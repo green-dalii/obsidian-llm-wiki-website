@@ -178,22 +178,17 @@ export const en: Translations = {
     afterLabel: 'With LLM-Wiki',
     items: [
       {
-        category: 'Saving what you read',
+        category: 'Knowledge Saving',
         before: 'You clip an article, drop it in a folder, forget the filename. Three months later, search returns nothing useful.',
         after: 'Drop it in sources/. The plugin reads it, extracts key ideas, updates 10–15 related wiki pages, and files the summary. Done in seconds.',
       },
       {
-        category: 'Cross-references',
+        category: 'Knowledge Connection',
         before: 'You manually link two notes. Six months later, one is updated — the other still points to the old version. Links silently rot.',
         after: 'All cross-references are maintained automatically. When new data contradicts an old claim, every affected page updates.',
       },
       {
-        category: 'Finding answers',
-        before: '"How does this connect to that?" — you spend 20 minutes opening files, skimming, copying fragments. You are the glue.',
-        after: 'Ask the same question. The plugin reads relevant wiki pages, synthesizes a cited answer with [[wiki-links]] as breadcrumbs. You read the answer.',
-      },
-      {
-        category: 'Knowledge over time',
+        category: 'Knowledge Compounding',
         before: 'A year of notes is a pile of files. Each new project starts from zero. You re-read the same sources, re-derive the same insights.',
         after: 'A year of sources builds a dense, cross-referenced wiki. New questions tap into everything you have ever read. Knowledge compounds.',
       },
@@ -337,22 +332,17 @@ export const zh: Translations = {
     afterLabel: '使用 LLM-Wiki',
     items: [
       {
-        category: '保存阅读内容',
+        category: '知识保存',
         before: '剪了一篇文章丢进文件夹，转头忘了文件名。三个月后想找回来，搜索全是无效结果。',
         after: '丢进 sources/，插件自动阅读、提取关键概念，更新 10-15 个相关页面，归档摘要。几秒搞定。',
       },
       {
-        category: '交叉引用',
+        category: '知识连接',
         before: '手动链接了两条笔记。半年后更新了其中一条，另一条还指向旧版本。链接悄悄失效。',
         after: '所有交叉引用自动维护。新信息和旧内容矛盾时，每条相关页面都会同步更新。',
       },
       {
-        category: '寻找答案',
-        before: '"这和那个有什么关系？" —— 花 20 分钟翻文件、扫读、拼凑。人脑就是搜索引擎。',
-        after: '同样一句话问插件。它读取相关 Wiki 页面，综合出带 [[wiki-links]] 引用的答案。你只管读。',
-      },
-      {
-        category: '知识的长期增长',
+        category: '知识复利',
         before: '记了一年的笔记，最后还是一堆文件。每个新项目都从零开始，反复读同样的材料，得出同样的结论。',
         after: '一年积累下来，一部密集的交叉引用 Wiki 自然成型。新问题直接调用你读过的所有内容，知识越用越值钱。',
       },

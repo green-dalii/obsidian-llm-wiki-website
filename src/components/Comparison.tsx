@@ -1,10 +1,10 @@
 import { useRef, useEffect } from 'react';
 import gsap from 'gsap';
-import { X, Check } from 'lucide-react';
+import { Bookmark, Link2, TrendingUp, X, Check } from 'lucide-react';
 import { useI18n } from '../i18n/use-i18n';
 
 export default function Comparison() {
-  const { t } = useI18n();
+  const { t, lang } = useI18n();
   const sectionRef = useRef<HTMLElement>(null);
 
   useEffect(() => {
@@ -25,7 +25,14 @@ export default function Comparison() {
       <div className="max-w-5xl mx-auto px-4 sm:px-6">
         <div className="mb-12 text-center">
           <span className="text-[11px] font-mono text-obsidian-purple tracking-[0.15em] uppercase">{t.comparison.label}</span>
-          <h2 className="text-[clamp(1.6rem,4vw,2.8rem)] font-semibold mt-3 mb-3 text-[#e5e5e5]">{t.comparison.title}</h2>
+          <div className="mb-8">
+            <p className="text-[clamp(1.4rem,3.5vw,2rem)] text-obsidian-muted font-light leading-snug max-w-2xl mx-auto">
+              {lang === 'en'
+                ? 'Every article you read should never be forgotten.'
+                : '你读过的每一篇，都不该白读。'}
+            </p>
+          </div>
+          <h2 className="text-[clamp(1.6rem,4vw,2.8rem)] font-semibold mt-3 mb-3 text-obsidian-heading">{t.comparison.title}</h2>
           <p className="text-obsidian-muted text-sm max-w-md mx-auto">{t.comparison.subtitle}</p>
         </div>
 
@@ -53,6 +60,9 @@ export default function Comparison() {
                 <div className="hidden md:flex items-center gap-2 mb-2.5">
                   <X className="w-3.5 h-3.5 text-obsidian-dim flex-shrink-0" />
                   <span className="text-xs font-mono text-obsidian-dim">{item.category}</span>
+                  {i === 0 && <Bookmark className="w-3 h-3 text-obsidian-dim ml-auto" />}
+                  {i === 1 && <Link2 className="w-3 h-3 text-obsidian-dim ml-auto" />}
+                  {i === 2 && <TrendingUp className="w-3 h-3 text-obsidian-dim ml-auto" />}
                 </div>
                 <p className="text-sm text-obsidian-dim leading-relaxed">{item.before}</p>
               </div>
@@ -66,6 +76,9 @@ export default function Comparison() {
                 <div className="hidden md:flex items-center gap-2 mb-2.5">
                   <Check className="w-3.5 h-3.5 text-obsidian-purple-light flex-shrink-0" />
                   <span className="text-xs font-mono text-obsidian-purple-light">{item.category}</span>
+                  {i === 0 && <Bookmark className="w-3 h-3 text-obsidian-purple-light ml-auto" />}
+                  {i === 1 && <Link2 className="w-3 h-3 text-obsidian-purple-light ml-auto" />}
+                  {i === 2 && <TrendingUp className="w-3 h-3 text-obsidian-purple-light ml-auto" />}
                 </div>
                 <p className="text-sm text-obsidian-muted leading-relaxed">{item.after}</p>
                 <div className="absolute top-0 right-0 w-20 h-20 bg-obsidian-purple/5 rounded-full blur-2xl" />
