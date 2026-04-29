@@ -34,7 +34,7 @@ export default function KnowledgeGrowth() {
     let width = 0;
     let height = 0;
     let nodes: DocumentNode[] = [];
-    let connections: Connection[] = [];
+    const connections: Connection[] = [];
     let phase = 0;
     let frameCount = 0;
 
