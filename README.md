@@ -1,73 +1,60 @@
-# React + TypeScript + Vite
+# LLM Wiki for Obsidian — Landing Page
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Marketing website for the [Obsidian LLM Wiki plugin](https://github.com/green-dalii/obsidian-llm-wiki), an AI-powered self-organizing knowledge base.
 
-Currently, two official plugins are available:
+## Tech Stack
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- **React 19** with TypeScript
+- **Vite 7** — fast dev server and build
+- **Tailwind CSS 3.4** — utility-first styling with custom Obsidian theme
+- **GSAP** — scroll-triggered animations via ScrollTrigger
+- **lucide-react** — consistent icon system
+- **i18n** — built-in English/Chinese translation
 
-## React Compiler
+## Development
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
-
-## Expanding the ESLint configuration
-
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
-
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
-
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+```bash
+npm install
+npm run dev       # Start dev server at localhost:3000
+npm run build     # Production build (tsc + vite)
+npm run lint      # ESLint
+npm run preview   # Preview production build
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+## Project Structure
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
-
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
 ```
+src/
+  App.tsx              Root component, GSAP plugin registration
+  main.tsx             Entry point
+  index.css            Global styles, Tailwind layers, CSS variables
+  components/
+    Header.tsx          Fixed header with nav, language toggle
+    Hero.tsx            Landing section with animated background
+    ProgressBar.tsx     Scroll progress indicator
+    Philosophy.tsx      Problem/solution narrative
+    WikiDemo.tsx        Interactive 5-step demo
+    Comparison.tsx      Before/after comparison grid
+    Architecture.tsx    Three-layer architecture visualization
+    Features.tsx        Feature cards with images
+    Ecosystem.tsx       Obsidian ecosystem integration cards
+    Providers.tsx       LLM provider grid
+    Footer.tsx          Site footer
+    KnowledgeGraphGenesis.tsx  Canvas-based animated background
+  i18n/
+    index.tsx           i18n context and hook
+    translations.ts     English and Chinese translation strings
+  public/              Static images (features, ecosystem, OG image)
+```
+
+## Architecture
+
+- **Single-page scroll layout** — no routing, all sections rendered inline
+- **Component-per-section** — each section is a self-contained component
+- **Centralized GSAP registration** — ScrollTrigger registered once in App.tsx
+- **Type-safe i18n** — translations use typed interface, no `any` casts
+- **Canvas animations** — KnowledgeGraphGenesis uses raw Canvas 2D API for the hero background
+
+## License
+
+MIT
