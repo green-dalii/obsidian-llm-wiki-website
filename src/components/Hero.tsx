@@ -1,7 +1,7 @@
 import { useRef, useEffect } from 'react';
 import gsap from 'gsap';
 import { Github, ExternalLink } from 'lucide-react';
-import KnowledgeGraphGenesis from './KnowledgeGraphGenesis';
+import KnowledgeGrowth from './KnowledgeGrowth';
 import { useI18n } from '../i18n/use-i18n';
 
 export default function Hero() {
@@ -30,11 +30,11 @@ export default function Hero() {
       <div className="absolute inset-0 z-[5] pointer-events-none bg-gradient-to-t from-[#1e1e1e] via-transparent to-[#1e1e1e]/30" />
 
       <div className="absolute inset-0 z-0">
-        <KnowledgeGraphGenesis />
+        <KnowledgeGrowth />
       </div>
 
       <div ref={contentRef} className="relative z-10 text-center px-6 max-w-3xl mx-auto">
-        <div className="inline-flex items-center gap-2.5 px-4 py-1.5 rounded-full border border-[#333] bg-[#262626]/60 backdrop-blur-sm mb-8">
+        <div className="inline-flex items-center gap-2.5 px-4 py-1.5 rounded-full border border-obsidian-border bg-obsidian-surface/60 backdrop-blur-sm mb-8">
           <span className="relative flex h-2 w-2">
             <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-obsidian-purple opacity-75" />
             <span className="relative inline-flex rounded-full h-2 w-2 bg-obsidian-purple" />
@@ -42,7 +42,7 @@ export default function Hero() {
           <span className="text-xs font-mono text-obsidian-muted tracking-wide">{t.hero.badge}</span>
         </div>
 
-        <h1 className="text-[clamp(2.5rem,6vw,4.5rem)] font-semibold tracking-tight text-[#e5e5e5] leading-[1.1] mb-6">
+        <h1 className="text-[clamp(2.5rem,6vw,4.5rem)] font-semibold tracking-tight text-obsidian-heading leading-[1.1] mb-6">
           {t.hero.title1}
           <br />
           <span className="text-obsidian-purple-light">{t.hero.title2}</span>
@@ -59,7 +59,7 @@ export default function Hero() {
             {t.hero.ctaInstall}
           </a>
           <a href="https://gist.github.com/karpathy/442a6bf555914893e9891c11519de94f" target="_blank" rel="noopener noreferrer"
-            className="inline-flex items-center gap-2 px-6 py-3 rounded-lg border border-[#333] text-obsidian-muted text-sm font-medium hover:text-[#e5e5e5] hover:border-[#444] transition-colors duration-200">
+            className="inline-flex items-center gap-2 px-6 py-3 rounded-lg border border-obsidian-border text-obsidian-muted text-sm font-medium hover:text-obsidian-heading hover:border-obsidian-border-light transition-colors duration-200">
             {t.hero.ctaRead}
             <ExternalLink className="w-3.5 h-3.5" />
           </a>
