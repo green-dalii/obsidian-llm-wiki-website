@@ -3,8 +3,6 @@ import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { useI18n } from '../i18n';
 
-gsap.registerPlugin(ScrollTrigger);
-
 const PROVIDERS = [
   { name: 'DeepSeek', model: 'v4 Pro / Flash', context: '1M', status: 'Cloud', badge: 'bestValue' },
   { name: 'Google', model: 'Gemini 3.1 Pro', context: '1M', status: 'Cloud' },

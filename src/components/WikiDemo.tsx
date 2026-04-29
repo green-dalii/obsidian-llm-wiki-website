@@ -2,10 +2,11 @@ import { useRef, useEffect, useState } from 'react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { useI18n } from '../i18n';
+import type { Translations } from '../i18n/translations';
 
-gsap.registerPlugin(ScrollTrigger);
+type WikiDemoKey = keyof Translations['wikiDemo'];
 
-const STEPS = [
+const STEPS: Array<{ id: number; titleKey: WikiDemoKey; descKey: WikiDemoKey }> = [
   { id: 1, titleKey: 'step1Title', descKey: 'step1Desc' },
   { id: 2, titleKey: 'step2Title', descKey: 'step2Desc' },
   { id: 3, titleKey: 'step3Title', descKey: 'step3Desc' },
@@ -71,6 +72,13 @@ Machine learning uses algorithms to learn from data.
 
   const lines = sourceNote.split('\n');
 
+  const renderMarkdownLine = (line: string) => {
+    if (line.startsWith('# ')) return <span className="text-[#e5e5e5] font-semibold">{line}</span>;
+    if (line.startsWith('## ')) return <span className="text-obsidian-muted">{line}</span>;
+    if (line.startsWith('- ')) return <span className="text-obsidian-dim">{line}</span>;
+    return <span>{line}</span>;
+  };
+
   return (
     <section ref={sectionRef} id="how-it-works" className="relative w-full py-28 sm:py-36">
       <div className="max-w-5xl mx-auto px-4 sm:px-6">
@@ -93,9 +101,9 @@ Machine learning uses algorithms to learn from data.
               >
                 <div className="flex items-center gap-2.5 mb-1">
                   <span className={`text-xs font-mono w-5 h-5 rounded-full flex items-center justify-center ${i === step ? 'bg-obsidian-purple text-[#1e1e1e]' : 'bg-[#333] text-obsidian-dim'}`}>{s.id}</span>
-                  <span className={`text-sm font-medium ${i === step ? 'text-[#e5e5e5]' : 'text-obsidian-muted'}`}>{(t.wikiDemo as any)[s.titleKey]}</span>
+                  <span className={`text-sm font-medium ${i === step ? 'text-[#e5e5e5]' : 'text-obsidian-muted'}`}>{t.wikiDemo[s.titleKey]}</span>
                 </div>
-                <p className={`text-xs leading-relaxed pl-7 ${i === step ? 'text-obsidian-muted' : 'text-obsidian-dim'}`}>{(t.wikiDemo as any)[s.descKey]}</p>
+                <p className={`text-xs leading-relaxed pl-7 ${i === step ? 'text-obsidian-muted' : 'text-obsidian-dim'}`}>{t.wikiDemo[s.descKey]}</p>
               </button>
             ))}
             <div className="flex items-center gap-2 pt-1">
@@ -131,12 +139,7 @@ Machine learning uses algorithms to learn from data.
                     {lines.map((line, i) => (
                       <div key={i} className="flex">
                         <span className="w-5 text-right pr-2 text-obsidian-dim select-none">{i + 1}</span>
-                        <span dangerouslySetInnerHTML={{
-                          __html: line
-                            .replace(/# (.+)/, '<span class="text-[#e5e5e5] font-semibold"># $1</span>')
-                            .replace(/## (.+)/, '<span class="text-obsidian-muted">## $1</span>')
-                            .replace(/- (.+)/, '<span class="text-obsidian-dim">- $1</span>')
-                        }} />
+                        {renderMarkdownLine(line)}
                       </div>
                     ))}
                   </div>
@@ -175,12 +178,7 @@ Machine learning uses algorithms to learn from data.
                                 }`}>{item.type}</span>
                               </span>
                             ) : (
-                              <span dangerouslySetInnerHTML={{
-                                __html: line
-                                  .replace(/# (.+)/, '<span class="text-[#e5e5e5] font-semibold"># $1</span>')
-                                  .replace(/## (.+)/, '<span class="text-obsidian-muted">## $1</span>')
-                                  .replace(/- (.+)/, '<span class="text-obsidian-dim">- $1</span>')
-                              }} />
+                              renderMarkdownLine(line)
                             )}
                           </span>
                         </div>
@@ -201,7 +199,7 @@ Machine learning uses algorithms to learn from data.
                 <div className="p-5 pt-12">
                   <div className="grid grid-cols-2 gap-3">
                     {generatedPages.map((page, i) => (
-                      <div key={page.title} className="rounded-lg border border-[#333] bg-[#1e1e1e] p-3.5" style={{ animation: `fadeSlideIn 0.5s ease-out ${i * 0.15}s forwards`, opacity: 0 }}>
+                      <div key={page.title} className="rounded-lg border border-[#333] bg-[#1e1e1e] p-3.5 animate-fadeSlideIn" style={{ animationDelay: `${i * 0.15}s` }}>
                         <div className="text-[9px] font-mono text-obsidian-dim mb-1.5 truncate">{page.path}</div>
                         <div className="text-sm font-medium text-[#e5e5e5] mb-1.5">{page.title}</div>
                         <div className="flex flex-wrap gap-1">{page.tags.map(tag => <span key={tag} className="text-[9px] font-mono px-1 py-0.5 rounded bg-[#333] text-obsidian-dim">#{tag}</span>)}</div>
@@ -277,7 +275,6 @@ Machine learning uses algorithms to learn from data.
           </div>
         </div>
       </div>
-      <style>{`@keyframes fadeSlideIn { from { opacity:0; transform:translateY(8px); } to { opacity:1; transform:translateY(0); } }`}</style>
     </section>
   );
 }

@@ -3,8 +3,6 @@ import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { useI18n } from '../i18n';
 
-gsap.registerPlugin(ScrollTrigger);
-
 const CARDS = [
   { image: '/eco-graph.jpg' },
   { image: '/eco-clipper.jpg' },

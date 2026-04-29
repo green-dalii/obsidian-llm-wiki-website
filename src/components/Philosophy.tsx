@@ -3,8 +3,6 @@ import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { useI18n } from '../i18n';
 
-gsap.registerPlugin(ScrollTrigger);
-
 export default function Philosophy() {
   const { t } = useI18n();
   const sectionRef = useRef<HTMLElement>(null);
