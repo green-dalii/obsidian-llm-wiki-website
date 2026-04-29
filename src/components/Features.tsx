@@ -1,5 +1,6 @@
 import { useRef, useEffect } from 'react';
 import gsap from 'gsap';
+import { Layers, Link2, MessageSquare, RefreshCw } from 'lucide-react';
 import { useI18n } from '../i18n/use-i18n';
 
 export default function Features() {
@@ -20,10 +21,10 @@ export default function Features() {
   }, []);
 
   const features = [
-    { title: t.features.organizeTitle, tag: t.features.organizeTag, desc: t.features.organizeDesc, image: '/feat-organize.jpg' },
-    { title: t.features.bidirectionalTitle, tag: t.features.bidirectionalTag, desc: t.features.bidirectionalDesc, image: '/feat-links.jpg' },
-    { title: t.features.conversationalTitle, tag: t.features.conversationalTag, desc: t.features.conversationalDesc, image: '/feat-chat.jpg' },
-    { title: t.features.autoMaintenanceTitle, tag: t.features.autoMaintenanceTag, desc: t.features.autoMaintenanceDesc, image: '/feat-maintain.jpg' },
+    { title: t.features.organizeTitle, tag: t.features.organizeTag, desc: t.features.organizeDesc, image: '/feat-organize.jpg', icon: Layers },
+    { title: t.features.bidirectionalTitle, tag: t.features.bidirectionalTag, desc: t.features.bidirectionalDesc, image: '/feat-links.jpg', icon: Link2 },
+    { title: t.features.conversationalTitle, tag: t.features.conversationalTag, desc: t.features.conversationalDesc, image: '/feat-chat.jpg', icon: MessageSquare },
+    { title: t.features.autoMaintenanceTitle, tag: t.features.autoMaintenanceTag, desc: t.features.autoMaintenanceDesc, image: '/feat-maintain.jpg', icon: RefreshCw },
   ];
 
   return (
@@ -43,8 +44,10 @@ export default function Features() {
                 <div className="absolute inset-0 bg-gradient-to-t from-[#262626] via-[#262626]/50 to-transparent" />
               </div>
               <div className="p-5 sm:p-6">
-                <div className="flex items-center gap-2 mb-2.5">
-                  <span className="w-1.5 h-1.5 rounded-full bg-obsidian-purple" />
+                <div className="flex items-center gap-2.5 mb-2.5">
+                  <div className="w-7 h-7 rounded-lg bg-obsidian-purple/15 border border-obsidian-purple/25 flex items-center justify-center">
+                    <f.icon className="w-3.5 h-3.5 text-obsidian-purple-light" />
+                  </div>
                   <span className="text-[10px] font-mono text-obsidian-purple tracking-wider uppercase">{f.tag}</span>
                 </div>
                 <h3 className="text-base font-semibold text-[#e5e5e5] mb-2">{f.title}</h3>

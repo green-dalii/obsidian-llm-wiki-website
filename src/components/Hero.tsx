@@ -65,11 +65,10 @@ export default function Hero() {
           </a>
         </div>
 
-        <div className="mt-16 flex items-center justify-center gap-8 text-xs font-mono text-obsidian-dim">
-          <span className="flex items-center gap-2"><span className="w-1.5 h-1.5 rounded-full bg-obsidian-amber" />{t.hero.legendSources}</span>
-          <span className="flex items-center gap-2"><span className="w-1.5 h-1.5 rounded-full bg-obsidian-gold" />{t.hero.legendEntities}</span>
-          <span className="flex items-center gap-2"><span className="w-1.5 h-1.5 rounded-full bg-obsidian-purple" />{t.hero.legendConcepts}</span>
-        </div>
+        <a href="https://github.com/green-dalii/obsidian-llm-wiki" target="_blank" rel="noopener noreferrer"
+          className="mt-6 inline-flex items-center gap-2 text-obsidian-dim hover:text-obsidian-muted transition-colors">
+          <img src="https://img.shields.io/github/stars/green-dalii/obsidian-llm-wiki?style=social&label=Stars" alt="GitHub Stars" className="h-5" loading="lazy" />
+        </a>
       </div>
 
       <div className="absolute bottom-8 left-1/2 -translate-x-1/2 z-10 flex flex-col items-center gap-2 opacity-40">

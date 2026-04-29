@@ -57,6 +57,11 @@ export default function Architecture() {
           <span className="text-[11px] font-mono text-obsidian-purple tracking-[0.15em] uppercase">{t.architecture.label}</span>
           <h2 className="text-[clamp(1.6rem,4vw,2.8rem)] font-semibold mt-3 mb-3 text-[#e5e5e5]">{t.architecture.title}</h2>
           <p className="text-obsidian-muted max-w-lg mx-auto text-sm">{t.architecture.subtitle}</p>
+          <div className="mt-5 flex items-center justify-center gap-6 text-xs font-mono text-obsidian-dim">
+            <span className="flex items-center gap-2"><span className="w-1.5 h-1.5 rounded-full bg-obsidian-amber" />{t.hero.legendSources}</span>
+            <span className="flex items-center gap-2"><span className="w-1.5 h-1.5 rounded-full bg-obsidian-gold" />{t.hero.legendEntities}</span>
+            <span className="flex items-center gap-2"><span className="w-1.5 h-1.5 rounded-full bg-obsidian-purple" />{t.hero.legendConcepts}</span>
+          </div>
         </div>
 
         <div className="arch-pipeline">
