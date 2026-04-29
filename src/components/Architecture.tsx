@@ -1,6 +1,7 @@
 import { useRef, useEffect, useState } from 'react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import { FileText, Sparkles, BookOpen, ArrowRight, ChevronDown } from 'lucide-react';
 import { useI18n } from '../i18n';
 
 export default function Architecture() {
@@ -30,11 +31,7 @@ export default function Architecture() {
       title: t.architecture.sourcesTitle,
       desc: t.architecture.sourcesDesc,
       dot: 'bg-obsidian-amber',
-      icon: (
-        <svg className="w-4 h-4" fill="none" stroke="currentColor" strokeWidth={1.5} viewBox="0 0 24 24">
-          <path strokeLinecap="round" strokeLinejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 00-3.375-3.375h-1.5A1.125 1.125 0 0113.5 7.125v-1.5a3.375 3.375 0 00-3.375-3.375H8.25m0 12.75h7.5m-7.5 3H12M10.5 2.25H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 00-9-9z" />
-        </svg>
-      ),
+      icon: <FileText className="w-4 h-4" />,
     },
     {
       id: 'engine',
@@ -42,11 +39,7 @@ export default function Architecture() {
       title: t.architecture.engineTitle,
       desc: t.architecture.engineDesc,
       dot: 'bg-obsidian-purple',
-      icon: (
-        <svg className="w-4 h-4" fill="none" stroke="currentColor" strokeWidth={1.5} viewBox="0 0 24 24">
-          <path strokeLinecap="round" strokeLinejoin="round" d="M9.813 15.904L9 18.75l-.813-2.846a4.5 4.5 0 00-3.09-3.09L2.25 12l2.846-.813a4.5 4.5 0 003.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 003.09 3.09L15.75 12l-2.846.813a4.5 4.5 0 00-3.09 3.09z" />
-        </svg>
-      ),
+      icon: <Sparkles className="w-4 h-4" />,
     },
     {
       id: 'wiki',
@@ -54,11 +47,7 @@ export default function Architecture() {
       title: t.architecture.wikiTitle,
       desc: t.architecture.wikiDesc,
       dot: 'bg-obsidian-gold',
-      icon: (
-        <svg className="w-4 h-4" fill="none" stroke="currentColor" strokeWidth={1.5} viewBox="0 0 24 24">
-          <path strokeLinecap="round" strokeLinejoin="round" d="M12 6.042A8.967 8.967 0 006 3.75c-1.052 0-2.062.18-3 .512v14.25A8.987 8.987 0 016 18c2.305 0 4.408.867 6 2.292m0-14.25a8.966 8.966 0 016-2.292c1.052 0 2.062.18 3 .512v14.25A8.987 8.987 0 0018 18a8.967 8.967 0 00-6 2.292m0-14.25v14.25" />
-        </svg>
-      ),
+      icon: <BookOpen className="w-4 h-4" />,
     },
   ];
 
@@ -107,12 +96,8 @@ export default function Architecture() {
                 {/* Arrow */}
                 {i < layers.length - 1 && (
                   <div className="flex items-center justify-center py-2 md:py-0 md:px-3">
-                    <svg className="hidden md:block w-5 h-5 text-obsidian-purple/40" fill="none" stroke="currentColor" strokeWidth={1.5} viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" />
-                    </svg>
-                    <svg className="md:hidden w-5 h-5 text-[#333]" fill="none" stroke="currentColor" strokeWidth={1.5} viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" d="M19.5 13.5L12 21m0 0l-7.5-7.5M12 21V3" />
-                    </svg>
+                    <ArrowRight className="hidden md:block w-5 h-5 text-obsidian-purple/40" />
+                    <ChevronDown className="md:hidden w-5 h-5 text-[#333]" />
                   </div>
                 )}
               </div>

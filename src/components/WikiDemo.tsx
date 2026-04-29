@@ -1,6 +1,7 @@
 import { useRef, useEffect, useState } from 'react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import { Sparkles } from 'lucide-react';
 import { useI18n } from '../i18n';
 import type { Translations } from '../i18n/translations';
 
@@ -247,9 +248,7 @@ Machine learning uses algorithms to learn from data.
                     </div>
                     <div className="flex items-start gap-2.5">
                       <div className="w-5 h-5 rounded-full bg-obsidian-purple/20 border border-obsidian-purple/30 flex items-center justify-center flex-shrink-0 mt-0.5">
-                        <svg className="w-3 h-3 text-obsidian-purple-light" fill="none" stroke="currentColor" strokeWidth={2} viewBox="0 0 24 24">
-                          <path strokeLinecap="round" strokeLinejoin="round" d="M9.813 15.904L9 18.75l-.813-2.846a4.5 4.5 0 00-3.09-3.09L2.25 12l2.846-.813a4.5 4.5 0 003.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 003.09 3.09L15.75 12l-2.846.813a4.5 4.5 0 00-3.09 3.09z" />
-                        </svg>
+                        <Sparkles className="w-3 h-3 text-obsidian-purple-light" />
                       </div>
                       <div className="rounded-lg border border-obsidian-purple/20 bg-obsidian-purple/5 px-3 py-2.5 text-xs text-obsidian-text leading-relaxed space-y-1.5">
                         <p>[[Supervised Learning]] provides the foundational training paradigm for most [[Computer Vision]] systems today.</p>

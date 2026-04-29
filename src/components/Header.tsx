@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { BookOpen, Menu, X } from 'lucide-react';
 import { useI18n } from '../i18n';
 
 const NAV_ITEMS = [
@@ -35,9 +36,7 @@ export default function Header() {
       <div className="max-w-6xl mx-auto px-4 sm:px-6 flex items-center justify-between h-14">
         <button onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })} className="flex items-center gap-2.5 group">
           <div className="w-7 h-7 rounded-lg bg-obsidian-purple/20 border border-obsidian-purple/30 flex items-center justify-center group-hover:bg-obsidian-purple/30 transition-colors">
-            <svg className="w-3.5 h-3.5 text-obsidian-purple-light" fill="none" stroke="currentColor" strokeWidth={2} viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" d="M12 6.042A8.967 8.967 0 006 3.75c-1.052 0-2.062.18-3 .512v14.25A8.987 8.987 0 016 18c2.305 0 4.408.867 6 2.292m0-14.25a8.966 8.966 0 016-2.292c1.052 0 2.062.18 3 .512v14.25A8.987 8.987 0 0018 18a8.967 8.967 0 00-6 2.292m0-14.25v14.25" />
-            </svg>
+            <BookOpen className="w-3.5 h-3.5 text-obsidian-purple-light" />
           </div>
           <span className="text-sm font-semibold text-[#e5e5e5] tracking-tight">LLM Wiki</span>
         </button>
@@ -61,9 +60,7 @@ export default function Header() {
         </nav>
 
         <button className="md:hidden p-2 text-obsidian-muted" onClick={() => setMobileOpen(!mobileOpen)}>
-          <svg className="w-5 h-5" fill="none" stroke="currentColor" strokeWidth={2} viewBox="0 0 24 24">
-            {mobileOpen ? <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" /> : <path strokeLinecap="round" strokeLinejoin="round" d="M3.75 9h16.5m-16.5 6.75h16.5" />}
-          </svg>
+          {mobileOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
         </button>
       </div>
 
