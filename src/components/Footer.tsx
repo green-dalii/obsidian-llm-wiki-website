@@ -21,7 +21,7 @@ export default function Footer() {
       <div className="max-w-5xl mx-auto px-6">
         <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-6">
           <div>
-            <div className="text-base font-semibold text-[#e5e5e5]">Karpathy LLM Wiki</div>
+            <div className="text-base font-semibold text-[#e5e5e5]">LLM Wiki for Obsidian</div>
             <p className="text-xs text-obsidian-dim mt-1">
               By <a href="https://github.com/green-dalii" target="_blank" rel="noopener noreferrer" className="text-obsidian-muted hover:text-obsidian-purple transition-colors">Greener-Dalii</a> · {t.footer.license}
             </p>

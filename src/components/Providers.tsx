@@ -4,12 +4,12 @@ import { Lightbulb } from 'lucide-react';
 import { useI18n } from '../i18n/use-i18n';
 
 const PROVIDERS = [
-  { name: 'DeepSeek', model: 'v4 Pro / Flash', context: '1M', status: 'Cloud', badge: 'bestValue' },
-  { name: 'Google', model: 'Gemini 3.1 Pro', context: '1M', status: 'Cloud' },
-  { name: 'Moonshot', model: 'Kimi K2.6', context: '256K', status: 'Cloud' },
-  { name: 'Xiaomi', model: 'Mimo-V2.5 Pro', context: '1M', status: 'Cloud' },
-  { name: 'Anthropic', model: 'Claude Opus 4.7', context: '1M', status: 'Cloud' },
-  { name: 'OpenAI', model: 'GPT-5.5', context: '1M', status: 'Cloud' },
+  { name: 'DeepSeek', model: 'DeepSeek V4', context: '1M', status: 'Cloud', badge: 'bestValue' },
+  { name: 'Google', model: 'Gemini Pro', context: '1M+', status: 'Cloud' },
+  { name: 'Anthropic', model: 'Claude', context: '1M', status: 'Cloud' },
+  { name: 'OpenAI', model: 'GPT', context: '1M', status: 'Cloud' },
+  { name: 'Moonshot', model: 'Kimi', context: '256K', status: 'Cloud' },
+  { name: 'GLM', model: 'GLM-4', context: '128K', status: 'Cloud' },
   { name: 'OpenRouter', model: 'Universal API', context: 'Varies', status: 'Cloud' },
   { name: 'Ollama', model: 'Any local model', context: 'Varies', status: 'Local' },
 ];
