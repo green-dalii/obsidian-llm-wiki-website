@@ -1,8 +1,7 @@
 import { useRef, useEffect, useState } from 'react';
 import gsap from 'gsap';
-import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { FileText, Sparkles, BookOpen, ArrowRight, ChevronDown } from 'lucide-react';
-import { useI18n } from '../i18n';
+import { useI18n } from '../i18n/use-i18n';
 
 export default function Architecture() {
   const { t } = useI18n();
@@ -64,8 +63,8 @@ export default function Architecture() {
           {/* Pipeline track */}
           <div className="hidden md:block mb-4 h-px relative">
             <div className="absolute inset-x-[15%] top-0 h-px bg-[#333]" />
-            <div className="absolute top-1/2 -translate-y-1/2 w-2 h-2 rounded-full bg-obsidian-purple transition-all duration-[2800ms] ease-in-out"
-              style={{ left: flowPhase === 0 ? '15%' : flowPhase === 1 ? '50%' : '85%', boxShadow: '0 0 10px rgba(139,92,246,0.5)' }} />
+            <div className="absolute top-1/2 -translate-y-1/2 w-2 h-2 rounded-full bg-obsidian-purple transition-all ease-in-out"
+              style={{ left: flowPhase === 0 ? '15%' : flowPhase === 1 ? '50%' : '85%', boxShadow: '0 0 10px rgba(139,92,246,0.5)', transitionDuration: '2800ms' }} />
           </div>
 
           {/* Cards + arrows inline */}

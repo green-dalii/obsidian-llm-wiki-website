@@ -1,8 +1,7 @@
 import { useRef, useEffect, useState } from 'react';
 import gsap from 'gsap';
-import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { Sparkles } from 'lucide-react';
-import { useI18n } from '../i18n';
+import { useI18n } from '../i18n/use-i18n';
 import type { Translations } from '../i18n/translations';
 
 type WikiDemoKey = keyof Translations['wikiDemo'];

@@ -1,7 +1,6 @@
 import { useRef, useEffect } from 'react';
 import gsap from 'gsap';
-import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import { useI18n } from '../i18n';
+import { useI18n } from '../i18n/use-i18n';
 
 export default function Features() {
   const { t } = useI18n();

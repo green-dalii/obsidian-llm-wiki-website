@@ -1,8 +1,7 @@
 import { useRef, useEffect } from 'react';
 import gsap from 'gsap';
-import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { Lightbulb } from 'lucide-react';
-import { useI18n } from '../i18n';
+import { useI18n } from '../i18n/use-i18n';
 
 const PROVIDERS = [
   { name: 'DeepSeek', model: 'v4 Pro / Flash', context: '1M', status: 'Cloud', badge: 'bestValue' },

@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { BookOpen, Menu, X } from 'lucide-react';
-import { useI18n } from '../i18n';
+import { useI18n } from '../i18n/use-i18n';
 
 const NAV_ITEMS = [
   { key: 'philosophy', labelKey: 'philosophy' as const, target: '#philosophy' },

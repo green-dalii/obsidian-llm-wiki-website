@@ -1,8 +1,7 @@
 import { useRef, useEffect } from 'react';
 import gsap from 'gsap';
-import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { X, Check } from 'lucide-react';
-import { useI18n } from '../i18n';
+import { useI18n } from '../i18n/use-i18n';
 
 export default function Comparison() {
   const { t } = useI18n();
