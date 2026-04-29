@@ -1,0 +1,89 @@
+import { useEffect, useState } from 'react';
+import { useI18n } from '../i18n';
+
+const NAV_ITEMS = [
+  { key: 'philosophy', labelKey: 'philosophy' as const, target: '#philosophy' },
+  { key: 'how-it-works', labelKey: 'howItWorks' as const, target: '#how-it-works' },
+  { key: 'features', labelKey: 'features' as const, target: '#features' },
+  { key: 'providers', labelKey: 'providers' as const, target: '#providers' },
+  { key: 'ecosystem', labelKey: 'ecosystem' as const, target: '#ecosystem' },
+];
+
+export default function Header() {
+  const { t, lang, toggleLang } = useI18n();
+  const [scrolled, setScrolled] = useState(false);
+  const [mobileOpen, setMobileOpen] = useState(false);
+
+  useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > 60);
+    window.addEventListener('scroll', onScroll, { passive: true });
+    return () => window.removeEventListener('scroll', onScroll);
+  }, []);
+
+  const handleNav = (target: string) => {
+    setMobileOpen(false);
+    const el = document.querySelector(target);
+    if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  };
+
+  return (
+    <header className={`fixed top-0 left-0 right-0 z-40 border-b transition-all duration-500 ${
+      scrolled
+        ? 'bg-[#1e1e1e]/85 backdrop-blur-xl border-[#333]/50 shadow-[0_1px_0_rgba(255,255,255,0.03)]'
+        : 'bg-[#1e1e1e]/0 border-transparent'
+    }`}>
+      <div className="max-w-6xl mx-auto px-4 sm:px-6 flex items-center justify-between h-14">
+        <button onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })} className="flex items-center gap-2.5 group">
+          <div className="w-7 h-7 rounded-lg bg-obsidian-purple/20 border border-obsidian-purple/30 flex items-center justify-center group-hover:bg-obsidian-purple/30 transition-colors">
+            <svg className="w-3.5 h-3.5 text-obsidian-purple-light" fill="none" stroke="currentColor" strokeWidth={2} viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" d="M12 6.042A8.967 8.967 0 006 3.75c-1.052 0-2.062.18-3 .512v14.25A8.987 8.987 0 016 18c2.305 0 4.408.867 6 2.292m0-14.25a8.966 8.966 0 016-2.292c1.052 0 2.062.18 3 .512v14.25A8.987 8.987 0 0018 18a8.967 8.967 0 00-6 2.292m0-14.25v14.25" />
+            </svg>
+          </div>
+          <span className="text-sm font-semibold text-[#e5e5e5] tracking-tight">LLM Wiki</span>
+        </button>
+
+        <nav className="hidden md:flex items-center gap-0.5">
+          {NAV_ITEMS.map((item) => (
+            <button key={item.key} onClick={() => handleNav(item.target)}
+              className="px-2.5 py-1.5 text-xs text-obsidian-muted hover:text-[#e5e5e5] transition-colors duration-200 rounded-md hover:bg-white/[0.04]">
+              {t.nav[item.labelKey]}
+            </button>
+          ))}
+          <div className="w-px h-4 bg-[#333] mx-1.5" />
+          <button onClick={toggleLang}
+            className="px-2 py-0.5 text-[11px] font-mono text-obsidian-dim hover:text-obsidian-text border border-[#333] rounded-md hover:border-obsidian-purple/40 transition-all">
+            {lang === 'en' ? 'EN' : '中'}
+          </button>
+          <a href="https://github.com/green-dalii/obsidian-llm-wiki/releases" target="_blank" rel="noopener noreferrer"
+            className="ml-1.5 px-3 py-1.5 text-xs font-medium text-[#1e1e1e] bg-obsidian-purple rounded-md hover:bg-obsidian-purple-light transition-colors">
+            {t.nav.install}
+          </a>
+        </nav>
+
+        <button className="md:hidden p-2 text-obsidian-muted" onClick={() => setMobileOpen(!mobileOpen)}>
+          <svg className="w-5 h-5" fill="none" stroke="currentColor" strokeWidth={2} viewBox="0 0 24 24">
+            {mobileOpen ? <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" /> : <path strokeLinecap="round" strokeLinejoin="round" d="M3.75 9h16.5m-16.5 6.75h16.5" />}
+          </svg>
+        </button>
+      </div>
+
+      {mobileOpen && (
+        <div className="md:hidden bg-[#1e1e1e]/95 backdrop-blur-md border-b border-[#333] px-4 sm:px-6 pb-4">
+          {NAV_ITEMS.map((item) => (
+            <button key={item.key} onClick={() => handleNav(item.target)}
+              className="block w-full text-left py-2.5 text-sm text-obsidian-muted hover:text-[#e5e5e5] transition-colors">
+              {t.nav[item.labelKey]}
+            </button>
+          ))}
+          <div className="flex items-center gap-3 mt-3 pt-3 border-t border-[#333]">
+            <button onClick={toggleLang} className="px-2.5 py-1 text-[11px] font-mono text-obsidian-dim border border-[#333] rounded-md">
+              {lang === 'en' ? 'EN' : '中'}
+            </button>
+            <a href="https://github.com/green-dalii/obsidian-llm-wiki/releases" target="_blank" rel="noopener noreferrer"
+              className="px-3.5 py-1.5 text-xs font-medium text-[#1e1e1e] bg-obsidian-purple rounded-md">{t.nav.install}</a>
+          </div>
+        </div>
+      )}
+    </header>
+  );
+}
