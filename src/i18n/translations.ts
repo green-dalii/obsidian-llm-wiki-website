@@ -18,13 +18,6 @@ export interface Translations {
     legendConcepts: string;
     scrollHint: string;
   };
-  philosophy: {
-    label: string;
-    hook1: string;
-    hook2: string;
-    hook3: string;
-    hook4: string;
-  };
   wikiDemo: {
     label: string;
     title: string;
@@ -60,20 +53,6 @@ export interface Translations {
       before: string;
       after: string;
     }>;
-  };
-  architecture: {
-    label: string;
-    title: string;
-    subtitle: string;
-    sourcesPath: string;
-    sourcesTitle: string;
-    sourcesDesc: string;
-    enginePath: string;
-    engineTitle: string;
-    engineDesc: string;
-    wikiPath: string;
-    wikiTitle: string;
-    wikiDesc: string;
   };
   features: {
     label: string;
@@ -138,13 +117,6 @@ export const en: Translations = {
     legendConcepts: 'concepts/',
     scrollHint: 'Scroll',
   },
-  philosophy: {
-    label: 'Philosophy',
-    hook1: "You read. You save. You forget. Six months later, a question requires connecting three ideas across six files — and you draw a blank. The knowledge is in your vault. But it might as well be invisible.",
-    hook2: "ChatGPT gives you an answer and throws it away. NotebookLM summarizes and forgets. You ask the same question next week, it starts from scratch. Nothing persists. Nothing compounds.",
-    hook3: "What if your notes did not just sit in folders? What if a plugin built a living wiki — cross-referenced, self-maintained, growing richer with every article you add? That is the LLM Wiki concept.",
-    hook4: "As Karpathy puts it: Obsidian is the IDE; the LLM is the programmer; the wiki is the codebase. A year from now, your knowledge base compounds like interest — every new source makes the next answer better.",
-  },
   wikiDemo: {
     label: 'How It Works',
     title: 'From note to wiki, step by step',
@@ -192,20 +164,6 @@ export const en: Translations = {
         after: 'A year of sources builds a dense, cross-referenced wiki. New questions tap into everything you have ever read. Knowledge compounds.',
       },
     ],
-  },
-  architecture: {
-    label: 'Architecture',
-    title: 'Sources in. Wiki out.',
-    subtitle: "Karpathy's design: raw sources are immutable. The plugin owns the wiki. You evolve the structure over time.",
-    sourcesPath: 'sources/',
-    sourcesTitle: 'Raw Sources',
-    sourcesDesc: 'Your curated collection — articles, papers, book notes, clippings. Immutable. The plugin reads but never modifies. This is your source of truth.',
-    enginePath: 'AI Engine',
-    engineTitle: 'LLM + Schema',
-    engineDesc: 'Full-context ingestion guided by wiki/schema/config.md. The schema defines page templates, naming conventions, and maintenance rules.',
-    wikiPath: 'wiki/',
-    wikiTitle: 'The Wiki',
-    wikiDesc: 'Auto-generated markdown files — summaries, entity pages, concept pages, an index, a log. The plugin owns this layer. You read it; the plugin writes it.',
   },
   features: {
     label: 'Features',
@@ -297,13 +255,6 @@ export const zh: Translations = {
     legendConcepts: 'concepts/',
     scrollHint: '向下滚动',
   },
-  philosophy: {
-    label: '理念',
-    hook1: '读过的东西，存了就忘。半年后想把三个想法串起来，却发现它们散落在六个文件里，怎么也想不起来。知识明明就在 Vault 里，却跟没有一样。',
-    hook2: 'ChatGPT 回答完就丢，NotebookLM 总结完就忘。下次再问，从头来过。没有积累，没有复利。',
-    hook3: '如果笔记不只是躺在文件夹里呢？如果有一部活的 Wiki —— 交叉引用、自动维护、每加一篇文章就更丰富？这就是 LLM Wiki 的核心理念。',
-    hook4: 'Karpathy 说得好：Obsidian 是 IDE，LLM 是程序员，Wiki 是代码库。一年后，你的知识库像利息一样越滚越多 —— 每多读一篇，下一个答案就更精准。',
-  },
   wikiDemo: {
     label: '工作原理',
     title: '从笔记到 Wiki，一步一幅画',
@@ -351,20 +302,6 @@ export const zh: Translations = {
         after: '一年积累下来，一部密集的交叉引用 Wiki 自然成型。新问题直接调用你读过的所有内容，知识越用越值钱。',
       },
     ],
-  },
-  architecture: {
-    label: '架构',
-    title: '原始输入，Wiki 产出',
-    subtitle: 'Karpathy 的设计哲学：原始笔记不可变，插件驱动 Wiki，你掌控结构。',
-    sourcesPath: 'sources/',
-    sourcesTitle: '原始来源',
-    sourcesDesc: '你的收藏夹——文章、论文、读书笔记、摘录。只读不改。插件从中提取信息，但绝不触碰原文。',
-    enginePath: 'AI 引擎',
-    engineTitle: 'LLM + 模板',
-    engineDesc: '由 wiki/schema/config.md 引导的全文摄入。Schema 定义页面模板、命名规范和维护规则。',
-    wikiPath: 'wiki/',
-    wikiTitle: 'Wiki',
-    wikiDesc: '自动生成的 Markdown 文件——摘要、实体页、概念页、索引、日志。插件负责这一层的生成和维护。你读，它写。',
   },
   features: {
     label: '功能',
