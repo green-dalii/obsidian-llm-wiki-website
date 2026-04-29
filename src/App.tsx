@@ -23,15 +23,17 @@ function App() {
 
   return (
     <I18nProvider>
-      <div className="relative min-h-screen bg-[#1e1e1e] text-[#d4d4d4] overflow-x-hidden">
+      <div className="relative min-h-screen bg-obsidian-bg text-obsidian-text overflow-x-hidden">
         <ProgressBar />
         <Header />
         <main className="pt-14">
           <Hero />
           <Philosophy />
           <WikiDemo />
+          <div className="h-px max-w-5xl mx-auto bg-gradient-to-r from-transparent via-obsidian-border-light to-transparent" />
           <Comparison />
           <Architecture />
+          <div className="h-px max-w-5xl mx-auto bg-gradient-to-r from-transparent via-obsidian-purple/20 to-transparent" />
           <Features />
           <Ecosystem />
           <Providers />

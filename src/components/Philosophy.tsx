@@ -34,25 +34,21 @@ export default function Philosophy() {
           <div className="w-8 h-px bg-obsidian-purple/30 mt-3" />
         </div>
 
-        <div className="space-y-10">
+        <div className="space-y-14">
           {hooks.map((h, i) => (
-            <div key={i} className="philosophy-line flex gap-4">
-              <div className="flex-shrink-0 mt-0.5">
-                <span className={`inline-flex items-center justify-center w-7 h-7 rounded-full text-[11px] font-mono font-bold border ${
-                  h.type === 'pain'
-                    ? 'bg-obsidian-amber/10 text-obsidian-amber border-obsidian-amber/25'
-                    : h.type === 'solution'
-                    ? 'bg-obsidian-purple/10 text-obsidian-purple-light border-obsidian-purple/25'
-                    : 'bg-emerald-500/8 text-emerald-400 border-emerald-500/20'
-                }`}>
-                  {i + 1}
-                </span>
-              </div>
-              <p className={`text-base sm:text-lg leading-relaxed ${
-                h.type === 'pain' ? 'text-obsidian-muted' : 'text-[#e5e5e5]'
+            <div key={i} className="philosophy-line relative">
+              <p className={`leading-snug ${
+                h.type === 'pain'
+                  ? 'text-[clamp(1.15rem,2.8vw,1.5rem)] text-obsidian-muted font-light'
+                  : h.type === 'solution'
+                  ? 'text-[clamp(1.25rem,3vw,1.65rem)] text-obsidian-heading font-normal'
+                  : 'text-[clamp(1.25rem,3vw,1.65rem)] text-obsidian-heading font-normal'
               }`}>
                 {h.text}
               </p>
+              <div className={`mt-4 h-px w-12 ${
+                h.type === 'pain' ? 'bg-obsidian-amber/20' : 'bg-obsidian-purple/25'
+              }`} />
             </div>
           ))}
         </div>

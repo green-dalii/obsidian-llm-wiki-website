@@ -64,10 +64,12 @@ export default function Architecture() {
           </div>
         </div>
 
-        <div className="arch-pipeline">
+        <div className="arch-pipeline relative">
+          {/* Ambient glow behind pipeline */}
+          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[80%] h-[60%] bg-obsidian-purple/[0.04] rounded-full blur-3xl pointer-events-none" />
           {/* Pipeline track */}
           <div className="hidden md:block mb-4 h-px relative">
-            <div className="absolute inset-x-[15%] top-0 h-px bg-[#333]" />
+            <div className="absolute inset-x-[15%] top-0 h-px bg-obsidian-border" />
             <div className="absolute top-1/2 -translate-y-1/2 w-2 h-2 rounded-full bg-obsidian-purple transition-all ease-in-out"
               style={{ left: flowPhase === 0 ? '15%' : flowPhase === 1 ? '50%' : '85%', boxShadow: '0 0 10px rgba(139,92,246,0.5)', transitionDuration: '2800ms' }} />
           </div>
@@ -78,7 +80,7 @@ export default function Architecture() {
               <div key={layer.id} className="flex flex-col md:flex-row items-stretch flex-1">
                 {/* Card — default desc visible (semi-transparent), highlighted when active phase */}
                 <div className={`flex-1 p-5 rounded-xl border transition-all duration-700 min-h-[200px] flex flex-col ${
-                  flowPhase === i ? 'border-obsidian-purple/30 bg-[#2a2a2a]' : 'border-[#333] bg-[#262626]/50'
+                  flowPhase === i ? 'border-obsidian-purple/30 bg-obsidian-panel' : 'border-obsidian-border bg-obsidian-surface/50'
                 }`}>
                   <div className="flex items-center gap-2 mb-2.5">
                     <span className={`w-2 h-2 rounded-full ${layer.dot} transition-all duration-500 ${flowPhase === i ? 'scale-125' : ''}`} />
@@ -91,9 +93,9 @@ export default function Architecture() {
                   }`}>{layer.desc}</p>
                   {/* Phase indicator dots */}
                   <div className="mt-auto pt-3 flex items-center gap-1">
-                    <span className={`w-1.5 h-1.5 rounded-full transition-all duration-500 ${flowPhase === i ? layer.dot : 'bg-[#333]'}`} />
-                    <span className={`w-1.5 h-1.5 rounded-full transition-all duration-500 delay-75 ${flowPhase === i ? layer.dot : 'bg-[#333]'}`} />
-                    <span className={`w-1.5 h-1.5 rounded-full transition-all duration-500 delay-150 ${flowPhase === i ? layer.dot : 'bg-[#333]'}`} />
+                    <span className={`w-1.5 h-1.5 rounded-full transition-all duration-500 ${flowPhase === i ? layer.dot : 'bg-obsidian-border'}`} />
+                    <span className={`w-1.5 h-1.5 rounded-full transition-all duration-500 delay-75 ${flowPhase === i ? layer.dot : 'bg-obsidian-border'}`} />
+                    <span className={`w-1.5 h-1.5 rounded-full transition-all duration-500 delay-150 ${flowPhase === i ? layer.dot : 'bg-obsidian-border'}`} />
                   </div>
                 </div>
 

@@ -45,7 +45,7 @@ export default function Comparison() {
           {t.comparison.items.map((item, i) => (
             <div key={i} className="compare-row grid grid-cols-1 md:grid-cols-2 gap-3 md:gap-4 group">
               {/* Before */}
-              <div className="rounded-lg border border-[#333] bg-[#262626]/30 p-4 md:p-5 transition-colors duration-300 hover:border-[#3a3a3a]">
+              <div className="rounded-lg border border-obsidian-border bg-obsidian-bg/60 p-4 md:p-5 transition-colors duration-300 hover:border-obsidian-border-light opacity-70">
                 <div className="flex items-center gap-2 mb-2.5 md:hidden">
                   <span className="text-[10px] font-mono text-obsidian-dim uppercase tracking-wider">{t.comparison.beforeLabel}</span>
                   <span className="text-[10px] font-mono text-obsidian-muted">— {item.category}</span>
@@ -58,7 +58,7 @@ export default function Comparison() {
               </div>
 
               {/* After */}
-              <div className="rounded-lg border border-obsidian-purple/20 bg-obsidian-purple/[0.04] p-4 md:p-5 relative overflow-hidden transition-all duration-300 hover:border-obsidian-purple/30">
+              <div className="rounded-lg border border-obsidian-purple/25 bg-obsidian-purple/[0.05] p-4 md:p-5 relative overflow-hidden transition-all duration-300 hover:border-obsidian-purple/40 shadow-[0_0_30px_rgba(139,92,246,0.06)]">
                 <div className="flex items-center gap-2 mb-2.5 md:hidden">
                   <span className="text-[10px] font-mono text-obsidian-purple-light uppercase tracking-wider">{t.comparison.afterLabel}</span>
                   <span className="text-[10px] font-mono text-obsidian-muted">— {item.category}</span>

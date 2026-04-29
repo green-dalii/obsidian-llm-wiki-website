@@ -48,7 +48,7 @@ export default function Providers() {
         <div className="grid grid-cols-2 sm:grid-cols-4 gap-2.5">
           {PROVIDERS.map((p) => (
             <div key={p.name} className={`provider-card group p-3.5 rounded-lg border transition-all duration-200 ${
-              p.badge === 'bestValue' ? 'border-obsidian-amber/30 bg-obsidian-amber/[0.04] hover:border-obsidian-amber/50' : 'border-[#333] bg-[#262626]/40 hover:border-obsidian-purple/30 hover:bg-obsidian-purple/5'
+              p.badge === 'bestValue' ? 'border-obsidian-amber/30 bg-obsidian-amber/[0.04] hover:border-obsidian-amber/50' : 'border-obsidian-border bg-obsidian-surface/40 hover:border-obsidian-purple/30 hover:bg-obsidian-purple/5'
             }`}>
               <div className="flex items-center justify-between mb-0.5">
                 <span className="text-sm font-medium text-[#e5e5e5]">{p.name}</span>
@@ -63,7 +63,7 @@ export default function Providers() {
                     ? 'bg-obsidian-purple/15 text-obsidian-purple-light border-obsidian-purple/25'
                     : p.context === '256K'
                     ? 'bg-obsidian-amber/10 text-obsidian-amber border-obsidian-amber/25'
-                    : 'bg-[#1e1e1e] text-obsidian-dim border-[#2a2a2a]'
+                    : 'bg-obsidian-bg text-obsidian-dim border-obsidian-border'
                 }`}>{p.context}</span>
                 <span className="text-[9px] font-mono text-obsidian-dim">{p.status}</span>
               </div>

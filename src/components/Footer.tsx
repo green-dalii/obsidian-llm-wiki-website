@@ -17,7 +17,7 @@ export default function Footer() {
   }, []);
 
   return (
-    <footer ref={footerRef} className="relative w-full py-14 border-t border-[#333]">
+    <footer ref={footerRef} className="relative w-full py-14 border-t border-obsidian-border">
       <div className="max-w-5xl mx-auto px-6">
         <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-6">
           <div>

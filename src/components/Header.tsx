@@ -30,7 +30,7 @@ export default function Header() {
   return (
     <header className={`fixed top-0 left-0 right-0 z-40 border-b transition-all duration-500 ${
       scrolled
-        ? 'bg-[#1e1e1e]/85 backdrop-blur-xl border-[#333]/50 shadow-[0_1px_0_rgba(255,255,255,0.03)]'
+        ? 'bg-obsidian-bg/85 backdrop-blur-xl border-obsidian-border/50 shadow-[0_1px_0_rgba(255,255,255,0.03)]'
         : 'bg-[#1e1e1e]/0 border-transparent'
     }`}>
       <div className="max-w-6xl mx-auto px-4 sm:px-6 flex items-center justify-between h-14">
@@ -48,9 +48,9 @@ export default function Header() {
               {t.nav[item.labelKey]}
             </button>
           ))}
-          <div className="w-px h-4 bg-[#333] mx-1.5" />
+          <div className="w-px h-4 bg-obsidian-border mx-1.5" />
           <button onClick={toggleLang}
-            className="px-2 py-0.5 text-[11px] font-mono text-obsidian-dim hover:text-obsidian-text border border-[#333] rounded-md hover:border-obsidian-purple/40 transition-all">
+            className="px-2 py-0.5 text-[11px] font-mono text-obsidian-dim hover:text-obsidian-text border border-obsidian-border rounded-md hover:border-obsidian-purple/40 transition-all">
             {lang === 'en' ? 'EN' : '中'}
           </button>
           <a href="https://github.com/green-dalii/obsidian-llm-wiki/releases" target="_blank" rel="noopener noreferrer"
@@ -65,15 +65,15 @@ export default function Header() {
       </div>
 
       {mobileOpen && (
-        <div className="md:hidden bg-[#1e1e1e]/95 backdrop-blur-md border-b border-[#333] px-4 sm:px-6 pb-4">
+        <div className="md:hidden bg-obsidian-bg/95 backdrop-blur-md border-b border-obsidian-border px-4 sm:px-6 pb-4">
           {NAV_ITEMS.map((item) => (
             <button key={item.key} onClick={() => handleNav(item.target)}
               className="block w-full text-left py-2.5 text-sm text-obsidian-muted hover:text-[#e5e5e5] transition-colors">
               {t.nav[item.labelKey]}
             </button>
           ))}
-          <div className="flex items-center gap-3 mt-3 pt-3 border-t border-[#333]">
-            <button onClick={toggleLang} className="px-2.5 py-1 text-[11px] font-mono text-obsidian-dim border border-[#333] rounded-md">
+          <div className="flex items-center gap-3 mt-3 pt-3 border-t border-obsidian-border">
+            <button onClick={toggleLang} className="px-2.5 py-1 text-[11px] font-mono text-obsidian-dim border border-obsidian-border rounded-md">
               {lang === 'en' ? 'EN' : '中'}
             </button>
             <a href="https://github.com/green-dalii/obsidian-llm-wiki/releases" target="_blank" rel="noopener noreferrer"

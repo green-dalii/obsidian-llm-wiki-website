@@ -38,10 +38,10 @@ export default function Features() {
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           {features.map((f) => (
-            <div key={f.title} className="feature-card group rounded-xl border border-[#333] bg-[#262626]/40 overflow-hidden hover:border-[#3a3a3a] transition-colors duration-300">
-              <div className="relative h-40 sm:h-44 overflow-hidden bg-[#1e1e1e]">
+            <div key={f.title} className="feature-card group rounded-xl border border-obsidian-border bg-obsidian-surface/40 overflow-hidden hover:border-obsidian-purple/30 hover:shadow-[0_0_40px_rgba(139,92,246,0.08)] transition-all duration-300">
+              <div className="relative h-40 sm:h-44 overflow-hidden bg-obsidian-bg">
                 <img src={f.image} alt={f.title} className="w-full h-full object-cover opacity-50 group-hover:opacity-75 transition-all duration-500 group-hover:scale-[1.03]" loading="lazy" />
-                <div className="absolute inset-0 bg-gradient-to-t from-[#262626] via-[#262626]/50 to-transparent" />
+                <div className="absolute inset-0 bg-gradient-to-t from-obsidian-surface via-obsidian-surface/50 to-transparent" />
               </div>
               <div className="p-5 sm:p-6">
                 <div className="flex items-center gap-2.5 mb-2.5">
