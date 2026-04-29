@@ -1,6 +1,5 @@
 export interface Translations {
   nav: {
-    philosophy: string;
     howItWorks: string;
     features: string;
     providers: string;
@@ -121,7 +120,6 @@ export interface Translations {
 
 export const en: Translations = {
   nav: {
-    philosophy: 'Philosophy',
     howItWorks: 'How It Works',
     features: 'Features',
     providers: 'Providers',
@@ -281,7 +279,6 @@ export const en: Translations = {
 
 export const zh: Translations = {
   nav: {
-    philosophy: '理念',
     howItWorks: '工作原理',
     features: '功能',
     providers: '提供商',
