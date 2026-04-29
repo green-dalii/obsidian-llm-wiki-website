@@ -35,16 +35,27 @@ export default function Ecosystem() {
           {t.ecosystem.items.map((item, i) => {
             const Icon = ICONS[i];
             return (
-              <div key={i} className="eco-card group relative rounded-lg border border-obsidian-border bg-obsidian-surface/30 p-5 hover:border-obsidian-purple/25 hover:bg-obsidian-purple/[0.03] transition-all duration-250">
-                <div className="absolute left-0 top-3 bottom-3 w-[2px] rounded-full bg-obsidian-purple/15 group-hover:bg-obsidian-purple/40 transition-colors" />
-                <div className="flex items-start gap-3">
-                  <div className="w-8 h-8 rounded-md bg-obsidian-purple/10 border border-obsidian-purple/20 flex items-center justify-center flex-shrink-0 group-hover:bg-obsidian-purple/15 transition-colors">
-                    <Icon className="w-4 h-4 text-obsidian-purple-light" />
+              <div key={i} className="eco-card group rounded-lg border border-obsidian-border bg-obsidian-surface/30 p-5 hover:border-obsidian-purple/25 hover:bg-obsidian-purple/[0.03] transition-all duration-250">
+                <div className="flex items-start gap-3 mb-2">
+                  <div className="w-7 h-7 rounded-md bg-obsidian-purple/10 border border-obsidian-purple/20 flex items-center justify-center flex-shrink-0">
+                    <Icon className="w-3.5 h-3.5 text-obsidian-purple-light" />
                   </div>
-                  <div className="min-w-0">
+                  <div className="min-w-0 flex-1">
                     <h3 className="text-sm font-semibold text-obsidian-heading mb-1">{item.name}</h3>
-                    <p className="text-xs text-obsidian-muted leading-relaxed">{item.desc}</p>
+                    <p className="text-xs text-obsidian-dim leading-relaxed">{item.standalone}</p>
                   </div>
+                </div>
+
+                {/* Divider */}
+                <div className="h-px border-t border-dashed border-obsidian-purple/20 my-3" />
+
+                {/* Amplified effect */}
+                <div className="relative pl-3">
+                  <div className="absolute left-0 top-0 bottom-0 w-[2px] rounded-full bg-obsidian-purple/30" />
+                  <div className="flex items-center gap-1.5 mb-1">
+                    <span className="text-[10px] font-mono text-obsidian-purple-light">+ LLM Wiki</span>
+                  </div>
+                  <p className="text-xs text-obsidian-heading leading-relaxed">{item.amplified}</p>
                 </div>
               </div>
             );

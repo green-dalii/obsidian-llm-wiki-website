@@ -106,7 +106,8 @@ export interface Translations {
     subtitle: string;
     items: Array<{
       name: string;
-      desc: string;
+      standalone: string;
+      amplified: string;
     }>;
     cta: string;
   };
@@ -234,32 +235,38 @@ export const en: Translations = {
   },
   ecosystem: {
     label: 'Ecosystem',
-    title: 'Powered by the Obsidian ecosystem',
-    subtitle: 'LLM-Wiki is not an island. It amplifies every tool you already use.',
+    title: 'Every plugin, amplified',
+    subtitle: 'LLM-Wiki is not an island. It makes every tool you already use more powerful.',
     items: [
       {
         name: 'Graph View',
-        desc: 'Your graph becomes a live knowledge map — see hub pages, orphan pages, and where clusters form. The wiki gives your graph meaning beyond decoration.',
-      },
-      {
-        name: 'Web Clipper',
-        desc: 'Clip any article from your browser as markdown. Drop it into sources/. The AI processes it automatically — extracting ideas, weaving links, updating the index.',
-      },
-      {
-        name: 'Marp',
-        desc: 'Generate slide decks from wiki content. A presentation is just a query: "Summarize my ML research for a 10-minute talk." The result is a new wiki page you can present from.',
+        standalone: 'Visualize links between notes',
+        amplified: 'Wiki gives your graph real meaning — hub pages, knowledge clusters, orphan detection. Graph becomes navigation, not decoration.',
       },
       {
         name: 'Dataview',
-        desc: 'Query wiki page frontmatter dynamically. When the AI adds YAML metadata to pages, Dataview generates tables, dashboards, and filtered views automatically.',
+        standalone: 'Query frontmatter to generate tables',
+        amplified: 'AI auto-adds structured metadata (tags, dates, categories). Dataview turns empty tables into living dashboards.',
       },
       {
         name: 'Git',
-        desc: 'The wiki is just a folder of markdown files. Version history, branching, and collaboration come free. See exactly how your knowledge evolved.',
+        standalone: 'Version control for files',
+        amplified: 'Watch your knowledge evolve step by step. Every commit tells how your understanding grew.',
+      },
+      {
+        name: 'Web Clipper',
+        standalone: 'Clip articles as Markdown',
+        amplified: 'Drop into sources/, AI auto-extracts, links, updates index. One clip → 10+ wiki pages.',
+      },
+      {
+        name: 'Marp',
+        standalone: 'Generate slide decks',
+        amplified: 'A presentation is just a query: "Summarize my research for 10-min talk." Wiki generates slides from knowledge.',
       },
       {
         name: 'Canvas',
-        desc: 'Visualize wiki structures as infinite canvases. The AI can generate concept maps, timelines, and decision trees from your knowledge graph.',
+        standalone: 'Infinite visual canvas',
+        amplified: 'AI generates concept maps, timelines, decision trees from your knowledge graph — not blank canvas.',
       },
     ],
     cta: 'These are just the beginning. Every Obsidian plugin becomes more powerful when your knowledge is structured.',
@@ -388,32 +395,38 @@ export const zh: Translations = {
   },
   ecosystem: {
     label: '生态',
-    title: 'Obsidian 生态，全面加持',
+    title: '每一个插件，都因知识结构化而更强',
     subtitle: 'LLM-Wiki 不是孤岛。它让你已有的每一个工具都更强。',
     items: [
       {
         name: '图谱视图',
-        desc: '图谱不再只是装饰。Wiki 赋予它真正的意义——枢纽页面、孤儿页面、知识集群，一目了然。',
-      },
-      {
-        name: 'Web Clipper',
-        desc: '浏览器里看到好文章，一键剪辑为 Markdown，丢进 sources/。插件自动处理：提取、链接、更新索引。',
-      },
-      {
-        name: 'Marp',
-        desc: '从 Wiki 直接生成幻灯片。"为 10 分钟演讲总结我的 ML 研究" —— 一句话搞定，结果就是一页可展示的 Wiki。',
+        standalone: '可视化笔记之间的链接',
+        amplified: 'Wiki 赋予图谱真正的意义——枢纽页面、知识集群、孤儿检测。图谱从装饰变成导航。',
       },
       {
         name: 'Dataview',
-        desc: 'Wiki 页面的元数据自动可查。标签、日期、分类——Dataview 动态生成表格和仪表盘。',
+        standalone: '查询笔记 frontmatter 生成表格',
+        amplified: 'AI 自动添加结构化元数据——标签、日期、分类。Dataview 从空表格变成活仪表盘。',
       },
       {
         name: 'Git',
-        desc: 'Wiki 就是一堆 Markdown 文件。版本历史、分支、协作天然支持。知识如何演变，一目了然。',
+        standalone: '文件的版本控制',
+        amplified: '看你的知识一步步演变。每个 commit 都在讲述你的理解如何生长。',
+      },
+      {
+        name: 'Web Clipper',
+        standalone: '剪辑文章为 Markdown',
+        amplified: '丢进 sources/，AI 自动提取、链接、更新索引。一次剪辑 → 10+ Wiki 页面。',
+      },
+      {
+        name: 'Marp',
+        standalone: '生成幻灯片',
+        amplified: '演示只是一句查询："为 10 分钟演讲总结我的研究。" Wiki 从知识库直接生成幻灯片。',
       },
       {
         name: 'Canvas',
-        desc: '把 Wiki 结构铺在无限画布上。概念地图、时间线、决策树——AI 从知识图谱直接生成。',
+        standalone: '无限可视化画布',
+        amplified: 'AI 从你的知识图谱生成概念地图、时间线、决策树——不再是空白画布。',
       },
     ],
     cta: '这只是开始。知识一旦结构化，Obsidian 的每一个插件都会变得更强大。',
