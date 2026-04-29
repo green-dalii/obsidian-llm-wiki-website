@@ -6,8 +6,8 @@ const NAV_ITEMS = [
   { key: 'philosophy', labelKey: 'philosophy' as const, target: '#philosophy' },
   { key: 'how-it-works', labelKey: 'howItWorks' as const, target: '#how-it-works' },
   { key: 'features', labelKey: 'features' as const, target: '#features' },
-  { key: 'providers', labelKey: 'providers' as const, target: '#providers' },
   { key: 'ecosystem', labelKey: 'ecosystem' as const, target: '#ecosystem' },
+  { key: 'providers', labelKey: 'providers' as const, target: '#providers' },
 ];
 
 export default function Header() {
