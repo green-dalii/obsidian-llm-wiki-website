@@ -315,7 +315,7 @@ export default function KnowledgeGrowth() {
 
     const draw = () => {
       // Clear with short trail — higher opacity for faster fade
-      ctx.fillStyle = 'rgba(26,26,26,0.55)';
+      ctx.fillStyle = 'rgba(15,15,15,0.55)';
       ctx.fillRect(0, 0, width, height);
 
       const evo = getEvolutionFactor();
@@ -323,8 +323,8 @@ export default function KnowledgeGrowth() {
       // Mouse ambient glow
       if (mouse.active) {
         const r = ctx.createRadialGradient(mouse.x, mouse.y, 0, mouse.x, mouse.y, MOUSE_RADIUS * 1.2);
-        r.addColorStop(0, 'rgba(139,92,246,0.02)');
-        r.addColorStop(1, 'rgba(139,92,246,0)');
+        r.addColorStop(0, 'rgba(124,58,237,0.02)');
+        r.addColorStop(1, 'rgba(124,58,237,0)');
         ctx.fillStyle = r;
         ctx.fillRect(0, 0, width, height);
       }
@@ -353,7 +353,7 @@ export default function KnowledgeGrowth() {
         const alpha = e.strength * 0.18;
         ctx.strokeStyle = a.type === 'source' && b.type === 'source'
           ? `rgba(217,119,6,${alpha * 0.5})`
-          : `rgba(139,92,246,${alpha})`;
+          : `rgba(124,58,237,${alpha})`;
         ctx.lineWidth = 0.8;
         ctx.stroke();
 
@@ -367,13 +367,13 @@ export default function KnowledgeGrowth() {
 
           ctx.beginPath();
           ctx.arc(px, py, 1.5, 0, Math.PI * 2);
-          ctx.fillStyle = `rgba(167,139,250,${pulseAlpha})`;
+          ctx.fillStyle = `rgba(139,92,246,${pulseAlpha})`;
           ctx.fill();
 
           // Soft glow around pulse
           const pg = ctx.createRadialGradient(px, py, 0, px, py, 6);
-          pg.addColorStop(0, `rgba(167,139,250,${pulseAlpha * 0.25})`);
-          pg.addColorStop(1, 'rgba(167,139,250,0)');
+          pg.addColorStop(0, `rgba(139,92,246,${pulseAlpha * 0.25})`);
+          pg.addColorStop(1, 'rgba(139,92,246,0)');
           ctx.fillStyle = pg;
           ctx.beginPath();
           ctx.arc(px, py, 6, 0, Math.PI * 2);
@@ -409,22 +409,22 @@ export default function KnowledgeGrowth() {
         } else {
           // Concept node: circle with purple glow
           const glow = ctx.createRadialGradient(n.x, n.y, 0, n.x, n.y, glowSize);
-          glow.addColorStop(0, `rgba(139,92,246,${baseAlpha * 0.2})`);
-          glow.addColorStop(0.5, `rgba(139,92,246,${baseAlpha * 0.05})`);
-          glow.addColorStop(1, 'rgba(139,92,246,0)');
+          glow.addColorStop(0, `rgba(124,58,237,${baseAlpha * 0.2})`);
+          glow.addColorStop(0.5, `rgba(124,58,237,${baseAlpha * 0.05})`);
+          glow.addColorStop(1, 'rgba(124,58,237,0)');
           ctx.fillStyle = glow;
           ctx.beginPath();
           ctx.arc(n.x, n.y, glowSize, 0, Math.PI * 2);
           ctx.fill();
 
           // Core
-          ctx.fillStyle = `rgba(167,139,250,${baseAlpha})`;
+          ctx.fillStyle = `rgba(139,92,246,${baseAlpha})`;
           ctx.beginPath();
           ctx.arc(n.x, n.y, n.radius, 0, Math.PI * 2);
           ctx.fill();
 
           // Inner bright core
-          ctx.fillStyle = `rgba(196,181,253,${baseAlpha * 0.4})`;
+          ctx.fillStyle = `rgba(167,139,250,${baseAlpha * 0.4})`;
           ctx.beginPath();
           ctx.arc(n.x - n.radius * 0.15, n.y - n.radius * 0.15, n.radius * 0.35, 0, Math.PI * 2);
           ctx.fill();
@@ -435,7 +435,7 @@ export default function KnowledgeGrowth() {
       if (mouse.active) {
         ctx.beginPath();
         ctx.arc(mouse.x, mouse.y, 10, 0, Math.PI * 2);
-        ctx.strokeStyle = 'rgba(139,92,246,0.12)';
+        ctx.strokeStyle = 'rgba(124,58,237,0.12)';
         ctx.lineWidth = 1;
         ctx.stroke();
       }

@@ -49,14 +49,14 @@ export default function Header({ currentLocale = 'en' }: Props) {
     <header className={`fixed top-0 left-0 right-0 z-40 border-b transition-all duration-500 ${
       scrolled
         ? 'bg-obsidian-bg/85 backdrop-blur-xl border-obsidian-border/50 shadow-[0_1px_0_rgba(255,255,255,0.03)]'
-        : 'bg-[#1e1e1e]/0 border-transparent'
+        : 'bg-[#1f1f1f]/0 border-transparent'
     }`}>
       <div className="max-w-6xl mx-auto px-4 sm:px-6 flex items-center justify-between h-14">
-        <button onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })} className="flex items-center gap-2.5 group">
+        <button onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })} className="flex items-center gap-2 group" aria-label={currentLocale === 'zh' ? '回到顶部' : 'Scroll to top'}>
           <div className="w-7 h-7 rounded-lg bg-obsidian-purple/20 border border-obsidian-purple/30 flex items-center justify-center group-hover:bg-obsidian-purple/30 transition-colors">
-            <BookOpen className="w-3.5 h-3.5 text-obsidian-purple-light" />
+            <BookOpen className="w-4 h-4 text-obsidian-purple-light" />
           </div>
-          <span className="text-sm font-semibold text-[#e5e5e5] tracking-tight">LLM Wiki</span>
+          <span className="text-sm font-semibold text-[#e5e5e5] tracking-tight">LLM Wiki for Obsidian</span>
         </button>
 
         <nav className="hidden md:flex items-center gap-0.5">
@@ -78,13 +78,18 @@ export default function Header({ currentLocale = 'en' }: Props) {
             <span className="text-obsidian-dim">{stars ?? '...'}</span>
           </a>
           <a href="https://github.com/green-dalii/obsidian-llm-wiki/releases" target="_blank" rel="noopener noreferrer"
-            className="ml-1 px-3 py-1.5 text-xs font-medium text-[#1e1e1e] bg-obsidian-purple rounded-md hover:bg-obsidian-purple-light transition-colors inline-flex items-center gap-1.5">
+            className="ml-1 px-3 py-1.5 text-xs font-medium text-white bg-obsidian-purple-dark rounded-md hover:bg-obsidian-purple transition-colors inline-flex items-center gap-1.5">
             <Download className="w-3 h-3" />
             {t.nav.download}
           </a>
         </nav>
 
-        <button className="md:hidden p-2 text-obsidian-muted" onClick={() => setMobileOpen(!mobileOpen)}>
+        <button
+          className="md:hidden p-2 text-obsidian-muted"
+          onClick={() => setMobileOpen(!mobileOpen)}
+          aria-label={mobileOpen ? (currentLocale === 'zh' ? '关闭菜单' : 'Close menu') : (currentLocale === 'zh' ? '打开菜单' : 'Open menu')}
+          aria-expanded={mobileOpen}
+        >
           {mobileOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
         </button>
       </div>

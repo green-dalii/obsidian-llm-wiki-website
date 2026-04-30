@@ -100,7 +100,7 @@ Machine learning uses algorithms to learn from data.
                 key={s.id}
                 onClick={() => { setStep(i); setAutoPlay(false); }}
                 className={`w-full text-left p-3.5 sm:p-4 rounded-lg border transition-all duration-300 ${
-                  i === step ? 'border-obsidian-purple/40 bg-obsidian-purple/5' : 'border-[#333] bg-[#262626]/30 hover:border-[#3a3a3a]'
+                  i === step ? 'border-obsidian-purple/40 bg-obsidian-purple/5' : 'border-[#333] bg-[#1a1a1a]/30 hover:border-[#3a3a3a]'
                 }`}
               >
                 <div className="flex items-center gap-2.5 mb-1">
@@ -112,15 +112,16 @@ Machine learning uses algorithms to learn from data.
             ))}
             <div className="flex items-center gap-2 pt-1">
               <button onClick={() => setStep(Math.max(0, step - 1))} disabled={step === 0} className="px-3 py-1.5 text-xs font-mono text-obsidian-muted border border-[#333] rounded-md hover:border-[#444] disabled:opacity-30 transition-all">{t.wikiDemo.prev}</button>
-              <button onClick={() => setStep(Math.min(4, step + 1))} disabled={step === 4} className="px-3 py-1.5 text-xs font-mono text-[#1e1e1e] bg-obsidian-purple rounded-md hover:bg-obsidian-purple-light disabled:opacity-30 transition-all">{t.wikiDemo.next}</button>
-              <button onClick={() => { setStep(0); setAutoPlay(!autoPlay); }} className={`px-3 py-1.5 text-xs font-mono border rounded-md transition-all ${autoPlay ? 'border-obsidian-purple/40 text-obsidian-purple' : 'border-[#333] text-obsidian-muted hover:border-[#444]'}`}>{autoPlay ? '⏸' : '▶'}</button>
+              <button onClick={() => setStep(Math.min(4, step + 1))} disabled={step === 4} className="px-3 py-1.5 text-xs font-mono text-white bg-obsidian-purple-dark rounded-md hover:bg-obsidian-purple disabled:opacity-30 transition-all">{t.wikiDemo.next}</button>
+              <button onClick={() => { setStep(0); setAutoPlay(!autoPlay); }} aria-label={autoPlay ? (locale === 'zh' ? '暂停' : 'Pause') : (locale === 'zh' ? '播放' : 'Play')} className={`px-3 py-1.5 text-xs font-mono border rounded-md transition-all ${autoPlay ? 'border-obsidian-purple/40 text-obsidian-purple' : 'border-[#333] text-obsidian-muted hover:border-[#444]'}`}>{autoPlay ? '⏸' : '▶'}</button>
               <button onClick={() => { setStep(0); setAutoPlay(false); }} className="px-3 py-1.5 text-xs font-mono text-obsidian-dim border border-[#333] rounded-md hover:border-[#444] transition-all">{t.wikiDemo.restart}</button>
             </div>
           </div>
 
-          {/* Stage */}
-          <div className="lg:col-span-3">
-            <div className="relative rounded-xl border border-[#333] bg-[#262626]/60 overflow-hidden min-h-[380px]">
+          {/* Stage - 外部固定高度容器防止布局跳动 */}
+          <div className="lg:col-span-3 h-[550px]">
+            {/* 内部编辑器容器 - 自适应高度 */}
+            <div className="relative rounded-xl border border-[#333] bg-[#1a1a1a]/60 overflow-hidden min-h-[380px]">
               <div className="absolute top-3 left-3 z-10 flex items-center gap-2">
                 <span className="w-1.5 h-1.5 rounded-full bg-obsidian-purple animate-pulse" />
                 <span className="text-[10px] font-mono text-obsidian-dim tracking-wider uppercase">
@@ -135,7 +136,7 @@ Machine learning uses algorithms to learn from data.
               {/* Step 0: Source */}
               {step === 0 && (
                 <div className="p-5 pt-12">
-                  <div className="rounded-lg border border-[#333] bg-[#1e1e1e] p-4 font-mono text-xs leading-relaxed">
+                  <div className="rounded-lg border border-[#333] bg-[#1f1f1f] p-4 font-mono text-xs leading-relaxed">
                     <div className="flex items-center gap-2 mb-2 pb-2 border-b border-[#333]">
                       <span className="text-obsidian-dim">sources/</span>
                       <span className="text-obsidian-muted">machine-learning.md</span>
@@ -158,7 +159,7 @@ Machine learning uses algorithms to learn from data.
               {/* Step 1: Extraction with dashed boxes + entity/concept tags */}
               {step === 1 && (
                 <div className="p-5 pt-12">
-                  <div className="rounded-lg border border-[#333] bg-[#1e1e1e] p-4 font-mono text-xs leading-relaxed min-h-[280px]">
+                  <div className="rounded-lg border border-[#333] bg-[#1f1f1f] p-4 font-mono text-xs leading-relaxed min-h-[280px]">
                     <div className="flex items-center gap-2 mb-2 pb-2 border-b border-[#333]">
                       <span className="text-obsidian-dim">sources/</span>
                       <span className="text-obsidian-muted">machine-learning.md</span>
@@ -173,8 +174,8 @@ Machine learning uses algorithms to learn from data.
                             {item && !isHeading ? (
                               <span className="inline-flex items-center gap-2 border border-dashed rounded px-2 py-0.5"
                                 style={{
-                                  borderColor: item.type === 'entity' ? 'rgba(217,119,6,0.45)' : 'rgba(139,92,246,0.45)',
-                                  backgroundColor: item.type === 'entity' ? 'rgba(217,119,6,0.06)' : 'rgba(139,92,246,0.06)',
+                                  borderColor: item.type === 'entity' ? 'rgba(217,119,6,0.45)' : 'rgba(124,58,237,0.45)',
+                                  backgroundColor: item.type === 'entity' ? 'rgba(217,119,6,0.06)' : 'rgba(124,58,237,0.06)',
                                 }}>
                                 <span className="text-obsidian-muted">{line}</span>
                                 <span className={`text-[9px] font-mono px-1.5 py-0.5 rounded ${
@@ -205,7 +206,7 @@ Machine learning uses algorithms to learn from data.
                 <div className="p-5 pt-12">
                   <div className="grid grid-cols-2 gap-3">
                     {generatedPages.map((page, i) => (
-                      <div key={page.title} className="rounded-lg border border-[#333] bg-[#1e1e1e] p-3.5">
+                      <div key={page.title} className="rounded-lg border border-[#333] bg-[#1f1f1f] p-3.5">
                         <div className="text-[9px] font-mono text-obsidian-dim mb-1.5 truncate">{page.path}</div>
                         <div className="text-sm font-medium text-[#e5e5e5] mb-1.5">{page.title}</div>
                         <div className="flex flex-wrap gap-1">{page.tags.map(tag => <span key={tag} className="text-[9px] font-mono px-1 py-0.5 rounded bg-[#333] text-obsidian-dim">#{tag}</span>)}</div>
@@ -223,19 +224,19 @@ Machine learning uses algorithms to learn from data.
 
               {/* Step 3: Links */}
               {step === 3 && (
-                <div className="p-5 pt-12">
-                  <div className="relative min-h-[280px]">
+                <div className="p-5 pt-12 pb-16">
+                  <div className="relative h-[280px]">
                     {generatedPages.map((page, i) => (
-                      <div key={page.title} className="absolute rounded-lg border border-obsidian-purple/30 bg-[#1e1e1e] px-2.5 py-1.5 text-xs font-mono text-obsidian-muted"
-                        style={{ left: `${[8, 55, 8, 55][i]}%`, top: `${[8, 8, 55, 55][i]}%` }}>
+                      <div key={page.title} className="absolute rounded-lg border border-obsidian-purple/30 bg-[#1f1f1f] px-2.5 py-1.5 text-xs font-mono text-obsidian-muted"
+                        style={{ left: `${[8, 55, 8, 55][i]}%`, top: `${[8, 8, 50, 50][i]}%` }}>
                         <span className="text-obsidian-purple-light">[[</span>{page.title}<span className="text-obsidian-purple-light">]]</span>
                       </div>
                     ))}
                     <svg className="absolute inset-0 w-full h-full pointer-events-none">
                       {links.map((l, i) => (
-                        <line key={i} x1={`${[20, 67, 20, 67][l.from]}%`} y1={`${[14, 14, 61, 61][l.from]}%`}
-                          x2={`${[20, 67, 20, 67][l.to]}%`} y2={`${[14, 14, 61, 61][l.to]}%`}
-                          stroke="rgba(139,92,246,0.35)" strokeWidth="1" strokeDasharray="3 2" className="animate-pulse" />
+                        <line key={i} x1={`${[20, 67, 20, 67][l.from]}%`} y1={`${[12, 12, 54, 54][l.from]}%`}
+                          x2={`${[20, 67, 20, 67][l.to]}%`} y2={`${[12, 12, 54, 54][l.to]}%`}
+                          stroke="rgba(124,58,237,0.35)" strokeWidth="1" strokeDasharray="3 2" className="animate-pulse" />
                       ))}
                     </svg>
                     <div className="absolute bottom-3 left-3 text-[10px] font-mono text-obsidian-dim">4 pages · 6 bidirectional links · 1 graph</div>
@@ -249,7 +250,7 @@ Machine learning uses algorithms to learn from data.
                   <div className="space-y-3 max-w-md mx-auto">
                     <div className="flex items-start gap-2.5">
                       <div className="w-5 h-5 rounded-full bg-[#333] flex items-center justify-center flex-shrink-0 mt-0.5"><span className="text-[8px]">You</span></div>
-                      <div className="rounded-lg border border-[#333] bg-[#1e1e1e] px-3 py-2 text-xs text-obsidian-text">How does supervised learning relate to computer vision?</div>
+                      <div className="rounded-lg border border-[#333] bg-[#1f1f1f] px-3 py-2 text-xs text-obsidian-text">How does supervised learning relate to computer vision?</div>
                     </div>
                     <div className="flex items-start gap-2.5">
                       <div className="w-5 h-5 rounded-full bg-obsidian-purple/20 border border-obsidian-purple/30 flex items-center justify-center flex-shrink-0 mt-0.5">
@@ -271,8 +272,15 @@ Machine learning uses algorithms to learn from data.
               {/* Dots */}
               <div className="absolute bottom-3 right-3 flex items-center gap-1.5">
                 {STEPS.map((_, i) => (
-                  <button key={i} onClick={() => { setStep(i); setAutoPlay(false); }}
-                    className={`h-1.5 rounded-full transition-all duration-300 ${i === step ? 'bg-obsidian-purple w-4' : 'bg-[#333] hover:bg-[#444] w-1.5'}`} />
+                  <button
+                    key={i}
+                    onClick={() => { setStep(i); setAutoPlay(false); }}
+                    aria-label={`${locale === 'zh' ? '步骤' : 'Step'} ${i + 1}`}
+                    aria-current={i === step ? 'step' : undefined}
+                    className="min-w-6 min-h-6 flex items-center justify-center rounded-full"
+                  >
+                    <span className={`block h-1.5 rounded-full transition-all duration-300 ${i === step ? 'bg-obsidian-purple w-4' : 'bg-[#333] hover:bg-[#444] w-1.5'}`} />
+                  </button>
                 ))}
               </div>
             </div>

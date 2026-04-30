@@ -4,13 +4,24 @@ Marketing website for the [Obsidian LLM Wiki plugin](https://github.com/green-da
 
 ## Tech Stack
 
-- **Astro 6.1** — Static site generation with Islands architecture
+- **Astro 6.2** — Static site generation with Islands architecture
 - **React 19** — Interactive components (client-side hydration)
-- **Tailwind CSS 3.4** — Utility-first styling with custom Obsidian theme
+- **Tailwind CSS 4.0** — CSS-first utility styling with @theme directive
 - **IntersectionObserver** — Scroll-triggered animations for static sections
 - **Canvas 2D** — Organic "Knowledge Growth" animation for hero background
 - **lucide-react** — Consistent icon system
 - **i18n routing** — Static pages per language (EN: `/`, ZH: `/zh/`)
+
+## Brand Consistency
+
+**Official Obsidian Colors (as of 2026-04-30):**
+- Background: **#0f0f0f** (deeper, matches Obsidian app)
+- Surface/Card: **#1f1f1f** (gray background for panels)
+- Primary Purple: **#7c3aed** (Obsidian's brand purple)
+- Primary Light: **#8b5cf6** (hover/active states)
+- Primary Dark: **#6d28d9** (buttons with white text)
+
+All purple values in Canvas animations, SVGs, and CSS have been unified to official Obsidian palette.
 
 ## Architecture
 

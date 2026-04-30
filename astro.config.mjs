@@ -1,18 +1,14 @@
 import { defineConfig } from 'astro/config';
 import react from '@astrojs/react';
-import tailwind from '@astrojs/tailwind';
+import tailwindcss from '@tailwindcss/vite';
 
 // https://astro.build/config
 export default defineConfig({
   output: 'static',
-  // Remove base for local testing, set to '/obsidian-llm-wiki/' for GitHub Pages deployment
-  // base: '/obsidian-llm-wiki/',
-  integrations: [
-    react(),
-    tailwind({
-      applyBaseStyles: false,
-    }),
-  ],
+  integrations: [react()],
+  vite: {
+    plugins: [tailwindcss()],
+  },
   i18n: {
     defaultLocale: 'en',
     locales: ['en', 'zh'],

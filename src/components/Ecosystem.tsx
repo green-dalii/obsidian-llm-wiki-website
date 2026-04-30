@@ -35,7 +35,7 @@ export default function Ecosystem() {
           {t.ecosystem.items.map((item, i) => {
             const Icon = ICONS[i];
             return (
-              <div key={i} className="eco-card group rounded-lg border border-obsidian-border bg-obsidian-surface/30 p-5 hover:border-obsidian-purple/25 hover:bg-obsidian-purple/[0.03] transition-all duration-250">
+              <div key={i} className="eco-card group rounded-lg border border-obsidian-border bg-obsidian-card/40 p-5 hover:border-obsidian-purple/25 hover:bg-obsidian-purple/[0.03] transition-all duration-250">
                 <div className="flex items-start gap-3 mb-2">
                   <div className="w-7 h-7 rounded-md bg-obsidian-purple/10 border border-obsidian-purple/20 flex items-center justify-center flex-shrink-0">
                     <Icon className="w-3.5 h-3.5 text-obsidian-purple-light" />
@@ -53,7 +53,7 @@ export default function Ecosystem() {
                 <div className="relative pl-3">
                   <div className="absolute left-0 top-0 bottom-0 w-[2px] rounded-full bg-obsidian-purple/30" />
                   <div className="flex items-center gap-1.5 mb-1">
-                    <span className="text-[10px] font-mono text-obsidian-purple-light">+ LLM Wiki</span>
+                    <span className="text-[10px] font-mono text-obsidian-purple-light">+ LLM Wiki for Obsidian</span>
                   </div>
                   <p className="text-xs text-obsidian-heading leading-relaxed">{item.amplified}</p>
                 </div>

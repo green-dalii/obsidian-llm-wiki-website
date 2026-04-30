@@ -38,7 +38,7 @@ export default function Features() {
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           {features.map((f, i) => (
-            <div key={f.title} className="feature-card group rounded-xl border border-obsidian-border bg-obsidian-surface/40 overflow-hidden hover:border-obsidian-purple/30 hover:shadow-[0_0_40px_rgba(139,92,246,0.08)] transition-all duration-300">
+            <div key={f.title} className="feature-card group rounded-xl border border-obsidian-border bg-obsidian-card/60 overflow-hidden hover:border-obsidian-purple/30 hover:shadow-[0_0_40px_rgba(139,92,246,0.08)] transition-all duration-300">
               <div className="p-5 sm:p-6">
                 <div className="flex items-center gap-2.5 mb-3">
                   <div className="w-8 h-8 rounded-lg bg-obsidian-purple/15 border border-obsidian-purple/25 flex items-center justify-center">

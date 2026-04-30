@@ -33,7 +33,7 @@ export default function Hero({ locale = 'en' }: Props) {
       </div>
 
       <div ref={contentRef} className="relative z-10 text-center px-6 max-w-3xl mx-auto">
-        <div className="inline-flex items-center gap-2.5 px-4 py-1.5 rounded-full border border-obsidian-border bg-obsidian-surface/60 backdrop-blur-sm mb-8">
+        <div className="inline-flex items-center gap-2.5 px-4 py-1.5 rounded-full border border-obsidian-border bg-obsidian-card/80 backdrop-blur-sm mb-8">
           <span className="relative flex h-2 w-2">
             <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-obsidian-purple opacity-75" />
             <span className="relative inline-flex rounded-full h-2 w-2 bg-obsidian-purple" />
@@ -53,7 +53,7 @@ export default function Hero({ locale = 'en' }: Props) {
 
         <div className="flex flex-wrap items-center justify-center gap-4">
           <a href="https://github.com/green-dalii/obsidian-llm-wiki/releases" target="_blank" rel="noopener noreferrer"
-            className="inline-flex items-center gap-2.5 px-6 py-3 rounded-lg bg-obsidian-purple hover:bg-obsidian-purple-light text-[#1e1e1e] font-medium text-sm transition-colors duration-200">
+            className="inline-flex items-center gap-2.5 px-6 py-3 rounded-lg bg-obsidian-purple-dark hover:bg-obsidian-purple text-white font-medium text-sm transition-colors duration-200">
             <Github className="w-4 h-4" />
             {t.hero.ctaInstall}
           </a>
