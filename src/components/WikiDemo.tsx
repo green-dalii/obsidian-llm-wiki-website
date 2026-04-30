@@ -199,7 +199,7 @@ Machine learning uses algorithms to learn from data.
                 <div className="p-5 pt-12">
                   <div className="grid grid-cols-2 gap-3">
                     {generatedPages.map((page, i) => (
-                      <div key={page.title} className="rounded-lg border border-[#333] bg-[#1e1e1e] p-3.5 animate-fadeSlideIn" style={{ animationDelay: `${i * 0.15}s` }}>
+                      <div key={page.title} className="rounded-lg border border-[#333] bg-[#1e1e1e] p-3.5">
                         <div className="text-[9px] font-mono text-obsidian-dim mb-1.5 truncate">{page.path}</div>
                         <div className="text-sm font-medium text-[#e5e5e5] mb-1.5">{page.title}</div>
                         <div className="flex flex-wrap gap-1">{page.tags.map(tag => <span key={tag} className="text-[9px] font-mono px-1 py-0.5 rounded bg-[#333] text-obsidian-dim">#{tag}</span>)}</div>

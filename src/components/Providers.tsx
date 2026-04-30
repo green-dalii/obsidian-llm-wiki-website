@@ -40,7 +40,7 @@ export default function Providers() {
 
   return (
     <section ref={sectionRef} id="providers" className="relative w-full py-20 sm:py-28">
-      <div className="max-w-4xl mx-auto px-4 sm:px-6">
+      <div className="max-w-5xl mx-auto px-4 sm:px-6">
         <div className="text-center mb-10">
           <span className="text-[11px] font-mono text-obsidian-purple tracking-[0.15em] uppercase">{t.providers.label}</span>
           <h2 className="text-[clamp(1.4rem,3vw,2rem)] font-semibold mt-3 mb-2 text-[#e5e5e5]">{t.providers.title}</h2>
