@@ -82,6 +82,8 @@ export interface Translations {
     step2Desc: string;
     step3Title: string;
     step3Desc: string;
+    step4Title: string;
+    step4Desc: string;
     cta: string;
   };
   providers: {
@@ -208,14 +210,16 @@ export const en: Translations = {
   },
   install: {
     label: 'Get Started',
-    title: 'Up and running in 3 steps',
-    subtitle: 'No extra apps. Runs inside your Obsidian vault.',
+    title: 'Up and running in minutes',
+    subtitle: 'No extra apps. Runs inside your existing Obsidian vault.',
     step1Title: 'Download',
-    step1Desc: 'Grab the plugin files from GitHub Releases — main.js, manifest.json, styles.css.',
+    step1Desc: 'Grab main.js, manifest.json, and styles.css from GitHub Releases. These three files are all you need.',
     step2Title: 'Install',
-    step2Desc: 'Settings → Community plugins → Open plugins folder. Create a llm-wiki/ folder, drop the files in.',
-    step3Title: 'Connect',
-    step3Desc: 'Pick an LLM provider, enter your API key. DeepSeek, Claude, Gemini, GPT — your call.',
+    step2Desc: 'Open Obsidian → Settings → Community plugins. Click the folder icon to open your plugins directory. Create a new folder called llm-wiki, drop the three files in, then click the refresh icon in Obsidian. Enable the plugin when it appears.',
+    step3Title: 'Configure',
+    step3Desc: 'Go to Settings → Karpathy LLM Wiki. Pick a provider (DeepSeek, Claude, Gemini, GPT, Ollama, etc.), enter your API key, click Fetch Models, then Test Connection and Save.',
+    step4Title: 'Use',
+    step4Desc: 'Press Cmd+P (or Ctrl+P on Windows) to open the command palette. Type "Ingest" to find Ingest Sources or Ingest from Folder. Type "Query" to ask questions about your knowledge. The plugin handles the rest.',
     cta: 'Download Latest',
   },
   providers: {
@@ -369,14 +373,16 @@ export const zh: Translations = {
   },
   install: {
     label: '快速开始',
-    title: '3 步，即刻上手',
+    title: '几分钟，即可上手',
     subtitle: '无需额外软件，直接在 Obsidian Vault 内运行。',
     step1Title: '下载',
-    step1Desc: '从 GitHub Releases 获取插件文件——main.js、manifest.json、styles.css。',
+    step1Desc: '从 GitHub Releases 下载 main.js、manifest.json、styles.css 三个文件，这就是你所需要的全部。',
     step2Title: '安装',
-    step2Desc: '设置 → 第三方插件 → 打开插件目录。新建 llm-wiki/ 文件夹，放入文件即可。',
-    step3Title: '接入',
-    step3Desc: '选择 LLM 提供商，填入 API Key。DeepSeek、Claude、Gemini、GPT——随你选。',
+    step2Desc: '打开 Obsidian → 设置 → 第三方插件。点击文件夹图标打开插件目录，新建一个 llm-wiki 文件夹，把三个文件放进去。回到 Obsidian 点击刷新图标，看到插件后启用即可。',
+    step3Title: '配置',
+    step3Desc: '进入设置 → Karpathy LLM Wiki。选择提供商（DeepSeek、Claude、Gemini、GPT、Ollama 等），填入 API Key，点击"获取模型"，再点击"测试连接"并保存。',
+    step4Title: '使用',
+    step4Desc: '按 Cmd+P（Windows 为 Ctrl+P）打开命令面板，输入"Ingest"可找到"摄入源笔记"或"从文件夹摄入"，输入"Query"可向知识库提问。插件会自动完成剩余工作。',
     cta: '下载最新版',
   },
   providers: {
