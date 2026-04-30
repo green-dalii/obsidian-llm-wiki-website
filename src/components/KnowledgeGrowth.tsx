@@ -12,6 +12,9 @@ interface Node {
   homeX: number;
   homeY: number;
   driftPhase: number;
+  driftAmp: number;
+  driftFreq: number;
+  wanderTimer: number;
   spawnDelay: number;
   opacity: number;
 }
@@ -43,14 +46,14 @@ export default function KnowledgeGrowth() {
     let animationId = 0;
 
     const CLUSTER_CENTERS = 4;
-    const NODE_COUNT = 28;
-    const CENTER_ATTRACTION = 0.00012;
-    const REPULSION_RADIUS = 120;
-    const REPULSION_FORCE = 60;
-    const SPRING_LENGTH = 120;
+    const NODE_COUNT = 47;
+    const CENTER_ATTRACTION = 0.000065;
+    const REPULSION_RADIUS = 155;
+    const REPULSION_FORCE = 110;
+    const SPRING_LENGTH = 130;
     const SPRING_STRENGTH = 0.012;
     const MOUSE_RADIUS = 200;
-    const MOUSE_REPULSION = 80;
+    const MOUSE_REPULSION = 120;
     const FRICTION = 0.95;
     const MAX_SPEED = 1.8;
     const CONNECT_DIST = 150;
@@ -84,14 +87,14 @@ export default function KnowledgeGrowth() {
 
       for (let i = 0; i < NODE_COUNT; i++) {
         const cluster = i % CLUSTER_CENTERS;
-        const angle = (cluster / CLUSTER_CENTERS) * Math.PI * 2 + Math.random() * 0.6;
-        const dist = Math.min(width, height) * 0.12 + Math.random() * Math.min(width, height) * 0.22;
+        const angle = (cluster / CLUSTER_CENTERS) * Math.PI * 2 + Math.random() * 0.9;
+        const dist = Math.min(width, height) * 0.08 + Math.random() * Math.min(width, height) * 0.20;
         const homeX = width / 2 + Math.cos(angle) * dist;
         const homeY = height / 2 + Math.sin(angle) * dist;
 
         nodes.push({
-          x: homeX + (Math.random() - 0.5) * 100,
-          y: homeY + (Math.random() - 0.5) * 100,
+          x: homeX + (Math.random() - 0.5) * 60,
+          y: homeY + (Math.random() - 0.5) * 60,
           vx: (Math.random() - 0.5) * 1.2,
           vy: (Math.random() - 0.5) * 1.2,
           type: i < NODE_COUNT * 0.3 ? 'source' : 'concept',
@@ -101,6 +104,9 @@ export default function KnowledgeGrowth() {
           homeX,
           homeY,
           driftPhase: Math.random() * Math.PI * 2,
+          driftAmp: 0.5 + Math.random() * 1.0,
+          driftFreq: 0.6 + Math.random() * 0.8,
+          wanderTimer: Math.random() * 3000,
           spawnDelay: Math.random() * SPAWN_WINDOW * 0.8,
           opacity: 0,
         });
@@ -179,11 +185,24 @@ export default function KnowledgeGrowth() {
         n.vx += (n.homeX - n.x) * centerStrength;
         n.vy += (n.homeY - n.y) * centerStrength;
 
-        // Organic noise drift
-        n.driftPhase += 0.006;
-        const driftStrength = 1 - evo * 0.5;
-        n.vx += Math.sin(n.driftPhase + n.cluster * 1.5) * 0.012 * driftStrength;
-        n.vy += Math.cos(n.driftPhase * 0.7 + n.cluster) * 0.012 * driftStrength;
+        // Organic drift — per-node frequency & amplitude, no synchronized movement
+        n.driftPhase += 0.003 * n.driftFreq;
+        const driftStrength = 1 - evo * 0.25;
+        const dx = Math.sin(n.driftPhase + n.cluster * 2.1) * 0.030 * n.driftAmp * driftStrength;
+        const dy = Math.cos(n.driftPhase * 0.6 + n.cluster + n.driftAmp) * 0.030 * n.driftAmp * driftStrength;
+        n.vx += dx;
+        n.vy += dy;
+
+        // Rare spontaneous wander — ~0.3% chance per frame per node
+        n.wanderTimer -= 1;
+        if (n.wanderTimer <= 0) {
+          n.wanderTimer = 1500 + Math.random() * 4000;
+          if (Math.random() < 0.3 && evo > 0.4) {
+            const angle = Math.random() * Math.PI * 2;
+            n.vx += Math.cos(angle) * (0.15 + Math.random() * 0.4);
+            n.vy += Math.sin(angle) * (0.15 + Math.random() * 0.4);
+          }
+        }
 
         // Mouse interaction
         if (mouse.active) {
@@ -295,8 +314,8 @@ export default function KnowledgeGrowth() {
     };
 
     const draw = () => {
-      // Clear with slight trail for smoothness
-      ctx.fillStyle = 'rgba(26,26,26,0.35)';
+      // Clear with short trail — higher opacity for faster fade
+      ctx.fillStyle = 'rgba(26,26,26,0.55)';
       ctx.fillRect(0, 0, width, height);
 
       const evo = getEvolutionFactor();

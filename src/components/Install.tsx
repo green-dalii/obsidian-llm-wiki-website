@@ -1,7 +1,38 @@
-import { useRef, useEffect } from 'react';
+import { useRef, useEffect, type ReactNode } from 'react';
 import gsap from 'gsap';
-import { Download, FolderOpen, Settings, Terminal } from 'lucide-react';
+import { Download, FolderOpen, Settings, Terminal, Folder, RefreshCw } from 'lucide-react';
 import { useI18n } from '../i18n/use-i18n';
+
+const ICON_MAP: Record<string, React.ComponentType<{ className?: string }>> = {
+  'folder': Folder,
+  'refresh-cw': RefreshCw,
+};
+
+/** Parse <em>...</em> (emphasized tag) and <i>icon-name</i> (inline icon) in translation strings */
+function renderTagged(text: string): ReactNode[] {
+  const parts = text.split(/(<em>.*?<\/em>|<i>.*?<\/i>)/g);
+  return parts.map((part, i) => {
+    const emMatch = part.match(/<em>(.*?)<\/em>/);
+    if (emMatch) {
+      return (
+        <span
+          key={i}
+          className="text-[9px] font-mono px-1 py-px rounded bg-obsidian-purple/15 text-obsidian-purple-light border border-obsidian-purple/25 whitespace-nowrap inline-flex items-center gap-1"
+        >
+          {renderTagged(emMatch[1])}
+        </span>
+      );
+    }
+    const iconMatch = part.match(/<i>(.*?)<\/i>/);
+    if (iconMatch) {
+      const IconComponent = ICON_MAP[iconMatch[1]];
+      return IconComponent
+        ? <IconComponent key={i} className="w-3 h-3 inline-block" />
+        : <span key={i}>{iconMatch[1]}</span>;
+    }
+    return <span key={i}>{part}</span>;
+  });
+}
 
 function IllustrationDownload() {
   return (
@@ -17,7 +48,7 @@ function IllustrationDownload() {
       <circle cx="46" cy="18" r="3" fill="#22c55e" opacity="0.6"/>
       {/* URL bar */}
       <rect x="62" y="12" width="200" height="12" rx="4" fill="#1e1e1e" stroke="#333" strokeWidth="0.5"/>
-      <text x="72" y="21" fill="#737373" fontSize="7" fontFamily="JetBrains Mono, monospace">github.com/.../releases</text>
+      <text x="66" y="21" fill="#737373" fontSize="5.5" fontFamily="JetBrains Mono, monospace">github.com/green-dalii/obsidian-llm-wiki/releases</text>
 
       {/* File cards */}
       {/* main.js */}
@@ -25,21 +56,21 @@ function IllustrationDownload() {
       <rect x="32" y="55" width="14" height="14" rx="3" fill="#d97706" opacity="0.15"/>
       <text x="52" y="65" fill="#e5e5e5" fontSize="8" fontFamily="JetBrains Mono, monospace">main.js</text>
       <rect x="220" y="55" width="28" height="14" rx="3" fill="#8b5cf6" opacity="0.2"/>
-      <text x="228" y="65" fill="#a78bfa" fontSize="6" fontFamily="JetBrains Mono, monospace">↓</text>
+      <text x="232" y="65" fill="#a78bfa" fontSize="6" fontFamily="JetBrains Mono, monospace">↓</text>
 
       {/* manifest.json */}
       <rect x="24" y="84" width="232" height="28" rx="5" fill="#1e1e1e" stroke="#333" strokeWidth="1"/>
       <rect x="32" y="91" width="14" height="14" rx="3" fill="#8b5cf6" opacity="0.15"/>
       <text x="52" y="101" fill="#e5e5e5" fontSize="8" fontFamily="JetBrains Mono, monospace">manifest.json</text>
       <rect x="220" y="91" width="28" height="14" rx="3" fill="#8b5cf6" opacity="0.2"/>
-      <text x="228" y="101" fill="#a78bfa" fontSize="6" fontFamily="JetBrains Mono, monospace">↓</text>
+      <text x="232" y="101" fill="#a78bfa" fontSize="6" fontFamily="JetBrains Mono, monospace">↓</text>
 
       {/* styles.css */}
       <rect x="24" y="120" width="232" height="28" rx="5" fill="#1e1e1e" stroke="#333" strokeWidth="1"/>
       <rect x="32" y="127" width="14" height="14" rx="3" fill="#22c55e" opacity="0.15"/>
       <text x="52" y="137" fill="#e5e5e5" fontSize="8" fontFamily="JetBrains Mono, monospace">styles.css</text>
       <rect x="220" y="127" width="28" height="14" rx="3" fill="#8b5cf6" opacity="0.2"/>
-      <text x="228" y="137" fill="#a78bfa" fontSize="6" fontFamily="JetBrains Mono, monospace">↓</text>
+      <text x="232" y="137" fill="#a78bfa" fontSize="6" fontFamily="JetBrains Mono, monospace">↓</text>
     </svg>
   );
 }
@@ -47,12 +78,16 @@ function IllustrationDownload() {
 function IllustrationInstall() {
   return (
     <svg viewBox="0 0 280 160" className="w-full h-auto" aria-hidden="true">
+      <defs>
+        <clipPath id="sidebarClipInstall">
+          <path d="M12,4 H88 V156 H12 A8,8,0,0,1,4,148 V12 A8,8,0,0,1,12,4 Z"/>
+        </clipPath>
+      </defs>
       {/* Obsidian settings panel */}
       <rect x="4" y="4" width="272" height="152" rx="8" fill="#1e1e1e" stroke="#333" strokeWidth="1"/>
 
-      {/* Left sidebar */}
-      <rect x="4" y="4" width="84" height="152" rx="8" fill="#262626"/>
-      <rect x="4" y="4" width="84" height="152" rx="0" fill="#262626"/>
+      {/* Left sidebar — left corners match outer panel radius */}
+      <rect x="4" y="4" width="84" height="152" fill="#262626" clipPath="url(#sidebarClipInstall)"/>
 
       {/* Menu items */}
       <text x="16" y="28" fill="#737373" fontSize="6" fontFamily="system-ui">General</text>
@@ -81,8 +116,8 @@ function IllustrationInstall() {
       <rect x="114" y="83" width="12" height="12" rx="3" fill="#8b5cf6" opacity="0.2"/>
       <text x="132" y="92" fill="#e5e5e5" fontSize="7" fontFamily="system-ui" fontWeight="500">Karpathy LLM Wiki</text>
       {/* Toggle switch ON */}
-      <rect x="224" y="85" width="22" height="12" rx="6" fill="#8b5cf6"/>
-      <circle cx="242" cy="91" r="4" fill="#fff"/>
+      <rect x="224" y="82" width="22" height="12" rx="6" fill="#8b5cf6"/>
+      <circle cx="240" cy="88" r="4" fill="#fff"/>
     </svg>
   );
 }
@@ -90,18 +125,22 @@ function IllustrationInstall() {
 function IllustrationConfig() {
   return (
     <svg viewBox="0 0 280 160" className="w-full h-auto" aria-hidden="true">
+      <defs>
+        <clipPath id="sidebarClipConfig">
+          <path d="M12,4 H88 V156 H12 A8,8,0,0,1,4,148 V12 A8,8,0,0,1,12,4 Z"/>
+        </clipPath>
+      </defs>
       {/* Settings panel */}
       <rect x="4" y="4" width="272" height="152" rx="8" fill="#1e1e1e" stroke="#333" strokeWidth="1"/>
 
-      {/* Left sidebar */}
-      <rect x="4" y="4" width="84" height="152" rx="8" fill="#262626"/>
-      <rect x="4" y="4" width="84" height="152" rx="0" fill="#262626"/>
-      <text x="16" y="28" fill="#737373" fontSize="6" fontFamily="system-ui">General</text>
+      {/* Left sidebar — left corners match outer panel radius */}
+      <rect x="4" y="4" width="84" height="152" fill="#262626" clipPath="url(#sidebarClipConfig)"/>
+      <text x="16" y="28" fill="#737373" fontSize="6" fontFamily="system-ui">Community plugins</text>
       <rect x="12" y="36" width="68" height="18" rx="3" fill="#8b5cf6" opacity="0.12"/>
       <text x="16" y="48" fill="#a78bfa" fontSize="6" fontFamily="system-ui" fontWeight="600">Karpathy LLM Wiki</text>
 
       {/* Right settings area */}
-      <text x="100" y="24" fill="#e5e5e5" fontSize="8" fontFamily="system-ui" fontWeight="600">Provider Settings</text>
+      <text x="100" y="24" fill="#e5e5e5" fontSize="8" fontFamily="system-ui" fontWeight="600">LLM Provider Configuration</text>
 
       {/* Provider dropdown */}
       <text x="100" y="46" fill="#a3a3a3" fontSize="6" fontFamily="system-ui">Provider</text>
@@ -115,10 +154,10 @@ function IllustrationConfig() {
 
       {/* Buttons */}
       <rect x="100" y="124" width="72" height="18" rx="4" fill="#262626" stroke="#333" strokeWidth="0.5"/>
-      <text x="116" y="136" fill="#a3a3a3" fontSize="6" fontFamily="system-ui">Fetch Models</text>
+      <text x="136" y="136" textAnchor="middle" fill="#a3a3a3" fontSize="6" fontFamily="system-ui">Fetch Models</text>
 
       <rect x="180" y="124" width="72" height="18" rx="4" fill="#8b5cf6" opacity="0.2" stroke="#8b5cf6" strokeWidth="0.5"/>
-      <text x="188" y="136" fill="#a78bfa" fontSize="6" fontFamily="system-ui" fontWeight="500">Test Connection</text>
+      <text x="216" y="136" textAnchor="middle" fill="#a78bfa" fontSize="6" fontFamily="system-ui" fontWeight="500">Test Connection</text>
     </svg>
   );
 }
@@ -150,9 +189,9 @@ function IllustrationUse() {
       <text x="36" y="127" fill="#a3a3a3" fontSize="7" fontFamily="system-ui">Query wiki</text>
       <text x="164" y="127" fill="#525252" fontSize="6" fontFamily="system-ui">Ask questions</text>
 
-      {/* Keyboard hint */}
-      <rect x="196" y="138" width="56" height="14" rx="3" fill="#262626" stroke="#333" strokeWidth="0.5"/>
-      <text x="206" y="148" fill="#737373" fontSize="6" fontFamily="JetBrains Mono, monospace">⌘ P / Ctrl P</text>
+      {/* Keyboard hint — emphasized */}
+      <rect x="196" y="138" width="56" height="14" rx="3" fill="#8b5cf6" opacity="0.12" stroke="#8b5cf6" strokeWidth="0.8" strokeOpacity="0.8"/>
+      <text x="201" y="148" fill="#a78bfa" fontSize="6" fontFamily="JetBrains Mono, monospace">⌘+P / Ctrl+P</text>
     </svg>
   );
 }
@@ -198,20 +237,20 @@ export default function Install() {
             const descKey = (`step${idx + 1}Desc` as 'step1Desc' | 'step2Desc' | 'step3Desc' | 'step4Desc');
             return (
               <div key={s.num} className="install-step relative rounded-xl border border-obsidian-border bg-obsidian-surface/30 hover:border-obsidian-purple/25 transition-all duration-300 overflow-hidden flex flex-col lg:flex-row">
-                {/* Illustration — 3/5 on desktop, full on mobile */}
-                <div className="w-full lg:w-[60%] p-4 lg:p-5 border-b lg:border-b-0 lg:border-r border-obsidian-border/50 bg-obsidian-bg/50">
+                {/* Illustration — 3/4 on desktop, full on mobile */}
+                <div className="w-full lg:w-3/4 p-4 lg:p-5 border-b lg:border-b-0 lg:border-r border-obsidian-border/50 bg-obsidian-bg/50">
                   <Illustration />
                 </div>
-                {/* Content — 2/5 on desktop, full on mobile */}
-                <div className="w-full lg:w-[40%] p-4 lg:p-5 flex flex-col justify-center">
+                {/* Content — 1/4 on desktop, full on mobile */}
+                <div className="w-full lg:w-1/4 p-4 lg:p-5 flex flex-col justify-center">
                   <div className="flex items-center gap-2.5 mb-2">
                     <div className="w-7 h-7 rounded-md bg-obsidian-purple/10 border border-obsidian-purple/20 flex items-center justify-center">
                       <Icon className="w-3.5 h-3.5 text-obsidian-purple-light" />
                     </div>
                     <span className="text-[10px] font-mono text-obsidian-dim">{s.num}</span>
                   </div>
-                  <h3 className="text-sm font-semibold text-[#e5e5e5] mb-1.5">{t.install[titleKey]}</h3>
-                  <p className="text-xs text-obsidian-muted leading-relaxed">{t.install[descKey]}</p>
+                  <h3 className="text-base font-semibold text-[#e5e5e5] mb-1.5">{t.install[titleKey]}</h3>
+                  <p className="text-xs text-obsidian-muted leading-relaxed">{renderTagged(t.install[descKey])}</p>
                   {s.hasButton && (
                     <a
                       href="https://github.com/green-dalii/obsidian-llm-wiki/releases"

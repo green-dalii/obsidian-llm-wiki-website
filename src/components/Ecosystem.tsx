@@ -41,7 +41,7 @@ export default function Ecosystem() {
                     <Icon className="w-3.5 h-3.5 text-obsidian-purple-light" />
                   </div>
                   <div className="min-w-0 flex-1">
-                    <h3 className="text-sm font-semibold text-obsidian-heading mb-1">{item.name}</h3>
+                    <h3 className="text-base font-semibold text-obsidian-heading mb-1">{item.name}</h3>
                     <p className="text-xs text-obsidian-dim leading-relaxed">{item.standalone}</p>
                   </div>
                 </div>

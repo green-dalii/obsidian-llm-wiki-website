@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { BookOpen, Menu, X } from 'lucide-react';
+import { BookOpen, Download, Menu, Star, X } from 'lucide-react';
 import { useI18n } from '../i18n/use-i18n';
 
 const NAV_ITEMS = [
@@ -11,15 +11,28 @@ const NAV_ITEMS = [
   { key: 'providers', labelKey: 'providers' as const, target: '#providers' },
 ];
 
+function formatStars(n: number): string {
+  if (n >= 1000) return (n / 1000).toFixed(1).replace(/\.0$/, '') + 'k';
+  return String(n);
+}
+
 export default function Header() {
   const { t, lang, toggleLang } = useI18n();
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
+  const [stars, setStars] = useState<string | null>(null);
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 60);
     window.addEventListener('scroll', onScroll, { passive: true });
     return () => window.removeEventListener('scroll', onScroll);
+  }, []);
+
+  useEffect(() => {
+    fetch('https://api.github.com/repos/green-dalii/obsidian-llm-wiki')
+      .then(r => r.json())
+      .then(d => { if (d.stargazers_count) setStars(formatStars(d.stargazers_count as number)); })
+      .catch(() => {});
   }, []);
 
   const handleNav = (target: string) => {
@@ -51,12 +64,19 @@ export default function Header() {
           ))}
           <div className="w-px h-4 bg-obsidian-border mx-1.5" />
           <button onClick={toggleLang}
-            className="px-2 py-0.5 text-[11px] font-mono text-obsidian-dim hover:text-obsidian-text border border-obsidian-border rounded-md hover:border-obsidian-purple/40 transition-all">
+            className="px-2.5 py-1.5 text-xs font-mono text-obsidian-dim hover:text-obsidian-text border border-obsidian-border rounded-md hover:border-obsidian-purple/40 transition-all">
             {lang === 'en' ? 'EN' : '中'}
           </button>
+          <a href="https://github.com/green-dalii/obsidian-llm-wiki" target="_blank" rel="noopener noreferrer"
+            className="ml-1.5 px-2.5 py-1.5 text-xs font-medium text-obsidian-muted hover:text-[#e5e5e5] border border-obsidian-border rounded-md hover:border-obsidian-purple/30 transition-all inline-flex items-center gap-1.5">
+            <Star className="w-3 h-3" />
+            GitHub
+            <span className="text-obsidian-dim">{stars ?? '...'}</span>
+          </a>
           <a href="https://github.com/green-dalii/obsidian-llm-wiki/releases" target="_blank" rel="noopener noreferrer"
-            className="ml-1.5 px-3 py-1.5 text-xs font-medium text-[#1e1e1e] bg-obsidian-purple rounded-md hover:bg-obsidian-purple-light transition-colors">
-            {t.nav.install}
+            className="ml-1 px-3 py-1.5 text-xs font-medium text-[#1e1e1e] bg-obsidian-purple rounded-md hover:bg-obsidian-purple-light transition-colors inline-flex items-center gap-1.5">
+            <Download className="w-3 h-3" />
+            {t.nav.download}
           </a>
         </nav>
 
@@ -74,11 +94,20 @@ export default function Header() {
             </button>
           ))}
           <div className="flex items-center gap-3 mt-3 pt-3 border-t border-obsidian-border">
-            <button onClick={toggleLang} className="px-2.5 py-1 text-[11px] font-mono text-obsidian-dim border border-obsidian-border rounded-md">
+            <button onClick={toggleLang} className="px-2.5 py-1.5 text-xs font-mono text-obsidian-dim border border-obsidian-border rounded-md">
               {lang === 'en' ? 'EN' : '中'}
             </button>
+            <a href="https://github.com/green-dalii/obsidian-llm-wiki" target="_blank" rel="noopener noreferrer"
+              className="px-2.5 py-1.5 text-xs font-medium text-obsidian-muted border border-obsidian-border rounded-md inline-flex items-center gap-1.5">
+              <Star className="w-3 h-3" />
+              GitHub
+              <span className="text-obsidian-dim">{stars ?? '...'}</span>
+            </a>
             <a href="https://github.com/green-dalii/obsidian-llm-wiki/releases" target="_blank" rel="noopener noreferrer"
-              className="px-3.5 py-1.5 text-xs font-medium text-[#1e1e1e] bg-obsidian-purple rounded-md">{t.nav.install}</a>
+              className="px-3.5 py-1.5 text-xs font-medium text-[#1e1e1e] bg-obsidian-purple rounded-md inline-flex items-center gap-1.5">
+              <Download className="w-3 h-3" />
+              {t.nav.download}
+            </a>
           </div>
         </div>
       )}

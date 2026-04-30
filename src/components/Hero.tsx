@@ -24,11 +24,6 @@ export default function Hero() {
 
   return (
     <section ref={sectionRef} className="relative min-h-[100dvh] w-full flex items-center justify-center overflow-hidden">
-      <div className="absolute inset-0 z-[5] pointer-events-none"
-        style={{ background: 'radial-gradient(ellipse at 50% 50%, transparent 35%, #1e1e1e 75%)' }}
-      />
-      <div className="absolute inset-0 z-[5] pointer-events-none bg-gradient-to-t from-[#1e1e1e] via-transparent to-[#1e1e1e]/30" />
-
       <div className="absolute inset-0 z-0">
         <KnowledgeGrowth />
       </div>

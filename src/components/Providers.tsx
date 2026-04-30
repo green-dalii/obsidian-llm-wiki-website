@@ -9,7 +9,7 @@ const PROVIDERS = [
   { name: 'Anthropic', model: 'Claude', context: '1M', status: 'Cloud' },
   { name: 'OpenAI', model: 'GPT', context: '1M', status: 'Cloud' },
   { name: 'Moonshot', model: 'Kimi', context: '256K', status: 'Cloud' },
-  { name: 'GLM', model: 'GLM-4.5', context: '128K', status: 'Cloud' },
+  { name: 'GLM', model: 'GLM-5', context: '200K', status: 'Cloud' },
   { name: 'OpenRouter', model: 'Universal API', context: 'Varies', status: 'Cloud' },
   { name: 'Ollama', model: 'Any local model', context: 'Varies', status: 'Local' },
 ];
@@ -69,7 +69,7 @@ export default function Providers() {
                   <div className="w-8 h-8 rounded-lg bg-obsidian-purple/10 border border-obsidian-purple/20 flex items-center justify-center mb-3 group-hover:bg-obsidian-purple/20 transition-colors">
                     <Icon className="w-4 h-4 text-obsidian-purple-light" />
                   </div>
-                  <h3 className="text-sm font-semibold text-[#e5e5e5] mb-1">{title}</h3>
+                  <h3 className="text-base font-semibold text-[#e5e5e5] mb-1">{title}</h3>
                   <p className="text-xs text-obsidian-muted leading-relaxed">{desc}</p>
                   {p.link && (
                     <span className="inline-block mt-2 text-[10px] font-mono text-obsidian-purple-light opacity-0 group-hover:opacity-100 transition-opacity">→ GitHub</span>
