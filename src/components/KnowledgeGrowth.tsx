@@ -58,10 +58,10 @@ export default function KnowledgeGrowth() {
     const EDGE_FADE_SPEED = 0.012;
 
     // Evolution timeline (in frames, ~60fps)
-    const SPAWN_WINDOW = 360;        // 0-6s: nodes spawn
-    const CONNECT_START = 300;       // 5s: connections begin
-    const CONNECT_ACCEL = 600;       // 10s: more cross-cluster connections
-    const MATURE_PHASE = 900;        // 15s: network matures
+    const SPAWN_WINDOW = 720;        // 0-12s: nodes spawn
+    const CONNECT_START = 600;       // 10s: connections begin
+    const CONNECT_ACCEL = 1200;      // 20s: more cross-cluster connections
+    const MATURE_PHASE = 1800;       // 30s: network matures
 
     const resize = () => {
       const parent = canvas.parentElement;
@@ -165,9 +165,9 @@ export default function KnowledgeGrowth() {
       for (let i = 0; i < nodes.length; i++) {
         const n = nodes[i];
 
-        // Fade in
+        // Fade in — slower for longer timeline
         if (frame > n.spawnDelay && n.opacity < 1) {
-          n.opacity = Math.min(1, n.opacity + 0.008);
+          n.opacity = Math.min(1, n.opacity + 0.004);
         }
         if (frame <= n.spawnDelay) {
           n.opacity = 0;

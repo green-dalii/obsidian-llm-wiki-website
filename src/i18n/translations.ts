@@ -75,6 +75,14 @@ export interface Translations {
     label: string;
     title: string;
     subtitle: string;
+    openSourceTitle: string;
+    openSourceDesc: string;
+    communityTitle: string;
+    communityDesc: string;
+    vendorTitle: string;
+    vendorDesc: string;
+    cardLabel: string;
+    cardSubtitle: string;
     contextNote: string;
     bestValue: string;
   };
@@ -183,9 +191,17 @@ export const en: Translations = {
     autoMaintenanceTag: 'Always on',
   },
   providers: {
-    label: 'Providers',
-    title: 'Your LLM, your choice',
-    subtitle: 'Works with any major provider — cloud or local. No vendor lock-in.',
+    label: 'Open Source',
+    title: 'Built in the open',
+    subtitle: 'MIT licensed, community driven, vendor neutral. Use it, extend it, make it yours.',
+    openSourceTitle: 'Open Source',
+    openSourceDesc: 'MIT licensed. Full source on GitHub. Fork it, extend it, self-host it.',
+    communityTitle: 'Community',
+    communityDesc: 'GitHub Discussions for ideas and help. Contributions welcome.',
+    vendorTitle: 'Vendor Neutral',
+    vendorDesc: 'Your LLM, your choice. Cloud or local, switch anytime.',
+    cardLabel: 'Your LLM, your choice',
+    cardSubtitle: 'Works with any major provider — no lock-in.',
     contextNote: 'Long-context models (256K+ tokens) are recommended — the full wiki fits in a single inference call, giving the LLM complete understanding.',
     bestValue: 'Best value',
   },
@@ -321,9 +337,17 @@ export const zh: Translations = {
     autoMaintenanceTag: '持续运行',
   },
   providers: {
-    label: '提供商',
-    title: '你的 LLM，你做主',
-    subtitle: '主流提供商全支持——云端或本地，随意切换。',
+    label: '开源共建',
+    title: '开源、开放、共建',
+    subtitle: 'MIT 协议，社区驱动，不绑定任何厂商。自由使用、自由扩展、自由部署。',
+    openSourceTitle: '开源',
+    openSourceDesc: 'MIT 许可证，完整代码在 GitHub。可 Fork、可扩展、可自托管。',
+    communityTitle: '社区',
+    communityDesc: 'GitHub Discussions 交流想法与问题。欢迎提交 PR 共建。',
+    vendorTitle: '自由接入',
+    vendorDesc: '你的 LLM，你做主。云端或本地，随时切换。',
+    cardLabel: '你的 LLM，你做主',
+    cardSubtitle: '主流提供商全支持——无厂商锁定。',
     contextNote: '推荐 256K+ 上下文窗口——完整 Wiki 一次装入推理，LLM 看到全局。',
     bestValue: '最佳性价比',
   },
