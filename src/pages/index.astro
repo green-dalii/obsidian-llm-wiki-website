@@ -1,10 +1,20 @@
+---
+import App from '../App';
+import '../index.css';
+
+const siteUrl = 'https://green-dalii.github.io/obsidian-llm-wiki/';
+const title = 'LLM Wiki for Obsidian — AI-Powered Self-Organizing Knowledge';
+const description = 'An Obsidian plugin that transforms your raw notes into a persistent, self-organizing, interconnected wiki using AI. Auto-extract entities, generate wiki pages, and build bidirectional knowledge graphs. Based on Andrej Karpathy\'s LLM Wiki concept.';
+const ogImage = siteUrl + 'og-image.jpg';
+---
+
 <!doctype html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>LLM Wiki for Obsidian — AI-Powered Self-Organizing Knowledge</title>
-    <meta name="description" content="An Obsidian plugin that transforms your raw notes into a persistent, self-organizing, interconnected wiki using AI. Auto-extract entities, generate wiki pages, and build bidirectional knowledge graphs. Based on Andrej Karpathy's LLM Wiki concept." />
+    <title>{title}</title>
+    <meta name="description" content={description} />
     <meta name="keywords" content="Obsidian plugin, LLM Wiki, AI knowledge management, knowledge graph, bidirectional links, note-taking, AI-powered wiki, self-organizing notes, Andrej Karpathy, Obsidian AI, markdown wiki" />
     <meta name="author" content="Greener-Dalii" />
     <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large" />
@@ -16,10 +26,10 @@
     <!-- Open Graph -->
     <meta property="og:type" content="website" />
     <meta property="og:site_name" content="LLM Wiki for Obsidian" />
-    <meta property="og:url" content="https://green-dalii.github.io/obsidian-llm-wiki/" />
-    <meta property="og:title" content="LLM Wiki for Obsidian — AI-Powered Self-Organizing Knowledge" />
+    <meta property="og:url" content={siteUrl} />
+    <meta property="og:title" content={title} />
     <meta property="og:description" content="Transform your raw notes into a persistent, self-organizing, interconnected wiki. Auto-extract entities, generate wiki pages, and build bidirectional knowledge graphs with AI." />
-    <meta property="og:image" content="https://green-dalii.github.io/obsidian-llm-wiki/og-image.jpg" />
+    <meta property="og:image" content={ogImage} />
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="630" />
     <meta property="og:locale" content="en_US" />
@@ -30,10 +40,10 @@
     <meta name="twitter:creator" content="@GreenerDalii" />
     <meta name="twitter:title" content="LLM Wiki for Obsidian" />
     <meta name="twitter:description" content="AI-powered self-organizing knowledge base for Obsidian. Transform notes into a living wiki." />
-    <meta name="twitter:image" content="https://green-dalii.github.io/obsidian-llm-wiki/og-image.jpg" />
+    <meta name="twitter:image" content={ogImage} />
 
     <!-- Canonical -->
-    <link rel="canonical" href="https://green-dalii.github.io/obsidian-llm-wiki/" />
+    <link rel="canonical" href={siteUrl} />
 
     <!-- Preconnect -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -41,46 +51,30 @@
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
 
     <!-- JSON-LD Structured Data -->
-    <script type="application/ld+json">
-    {
+    <script type="application/ld+json" set:html={JSON.stringify({
       "@context": "https://schema.org",
       "@graph": [
         {
           "@type": "WebSite",
-          "@id": "https://green-dalii.github.io/obsidian-llm-wiki/#website",
+          "@id": siteUrl + "#website",
           "name": "LLM Wiki for Obsidian",
-          "url": "https://green-dalii.github.io/obsidian-llm-wiki/",
-          "description": "An Obsidian plugin that transforms your raw notes into a persistent, self-organizing, interconnected wiki using AI.",
-          "publisher": {
-            "@type": "Person",
-            "name": "Greener-Dalii"
-          }
+          "url": siteUrl,
+          "description": description,
+          "publisher": { "@type": "Person", "name": "Greener-Dalii" }
         },
         {
           "@type": "SoftwareApplication",
-          "@id": "https://green-dalii.github.io/obsidian-llm-wiki/#software",
+          "@id": siteUrl + "#software",
           "name": "LLM Wiki for Obsidian",
           "applicationCategory": "DeveloperApplication",
           "operatingSystem": "Cross-platform",
-          "offers": {
-            "@type": "Offer",
-            "price": "0",
-            "priceCurrency": "USD"
-          },
+          "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
           "license": "https://opensource.org/licenses/MIT",
-          "author": {
-            "@type": "Person",
-            "name": "Greener-Dalii",
-            "url": "https://github.com/green-dalii"
-          },
+          "author": { "@type": "Person", "name": "Greener-Dalii", "url": "https://github.com/green-dalii" },
           "codeRepository": "https://github.com/green-dalii/obsidian-llm-wiki",
           "downloadUrl": "https://github.com/green-dalii/obsidian-llm-wiki/releases",
           "softwareVersion": "1.0.0",
-          "aggregateRating": {
-            "@type": "AggregateRating",
-            "ratingValue": "5",
-            "ratingCount": "1"
-          },
+          "aggregateRating": { "@type": "AggregateRating", "ratingValue": "5", "ratingCount": "1" },
           "featureList": [
             "Auto-organize notes into structured wiki pages",
             "Bidirectional linking between knowledge entities",
@@ -93,20 +87,13 @@
         {
           "@type": "BreadcrumbList",
           "itemListElement": [
-            {
-              "@type": "ListItem",
-              "position": 1,
-              "name": "Home",
-              "item": "https://green-dalii.github.io/obsidian-llm-wiki/"
-            }
+            { "@type": "ListItem", "position": 1, "name": "Home", "item": siteUrl }
           ]
         }
       ]
-    }
-    </script>
+    })} />
   </head>
   <body>
-    <div id="root"></div>
-    <script type="module" src="/src/main.tsx"></script>
+    <App client:load />
   </body>
 </html>
