@@ -137,8 +137,8 @@ Machine learning uses algorithms to learn from data.
                       <span className="text-obsidian-muted">machine-learning.md</span>
                     </div>
                     {lines.map((line, i) => (
-                      <div key={i} className="flex">
-                        <span className="w-5 text-right pr-2 text-obsidian-dim select-none">{i + 1}</span>
+                      <div key={i} className="flex items-start py-0.5">
+                        <span className="w-5 text-right pr-2 text-obsidian-dim select-none flex-shrink-0">{i + 1}</span>
                         {renderMarkdownLine(line)}
                       </div>
                     ))}
