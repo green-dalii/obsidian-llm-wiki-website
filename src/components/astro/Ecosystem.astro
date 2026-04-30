@@ -1,0 +1,54 @@
+---
+import Icon from './Icon.astro';
+import { translations } from '../../i18n/astro';
+
+interface Props {
+  locale?: 'en' | 'zh';
+}
+const { locale = 'en' } = Astro.props;
+const t = locale === 'zh' ? translations.zh : translations.en;
+
+const ICONS = ['network', 'camera', 'monitor', 'table-2', 'git-branch', 'pen-tool'];
+---
+
+<section id="ecosystem" class="relative w-full py-20 sm:py-28">
+  <div class="max-w-5xl mx-auto px-4 sm:px-6">
+    <div class="mb-10 reveal">
+      <span class="text-[11px] font-mono text-obsidian-purple tracking-[0.15em] uppercase">{t.ecosystem.label}</span>
+      <h2 class="text-[clamp(1.4rem,3vw,2rem)] font-semibold mt-3 mb-3 text-obsidian-heading reveal" data-delay="1">{t.ecosystem.title}</h2>
+      <p class="text-obsidian-muted text-sm max-w-lg">{t.ecosystem.subtitle}</p>
+    </div>
+
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
+      {t.ecosystem.items.map((item, i) => (
+        <div class="eco-card group rounded-lg border border-obsidian-border bg-obsidian-surface/30 p-5 hover:border-obsidian-purple/25 hover:bg-obsidian-purple/[0.03] transition-all duration-250 reveal" data-delay={i * 2}>
+          <div class="flex items-start gap-3 mb-2">
+            <div class="w-7 h-7 rounded-md bg-obsidian-purple/10 border border-obsidian-purple/20 flex items-center justify-center flex-shrink-0">
+              <Icon name={ICONS[i]} class="w-3.5 h-3.5 text-obsidian-purple-light" />
+            </div>
+            <div class="min-w-0 flex-1">
+              <h3 class="text-base font-semibold text-obsidian-heading mb-1">{item.name}</h3>
+              <p class="text-xs text-obsidian-dim leading-relaxed">{item.standalone}</p>
+            </div>
+          </div>
+
+          <!-- Divider -->
+          <div class="h-px border-t border-dashed border-obsidian-purple/20 my-3" />
+
+          <!-- Amplified effect -->
+          <div class="relative pl-3">
+            <div class="absolute left-0 top-0 bottom-0 w-[2px] rounded-full bg-obsidian-purple/30" />
+            <div class="flex items-center gap-1.5 mb-1">
+              <span class="text-[10px] font-mono text-obsidian-purple-light">+ LLM Wiki</span>
+            </div>
+            <p class="text-xs text-obsidian-heading leading-relaxed">{item.amplified}</p>
+          </div>
+        </div>
+      ))}
+    </div>
+
+    <div class="mt-8 text-center reveal" data-delay="12">
+      <span class="text-xs text-obsidian-dim">{t.ecosystem.cta}</span>
+    </div>
+  </div>
+</section>

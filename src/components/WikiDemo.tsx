@@ -1,7 +1,7 @@
 import { useRef, useEffect, useState } from 'react';
 import gsap from 'gsap';
 import { Sparkles } from 'lucide-react';
-import { useI18n } from '../i18n/use-i18n';
+import { translations } from '../i18n/astro';
 import type { Translations } from '../i18n/translations';
 
 type WikiDemoKey = keyof Translations['wikiDemo'];
@@ -14,8 +14,12 @@ const STEPS: Array<{ id: number; titleKey: WikiDemoKey; descKey: WikiDemoKey }> 
   { id: 5, titleKey: 'step5Title', descKey: 'step5Desc' },
 ];
 
-export default function WikiDemo() {
-  const { t } = useI18n();
+interface Props {
+  locale?: 'en' | 'zh';
+}
+
+export default function WikiDemo({ locale = 'en' }: Props) {
+  const t = locale === 'zh' ? translations.zh : translations.en;
   const sectionRef = useRef<HTMLElement>(null);
   const [step, setStep] = useState(0);
   const [autoPlay, setAutoPlay] = useState(true);

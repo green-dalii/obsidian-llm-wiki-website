@@ -46,6 +46,23 @@
   }
 }
 
+/* Scroll reveal animations */
+.reveal {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.7s ease-out, transform 0.7s ease-out;
+}
+
+.reveal.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Faster animations for delayed elements */
+.reveal[data-delay] {
+  transition-duration: 0.5s;
+}
+
 /* Noise grain overlay for depth */
 body::after {
   content: '';

@@ -2,10 +2,14 @@ import { useRef, useEffect } from 'react';
 import gsap from 'gsap';
 import { Github, ExternalLink } from 'lucide-react';
 import KnowledgeGrowth from './KnowledgeGrowth';
-import { useI18n } from '../i18n/use-i18n';
+import { translations } from '../i18n/astro';
 
-export default function Hero() {
-  const { t } = useI18n();
+interface Props {
+  locale?: 'en' | 'zh';
+}
+
+export default function Hero({ locale = 'en' }: Props) {
+  const t = locale === 'zh' ? translations.zh : translations.en;
   const sectionRef = useRef<HTMLElement>(null);
   const contentRef = useRef<HTMLDivElement>(null);
 

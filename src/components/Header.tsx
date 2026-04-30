@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { BookOpen, Download, Menu, Star, X } from 'lucide-react';
-import { useI18n } from '../i18n/use-i18n';
+import { translations } from '../i18n/astro';
 
 const NAV_ITEMS = [
   { key: 'comparison', labelKey: 'comparison' as const, target: '#comparison' },
@@ -16,8 +16,12 @@ function formatStars(n: number): string {
   return String(n);
 }
 
-export default function Header() {
-  const { t, lang, toggleLang } = useI18n();
+interface Props {
+  currentLocale?: 'en' | 'zh';
+}
+
+export default function Header({ currentLocale = 'en' }: Props) {
+  const t = currentLocale === 'zh' ? translations.zh : translations.en;
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
   const [stars, setStars] = useState<string | null>(null);
@@ -63,10 +67,10 @@ export default function Header() {
             </button>
           ))}
           <div className="w-px h-4 bg-obsidian-border mx-1.5" />
-          <button onClick={toggleLang}
+          <a href={currentLocale === 'en' ? '/zh/' : '/'}
             className="px-2.5 py-1.5 text-xs font-mono text-obsidian-dim hover:text-obsidian-text border border-obsidian-border rounded-md hover:border-obsidian-purple/40 transition-all">
-            {lang === 'en' ? 'EN' : '中'}
-          </button>
+            {currentLocale === 'en' ? '中' : 'EN'}
+          </a>
           <a href="https://github.com/green-dalii/obsidian-llm-wiki" target="_blank" rel="noopener noreferrer"
             className="ml-1.5 px-2.5 py-1.5 text-xs font-medium text-obsidian-muted hover:text-[#e5e5e5] border border-obsidian-border rounded-md hover:border-obsidian-purple/30 transition-all inline-flex items-center gap-1.5">
             <Star className="w-3 h-3" />
@@ -94,9 +98,9 @@ export default function Header() {
             </button>
           ))}
           <div className="flex items-center gap-3 mt-3 pt-3 border-t border-obsidian-border">
-            <button onClick={toggleLang} className="px-2.5 py-1.5 text-xs font-mono text-obsidian-dim border border-obsidian-border rounded-md">
-              {lang === 'en' ? 'EN' : '中'}
-            </button>
+            <a href={currentLocale === 'en' ? '/zh/' : '/'} className="px-2.5 py-1.5 text-xs font-mono text-obsidian-dim border border-obsidian-border rounded-md">
+              {currentLocale === 'en' ? '中' : 'EN'}
+            </a>
             <a href="https://github.com/green-dalii/obsidian-llm-wiki" target="_blank" rel="noopener noreferrer"
               className="px-2.5 py-1.5 text-xs font-medium text-obsidian-muted border border-obsidian-border rounded-md inline-flex items-center gap-1.5">
               <Star className="w-3 h-3" />
