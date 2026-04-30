@@ -72,6 +72,18 @@ export interface Translations {
     autoMaintenanceDesc: string;
     autoMaintenanceTag: string;
   };
+  install: {
+    label: string;
+    title: string;
+    subtitle: string;
+    step1Title: string;
+    step1Desc: string;
+    step2Title: string;
+    step2Desc: string;
+    step3Title: string;
+    step3Desc: string;
+    cta: string;
+  };
   providers: {
     label: string;
     title: string;
@@ -193,6 +205,18 @@ export const en: Translations = {
     autoMaintenanceTitle: 'Auto Maintenance',
     autoMaintenanceDesc: 'File watcher for automatic ingestion. Periodic lint detects contradictions, stale info, and orphaned pages. Startup health check keeps your wiki consistent — all default OFF to avoid surprise costs.',
     autoMaintenanceTag: 'Always on',
+  },
+  install: {
+    label: 'Get Started',
+    title: 'Up and running in 3 steps',
+    subtitle: 'No extra apps. Runs inside your Obsidian vault.',
+    step1Title: 'Download',
+    step1Desc: 'Grab the plugin files from GitHub Releases — main.js, manifest.json, styles.css.',
+    step2Title: 'Install',
+    step2Desc: 'Settings → Community plugins → Open plugins folder. Create a llm-wiki/ folder, drop the files in.',
+    step3Title: 'Connect',
+    step3Desc: 'Pick an LLM provider, enter your API key. DeepSeek, Claude, Gemini, GPT — your call.',
+    cta: 'Download Latest',
   },
   providers: {
     label: 'Open Source',
@@ -342,6 +366,18 @@ export const zh: Translations = {
     autoMaintenanceTitle: '自动维护',
     autoMaintenanceDesc: '文件监控自动摄入新内容。定期检测矛盾、过时信息和孤立页面。启动时自动健康检查——默认全部关闭，不用担心意外费用。',
     autoMaintenanceTag: '持续运行',
+  },
+  install: {
+    label: '快速开始',
+    title: '3 步，即刻上手',
+    subtitle: '无需额外软件，直接在 Obsidian Vault 内运行。',
+    step1Title: '下载',
+    step1Desc: '从 GitHub Releases 获取插件文件——main.js、manifest.json、styles.css。',
+    step2Title: '安装',
+    step2Desc: '设置 → 第三方插件 → 打开插件目录。新建 llm-wiki/ 文件夹，放入文件即可。',
+    step3Title: '接入',
+    step3Desc: '选择 LLM 提供商，填入 API Key。DeepSeek、Claude、Gemini、GPT——随你选。',
+    cta: '下载最新版',
   },
   providers: {
     label: '开源共建',

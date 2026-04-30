@@ -6,6 +6,7 @@ const NAV_ITEMS = [
   { key: 'comparison', labelKey: 'comparison' as const, target: '#comparison' },
   { key: 'how-it-works', labelKey: 'howItWorks' as const, target: '#how-it-works' },
   { key: 'features', labelKey: 'features' as const, target: '#features' },
+  { key: 'install', labelKey: 'install' as const, target: '#install' },
   { key: 'ecosystem', labelKey: 'ecosystem' as const, target: '#ecosystem' },
   { key: 'providers', labelKey: 'providers' as const, target: '#providers' },
 ];

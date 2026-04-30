@@ -8,6 +8,7 @@ import Hero from './components/Hero';
 import WikiDemo from './components/WikiDemo';
 import Comparison from './components/Comparison';
 import Features from './components/Features';
+import Install from './components/Install';
 import Providers from './components/Providers';
 import Ecosystem from './components/Ecosystem';
 import Footer from './components/Footer';
@@ -30,6 +31,7 @@ function App() {
           <WikiDemo />
           <div className="h-px max-w-5xl mx-auto bg-gradient-to-r from-transparent via-obsidian-purple/20 to-transparent" />
           <Features />
+          <Install />
           <Ecosystem />
           <Providers />
         </main>
