@@ -137,9 +137,9 @@ Machine learning uses algorithms to learn from data.
                       <span className="text-obsidian-muted">machine-learning.md</span>
                     </div>
                     {lines.map((line, i) => (
-                      <div key={i} className="flex items-start py-0.5">
+                      <div key={i} className="flex items-center h-7">
                         <span className="w-5 text-right pr-2 text-obsidian-dim select-none flex-shrink-0">{i + 1}</span>
-                        <span className="flex-1 inline-flex items-center py-0.5">
+                        <span className="flex-1 inline-flex items-center">
                           {renderMarkdownLine(line)}
                         </span>
                       </div>
@@ -163,9 +163,9 @@ Machine learning uses algorithms to learn from data.
                       const item = extractedItems.find(e => line.toLowerCase().includes(e.name.toLowerCase().replace(/\s+/g, ' ')));
                       const isHeading = line.startsWith('#');
                       return (
-                        <div key={i} className="flex items-start py-0.5">
+                        <div key={i} className="flex items-center h-7">
                           <span className="w-5 text-right pr-2 text-obsidian-dim select-none flex-shrink-0">{i + 1}</span>
-                          <span className="flex-1">
+                          <span className="flex-1 inline-flex items-center">
                             {item && !isHeading ? (
                               <span className="inline-flex items-center gap-2 border border-dashed rounded px-2 py-0.5"
                                 style={{
@@ -180,7 +180,7 @@ Machine learning uses algorithms to learn from data.
                                 }`}>{item.type}</span>
                               </span>
                             ) : (
-                              <span className="inline-flex items-center py-0.5">{renderMarkdownLine(line)}</span>
+                              <>{renderMarkdownLine(line)}</>
                             )}
                           </span>
                         </div>
