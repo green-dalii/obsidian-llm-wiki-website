@@ -3,6 +3,7 @@ import { BookOpen, Menu, X } from 'lucide-react';
 import { useI18n } from '../i18n/use-i18n';
 
 const NAV_ITEMS = [
+  { key: 'comparison', labelKey: 'comparison' as const, target: '#comparison' },
   { key: 'how-it-works', labelKey: 'howItWorks' as const, target: '#how-it-works' },
   { key: 'features', labelKey: 'features' as const, target: '#features' },
   { key: 'ecosystem', labelKey: 'ecosystem' as const, target: '#ecosystem' },

@@ -1,9 +1,10 @@
 export interface Translations {
   nav: {
     howItWorks: string;
+    comparison: string;
     features: string;
-    providers: string;
     ecosystem: string;
+    providers: string;
     install: string;
   };
   hero: {
@@ -110,6 +111,7 @@ export interface Translations {
 export const en: Translations = {
   nav: {
     howItWorks: 'How It Works',
+    comparison: 'Why It Matters',
     features: 'Features',
     providers: 'Open Source',
     ecosystem: 'Ecosystem',
@@ -258,6 +260,7 @@ export const en: Translations = {
 export const zh: Translations = {
   nav: {
     howItWorks: '工作原理',
+    comparison: '为何重要',
     features: '功能',
     providers: '开源',
     ecosystem: '生态',

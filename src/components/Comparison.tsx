@@ -21,7 +21,7 @@ export default function Comparison() {
   }, []);
 
   return (
-    <section ref={sectionRef} className="relative w-full py-28 sm:py-36">
+    <section ref={sectionRef} id="comparison" className="relative w-full py-28 sm:py-36">
       <div className="max-w-5xl mx-auto px-4 sm:px-6">
         <div className="mb-12 text-center">
           <span className="text-[11px] font-mono text-obsidian-purple tracking-[0.15em] uppercase">{t.comparison.label}</span>
