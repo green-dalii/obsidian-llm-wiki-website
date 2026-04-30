@@ -9,7 +9,7 @@ const PROVIDERS = [
   { name: 'Anthropic', model: 'Claude', context: '1M', status: 'Cloud' },
   { name: 'OpenAI', model: 'GPT', context: '1M', status: 'Cloud' },
   { name: 'Moonshot', model: 'Kimi', context: '256K', status: 'Cloud' },
-  { name: 'GLM', model: 'GLM-4', context: '128K', status: 'Cloud' },
+  { name: 'GLM', model: 'GLM-4.5', context: '128K', status: 'Cloud' },
   { name: 'OpenRouter', model: 'Universal API', context: 'Varies', status: 'Cloud' },
   { name: 'Ollama', model: 'Any local model', context: 'Varies', status: 'Local' },
 ];
@@ -59,8 +59,8 @@ export default function Providers() {
               <div className="text-[10px] font-mono text-obsidian-dim leading-tight">{p.model}</div>
               <div className="mt-2 flex items-center gap-1.5">
                 <span className={`text-[9px] font-mono px-1.5 py-0.5 rounded border ${
-                  p.context === '1M'
-                    ? 'bg-obsidian-purple/15 text-obsidian-purple-light border-obsidian-purple/25'
+                  p.badge === 'bestValue'
+                    ? 'bg-obsidian-amber/15 text-obsidian-amber border-obsidian-amber/25'
                     : p.context === '256K'
                     ? 'bg-obsidian-amber/10 text-obsidian-amber border-obsidian-amber/25'
                     : 'bg-obsidian-bg text-obsidian-dim border-obsidian-border'
