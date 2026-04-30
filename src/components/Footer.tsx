@@ -1,9 +1,13 @@
 import { useRef, useEffect, useState } from 'react';
 import { Github } from 'lucide-react';
-import { useI18n } from '../i18n/use-i18n';
+import { translations } from '../i18n/astro';
 
-export default function Footer() {
-  const { t } = useI18n();
+interface Props {
+  locale?: 'en' | 'zh';
+}
+
+export default function Footer({ locale = 'en' }: Props) {
+  const t = locale === 'zh' ? translations.zh : translations.en;
   const footerRef = useRef<HTMLElement>(null);
   const [visible, setVisible] = useState(false);
 

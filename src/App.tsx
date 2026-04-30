@@ -6,11 +6,6 @@ import ProgressBar from './components/ProgressBar';
 import Header from './components/Header';
 import Hero from './components/Hero';
 import WikiDemo from './components/WikiDemo';
-import Comparison from './components/Comparison';
-import Features from './components/Features';
-import Install from './components/Install';
-import Providers from './components/Providers';
-import Ecosystem from './components/Ecosystem';
 import Footer from './components/Footer';
 
 gsap.registerPlugin(ScrollTrigger);
@@ -27,13 +22,7 @@ function App() {
         <Header />
         <main className="pt-14">
           <Hero />
-          <Comparison />
           <WikiDemo />
-          <div className="h-px max-w-5xl mx-auto bg-gradient-to-r from-transparent via-obsidian-purple/20 to-transparent" />
-          <Features />
-          <Install />
-          <Ecosystem />
-          <Providers />
         </main>
         <Footer />
       </div>

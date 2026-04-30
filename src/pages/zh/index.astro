@@ -1,30 +1,30 @@
 ---
-import '../index.css';
-import ProgressBar from '../components/ProgressBar';
-import HeaderIsland from '../components/HeaderIsland';
-import HeroIsland from '../components/HeroIsland';
-import WikiDemoIsland from '../components/WikiDemoIsland';
-import FooterIsland from '../components/FooterIsland';
-import Comparison from '../components/astro/Comparison.astro';
-import Features from '../components/astro/Features.astro';
-import Install from '../components/astro/Install.astro';
-import Ecosystem from '../components/astro/Ecosystem.astro';
-import Providers from '../components/astro/Providers.astro';
+import '../../index.css';
+import ProgressBar from '../../components/ProgressBar';
+import HeaderIsland from '../../components/HeaderIsland';
+import HeroIsland from '../../components/HeroIsland';
+import WikiDemoIsland from '../../components/WikiDemoIsland';
+import FooterIsland from '../../components/FooterIsland';
+import Comparison from '../../components/astro/Comparison.astro';
+import Features from '../../components/astro/Features.astro';
+import Install from '../../components/astro/Install.astro';
+import Ecosystem from '../../components/astro/Ecosystem.astro';
+import Providers from '../../components/astro/Providers.astro';
 
 const siteUrl = 'https://green-dalii.github.io/obsidian-llm-wiki/';
-const title = 'LLM Wiki for Obsidian — AI-Powered Self-Organizing Knowledge';
-const description = 'An Obsidian plugin that transforms your raw notes into a persistent, self-organizing, interconnected wiki using AI. Auto-extract entities, generate wiki pages, and build bidirectional knowledge graphs. Based on Andrej Karpathy\'s LLM Wiki concept.';
+const title = 'LLM Wiki for Obsidian — AI驱动的自组织知识库';
+const description = '一个 Obsidian 插件，使用 AI 将你的原始笔记转换为持久、自组织、互联的 wiki。自动提取实体、生成 wiki 页面、构建双向知识图谱。基于 Andrej Karpathy 的 LLM Wiki 概念。';
 const ogImage = siteUrl + 'og-image.jpg';
 ---
 
 <!doctype html>
-<html lang="en">
+<html lang="zh-CN">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>{title}</title>
     <meta name="description" content={description} />
-    <meta name="keywords" content="Obsidian plugin, LLM Wiki, AI knowledge management, knowledge graph, bidirectional links, note-taking, AI-powered wiki, self-organizing notes, Andrej Karpathy, Obsidian AI, markdown wiki" />
+    <meta name="keywords" content="Obsidian 插件, LLM Wiki, AI 知识管理, 知识图谱, 双向链接, 笔记, AI wiki, 自组织笔记, Andrej Karpathy, Obsidian AI, markdown wiki" />
     <meta name="author" content="Greener-Dalii" />
     <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large" />
     <meta name="theme-color" content="#1a1a1a" />
@@ -35,24 +35,24 @@ const ogImage = siteUrl + 'og-image.jpg';
     <!-- Open Graph -->
     <meta property="og:type" content="website" />
     <meta property="og:site_name" content="LLM Wiki for Obsidian" />
-    <meta property="og:url" content={siteUrl} />
+    <meta property="og:url" content={siteUrl + 'zh/'} />
     <meta property="og:title" content={title} />
-    <meta property="og:description" content="Transform your raw notes into a persistent, self-organizing, interconnected wiki. Auto-extract entities, generate wiki pages, and build bidirectional knowledge graphs with AI." />
+    <meta property="og:description" content={description} />
     <meta property="og:image" content={ogImage} />
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="630" />
-    <meta property="og:locale" content="en_US" />
+    <meta property="og:locale" content="zh_CN" />
 
     <!-- Twitter -->
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:site" content="@GreenerDalii" />
     <meta name="twitter:creator" content="@GreenerDalii" />
     <meta name="twitter:title" content="LLM Wiki for Obsidian" />
-    <meta name="twitter:description" content="AI-powered self-organizing knowledge base for Obsidian. Transform notes into a living wiki." />
+    <meta name="twitter:description" content="AI驱动的自组织知识库，专为 Obsidian 设计。将笔记转换为活的 wiki。" />
     <meta name="twitter:image" content={ogImage} />
 
     <!-- Canonical -->
-    <link rel="canonical" href={siteUrl} />
+    <link rel="canonical" href={siteUrl + 'zh/'} />
     <link rel="alternate" hreflang="en" href={siteUrl} />
     <link rel="alternate" hreflang="zh" href={siteUrl + 'zh/'} />
 
@@ -60,65 +60,22 @@ const ogImage = siteUrl + 'og-image.jpg';
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
-
-    <!-- JSON-LD Structured Data -->
-    <script type="application/ld+json" set:html={JSON.stringify({
-      "@context": "https://schema.org",
-      "@graph": [
-        {
-          "@type": "WebSite",
-          "@id": siteUrl + "#website",
-          "name": "LLM Wiki for Obsidian",
-          "url": siteUrl,
-          "description": description,
-          "publisher": { "@type": "Person", "name": "Greener-Dalii" }
-        },
-        {
-          "@type": "SoftwareApplication",
-          "@id": siteUrl + "#software",
-          "name": "LLM Wiki for Obsidian",
-          "applicationCategory": "DeveloperApplication",
-          "operatingSystem": "Cross-platform",
-          "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
-          "license": "https://opensource.org/licenses/MIT",
-          "author": { "@type": "Person", "name": "Greener-Dalii", "url": "https://github.com/green-dalii" },
-          "codeRepository": "https://github.com/green-dalii/obsidian-llm-wiki",
-          "downloadUrl": "https://github.com/green-dalii/obsidian-llm-wiki/releases",
-          "softwareVersion": "1.0.0",
-          "aggregateRating": { "@type": "AggregateRating", "ratingValue": "5", "ratingCount": "1" },
-          "featureList": [
-            "Auto-organize notes into structured wiki pages",
-            "Bidirectional linking between knowledge entities",
-            "Conversational query with cited answers",
-            "Auto maintenance with file watcher",
-            "Multi-provider LLM support",
-            "Full-context ingestion"
-          ]
-        },
-        {
-          "@type": "BreadcrumbList",
-          "itemListElement": [
-            { "@type": "ListItem", "position": 1, "name": "Home", "item": siteUrl }
-          ]
-        }
-      ]
-    })} />
   </head>
   <body>
     <div class="relative min-h-screen bg-obsidian-bg text-obsidian-text overflow-x-hidden">
       <ProgressBar client:only="react" />
-      <HeaderIsland client:only="react" currentLocale="en" />
+      <HeaderIsland client:only="react" currentLocale="zh" />
       <main class="pt-14">
-        <HeroIsland client:only="react" locale="en" />
-        <Comparison locale="en" />
-        <WikiDemoIsland client:only="react" locale="en" />
+        <HeroIsland client:only="react" locale="zh" />
+        <Comparison locale="zh" />
+        <WikiDemoIsland client:only="react" locale="zh" />
         <div class="h-px max-w-5xl mx-auto bg-gradient-to-r from-transparent via-obsidian-purple/20 to-transparent" />
-        <Features locale="en" />
-        <Install locale="en" />
-        <Ecosystem locale="en" />
-        <Providers locale="en" />
+        <Features locale="zh" />
+        <Install locale="zh" />
+        <Ecosystem locale="zh" />
+        <Providers locale="zh" />
       </main>
-      <FooterIsland client:only="react" locale="en" />
+      <FooterIsland client:only="react" locale="zh" />
     </div>
   </body>
 </html>

@@ -1,0 +1,105 @@
+---
+import Icon from './Icon.astro';
+import { translations } from '../../i18n/astro';
+
+interface Props {
+  locale?: 'en' | 'zh';
+}
+const { locale = 'en' } = Astro.props;
+const t = locale === 'zh' ? translations.zh : translations.en;
+
+const PROVIDERS = [
+  { name: 'DeepSeek', model: 'DeepSeek V4', context: '1M', status: 'Cloud', badge: 'bestValue' },
+  { name: 'Google', model: 'Gemini Pro', context: '1M', status: 'Cloud' },
+  { name: 'Anthropic', model: 'Claude', context: '1M', status: 'Cloud' },
+  { name: 'OpenAI', model: 'GPT', context: '1M', status: 'Cloud' },
+  { name: 'Moonshot', model: 'Kimi', context: '256K', status: 'Cloud' },
+  { name: 'GLM', model: 'GLM-5', context: '200K', status: 'Cloud' },
+  { name: 'OpenRouter', model: 'Universal API', context: 'Varies', status: 'Cloud' },
+  { name: 'Ollama', model: 'Any local model', context: 'Varies', status: 'Local' },
+];
+
+const PILLARS = [
+  { key: 'openSource', icon: 'code-2', link: 'https://github.com/green-dalii/obsidian-llm-wiki' },
+  { key: 'community', icon: 'users', link: 'https://github.com/green-dalii/obsidian-llm-wiki/discussions' },
+  { key: 'obsidian', icon: 'book-open', link: null },
+  { key: 'vendor', icon: 'plug', link: null },
+];
+---
+
+<section id="providers" class="relative w-full py-20 sm:py-28">
+  <div class="max-w-5xl mx-auto px-4 sm:px-6">
+    <div class="text-center mb-10 reveal">
+      <span class="text-[11px] font-mono text-obsidian-purple tracking-[0.15em] uppercase">{t.providers.label}</span>
+      <h2 class="text-[clamp(1.4rem,3vw,2rem)] font-semibold mt-3 mb-2 text-[#e5e5e5] reveal" data-delay="1">{t.providers.title}</h2>
+      <p class="text-obsidian-muted text-sm max-w-lg mx-auto">{t.providers.subtitle}</p>
+    </div>
+
+    <!-- Three pillars -->
+    <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 mb-10">
+      {PILLARS.map((p) => (
+        <div class="reveal" data-delay={2}>
+          {p.link ? (
+            <a href={p.link} target="_blank" rel="noopener noreferrer" class="block">
+              <div class="pillar-card group p-4 rounded-xl border border-obsidian-border bg-obsidian-surface/30 hover:border-obsidian-purple/30 hover:bg-obsidian-purple/5 cursor-pointer transition-all duration-250 h-full">
+                <div class="w-8 h-8 rounded-lg bg-obsidian-purple/10 border border-obsidian-purple/20 flex items-center justify-center mb-3 group-hover:bg-obsidian-purple/20 transition-colors">
+                  <Icon name={p.icon} class="w-4 h-4 text-obsidian-purple-light" />
+                </div>
+                <h3 class="text-base font-semibold text-[#e5e5e5] mb-1">{t.providers[`${p.key}Title` as keyof typeof t.providers]}</h3>
+                <p class="text-xs text-obsidian-muted leading-relaxed">{t.providers[`${p.key}Desc` as keyof typeof t.providers]}</p>
+                <span class="inline-block mt-2 text-[10px] font-mono text-obsidian-purple-light opacity-0 group-hover:opacity-100 transition-opacity">→ GitHub</span>
+              </div>
+            </a>
+          ) : (
+            <div class="pillar-card group p-4 rounded-xl border border-obsidian-border bg-obsidian-surface/30 h-full">
+              <div class="w-8 h-8 rounded-lg bg-obsidian-purple/10 border border-obsidian-purple/20 flex items-center justify-center mb-3">
+                <Icon name={p.icon} class="w-4 h-4 text-obsidian-purple-light" />
+              </div>
+              <h3 class="text-base font-semibold text-[#e5e5e5] mb-1">{t.providers[`${p.key}Title` as keyof typeof t.providers]}</h3>
+              <p class="text-xs text-obsidian-muted leading-relaxed">{t.providers[`${p.key}Desc` as keyof typeof t.providers]}</p>
+            </div>
+          )}
+        </div>
+      ))}
+    </div>
+
+    <div class="mb-6 flex items-start gap-2.5 p-3 rounded-lg border border-obsidian-purple/20 bg-obsidian-purple/[0.04] reveal" data-delay="10">
+      <Icon name="lightbulb" class="w-4 h-4 text-obsidian-purple-light flex-shrink-0 mt-0.5" />
+      <p class="text-xs text-obsidian-muted leading-relaxed">{t.providers.contextNote}</p>
+    </div>
+
+    <!-- Provider cards subsection -->
+    <div class="mb-4 reveal" data-delay="12">
+      <span class="text-[11px] font-mono text-obsidian-dim tracking-[0.1em] uppercase">{t.providers.cardLabel}</span>
+      <p class="text-xs text-obsidian-muted mt-0.5">{t.providers.cardSubtitle}</p>
+    </div>
+
+    <div class="grid grid-cols-2 sm:grid-cols-4 gap-2.5">
+      {PROVIDERS.map((p, i) => (
+        <div class="provider-card group p-3.5 rounded-lg border transition-all duration-200 reveal" data-delay={13 + i} class:list={[
+          p.badge === 'bestValue'
+            ? 'border-obsidian-amber/30 bg-obsidian-amber/[0.04] hover:border-obsidian-amber/50'
+            : 'border-obsidian-border bg-obsidian-surface/40 hover:border-obsidian-purple/30 hover:bg-obsidian-purple/5'
+        ]}>
+          <div class="flex items-center justify-between mb-0.5">
+            <span class="text-sm font-medium text-[#e5e5e5]">{p.name}</span>
+            {p.badge === 'bestValue' && (
+              <span class="text-[9px] font-mono px-1.5 py-0.5 rounded bg-obsidian-amber/15 text-obsidian-amber border border-obsidian-amber/25">{t.providers.bestValue}</span>
+            )}
+          </div>
+          <div class="text-[10px] font-mono text-obsidian-dim leading-tight">{p.model}</div>
+          <div class="mt-2 flex items-center gap-1.5">
+            <span class="text-[9px] font-mono px-1.5 py-0.5 rounded border" class:list={[
+              p.badge === 'bestValue'
+                ? 'bg-obsidian-amber/15 text-obsidian-amber border-obsidian-amber/25'
+                : p.context === '1M'
+                ? 'bg-obsidian-purple/15 text-obsidian-purple-light border-obsidian-purple/25'
+                : 'bg-obsidian-bg text-obsidian-dim border-obsidian-border'
+            ]}>{p.context}</span>
+            <span class="text-[9px] font-mono text-obsidian-dim">{p.status}</span>
+          </div>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
