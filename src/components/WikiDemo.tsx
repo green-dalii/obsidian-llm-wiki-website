@@ -18,7 +18,7 @@ export default function WikiDemo() {
   const { t } = useI18n();
   const sectionRef = useRef<HTMLElement>(null);
   const [step, setStep] = useState(0);
-  const [autoPlay, setAutoPlay] = useState(false);
+  const [autoPlay, setAutoPlay] = useState(true);
 
   useEffect(() => {
     const ctx = gsap.context(() => {
