@@ -1,23 +1,34 @@
-import { useRef, useEffect } from 'react';
-import gsap from 'gsap';
+import { useRef, useEffect, useState } from 'react';
 import { Github } from 'lucide-react';
 import { useI18n } from '../i18n/use-i18n';
 
 export default function Footer() {
   const { t } = useI18n();
   const footerRef = useRef<HTMLElement>(null);
+  const [visible, setVisible] = useState(false);
 
   useEffect(() => {
-    const ctx = gsap.context(() => {
-      gsap.fromTo(footerRef.current, { opacity: 0 }, {
-        opacity: 1, duration: 0.8, scrollTrigger: { trigger: footerRef.current, start: 'top 90%' },
-      });
-    }, footerRef);
-    return () => ctx.revert();
+    const el = footerRef.current;
+    if (!el) return;
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            setVisible(true);
+            observer.disconnect();
+          }
+        });
+      },
+      { threshold: 0.1, rootMargin: '0px 0px 50px 0px' }
+    );
+
+    observer.observe(el);
+    return () => observer.disconnect();
   }, []);
 
   return (
-    <footer ref={footerRef} className="relative w-full py-14 border-t border-obsidian-border">
+    <footer ref={footerRef} className={`relative w-full py-14 border-t border-obsidian-border transition-opacity duration-700 ease-out ${visible ? 'opacity-100' : 'opacity-0'}`}>
       <div className="max-w-5xl mx-auto px-6">
         <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-6">
           <div>
