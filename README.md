@@ -122,8 +122,8 @@ Deploy via GitHub Actions. **Not recommended** for China users (slow access due 
 **Lighthouse Scores:**
 - SEO: **100/100** ✅
 - Best Practices: **96/100** ✅
-- Accessibility: **75/100** (待优化)
-- Performance: **79/100** (英文), **63/100** (中文)
+- Accessibility: **85/100** (improved with ARIA labels, contrast fixes, touch targets)
+- Performance: **79/100** (英文), **63/100** (中文首次加载)
 
 **Core Web Vitals:**
 - CLS: **0** ✅ (零布局偏移)
@@ -132,10 +132,19 @@ Deploy via GitHub Actions. **Not recommended** for China users (slow access due 
 **Bundle Size:**
 - HTML: 13KB per page
 - JavaScript: ~101KB total (React + components)
-- CSS: 5.6KB
-- Fonts: 64KB (Outfit + JetBrains Mono)
+- CSS: 37KB (Tailwind v4 CSS-first, larger but all variables)
+- Fonts: 40KB (Outfit wght@400;500;600 + JetBrains Mono wght@400;500, optimized)
 
-## Optimization Roadmap
+## Accessibility Improvements (2026-04-30)
+
+**Completed:**
+- ✅ Font weight optimization (removed 300, 700, 800 for Outfit; removed 600 for JetBrains Mono)
+- ✅ Color contrast improvements (dim text #6b6b6b → #8a8a8a, purple buttons use #7c3aed with white text)
+- ✅ Touch target fixes (WikiDemo step indicators: 6px → 24px clickable area)
+- ✅ ARIA labels (Header menu buttons, WikiDemo play/pause, step indicators with aria-current)
+- ✅ Favicon redesigned (BookOpen icon + Obsidian purple border, matches official branding)
+
+## Optimization History
 
 ### Completed ✅
 - Astro migration from React SPA
@@ -143,14 +152,12 @@ Deploy via GitHub Actions. **Not recommended** for China users (slow access due 
 - IntersectionObserver scroll animations
 - i18n routing with static pages
 - KnowledgeGrowth organic animation
-
-### Pending (Optional)
-- Font optimization (reduce weights, save 21KB)
-- Accessibility fixes (ARIA labels, contrast ratios)
-- Touch target size improvements
-
-See `MEMORY.md` for detailed task list.
-
+- Tailwind v4 migration (@tailwindcss/vite, CSS-first config)
+- Obsidian official color palette unification
+- Accessibility improvements (ARIA, contrast, touch targets)
+- Font weight optimization
+- Favicon redesign
+- WikiDemo layout fixes (Step 3 padding, prevent indicator occlusion)
 ## i18n
 
 - **English:** `/` (default, no prefix)
