@@ -139,7 +139,7 @@ Machine learning uses algorithms to learn from data.
                     {lines.map((line, i) => (
                       <div key={i} className="flex items-center h-7">
                         <span className="w-5 text-right pr-2 text-obsidian-dim select-none flex-shrink-0">{i + 1}</span>
-                        <span className="flex-1 inline-flex items-center">
+                        <span className="flex-1 inline-flex items-center pl-2">
                           {renderMarkdownLine(line)}
                         </span>
                       </div>
