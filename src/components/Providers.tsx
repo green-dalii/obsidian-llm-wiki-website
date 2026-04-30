@@ -1,11 +1,11 @@
 import { useRef, useEffect } from 'react';
 import gsap from 'gsap';
-import { Lightbulb, Code2, Users, Plug } from 'lucide-react';
+import { Lightbulb, Code2, Users, Plug, BookOpen } from 'lucide-react';
 import { useI18n } from '../i18n/use-i18n';
 
 const PROVIDERS = [
   { name: 'DeepSeek', model: 'DeepSeek V4', context: '1M', status: 'Cloud', badge: 'bestValue' },
-  { name: 'Google', model: 'Gemini Pro', context: '1M+', status: 'Cloud' },
+  { name: 'Google', model: 'Gemini Pro', context: '1M', status: 'Cloud' },
   { name: 'Anthropic', model: 'Claude', context: '1M', status: 'Cloud' },
   { name: 'OpenAI', model: 'GPT', context: '1M', status: 'Cloud' },
   { name: 'Moonshot', model: 'Kimi', context: '256K', status: 'Cloud' },
@@ -17,6 +17,7 @@ const PROVIDERS = [
 const PILLARS = [
   { key: 'openSource' as const, icon: Code2, link: 'https://github.com/green-dalii/obsidian-llm-wiki' },
   { key: 'community' as const, icon: Users, link: 'https://github.com/green-dalii/obsidian-llm-wiki/discussions' },
+  { key: 'obsidian' as const, icon: BookOpen, link: null },
   { key: 'vendor' as const, icon: Plug, link: null },
 ];
 
@@ -47,7 +48,7 @@ export default function Providers() {
         </div>
 
         {/* Three pillars */}
-        <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 mb-10">
+        <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 mb-10">
           {PILLARS.map((p) => {
             const Icon = p.icon;
             const title = t.providers[`${p.key}Title` as keyof typeof t.providers] as string;
@@ -110,8 +111,6 @@ export default function Providers() {
                     ? 'bg-obsidian-amber/15 text-obsidian-amber border-obsidian-amber/25'
                     : p.context === '1M'
                     ? 'bg-obsidian-purple/15 text-obsidian-purple-light border-obsidian-purple/25'
-                    : p.context === '256K'
-                    ? 'bg-obsidian-amber/10 text-obsidian-amber border-obsidian-amber/25'
                     : 'bg-obsidian-bg text-obsidian-dim border-obsidian-border'
                 }`}>{p.context}</span>
                 <span className="text-[9px] font-mono text-obsidian-dim">{p.status}</span>

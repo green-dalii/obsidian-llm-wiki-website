@@ -81,6 +81,8 @@ export interface Translations {
     communityDesc: string;
     vendorTitle: string;
     vendorDesc: string;
+    obsidianTitle: string;
+    obsidianDesc: string;
     cardLabel: string;
     cardSubtitle: string;
     contextNote: string;
@@ -109,7 +111,7 @@ export const en: Translations = {
   nav: {
     howItWorks: 'How It Works',
     features: 'Features',
-    providers: 'Providers',
+    providers: 'Open Source',
     ecosystem: 'Ecosystem',
     install: 'Install',
   },
@@ -200,6 +202,8 @@ export const en: Translations = {
     communityDesc: 'GitHub Discussions for ideas and help. Contributions welcome.',
     vendorTitle: 'Vendor Neutral',
     vendorDesc: 'Your LLM, your choice. Cloud or local, switch anytime.',
+    obsidianTitle: 'Obsidian Native',
+    obsidianDesc: 'No extra apps to install. Runs entirely inside your Obsidian vault.',
     cardLabel: 'Your LLM, your choice',
     cardSubtitle: 'Works with any major provider — no lock-in.',
     contextNote: 'Long-context models (256K+ tokens) are recommended — the full wiki fits in a single inference call, giving the LLM complete understanding.',
@@ -255,7 +259,7 @@ export const zh: Translations = {
   nav: {
     howItWorks: '工作原理',
     features: '功能',
-    providers: '提供商',
+    providers: '开源',
     ecosystem: '生态',
     install: '安装',
   },
@@ -346,6 +350,8 @@ export const zh: Translations = {
     communityDesc: 'GitHub Discussions 交流想法与问题。欢迎提交 PR 共建。',
     vendorTitle: '自由接入',
     vendorDesc: '你的 LLM，你做主。云端或本地，随时切换。',
+    obsidianTitle: '原生 Obsidian',
+    obsidianDesc: '无需安装额外软件，直接在 Vault 内运行。',
     cardLabel: '你的 LLM，你做主',
     cardSubtitle: '主流提供商全支持——无厂商锁定。',
     contextNote: '推荐 256K+ 上下文窗口——完整 Wiki 一次装入推理，LLM 看到全局。',
