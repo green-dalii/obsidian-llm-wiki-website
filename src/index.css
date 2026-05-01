@@ -95,14 +95,31 @@
 /* Scroll reveal animations */
 .reveal {
   opacity: 0;
-  transform: translateY(24px);
-  transition: opacity 0.7s ease-out, transform 0.7s ease-out;
+  transform: translateY(32px) scale(0.98);
+  transition:
+    opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1),
+    transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .reveal.is-visible {
   opacity: 1;
-  transform: translateY(0);
+  transform: translateY(0) scale(1);
 }
+
+/* Staggered timing for delayed elements */
+.reveal[data-delay="1"] { transition-delay: 0.08s; }
+.reveal[data-delay="2"] { transition-delay: 0.16s; }
+.reveal[data-delay="3"] { transition-delay: 0.24s; }
+.reveal[data-delay="4"] { transition-delay: 0.32s; }
+.reveal[data-delay="5"] { transition-delay: 0.40s; }
+.reveal[data-delay="6"] { transition-delay: 0.48s; }
+.reveal[data-delay="7"] { transition-delay: 0.56s; }
+.reveal[data-delay="8"] { transition-delay: 0.64s; }
+.reveal[data-delay="9"] { transition-delay: 0.72s; }
+.reveal[data-delay="10"] { transition-delay: 0.80s; }
+.reveal[data-delay="11"] { transition-delay: 0.88s; }
+.reveal[data-delay="12"] { transition-delay: 0.96s; }
+.reveal[data-delay="13"] { transition-delay: 1.04s; }
 
 /* Faster animations for delayed elements */
 .reveal[data-delay] {
