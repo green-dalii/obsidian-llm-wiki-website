@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { BookOpen, Download, Menu, Star, X } from 'lucide-react';
+import { Download, Menu, Star, X } from 'lucide-react';
 import { translations } from '../i18n/astro';
 
 const NAV_ITEMS = [
@@ -53,9 +53,7 @@ export default function Header({ currentLocale = 'en' }: Props) {
     }`}>
       <div className="max-w-6xl mx-auto px-4 sm:px-6 flex items-center justify-between h-14">
         <button onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })} className="flex items-center gap-2 group" aria-label={currentLocale === 'zh' ? '回到顶部' : 'Scroll to top'}>
-          <div className="w-7 h-7 rounded-lg bg-obsidian-purple/20 border border-obsidian-purple/30 flex items-center justify-center group-hover:bg-obsidian-purple/30 transition-colors">
-            <BookOpen className="w-4 h-4 text-obsidian-purple-light" />
-          </div>
+          <img src="/favicon.svg" alt="" className="w-7 h-7 rounded-lg" aria-hidden="true" />
           <span className="text-sm font-semibold text-[#e5e5e5] tracking-tight">LLM Wiki for Obsidian</span>
         </button>
 
