@@ -92,6 +92,17 @@
   }
 }
 
+/* Glow hover interaction */
+.glow-hover {
+  transition: box-shadow 0.25s ease;
+}
+
+.glow-hover:hover {
+  box-shadow:
+    0 0 30px rgba(127, 109, 242, 0.08),  /* outer glow */
+    inset 0 0 20px rgba(127, 109, 242, 0.04); /* inner glow */
+}
+
 /* Scroll reveal animations */
 .reveal {
   opacity: 0;

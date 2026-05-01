@@ -21,7 +21,7 @@ const ICONS = ['network', 'download', 'table-2', 'git-branch', 'monitor', 'layer
 
     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
       {t.ecosystem.items.map((item, i) => (
-        <div class="eco-card group rounded-lg border border-obsidian-border bg-obsidian-card/40 p-5 hover:border-obsidian-purple/25 hover:bg-obsidian-purple/[0.03] transition-all duration-250 reveal" data-delay={i * 2}>
+        <div class="eco-card group rounded-lg border border-obsidian-border bg-obsidian-card/40 p-5 hover:border-obsidian-purple/25 hover:bg-obsidian-purple/[0.03] glow-hover transition-all duration-250 reveal" data-delay={i * 2}>
           <div class="flex items-start gap-3 mb-2">
             <div class="w-7 h-7 rounded-md bg-obsidian-purple/10 border border-obsidian-purple/20 flex items-center justify-center flex-shrink-0">
               <Icon name={ICONS[i]} class="w-3.5 h-3.5 text-obsidian-purple-light" />

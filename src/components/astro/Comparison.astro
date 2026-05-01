@@ -40,7 +40,7 @@ const t = locale === 'zh' ? translations.zh : translations.en;
       {t.comparison.items.map((item, i) => (
         <div class="compare-row grid grid-cols-1 md:grid-cols-2 gap-3 md:gap-4 group reveal" data-delay={i * 2}>
           <!-- Before -->
-          <div class="rounded-lg border border-obsidian-border bg-obsidian-bg/60 p-4 md:p-5 transition-colors duration-300 hover:border-obsidian-border-light opacity-70">
+          <div class="rounded-lg border border-obsidian-border bg-obsidian-bg/60 p-4 md:p-5 transition-colors duration-300 hover:border-obsidian-border-light opacity-70 glow-hover">
             <div class="flex items-center gap-2 mb-2.5 md:hidden">
               <span class="text-[10px] font-mono text-obsidian-dim uppercase tracking-wider">{t.comparison.beforeLabel}</span>
               <span class="text-[10px] font-mono text-obsidian-muted">— {item.category}</span>
@@ -56,7 +56,7 @@ const t = locale === 'zh' ? translations.zh : translations.en;
           </div>
 
           <!-- After -->
-          <div class="rounded-lg border border-obsidian-purple/25 bg-obsidian-purple/[0.05] p-4 md:p-5 relative overflow-hidden transition-all duration-300 hover:border-obsidian-purple/40 shadow-[0_0_30px_rgba(124,58,237,0.06)]">
+          <div class="rounded-lg border border-obsidian-purple/25 bg-obsidian-purple/[0.05] p-4 md:p-5 relative overflow-hidden transition-all duration-300 hover:border-obsidian-purple/40 shadow-[0_0_30px_rgba(124,58,237,0.06)] glow-hover">
             <div class="flex items-center gap-2 mb-2.5 md:hidden">
               <span class="text-[10px] font-mono text-obsidian-purple-light uppercase tracking-wider">{t.comparison.afterLabel}</span>
               <span class="text-[10px] font-mono text-obsidian-muted">— {item.category}</span>
