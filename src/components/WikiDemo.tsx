@@ -136,19 +136,28 @@ Machine learning uses algorithms to learn from data.
               {/* Step 0: Source */}
               {step === 0 && (
                 <div className="p-5 pt-12 pb-16">
-                  <div className="rounded-lg border border-[#333] bg-[#1f1f1f] p-4 font-mono text-xs leading-relaxed">
-                    <div className="flex items-center gap-2 mb-2 pb-2 border-b border-[#333]">
-                      <span className="text-obsidian-dim">sources/</span>
-                      <span className="text-obsidian-muted">machine-learning.md</span>
-                    </div>
-                    {lines.map((line, i) => (
-                      <div key={i} className="flex items-center h-7">
-                        <span className="w-5 text-right pr-2 text-obsidian-dim select-none flex-shrink-0">{i + 1}</span>
-                        <span className="flex-1 inline-flex items-center pl-2">
-                          {renderMarkdownLine(line)}
-                        </span>
+                  <div className="rounded-xl border border-[#333] bg-[#1a1a1a] overflow-hidden font-mono text-xs leading-relaxed">
+                    {/* macOS window chrome */}
+                    <div className="h-9 bg-[#1f1f1f] border-b border-[#333] flex items-center px-3.5 gap-2">
+                      <span className="w-3 h-3 rounded-full bg-[#ff5f57] opacity-90" />
+                      <span className="w-3 h-3 rounded-full bg-[#febc2e] opacity-90" />
+                      <span className="w-3 h-3 rounded-full bg-[#28c840] opacity-90" />
+                      <div className="ml-3 flex items-center gap-1.5">
+                        <span className="text-[10px] text-obsidian-dim">sources/</span>
+                        <span className="text-[10px] text-obsidian-muted">machine-learning.md</span>
                       </div>
-                    ))}
+                    </div>
+                    {/* Editor content */}
+                    <div className="p-4">
+                      {lines.map((line, i) => (
+                        <div key={i} className="flex items-center h-7">
+                          <span className="w-5 text-right pr-2 text-obsidian-dim select-none flex-shrink-0">{i + 1}</span>
+                          <span className="flex-1 inline-flex items-center pl-2">
+                            {renderMarkdownLine(line)}
+                          </span>
+                        </div>
+                      ))}
+                    </div>
                   </div>
                   <div className="mt-3 flex items-center gap-2 text-[10px] font-mono text-obsidian-dim">
                     <span className="w-1.5 h-1.5 rounded-full bg-obsidian-amber" />206 words · 4 sections · 12 lines
@@ -159,38 +168,47 @@ Machine learning uses algorithms to learn from data.
               {/* Step 1: Extraction with dashed boxes + entity/concept tags */}
               {step === 1 && (
                 <div className="p-5 pt-12 pb-16">
-                  <div className="rounded-lg border border-[#333] bg-[#1f1f1f] p-4 font-mono text-xs leading-relaxed min-h-[280px]">
-                    <div className="flex items-center gap-2 mb-2 pb-2 border-b border-[#333]">
-                      <span className="text-obsidian-dim">sources/</span>
-                      <span className="text-obsidian-muted">machine-learning.md</span>
+                  <div className="rounded-xl border border-[#333] bg-[#1a1a1a] overflow-hidden font-mono text-xs leading-relaxed min-h-[280px]">
+                    {/* macOS window chrome */}
+                    <div className="h-9 bg-[#1f1f1f] border-b border-[#333] flex items-center px-3.5 gap-2">
+                      <span className="w-3 h-3 rounded-full bg-[#ff5f57] opacity-90" />
+                      <span className="w-3 h-3 rounded-full bg-[#febc2e] opacity-90" />
+                      <span className="w-3 h-3 rounded-full bg-[#28c840] opacity-90" />
+                      <div className="ml-3 flex items-center gap-1.5">
+                        <span className="text-[10px] text-obsidian-dim">sources/</span>
+                        <span className="text-[10px] text-obsidian-muted">machine-learning.md</span>
+                      </div>
                     </div>
-                    {lines.map((line, i) => {
-                      const item = extractedItems.find(e => line.toLowerCase().includes(e.name.toLowerCase().replace(/\s+/g, ' ')));
-                      const isHeading = line.startsWith('#');
-                      return (
-                        <div key={i} className="flex items-center h-7">
-                          <span className="w-5 text-right pr-2 text-obsidian-dim select-none flex-shrink-0">{i + 1}</span>
-                          <span className="flex-1 inline-flex items-center pl-2">
-                            {item && !isHeading ? (
-                              <span className="inline-flex items-center gap-2 border border-dashed rounded px-2 py-0.5"
-                                style={{
-                                  borderColor: item.type === 'entity' ? 'rgba(217,119,6,0.45)' : 'rgba(124,58,237,0.45)',
-                                  backgroundColor: item.type === 'entity' ? 'rgba(217,119,6,0.06)' : 'rgba(124,58,237,0.06)',
-                                }}>
-                                <span className="text-obsidian-muted">{line}</span>
-                                <span className={`text-[9px] font-mono px-1.5 py-0.5 rounded ${
-                                  item.type === 'entity'
-                                    ? 'bg-obsidian-amber/15 text-obsidian-amber border border-obsidian-amber/25'
-                                    : 'bg-obsidian-purple/15 text-obsidian-purple-light border border-obsidian-purple/25'
-                                }`}>{item.type}</span>
-                              </span>
-                            ) : (
-                              <>{renderMarkdownLine(line)}</>
-                            )}
-                          </span>
-                        </div>
-                      );
-                    })}
+                    {/* Editor content */}
+                    <div className="p-4">
+                      {lines.map((line, i) => {
+                        const item = extractedItems.find(e => line.toLowerCase().includes(e.name.toLowerCase().replace(/\s+/g, ' ')));
+                        const isHeading = line.startsWith('#');
+                        return (
+                          <div key={i} className="flex items-center h-7">
+                            <span className="w-5 text-right pr-2 text-obsidian-dim select-none flex-shrink-0">{i + 1}</span>
+                            <span className="flex-1 inline-flex items-center pl-2">
+                              {item && !isHeading ? (
+                                <span className="inline-flex items-center gap-2 border border-dashed rounded px-2 py-0.5"
+                                  style={{
+                                    borderColor: item.type === 'entity' ? 'rgba(217,119,6,0.45)' : 'rgba(124,58,237,0.45)',
+                                    backgroundColor: item.type === 'entity' ? 'rgba(217,119,6,0.06)' : 'rgba(124,58,237,0.06)',
+                                  }}>
+                                  <span className="text-obsidian-muted">{line}</span>
+                                  <span className={`text-[9px] font-mono px-1.5 py-0.5 rounded ${
+                                    item.type === 'entity'
+                                      ? 'bg-obsidian-amber/15 text-obsidian-amber border border-obsidian-amber/25'
+                                      : 'bg-obsidian-purple/15 text-obsidian-purple-light border border-obsidian-purple/25'
+                                  }`}>{item.type}</span>
+                                </span>
+                              ) : (
+                                <>{renderMarkdownLine(line)}</>
+                              )}
+                            </span>
+                          </div>
+                        );
+                      })}
+                    </div>
                   </div>
                   <div className="mt-3 flex flex-wrap gap-2">
                     {extractedItems.slice(0, 4).map(e => (
