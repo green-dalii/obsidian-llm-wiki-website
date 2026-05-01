@@ -121,7 +121,7 @@ Machine learning uses algorithms to learn from data.
           {/* Stage - 外部固定高度容器防止布局跳动 */}
           <div className="lg:col-span-3 h-[550px]">
             {/* 内部编辑器容器 - 自适应高度 */}
-            <div className="relative rounded-xl border border-[#333] bg-[#1a1a1a]/60 overflow-hidden min-h-[380px]">
+            <div className="relative rounded-xl border border-[#333] bg-[#1a1a1a]/60 overflow-hidden min-h-[380px] gradient-border">
               <div className="absolute top-3 left-3 z-10 flex items-center gap-2">
                 <span className="w-1.5 h-1.5 rounded-full bg-obsidian-purple animate-pulse" />
                 <span className="text-[10px] font-mono text-obsidian-dim tracking-wider uppercase">
