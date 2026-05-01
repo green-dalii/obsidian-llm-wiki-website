@@ -40,23 +40,35 @@ const PILLARS = [
       {PILLARS.map((p) => (
         <div class="reveal" data-delay={2}>
           {p.link ? (
-            <a href={p.link} target="_blank" rel="noopener noreferrer" class="block">
-              <div class="pillar-card group p-4 rounded-xl border border-obsidian-border bg-obsidian-card/40 hover:border-obsidian-purple/30 hover:bg-obsidian-purple/5 cursor-pointer transition-all duration-250 h-full">
+            <a href={p.link} target="_blank" rel="noopener noreferrer" class="block h-full">
+              <div class="pillar-card group p-4 rounded-xl border border-obsidian-border bg-obsidian-card/40 hover:border-obsidian-purple/30 hover:bg-obsidian-purple/5 cursor-pointer transition-all duration-250 h-full flex flex-col">
+
+
+
+
+
+
                 <div class="w-8 h-8 rounded-lg bg-obsidian-purple/10 border border-obsidian-purple/20 flex items-center justify-center mb-3 group-hover:bg-obsidian-purple/20 transition-colors">
                   <Icon name={p.icon} class="w-4 h-4 text-obsidian-purple-light" />
                 </div>
                 <h3 class="text-base font-semibold text-[#e5e5e5] mb-1">{t.providers[`${p.key}Title` as keyof typeof t.providers]}</h3>
-                <p class="text-xs text-obsidian-muted leading-relaxed">{t.providers[`${p.key}Desc` as keyof typeof t.providers]}</p>
+                <p class="text-xs text-obsidian-muted leading-relaxed flex-1">{t.providers[`${p.key}Desc` as keyof typeof t.providers]}</p>
                 <span class="inline-block mt-2 text-[10px] font-mono text-obsidian-purple-light opacity-0 group-hover:opacity-100 transition-opacity">→ GitHub</span>
               </div>
             </a>
           ) : (
-            <div class="pillar-card group p-4 rounded-xl border border-obsidian-border bg-obsidian-card/40 h-full">
+            <div class="pillar-card group p-4 rounded-xl border border-obsidian-border bg-obsidian-card/40 h-full flex flex-col">
+
+
+
+
+
+
               <div class="w-8 h-8 rounded-lg bg-obsidian-purple/10 border border-obsidian-purple/20 flex items-center justify-center mb-3">
                 <Icon name={p.icon} class="w-4 h-4 text-obsidian-purple-light" />
               </div>
               <h3 class="text-base font-semibold text-[#e5e5e5] mb-1">{t.providers[`${p.key}Title` as keyof typeof t.providers]}</h3>
-              <p class="text-xs text-obsidian-muted leading-relaxed">{t.providers[`${p.key}Desc` as keyof typeof t.providers]}</p>
+              <p class="text-xs text-obsidian-muted leading-relaxed flex-1">{t.providers[`${p.key}Desc` as keyof typeof t.providers]}</p>
             </div>
           )}
         </div>
