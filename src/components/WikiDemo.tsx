@@ -135,7 +135,7 @@ Machine learning uses algorithms to learn from data.
 
               {/* Step 0: Source */}
               {step === 0 && (
-                <div className="p-5 pt-12">
+                <div className="p-5 pt-12 pb-16">
                   <div className="rounded-lg border border-[#333] bg-[#1f1f1f] p-4 font-mono text-xs leading-relaxed">
                     <div className="flex items-center gap-2 mb-2 pb-2 border-b border-[#333]">
                       <span className="text-obsidian-dim">sources/</span>
@@ -158,7 +158,7 @@ Machine learning uses algorithms to learn from data.
 
               {/* Step 1: Extraction with dashed boxes + entity/concept tags */}
               {step === 1 && (
-                <div className="p-5 pt-12">
+                <div className="p-5 pt-12 pb-16">
                   <div className="rounded-lg border border-[#333] bg-[#1f1f1f] p-4 font-mono text-xs leading-relaxed min-h-[280px]">
                     <div className="flex items-center gap-2 mb-2 pb-2 border-b border-[#333]">
                       <span className="text-obsidian-dim">sources/</span>
@@ -203,7 +203,7 @@ Machine learning uses algorithms to learn from data.
 
               {/* Step 2: Generated */}
               {step === 2 && (
-                <div className="p-5 pt-12">
+                <div className="p-5 pt-12 pb-16">
                   <div className="grid grid-cols-2 gap-3">
                     {generatedPages.map((page, i) => (
                       <div key={page.title} className="rounded-lg border border-[#333] bg-[#1f1f1f] p-3.5">

@@ -389,22 +389,25 @@ export default function KnowledgeGrowth() {
         const baseAlpha = (0.3 + Math.sin(n.glowPhase) * 0.08) * n.opacity;
 
         if (n.type === 'source') {
-          // Document node: small rounded rect with amber glow
+          // Document node: circle with amber glow
           const glow = ctx.createRadialGradient(n.x, n.y, 0, n.x, n.y, glowSize);
           glow.addColorStop(0, `rgba(217,119,6,${baseAlpha * 0.18})`);
+          glow.addColorStop(0.5, `rgba(217,119,6,${baseAlpha * 0.05})`);
           glow.addColorStop(1, 'rgba(217,119,6,0)');
           ctx.fillStyle = glow;
-          ctx.fillRect(n.x - glowSize, n.y - glowSize, glowSize * 2, glowSize * 2);
+          ctx.beginPath();
+          ctx.arc(n.x, n.y, glowSize, 0, Math.PI * 2);
+          ctx.fill();
 
           ctx.fillStyle = `rgba(217,119,6,${baseAlpha})`;
           ctx.beginPath();
-          ctx.roundRect(n.x - n.radius, n.y - n.radius * 1.3, n.radius * 2, n.radius * 2.6, 2);
+          ctx.arc(n.x, n.y, n.radius, 0, Math.PI * 2);
           ctx.fill();
 
           // Inner highlight
           ctx.fillStyle = `rgba(251,191,36,${baseAlpha * 0.35})`;
           ctx.beginPath();
-          ctx.roundRect(n.x - n.radius * 0.4, n.y - n.radius * 1, n.radius * 0.8, n.radius * 0.5, 1);
+          ctx.arc(n.x - n.radius * 0.15, n.y - n.radius * 0.15, n.radius * 0.35, 0, Math.PI * 2);
           ctx.fill();
         } else {
           // Concept node: circle with purple glow
