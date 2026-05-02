@@ -63,7 +63,7 @@ export default function Providers() {
               <CardWrapper key={p.key}>
                 <div className={`pillar-card group p-4 rounded-xl border transition-all duration-250 h-full ${
                   p.link
-                    ? 'border-obsidian-border bg-obsidian-card/40 hover:border-obsidian-purple/30 hover:bg-white/[0.02] cursor-pointer'
+                    ? 'border-obsidian-border bg-obsidian-card/40 hover:border-obsidian-purple/30 hover:bg-white/[0.05] cursor-pointer'
                     : 'border-obsidian-border bg-obsidian-card/40'
                 }`}>
                   <div className="w-8 h-8 rounded-lg bg-obsidian-purple/10 border border-obsidian-purple/20 flex items-center justify-center mb-3 group-hover:bg-obsidian-purple/20 transition-colors">
@@ -95,20 +95,20 @@ export default function Providers() {
           {PROVIDERS.map((p) => (
             <div key={p.name} className={`provider-card group p-3.5 rounded-lg border transition-all duration-200 ${
               p.badge === 'bestValue'
-                ? 'border-obsidian-amber/30 bg-obsidian-amber/[0.04] hover:border-obsidian-amber/50'
-                : 'border-obsidian-border bg-obsidian-card/60 hover:border-obsidian-purple/30 hover:bg-white/[0.02]'
+                ? 'border-obsidian-purple/30 bg-obsidian-purple/[0.04] hover:border-obsidian-purple/50'
+                : 'border-obsidian-border bg-obsidian-card/60 hover:border-obsidian-purple/30 hover:bg-white/[0.05]'
             }`}>
               <div className="flex items-center justify-between mb-0.5">
                 <span className="text-sm font-medium text-[#e5e5e5]">{p.name}</span>
                 {p.badge === 'bestValue' && (
-                  <span className="text-[9px] font-mono px-1.5 py-0.5 rounded bg-obsidian-amber/15 text-obsidian-amber border border-obsidian-amber/25">{t.providers.bestValue}</span>
+                  <span className="text-[9px] font-mono px-1.5 py-0.5 rounded bg-obsidian-purple/15 text-obsidian-purple-light border border-obsidian-purple/25">{t.providers.bestValue}</span>
                 )}
               </div>
               <div className="text-[10px] font-mono text-obsidian-dim leading-tight">{p.model}</div>
               <div className="mt-2 flex items-center gap-1.5">
                 <span className={`text-[9px] font-mono px-1.5 py-0.5 rounded border ${
                   p.badge === 'bestValue'
-                    ? 'bg-obsidian-amber/15 text-obsidian-amber border-obsidian-amber/25'
+                    ? 'bg-obsidian-purple/15 text-obsidian-purple-light border-obsidian-purple/25'
                     : p.context === '1M'
                     ? 'bg-obsidian-purple/15 text-obsidian-purple-light border-obsidian-purple/25'
                     : 'bg-obsidian-bg text-obsidian-dim border-obsidian-border'
