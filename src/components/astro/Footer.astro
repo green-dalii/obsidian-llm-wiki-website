@@ -1,0 +1,31 @@
+---
+import Icon from './Icon.astro';
+import { translations } from '../../i18n/astro';
+
+interface Props {
+  locale?: 'en' | 'zh';
+}
+const { locale = 'en' } = Astro.props;
+const t = locale === 'zh' ? translations.zh : translations.en;
+---
+
+<footer class="relative w-full py-14 border-t border-obsidian-border transition-opacity duration-700 ease-out reveal">
+  <div class="max-w-5xl mx-auto px-6">
+    <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-6">
+      <div>
+        <div class="text-base font-semibold text-[#e5e5e5]">LLM Wiki for Obsidian</div>
+        <p class="text-xs text-obsidian-dim mt-1">
+          By <a href="https://github.com/green-dalii" target="_blank" rel="noopener noreferrer" class="text-obsidian-muted hover:text-obsidian-purple transition-colors">Greener-Dalii</a> · {t.footer.license}
+        </p>
+      </div>
+      <div class="flex items-center gap-5">
+        <a href="https://github.com/green-dalii/obsidian-llm-wiki" target="_blank" rel="noopener noreferrer" class="text-xs text-obsidian-dim hover:text-[#e5e5e5] transition-colors flex items-center gap-1.5">
+          <Icon name="github" class="w-3.5 h-3.5" />
+          {t.footer.github}
+        </a>
+        <a href="https://github.com/green-dalii/obsidian-llm-wiki/discussions" target="_blank" rel="noopener noreferrer" class="text-xs text-obsidian-dim hover:text-[#e5e5e5] transition-colors">{t.footer.discussions}</a>
+        <a href="https://github.com/green-dalii/obsidian-llm-wiki/releases" target="_blank" rel="noopener noreferrer" class="text-xs text-obsidian-dim hover:text-[#e5e5e5] transition-colors">{t.footer.releases}</a>
+      </div>
+    </div>
+  </div>
+</footer>

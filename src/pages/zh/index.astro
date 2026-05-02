@@ -4,7 +4,7 @@ import ProgressBar from '../../components/ProgressBar';
 import HeaderIsland from '../../components/HeaderIsland';
 import HeroIsland from '../../components/HeroIsland';
 import WikiDemoIsland from '../../components/WikiDemoIsland';
-import FooterIsland from '../../components/FooterIsland';
+import Footer from '../../components/astro/Footer.astro';
 import Comparison from '../../components/astro/Comparison.astro';
 import Features from '../../components/astro/Features.astro';
 import Install from '../../components/astro/Install.astro';
@@ -79,7 +79,7 @@ const ogImage = siteUrl + 'og-image.jpg';
         <Ecosystem locale="zh" />
         <Providers locale="zh" />
       </main>
-      <FooterIsland client:only="react" locale="zh" />
+      <Footer locale="zh" />
     </div>
   </body>
 </html>
