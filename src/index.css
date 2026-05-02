@@ -92,18 +92,15 @@
   }
 }
 
-/* Unified hover interaction (Obsidian-style) */
+/* Glow hover interaction */
 .glow-hover {
-  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  transition: box-shadow 0.25s ease;
 }
 
 .glow-hover:hover {
-  background-color: rgba(127, 109, 242, 0.05); /* 更亮、淡的紫色填充 */
-  border-color: rgba(127, 109, 242, 0.25);     /* 更亮的边框 */
   box-shadow:
-    0 0 24px rgba(127, 109, 242, 0.12),  /* outer glow - 柔和光晕 */
-    inset 0 0 16px rgba(127, 109, 242, 0.03); /* inner glow */
-  transform: translateY(-1px); /* 微上移增加活力 */
+    0 0 30px rgba(127, 109, 242, 0.08),  /* outer glow */
+    inset 0 0 20px rgba(127, 109, 242, 0.04); /* inner glow */
 }
 
 /* Gradient border decoration (Obsidian style) */

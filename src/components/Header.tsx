@@ -60,7 +60,7 @@ export default function Header({ currentLocale = 'en' }: Props) {
         <nav className="hidden md:flex items-center gap-0.5">
           {NAV_ITEMS.map((item) => (
             <button key={item.key} onClick={() => handleNav(item.target)}
-              className="px-2.5 py-1.5 text-xs text-obsidian-muted hover:text-[#e5e5e5] transition-all duration-200 rounded-md hover:bg-[rgba(127,109,242,0.08)] hover:border hover:border-obsidian-purple/20">
+              className="px-2.5 py-1.5 text-xs text-obsidian-muted hover:text-[#e5e5e5] transition-colors duration-200 rounded-md hover:bg-white/[0.04]">
               {t.nav[item.labelKey]}
             </button>
           ))}
@@ -70,7 +70,7 @@ export default function Header({ currentLocale = 'en' }: Props) {
             {currentLocale === 'en' ? '中' : 'EN'}
           </a>
           <a href="https://github.com/green-dalii/obsidian-llm-wiki" target="_blank" rel="noopener noreferrer"
-            className="ml-1.5 px-2.5 py-1.5 text-xs font-medium text-obsidian-muted hover:text-[#e5e5e5] border border-obsidian-border rounded-md hover:border-obsidian-purple/35 hover:bg-[rgba(127,109,242,0.06)] transition-all inline-flex items-center gap-1.5">
+            className="ml-1.5 px-2.5 py-1.5 text-xs font-medium text-obsidian-muted hover:text-[#e5e5e5] border border-obsidian-border rounded-md hover:border-obsidian-purple/30 transition-all inline-flex items-center gap-1.5">
             <Star className="w-3 h-3" />
             GitHub
             <span className="text-obsidian-dim">{stars ?? '...'}</span>
