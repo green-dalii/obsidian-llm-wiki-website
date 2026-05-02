@@ -60,7 +60,7 @@ export default function Header({ currentLocale = 'en' }: Props) {
         <nav className="hidden md:flex items-center gap-0.5">
           {NAV_ITEMS.map((item) => (
             <button key={item.key} onClick={() => handleNav(item.target)}
-              className="px-2.5 py-1.5 text-xs text-obsidian-muted hover:text-[#e5e5e5] transition-colors duration-200 rounded-md hover:bg-white/[0.04]">
+              className="px-2.5 py-1.5 text-xs text-obsidian-muted hover:text-[#e5e5e5] transition-colors duration-200 rounded-md hover:bg-white/[0.08]">
               {t.nav[item.labelKey]}
             </button>
           ))}

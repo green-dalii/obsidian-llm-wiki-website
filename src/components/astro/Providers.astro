@@ -41,7 +41,7 @@ const PILLARS = [
         <div class="reveal" data-delay={2}>
           {p.link ? (
             <a href={p.link} target="_blank" rel="noopener noreferrer" class="block h-full">
-              <div class="pillar-card group p-4 rounded-xl border border-obsidian-border bg-obsidian-card/40 hover:border-obsidian-purple/30 hover:bg-obsidian-purple/5 cursor-pointer glow-hover transition-all duration-250 h-full flex flex-col">
+              <div class="pillar-card group p-4 rounded-xl border border-obsidian-border bg-obsidian-card/40 hover:border-obsidian-purple/30 hover:bg-white/[0.02] cursor-pointer glow-hover transition-all duration-250 h-full flex flex-col">
 
 
 
@@ -91,7 +91,7 @@ const PILLARS = [
         <div class="provider-card group p-3.5 rounded-lg border transition-all duration-200 glow-hover reveal" data-delay={13 + i} class:list={[
           p.badge === 'bestValue'
             ? 'border-obsidian-amber/30 bg-obsidian-amber/[0.04] hover:border-obsidian-amber/50'
-            : 'border-obsidian-border bg-obsidian-card/60 hover:border-obsidian-purple/30 hover:bg-obsidian-purple/5'
+            : 'border-obsidian-border bg-obsidian-card/60 hover:border-obsidian-purple/30 hover:bg-white/[0.02]'
         ]}>
           <div class="flex items-center justify-between mb-0.5">
             <span class="text-sm font-medium text-[#e5e5e5]">{p.name}</span>
