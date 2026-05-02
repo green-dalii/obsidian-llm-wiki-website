@@ -236,7 +236,7 @@ export default function Install() {
             const titleKey = (`step${idx + 1}Title` as 'step1Title' | 'step2Title' | 'step3Title' | 'step4Title');
             const descKey = (`step${idx + 1}Desc` as 'step1Desc' | 'step2Desc' | 'step3Desc' | 'step4Desc');
             return (
-              <div key={s.num} className="install-step relative rounded-xl border border-obsidian-border bg-obsidian-surface/30 hover:border-obsidian-purple/25 transition-all duration-300 overflow-hidden flex flex-col lg:flex-row">
+              <div key={s.num} className="install-step relative rounded-xl border border-obsidian-border bg-obsidian-surface/30 transition-all duration-300 overflow-hidden flex flex-col lg:flex-row">
                 {/* Illustration — 3/4 on desktop, full on mobile */}
                 <div className="w-full lg:w-3/4 p-4 lg:p-5 border-b lg:border-b-0 lg:border-r border-obsidian-border/50 bg-obsidian-bg/50">
                   <Illustration />

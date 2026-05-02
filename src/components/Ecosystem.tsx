@@ -35,7 +35,7 @@ export default function Ecosystem() {
           {t.ecosystem.items.map((item, i) => {
             const Icon = ICONS[i];
             return (
-              <div key={i} className="eco-card group rounded-lg border border-obsidian-border bg-obsidian-card/40 p-5 hover:border-obsidian-purple/25 hover:bg-white/[0.05] transition-all duration-250">
+              <div key={i} className="eco-card group rounded-lg border border-obsidian-border bg-obsidian-card/40 p-5 hover:bg-white/[0.05] transition-all duration-250">
                 <div className="flex items-start gap-3 mb-2">
                   <div className="w-7 h-7 rounded-md bg-obsidian-purple/10 border border-obsidian-purple/20 flex items-center justify-center flex-shrink-0">
                     <Icon className="w-3.5 h-3.5 text-obsidian-purple-light" />

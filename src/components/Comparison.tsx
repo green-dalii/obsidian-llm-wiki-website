@@ -68,7 +68,7 @@ export default function Comparison() {
               </div>
 
               {/* After */}
-              <div className="rounded-lg border border-obsidian-purple/25 bg-obsidian-purple/[0.05] p-4 md:p-5 relative overflow-hidden transition-all duration-300 hover:border-obsidian-purple/40 shadow-[0_0_30px_rgba(139,92,246,0.06)]">
+              <div className="rounded-lg border border-obsidian-purple/25 bg-obsidian-purple/[0.05] p-4 md:p-5 relative overflow-hidden transition-all duration-300 shadow-[0_0_30px_rgba(139,92,246,0.06)]">
                 <div className="flex items-center gap-2 mb-2.5 md:hidden">
                   <span className="text-[10px] font-mono text-obsidian-purple-light uppercase tracking-wider">{t.comparison.afterLabel}</span>
                   <span className="text-[10px] font-mono text-obsidian-muted">— {item.category}</span>
