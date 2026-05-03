@@ -27,7 +27,7 @@ export default function Hero({ locale = 'en' }: Props) {
   }, []);
 
   return (
-    <section ref={sectionRef} className="relative h-[100dvh] w-full flex items-center justify-center overflow-hidden">
+    <section ref={sectionRef} className="relative h-[calc(100dvh-3.5rem)] w-full flex items-center justify-center overflow-hidden">
       <div className="absolute inset-0 z-0">
         <KnowledgeGrowth />
       </div>
