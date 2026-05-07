@@ -62,7 +62,7 @@ export function getGraphLayout(id: ScenarioId): GraphLayout {
         { x1: 330, y1: 155, x2: 265, y2: 200, opacity: 6 }, { x1: 330, y1: 155, x2: 320, y2: 95, opacity: 6 }, { x1: 125, y1: 140, x2: 160, y2: 80, opacity: 6 },
       ],
     },
-    'ai-frontier': {
+    academic: {
       mainNodes: [{ x: 55, y: 110 }, { x: 240, y: 75 }, { x: 160, y: 230 }, { x: 400, y: 200 }],
       t1Nodes: [{ x: 110, y: 115 }, { x: 185, y: 105 }, { x: 305, y: 100 }, { x: 110, y: 190 }, { x: 210, y: 195 }, { x: 350, y: 165 }, { x: 345, y: 225 }],
       t2Nodes: [{ x: 140, y: 55 }, { x: 330, y: 50 }, { x: 25, y: 175 }, { x: 275, y: 175 }, { x: 450, y: 165 }, { x: 130, y: 270 }],

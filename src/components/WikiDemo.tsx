@@ -120,7 +120,12 @@ export default function WikiDemo({ locale = 'en' }: Props) {
                   <span className={`text-xs font-mono w-5 h-5 rounded-full flex items-center justify-center ${i === step ? 'bg-obsidian-purple text-[#1e1e1e]' : 'bg-[#333] text-obsidian-dim'}`}>{s.id}</span>
                   <span className={`text-sm font-medium ${i === step ? 'text-[#e5e5e5]' : 'text-obsidian-muted'}`}>{t.wikiDemo[s.titleKey]}</span>
                 </div>
-                <p className={`text-xs leading-relaxed pl-7 ${i === step ? 'text-obsidian-muted' : 'text-obsidian-dim'}`}>{t.wikiDemo[s.descKey]}</p>
+                <p className={`text-xs leading-relaxed pl-7 ${i === step ? 'text-obsidian-muted' : 'text-obsidian-dim'}`}>
+                  {i === 0
+                    ? (locale === 'zh' ? scenario.sourceNoteContextZh : scenario.sourceNoteContext)
+                    : t.wikiDemo[s.descKey]
+                  }
+                </p>
               </button>
             ))}
             <div className="flex items-center gap-2 pt-1">
