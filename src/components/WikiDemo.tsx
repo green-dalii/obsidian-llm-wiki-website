@@ -262,7 +262,7 @@ export default function WikiDemo({ locale = 'en' }: Props) {
                       return (
                         <div key={n.name}>
                           <div className="flex items-center gap-1 py-0.5 px-1 text-[10px] text-obsidian-muted" style={{ paddingLeft: `${indent}px` }}>
-                            <span className="flex-shrink-0 w-3 text-center text-[10px] leading-none">{n.children.length > 0 ? '▸' : ''}</span>
+                            <span className="flex-shrink-0 w-3 text-center text-[10px] leading-none">{n.children.length > 0 ? '▼' : ''}</span>
                             <span className="truncate">{n.name}/</span>
                           </div>
                           {renderWikiTree(n.children, depth + 1)}
@@ -358,7 +358,7 @@ export default function WikiDemo({ locale = 'en' }: Props) {
               {/* Step 4: Chat */}
               {step === 4 && (
                 <div className="p-5 pt-12 pb-16">
-                  <MacWindow title={<span className="text-xs text-obsidian-dim">Query</span>}>
+                  <MacWindow title={<span className="text-xs text-obsidian-dim">Query wiki</span>}>
                     <div className="space-y-4 max-w-xl mx-auto">
                       {/* User message — right aligned */}
                       <div className="flex items-start gap-3 justify-end">

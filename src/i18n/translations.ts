@@ -121,6 +121,11 @@ export interface Translations {
     discussions: string;
     releases: string;
   };
+  cta: {
+    title: string;
+    subtitle: string;
+    button: string;
+  };
 }
 
 export const en: Translations = {
@@ -171,7 +176,7 @@ export const en: Translations = {
   },
   comparison: {
     label: 'Why This Matters',
-    title: 'The difference between forgetting and compounding',
+    title: 'Fade away, or compound?',
     subtitle: 'What changes when LLM-Wiki enters your workflow.',
     beforeLabel: 'Without LLM Wiki for Obsidian',
     afterLabel: 'With LLM Wiki for Obsidian',
@@ -285,6 +290,11 @@ export const en: Translations = {
     discussions: 'Discussions',
     releases: 'Releases',
   },
+  cta: {
+    title: 'Ready to build your knowledge wiki?',
+    subtitle: 'MIT licensed, community driven. Runs entirely inside your Obsidian vault.',
+    button: 'Get the Plugin on GitHub',
+  },
 };
 
 export const zh: Translations = {
@@ -311,7 +321,7 @@ export const zh: Translations = {
   },
   wikiDemo: {
     label: '工作原理',
-    title: '从笔记到 Wiki，一步一图',
+    title: '来看看，你的笔记如何编织成 Wiki',
     subtitle: '一条原始笔记，如何变成全连接的知识网络。',
     step1Title: '放入源笔记',
     step1Desc: '文章、论文、读书笔记——放进 sources/ 即可。插件以只读方式读取全文内容。',
@@ -335,7 +345,7 @@ export const zh: Translations = {
   },
   comparison: {
     label: '为何重要',
-    title: '遗忘，还是复利',
+    title: '尘封遗忘，还是形成复利？',
     subtitle: 'LLM Wiki for Obsidian 加入工作流后的改变。',
     beforeLabel: '没有 LLM Wiki for Obsidian',
     afterLabel: '使用 LLM Wiki for Obsidian',
@@ -448,5 +458,10 @@ export const zh: Translations = {
     github: 'GitHub',
     discussions: '讨论区',
     releases: '版本发布',
+  },
+  cta: {
+    title: '准备好构建你的知识 Wiki 了吗？',
+    subtitle: 'MIT 开源，社区驱动。在你的 Obsidian 中直接运行。',
+    button: '前往 GitHub 获取插件',
   },
 };
