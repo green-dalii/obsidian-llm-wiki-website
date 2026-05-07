@@ -106,7 +106,8 @@ Sleep is the single most effective thing we can do to reset our brain and body.
       { title: 'Sleep Debt', path: 'wiki/concepts/sleep-debt.md', tags: ['Health', 'Cognition'], summary: 'The cumulative effect of insufficient sleep. After one week of 6h/night, cognitive performance equals 0.05% BAC. Linked to hormonal disruption, impaired insulin sensitivity, and prefrontal cortex degradation.' },
     ],
     links: [
-      { from: 0, to: 1 }, { from: 0, to: 2 }, { from: 1, to: 2 }, { from: 2, to: 3 },
+      { from: 0, to: 2 }, { from: 0, to: 3 }, { from: 1, to: 0 }, { from: 1, to: 3 },
+      { from: 2, to: 3 }, { from: 2, to: 4 }, { from: 3, to: 5 },
     ],
     chatQuestion: 'How does chronic sleep deprivation affect long-term brain health?',
     chatAnswerLead: <><BoldLink>Chronic sleep deprivation</BoldLink> impairs the <BoldLink>glymphatic system</BoldLink> — the brain\'s waste clearance mechanism that operates during deep sleep. Research shows clearance drops by up to 60% with sustained poor sleep, creating a direct link to neurodegenerative disease risk.</>,
@@ -244,7 +245,8 @@ colleague got $2,000 feels like a loss.
       { title: 'Prospect Theory', path: 'wiki/concepts/prospect-theory.md', tags: ['Behavioral Economics', 'Psychology'], summary: 'Developed by Kahneman and Tversky, prospect theory shows that people evaluate outcomes relative to a reference point rather than in absolute terms. Utility is reference-dependent — the same outcome feels different depending on the frame.' },
     ],
     links: [
-      { from: 0, to: 1 }, { from: 0, to: 4 }, { from: 1, to: 2 }, { from: 1, to: 3 }, { from: 3, to: 4 },
+      { from: 0, to: 1 }, { from: 0, to: 4 }, { from: 1, to: 2 }, { from: 1, to: 3 },
+      { from: 3, to: 4 }, { from: 0, to: 5 }, { from: 4, to: 5 },
     ],
     chatQuestion: 'How does System 1 interact with System 2 in decision-making?',
     chatAnswerLead: <><BoldLink>System 1</BoldLink> generates intuitions and snap judgments continuously, while <BoldLink>System 2</BoldLink> lazily endorses them without verification most of the time. Effective decision-making requires deliberately forcing <BoldLink>System 2</BoldLink> activation — writing down the problem, listing potential biases, and sleeping on it before acting.</>,
@@ -380,6 +382,7 @@ and fewer successes."
     ],
     links: [
       { from: 0, to: 2 }, { from: 1, to: 3 }, { from: 2, to: 3 }, { from: 0, to: 1 },
+      { from: 1, to: 4 }, { from: 0, to: 5 }, { from: 3, to: 4 },
     ],
     chatQuestion: 'What is the common thread between Second-Order Thinking and Inversion?',
     chatAnswerLead: <><BoldLink>Second-Order Thinking</BoldLink> and <BoldLink>Inversion</BoldLink> both reward depth over breadth and require resisting System 1\'s immediate intuition. Second-order thinking traces consequences forward; inversion traces failures backward. Both force you to look beyond what is obvious.</>,
@@ -489,6 +492,7 @@ Topic: "Tools for Thought and the Future of Reading"
     ],
     links: [
       { from: 0, to: 2 }, { from: 0, to: 1 }, { from: 2, to: 3 }, { from: 1, to: 3 },
+      { from: 0, to: 4 }, { from: 2, to: 5 }, { from: 4, to: 5 },
     ],
     chatQuestion: 'What is the core difference between evergreen notes and traditional note-taking?',
     chatAnswerLead: <><BoldLink>Evergreen notes</BoldLink> are written to be permanently useful and continuously refined, while traditional note-taking captures transient thoughts for short-term recall. Evergreen notes emphasize <BoldLink>atomicity</BoldLink> (one idea per note), <BoldLink>concept-orientation</BoldLink> (named by concept, not source), and <BoldLink>progressive summarization</BoldLink> (multi-layer distillation).</>,
@@ -611,7 +615,8 @@ Transformer 没有循环结构，天然不知道词的顺序。方案：在输�
       { title: 'Positional Encoding', path: 'wiki/concepts/positional-encoding.md', tags: ['AI', 'NLP'], summary: 'Since Transformers process all tokens in parallel, they have no inherent notion of word order. Positional encoding adds sine/cosine waves of varying frequencies to input embeddings, encoding position without adding trainable parameters.' },
     ],
     links: [
-      { from: 0, to: 2 }, { from: 0, to: 1 }, { from: 2, to: 3 }, { from: 2, to: 4 }, { from: 3, to: 4 },
+      { from: 0, to: 2 }, { from: 0, to: 1 }, { from: 2, to: 3 }, { from: 2, to: 4 },
+      { from: 3, to: 4 }, { from: 1, to: 5 },
     ],
     chatQuestion: 'Is attention the final form, or will State Space Models replace it?',
     chatAnswerLead: <><BoldLink>Attention</BoldLink> is not the final form — <BoldLink>State Space Models</BoldLink> (Mamba, S4) are already challenging its O(n²) complexity. SSMs achieve <BoldLink>linear scaling</BoldLink> with sequence length while maintaining competitive performance on long-context tasks.</>,
@@ -731,6 +736,7 @@ Temu 全托管：商家只负责供货和报一个出厂价。定什么价、上
     ],
     links: [
       { from: 0, to: 2 }, { from: 0, to: 1 }, { from: 2, to: 3 }, { from: 1, to: 3 },
+      { from: 1, to: 4 }, { from: 3, to: 5 }, { from: 4, to: 5 },
     ],
     chatQuestion: 'Can Stripe maintain growth without expanding into lending?',
     chatAnswerLead: <><BoldLink>Stripe</BoldLink> faces a classic growth ceiling: payment processing margins are compressing (2.9% + $0.30 is already under pressure from in-house builds by Shopify, DoorDash). The company must either expand into higher-margin adjacent services (lending, capital) or accept lower growth rates.</>,

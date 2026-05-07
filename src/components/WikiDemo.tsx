@@ -339,11 +339,18 @@ export default function WikiDemo({ locale = 'en' }: Props) {
                     <WikiGraphStage
                       layout={getGraphLayout(scenario.id)}
                       links={scenario.links}
-                      pageLabels={generatedPages.map(p => p.title)}
+                      pageLabels={(() => {
+                        const pageNames = generatedPages.map(p => p.title);
+                        const extras = extractedItems
+                          .filter(e => !pageNames.some(n => n.toLowerCase().includes(e.name.toLowerCase().slice(0, 8)) || e.name.toLowerCase().includes(n.toLowerCase().slice(0, 8))))
+                          .slice(0, Math.max(0, 6 - pageNames.length))
+                          .map(e => e.name);
+                        return [...pageNames, ...extras];
+                      })()}
                     />
                   </MacWindow>
                   <div className="text-xs font-mono text-obsidian-dim mt-3">
-                    4 pages · {scenario.links.length} bidirectional links · 1 graph
+                    {generatedPages.length} pages · {scenario.links.length} bidirectional links · 1 graph
                   </div>
                 </div>
               )}
