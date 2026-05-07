@@ -63,11 +63,6 @@ export default function Hero({ locale = 'en' }: Props) {
             <ExternalLink className="w-3.5 h-3.5" />
           </a>
         </div>
-
-        <a href="https://github.com/green-dalii/obsidian-llm-wiki" target="_blank" rel="noopener noreferrer"
-          className="mt-6 inline-flex items-center gap-2 text-obsidian-dim hover:text-obsidian-muted transition-colors">
-          <img src="https://img.shields.io/github/stars/green-dalii/obsidian-llm-wiki?style=social&label=Stars" alt="GitHub Stars" className="h-5" loading="lazy" width="76" height="20" />
-        </a>
       </div>
 
       <div className="absolute bottom-8 left-1/2 -translate-x-1/2 z-10 flex flex-col items-center gap-2 opacity-40">

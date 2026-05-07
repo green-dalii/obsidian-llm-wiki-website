@@ -31,7 +31,7 @@ const PILLARS = [
   <div class="max-w-5xl mx-auto px-4 sm:px-6">
     <div class="text-center mb-10 reveal">
       <span class="text-[11px] font-mono text-obsidian-purple tracking-[0.15em] uppercase">{t.providers.label}</span>
-      <h2 class="text-[clamp(1.4rem,3vw,2rem)] font-semibold mt-3 mb-2 text-[#e5e5e5] reveal" data-delay="1">{t.providers.title}</h2>
+      <h2 class="text-[clamp(1.6rem,4vw,2.8rem)] font-semibold mt-3 mb-3 text-obsidian-heading reveal" data-delay="1">{t.providers.title}</h2>
       <p class="text-obsidian-muted text-sm max-w-lg mx-auto">{t.providers.subtitle}</p>
     </div>
 
@@ -41,7 +41,7 @@ const PILLARS = [
         <div class="reveal" data-delay={2}>
           {p.link ? (
             <a href={p.link} target="_blank" rel="noopener noreferrer" class="block h-full">
-              <div class="pillar-card group p-4 rounded-xl border border-obsidian-border bg-obsidian-card/40 hover:bg-white/[0.05] cursor-pointer glow-hover transition-all duration-250 h-full flex flex-col">
+              <div class="pillar-card group p-4 rounded-xl border border-obsidian-border bg-obsidian-card/40 hover:bg-white/[0.06] hover:border-white/[0.08] cursor-pointer glow-hover transition-all duration-250 h-full flex flex-col">
 
 
 
@@ -57,7 +57,7 @@ const PILLARS = [
               </div>
             </a>
           ) : (
-            <div class="pillar-card group p-4 rounded-xl border border-obsidian-border bg-obsidian-card/40 h-full flex flex-col glow-hover">
+            <div class="pillar-card group p-4 rounded-xl border border-obsidian-border bg-obsidian-card/40 hover:bg-white/[0.06] hover:border-white/[0.08] h-full flex flex-col glow-hover">
 
 
 
@@ -90,8 +90,8 @@ const PILLARS = [
       {PROVIDERS.map((p, i) => (
         <div class="provider-card group p-3.5 rounded-lg border transition-all duration-200 glow-hover reveal" data-delay={13 + i} class:list={[
           p.badge === 'bestValue'
-            ? 'border-obsidian-purple/30 bg-obsidian-purple/[0.04]'
-            : 'border-obsidian-border bg-obsidian-card/60 hover:bg-white/[0.05]'
+            ? 'border-obsidian-purple/30 bg-obsidian-purple/[0.04] hover:bg-obsidian-purple/[0.08] hover:border-obsidian-purple/50'
+            : 'border-obsidian-border bg-obsidian-card/60 hover:bg-white/[0.06] hover:border-white/[0.08]'
         ]}>
           <div class="flex items-center justify-between mb-0.5">
             <span class="text-sm font-medium text-[#e5e5e5]">{p.name}</span>

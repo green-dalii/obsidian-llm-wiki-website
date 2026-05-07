@@ -18,15 +18,15 @@ const features = [
 
 <section id="features" class="relative w-full py-28 sm:py-36">
   <div class="max-w-5xl mx-auto px-4 sm:px-6">
-    <div class="mb-14 reveal">
+    <div class="mb-14 reveal text-center">
       <span class="text-[11px] font-mono text-obsidian-purple tracking-[0.15em] uppercase">{t.features.label}</span>
-      <h2 class="text-[clamp(1.6rem,4vw,2.8rem)] font-semibold mt-3 mb-3 text-[#e5e5e5] reveal" data-delay="1">{t.features.title}</h2>
-      <p class="text-obsidian-muted max-w-lg text-sm">{t.features.subtitle}</p>
+      <h2 class="text-[clamp(1.6rem,4vw,2.8rem)] font-semibold mt-3 mb-3 text-obsidian-heading reveal" data-delay="1">{t.features.title}</h2>
+      <p class="text-obsidian-muted max-w-lg mx-auto text-sm">{t.features.subtitle}</p>
     </div>
 
     <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
       {features.map((f, i) => (
-        <div class="feature-card group rounded-xl border border-obsidian-border bg-obsidian-card/60 overflow-hidden hover:bg-white/[0.05] glow-hover transition-all duration-300 reveal" data-delay={i * 2}>
+        <div class="feature-card group rounded-xl border border-obsidian-border bg-obsidian-card/60 overflow-hidden hover:bg-white/[0.06] hover:border-white/[0.08] glow-hover transition-all duration-300 reveal" data-delay={i * 2}>
           <div class="p-5 sm:p-6">
             <div class="flex items-center gap-2.5 mb-3">
               <div class="w-8 h-8 rounded-lg bg-obsidian-purple/15 border border-obsidian-purple/25 flex items-center justify-center">
@@ -49,7 +49,7 @@ const features = [
               )}
               {i === 1 && (
                 <div>
-                  <span class="text-obsidian-purple">[[Page A]]</span> ↔ <span class="text-obsidian-purple">[[Page B]]</span><br/>
+                  <span class="text-obsidian-purple font-semibold">Page A</span> ↔ <span class="text-obsidian-purple font-semibold">Page B</span><br/>
                   <span class="text-obsidian-muted">  auto-linked</span><br/>
                   <span class="text-obsidian-muted">  graph grows</span>
                 </div>
@@ -57,7 +57,7 @@ const features = [
               {i === 2 && (
                 <div>
                   <span class="text-obsidian-muted">Ask:</span> "How does X relate to Y?"<br/>
-                  <span class="text-obsidian-purple">  → [[X]]</span> + [[Y]] cited<br/>
+                  <span class="text-obsidian-purple font-semibold">  → X</span> + <span class="text-obsidian-purple font-semibold">Y</span> cited<br/>
                   <span class="text-obsidian-muted">  → saved as wiki page</span>
                 </div>
               )}
