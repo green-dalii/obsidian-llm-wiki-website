@@ -88,11 +88,7 @@ const PILLARS = [
 
     <div class="grid grid-cols-2 sm:grid-cols-4 gap-2.5">
       {PROVIDERS.map((p, i) => (
-        <div class="provider-card group p-3.5 rounded-lg border glow-hover reveal" data-delay={13 + i} class:list={[
-          p.badge === 'bestValue'
-            ? 'border-obsidian-purple/30 bg-obsidian-purple/[0.04] hover:bg-obsidian-purple/[0.08] hover:border-obsidian-purple/50'
-            : 'border-obsidian-border bg-obsidian-card/60'
-        ]}>
+        <div class="provider-card group p-3.5 rounded-lg border border-obsidian-border bg-obsidian-card/60 glow-hover reveal" data-delay={13 + i}>
           <div class="flex items-center justify-between mb-0.5">
             <span class="text-sm font-medium text-[#e5e5e5]">{p.name}</span>
             {p.badge === 'bestValue' && (
