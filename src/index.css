@@ -92,18 +92,36 @@
   }
 }
 
-/* Glow hover interaction — Obsidian-style subtle edge glow */
-.glow-hover {
+/* ── Card base styles ────────────────────────────── */
+.card {
+  border-radius: 8px;
+  border: 1px solid var(--color-obsidian-border);
+  background-color: rgba(31, 31, 31, 0.4);
+}
+
+/* Card hover — subtle lighten on hover */
+.card-hover {
   transition: background-color 0.4s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-.glow-hover:hover {
+.card-hover:hover {
   background-color: rgba(255, 255, 255, 0.06);
 }
 
-/* Combined: reveal entrance + glow hover on same element */
-.reveal.glow-hover,
-.glow-hover.reveal {
+/* Purple card variant — for "after" state emphasis */
+.card-purple {
+  border-color: rgba(124, 58, 237, 0.25);
+  background-color: rgba(124, 58, 237, 0.05);
+  box-shadow: 0 0 30px rgba(124, 58, 237, 0.06);
+}
+
+.card-purple:hover {
+  background-color: rgba(124, 58, 237, 0.10);
+}
+
+/* Combined: reveal entrance + card hover on same element */
+.reveal.card-hover,
+.card-hover.reveal {
   transition:
     opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1),
     transform 0.6s cubic-bezier(0.16, 1, 0.3, 1),
