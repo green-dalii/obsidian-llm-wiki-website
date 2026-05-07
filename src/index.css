@@ -98,9 +98,6 @@
 }
 
 .glow-hover:hover {
-  box-shadow:
-    0 0 12px rgba(255, 255, 255, 0.04),
-    0 0 2px rgba(255, 255, 255, 0.03);
 }
 
 /* Gradient border decoration (Obsidian style) */
