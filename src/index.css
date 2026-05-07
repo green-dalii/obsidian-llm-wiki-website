@@ -94,13 +94,13 @@
 
 /* Glow hover interaction — Obsidian-style subtle edge glow */
 .glow-hover {
-  transition: box-shadow 0.25s ease, border-color 0.25s ease, background-color 0.25s ease;
+  transition: box-shadow 0.4s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.4s cubic-bezier(0.16, 1, 0.3, 1), background-color 0.4s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .glow-hover:hover {
   box-shadow:
-    0 0 20px rgba(127, 109, 242, 0.06),
-    inset 0 0 12px rgba(127, 109, 242, 0.03);
+    0 0 12px rgba(255, 255, 255, 0.04),
+    0 0 2px rgba(255, 255, 255, 0.03);
 }
 
 /* Gradient border decoration (Obsidian style) */
