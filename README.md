@@ -146,6 +146,15 @@ Deploy via GitHub Actions. **Not recommended** for China users (slow access due 
 
 ## Optimization History
 
+### v1.3.0 (2026-05-07) ✅
+- Hero UI enhancement — Obsidian install guidance, Karpathy concept link, layout optimization
+- Install section improvements — Step 1 dual-download buttons, Step 2 SVG icons using standard Lucide paths with vertical centering
+- WikiDemo Step 3 visual refinement — Darker file tree panel (#161616), proper Obsidian color hierarchy
+- KnowledgeGrowth animation — Particle count reduced 20% (47 → 38) for cleaner visual
+- Footer expansion — Added Obsidian.md official link
+- CTA animation sync — Added reveal class for consistent scroll-triggered fade-in
+- WikiDemo scenario buttons — Increased height for better touch targets
+
 ### v1.2.0 (2026-05-07) ✅
 - WikiDemo content redesign — 6 new scenarios with real-world examples (Daily Life, Deep Reading, Inspiration, Content Creation, Academic Research, Business Decision)
 - Obsidian-style split layout for WikiDemo Step 2 (file tree + Markdown preview)

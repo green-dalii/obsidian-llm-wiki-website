@@ -93,7 +93,7 @@ export default function WikiDemo({ locale = 'en' }: Props) {
             <button
               key={s.id}
               onClick={() => switchScenario(s.id)}
-              className={`flex sm:flex-1 items-center justify-center gap-1.5 sm:gap-2 px-2.5 py-2 sm:px-4 sm:py-2.5 rounded-lg border text-xs sm:text-sm font-medium transition-all duration-200 ${
+              className={`flex sm:flex-1 items-center justify-center gap-1.5 sm:gap-2 px-2.5 py-3 sm:px-4 sm:py-3.5 rounded-lg border text-xs sm:text-sm font-medium transition-all duration-200 ${
                 activeScenario === s.id
                   ? 'border-obsidian-purple/40 bg-obsidian-purple/5 text-obsidian-heading'
                   : 'border-obsidian-border text-obsidian-muted hover:border-obsidian-border-light hover:text-obsidian-text'
@@ -293,11 +293,11 @@ export default function WikiDemo({ locale = 'en' }: Props) {
                     title={<><span className="text-xs text-obsidian-dim">wiki/</span><span className="text-xs text-obsidian-muted">{selPage.path.replace('wiki/', '').replace(/\.md$/, '')}</span></>}
                     contentClassName="flex h-[520px]"
                   >
-                    <div className="w-[42%] border-r border-obsidian-border bg-[#1a1a1a]/50 p-3 overflow-y-auto">
+                    <div className="w-[42%] border-r border-obsidian-border bg-[#161616] p-3 overflow-y-auto">
                       <div className="text-[9px] text-obsidian-dim/60 mb-2 uppercase tracking-widest">Explorer</div>
                       {renderWikiTree(wikiRoot, 0)}
                     </div>
-                    <div className="flex-1 p-4 overflow-y-auto bg-[#1a1a1a]">
+                    <div className="flex-1 p-4 overflow-y-auto bg-[#1e1e1e]">
                       <div className="text-[9px] text-obsidian-dim/60 mb-3 uppercase tracking-widest">Preview</div>
                       <div className="space-y-3">
                         <h1 className="text-sm font-semibold text-[#e5e5e5]">{selPage.title}</h1>

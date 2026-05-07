@@ -14,6 +14,8 @@ export interface Translations {
     title2: string;
     subtitle: string;
     ctaInstall: string;
+    ctaObsidian: string;
+    obsidianHint: string;
     ctaRead: string;
     legendSources: string;
     legendEntities: string;
@@ -79,6 +81,10 @@ export interface Translations {
     subtitle: string;
     step1Title: string;
     step1Desc: string;
+    obsidianRequired: string;
+    downloadPlugin: string;
+    downloadObsidian: string;
+    pluginHint: string;
     step2Title: string;
     step2Desc: string;
     step3Title: string;
@@ -120,6 +126,7 @@ export interface Translations {
     github: string;
     discussions: string;
     releases: string;
+    obsidian: string;
   };
   cta: {
     title: string;
@@ -144,6 +151,8 @@ export const en: Translations = {
     title2: 'A living wiki.',
     subtitle: 'Take notes in Obsidian. The plugin reads, extracts, and weaves them into a self-maintaining knowledge network. Every note you write makes the wiki grow richer.',
     ctaInstall: 'Get the Plugin',
+    ctaObsidian: 'Install Obsidian',
+    obsidianHint: 'Required: Obsidian must be installed first to use this plugin.',
     ctaRead: 'Read the original concept',
     legendSources: 'sources/',
     legendEntities: 'entities/',
@@ -221,6 +230,10 @@ export const en: Translations = {
     subtitle: 'No extra apps. Runs inside your existing Obsidian vault.',
     step1Title: 'Download',
     step1Desc: 'Grab <em>main.js</em>, <em>manifest.json</em>, and <em>styles.css</em> from GitHub Releases. These three files are all you need.',
+    obsidianRequired: 'If you haven\'t installed Obsidian yet, download it first.',
+    downloadPlugin: 'Download Plugin',
+    downloadObsidian: 'Download Obsidian',
+    pluginHint: 'Obsidian must be installed first to use this plugin.',
     step2Title: 'Install',
     step2Desc: 'Open <em>Obsidian</em> → <em>Settings</em> → <em>Community plugins</em>. Click the <em><i>folder</i> icon</em> to open your plugins directory. Create a new folder called <em>llm-wiki</em>, drop the three files in, then click the <em><i>refresh-cw</i> icon</em> in Obsidian. Enable the plugin when it appears.',
     step3Title: 'Configure',
@@ -289,6 +302,7 @@ export const en: Translations = {
     github: 'GitHub',
     discussions: 'Discussions',
     releases: 'Releases',
+    obsidian: 'Obsidian',
   },
   cta: {
     title: 'Ready to build your knowledge wiki?',
@@ -313,6 +327,8 @@ export const zh: Translations = {
     title2: '一座活的 Wiki',
     subtitle: '在 Obsidian 中记录想法，插件自动阅读、提取关键概念，编织成一张交叉引用的自维护知识网络。每一次记录，都在让这座 Wiki 生长。',
     ctaInstall: '获取插件',
+    ctaObsidian: '安装 Obsidian',
+    obsidianHint: '使用本插件需先安装 Obsidian',
     ctaRead: '阅读原始理念',
     legendSources: 'sources/',
     legendEntities: 'entities/',
@@ -390,6 +406,10 @@ export const zh: Translations = {
     subtitle: '无需额外软件，直接在你的 Obsidian Vault 中运行。',
     step1Title: '下载',
     step1Desc: '从 GitHub Releases 下载 <em>main.js</em>、<em>manifest.json</em> 和 <em>styles.css</em>。三个文件，仅此而已。',
+    obsidianRequired: '如果尚未安装 Obsidian，请先下载安装。',
+    downloadPlugin: '下载插件',
+    downloadObsidian: '下载 Obsidian',
+    pluginHint: '使用本插件需先安装 Obsidian',
     step2Title: '安装',
     step2Desc: '打开 <em>Obsidian</em> → <em>设置</em> → <em>第三方插件</em>。点击<em><i>folder</i> 图标</em>打开插件目录，新建一个 <em>llm-wiki</em> 文件夹，放入三个文件。回到 Obsidian 点击<em><i>refresh-cw</i> 图标</em>，看到插件后启用即可。',
     step3Title: '配置',
@@ -458,6 +478,7 @@ export const zh: Translations = {
     github: 'GitHub',
     discussions: '讨论区',
     releases: '版本发布',
+    obsidian: 'Obsidian',
   },
   cta: {
     title: '准备好构建你的知识 Wiki 了吗？',

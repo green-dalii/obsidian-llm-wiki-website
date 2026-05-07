@@ -38,7 +38,9 @@ export default function Hero({ locale = 'en' }: Props) {
             <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-obsidian-purple opacity-75" />
             <span className="relative inline-flex rounded-full h-2 w-2 bg-obsidian-purple" />
           </span>
-          <span className="text-xs font-mono text-obsidian-muted tracking-wide">{t.hero.badge}</span>
+          <a href="https://gist.github.com/karpathy/442a6bf555914893e9891c11519de94f" target="_blank" rel="noopener noreferrer" className="text-xs font-mono text-obsidian-muted tracking-wide hover:text-obsidian-heading transition-colors">
+            {t.hero.badge}
+          </a>
         </div>
 
         <h1 className="text-[clamp(2.5rem,6vw,4.5rem)] font-semibold tracking-tight text-obsidian-heading leading-[1.1] mb-6">
@@ -51,17 +53,20 @@ export default function Hero({ locale = 'en' }: Props) {
           {t.hero.subtitle}
         </p>
 
-        <div className="flex flex-wrap items-center justify-center gap-4">
-          <a href="https://github.com/green-dalii/obsidian-llm-wiki/releases" target="_blank" rel="noopener noreferrer"
-            className="inline-flex items-center gap-2.5 px-6 py-3 rounded-lg bg-obsidian-purple-dark hover:bg-obsidian-purple text-white font-medium text-sm transition-colors duration-200">
-            <Github className="w-4 h-4" />
-            {t.hero.ctaInstall}
-          </a>
-          <a href="https://gist.github.com/karpathy/442a6bf555914893e9891c11519de94f" target="_blank" rel="noopener noreferrer"
-            className="inline-flex items-center gap-2 px-6 py-3 rounded-lg border border-obsidian-border text-obsidian-muted text-sm font-medium hover:text-obsidian-heading hover:border-obsidian-border-light transition-colors duration-200">
-            {t.hero.ctaRead}
-            <ExternalLink className="w-3.5 h-3.5" />
-          </a>
+        <div className="flex flex-col items-center gap-4">
+          <div className="flex flex-wrap items-center justify-center gap-4">
+            <a href="https://github.com/green-dalii/obsidian-llm-wiki/releases" target="_blank" rel="noopener noreferrer"
+              className="inline-flex items-center gap-2.5 px-6 py-3 rounded-lg bg-obsidian-purple-dark hover:bg-obsidian-purple text-white font-medium text-sm transition-colors duration-200">
+              <Github className="w-4 h-4" />
+              {t.hero.ctaInstall}
+            </a>
+            <a href="https://obsidian.md/download" target="_blank" rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 px-6 py-3 rounded-lg border border-obsidian-border text-obsidian-muted text-sm font-medium hover:text-obsidian-heading hover:border-obsidian-border-light transition-colors duration-200">
+              <ExternalLink className="w-3.5 h-3.5" />
+              {t.hero.ctaObsidian}
+            </a>
+          </div>
+          <span className="text-xs text-obsidian-dim text-center">{t.hero.obsidianHint}</span>
         </div>
       </div>
 

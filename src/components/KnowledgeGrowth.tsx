@@ -3,7 +3,7 @@ import { useGraphPhysics } from '../hooks/useGraphPhysics';
 import type { PhysicsNodeState, PhysicsEdgeState, MouseState } from '../hooks/useGraphPhysics';
 
 const CLUSTER_CENTERS = 4;
-const NODE_COUNT = 47;
+const NODE_COUNT = 38;
 
 function generateHeroNodeHomes(width: number, height: number) {
   const homes: Array<{ x: number; y: number; cluster: number; radius: number }> = [];
