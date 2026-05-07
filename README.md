@@ -146,6 +146,16 @@ Deploy via GitHub Actions. **Not recommended** for China users (slow access due 
 
 ## Optimization History
 
+### v1.2.0 (2026-05-07) ✅
+- WikiDemo content redesign — 6 new scenarios with real-world examples (Daily Life, Deep Reading, Inspiration, Content Creation, Academic Research, Business Decision)
+- Obsidian-style split layout for WikiDemo Step 2 (file tree + Markdown preview)
+- Unified hover effects across all cards (CSS class hierarchy: .card → .card-hover → .card-purple)
+- New CTA section after Providers with i18n support
+- Graph physics optimization (reduced node clumping, satellite nodes)
+- Border styling unification (WikiDemo components now use consistent border-obsidian-border)
+- MacWindow component extraction (reusable macOS mock window)
+- Scenario content research via subagents (James Clear, Paul Graham, Farnam Street, 晚点LatePost, 人物, 知识分子)
+
 ### Completed ✅
 - Astro migration from React SPA
 - Static HTML rendering for SEO

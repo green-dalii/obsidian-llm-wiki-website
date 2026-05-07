@@ -113,7 +113,7 @@ export default function WikiDemo({ locale = 'en' }: Props) {
                 key={s.id}
                 onClick={() => { setStep(i); setAutoPlay(false); }}
                 className={`w-full text-left p-3.5 sm:p-4 rounded-lg border transition-all duration-300 ${
-                  i === step ? 'border-obsidian-purple/40 bg-obsidian-purple/5' : 'border-[#333] bg-[#1a1a1a]/30 hover:border-[#3a3a3a]'
+                  i === step ? 'border-obsidian-purple/40 bg-obsidian-purple/5' : 'border-obsidian-border bg-[#1a1a1a]/30 hover:border-obsidian-border-light'
                 }`}
               >
                 <div className="flex items-center gap-2.5 mb-1">
@@ -130,14 +130,14 @@ export default function WikiDemo({ locale = 'en' }: Props) {
             ))}
             <div className="flex items-center gap-2 pt-1">
               <button onClick={() => setStep(Math.min(4, step + 1))} disabled={step === 4} className="px-3 py-1.5 text-xs font-mono text-white bg-obsidian-purple-dark rounded-md hover:bg-obsidian-purple disabled:opacity-30 transition-all">{t.wikiDemo.next}</button>
-              <button onClick={() => { setStep(0); setAutoPlay(!autoPlay); }} aria-label={autoPlay ? (locale === 'zh' ? '暂停' : 'Pause') : (locale === 'zh' ? '播放' : 'Play')} className={`px-3 py-1.5 text-xs font-mono border rounded-md transition-all ${autoPlay ? 'border-obsidian-purple/40 text-obsidian-purple' : 'border-[#333] text-obsidian-muted hover:border-[#444]'}`}>{autoPlay ? '⏸' : '▶'}</button>
-              <button onClick={() => { setStep(0); setAutoPlay(false); }} className="px-3 py-1.5 text-xs font-mono text-obsidian-dim border border-[#333] rounded-md hover:border-[#444] transition-all">{t.wikiDemo.restart}</button>
+              <button onClick={() => { setStep(0); setAutoPlay(!autoPlay); }} aria-label={autoPlay ? (locale === 'zh' ? '暂停' : 'Pause') : (locale === 'zh' ? '播放' : 'Play')} className={`px-3 py-1.5 text-xs font-mono border rounded-md transition-all ${autoPlay ? 'border-obsidian-purple/40 text-obsidian-purple' : 'border-obsidian-border text-obsidian-muted hover:border-obsidian-border-light'}`}>{autoPlay ? '⏸' : '▶'}</button>
+              <button onClick={() => { setStep(0); setAutoPlay(false); }} className="px-3 py-1.5 text-xs font-mono text-obsidian-dim border border-obsidian-border rounded-md hover:border-obsidian-border-light transition-all">{t.wikiDemo.restart}</button>
             </div>
           </div>
 
           {/* Stage - 自适应高度容器 */}
           <div className="lg:col-span-3">
-            <div className="relative rounded-xl border border-[#2a2a2a] bg-[#1a1a1a]/60 overflow-hidden h-[700px]">
+            <div className="relative rounded-xl border border-obsidian-border bg-[#1a1a1a]/60 overflow-hidden h-[700px]">
               <div className="absolute top-3 left-3 z-10 flex items-center gap-2">
                 <span className="w-1.5 h-1.5 rounded-full bg-obsidian-purple animate-pulse" />
                 <span className="text-xs font-mono text-obsidian-dim tracking-wider uppercase">
@@ -293,7 +293,7 @@ export default function WikiDemo({ locale = 'en' }: Props) {
                     title={<><span className="text-xs text-obsidian-dim">wiki/</span><span className="text-xs text-obsidian-muted">{selPage.path.replace('wiki/', '').replace(/\.md$/, '')}</span></>}
                     contentClassName="flex h-[520px]"
                   >
-                    <div className="w-[42%] border-r border-[#333] bg-[#1a1a1a]/50 p-3 overflow-y-auto">
+                    <div className="w-[42%] border-r border-obsidian-border bg-[#1a1a1a]/50 p-3 overflow-y-auto">
                       <div className="text-[9px] text-obsidian-dim/60 mb-2 uppercase tracking-widest">Explorer</div>
                       {renderWikiTree(wikiRoot, 0)}
                     </div>
@@ -362,7 +362,7 @@ export default function WikiDemo({ locale = 'en' }: Props) {
                     <div className="space-y-4 max-w-xl mx-auto">
                       {/* User message — right aligned */}
                       <div className="flex items-start gap-3 justify-end">
-                        <div className="rounded-lg border border-[#333] bg-[#1f1f1f] px-4 py-3 text-sm text-obsidian-text max-w-[85%]">
+                        <div className="rounded-lg border border-obsidian-border bg-[#1f1f1f] px-4 py-3 text-sm text-obsidian-text max-w-[85%]">
                           {chatQuestion}
                         </div>
                         <div className="w-7 h-7 rounded-full bg-[#333] flex items-center justify-center flex-shrink-0 mt-0.5">
