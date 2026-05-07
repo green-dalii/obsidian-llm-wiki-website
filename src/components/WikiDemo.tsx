@@ -31,7 +31,7 @@ export default function WikiDemo({ locale = 'en' }: Props) {
   const sectionRef = useRef<HTMLElement>(null);
   const [step, setStep] = useState(0);
   const [autoPlay, setAutoPlay] = useState(true);
-  const [activeScenario, setActiveScenario] = useState<ScenarioId>('reading');
+  const [activeScenario, setActiveScenario] = useState<ScenarioId>('daily-life');
   const [selectedPageIdx, setSelectedPageIdx] = useState(0);
 
   const scenario = SCENARIOS.find(s => s.id === activeScenario)!;

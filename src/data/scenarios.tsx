@@ -1,6 +1,6 @@
-import { BookOpen, TrendingUp, Microscope, Palette, Compass, Terminal } from "lucide-react";
+import { Heart, BookOpen, Scissors, Mic, Cpu, TrendingUp } from "lucide-react";
 
-export type ScenarioId = 'reading' | 'product' | 'research' | 'creative' | 'growth' | 'tech';
+export type ScenarioId = 'daily-life' | 'reading' | 'inspiration' | 'creation' | 'ai-frontier' | 'business';
 
 export interface ScenarioData {
   id: ScenarioId;
@@ -31,494 +31,719 @@ export function BoldLink({ children }: { children: string }) {
 
 export const SCENARIOS: ScenarioData[] = [
   {
+    id: 'daily-life',
+    label: 'Daily Life',
+    labelZh: '日常生活',
+    Icon: Heart,
+    filename: 'sleep-hygiene.md',
+    sourceNote: `# Why We Sleep: Key Findings
+
+Sleep is the single most effective thing we can do to reset our brain and body.
+
+## Sleep Architecture
+- NREM Stage 3 (deep sleep): physical restoration, immune function
+- REM: emotional processing, creativity, memory consolidation
+- Each cycle ~90 min, 4-5 cycles per night ideal
+
+## The Cost of Sleep Debt
+- After 1 week of 6h/night: cognitive performance equals 0.05% BAC
+- Chronic sleep debt linked to Alzheimer's — glymphatic clearance drops 60%
+- 5h sleep → testosterone drops 10–15% in healthy young men
+
+## Practical Sleep Hygiene
+- Optimal bedroom temperature: 18–19°C
+- No blue light 90 min before bed — melanopsin sensitivity peaks at 480nm
+- Caffeine half-life 6h: last intake before 2pm
+- Wake-time consistency matters more than bedtime consistency
+
+## Open Questions
+- Do naps compensate for night debt? Evidence mixed
+- Melatonin: 0.3mg as effective as 3mg. Most supplements are overdosed.`,
+    sourceNoteZh: `# 中医体质学说与现代健康管理
+
+体质是你身体的"操作系统"——理解自己的体质类型，是健康管理的第一步。
+
+## 九种体质分类
+- 平和质：阴阳平衡，精力充沛。约占人群 32%，是调理的目标状态
+- 气虚质：容易疲劳，说话有气无力。约占 13%，白领高发
+- 阳虚质：怕冷畏寒，手脚冰凉。多见于女性与老年人
+- 阴虚质：口干舌燥，手心发热。熬夜人群的典型体质
+- 痰湿质：体型偏胖，容易困倦。与代谢综合征高度重叠
+
+## 体质与疾病风险（循证数据）
+- 痰湿质 → 2 型糖尿病风险升高 3 倍（北京中医药大学队列研究，n=12,000+）
+- 气郁质 → 抑郁症易感性增加，与 5-HT 转运体基因多态性相关
+- 血瘀质 → 心脑血管事件风险显著升高
+
+## 现代生活如何破坏体质
+- 长期熬夜（23:00 后入睡）→ 持续 6 个月即可从平和质转为阴虚质
+- 久坐 8h+/天 → 气滞血瘀叠加痰湿，典型"办公室体质"
+- 高糖高油外卖 → 3 个月即可出现痰湿指标异常
+- 过度思虑/焦虑 → 气郁，且气郁又加重失眠，形成恶性循环
+
+## 调养核心思路
+- 气虚：黄芪党参炖汤 + 八段锦，4–6 周可见精力改善
+- 痰湿：控碳水 + 每天快走 40 分钟，8 周腰围平均减少 5cm
+- 关键原则：起居有常 > 食疗 > 药补。睡好比吃什么补品都重要`,
+    extractedItems: [
+      { name: 'Matthew Walker', type: 'entity', lineIdx: 0 },
+      { name: 'Glymphatic System', type: 'entity', lineIdx: 0 },
+      { name: 'Melanopsin', type: 'entity', lineIdx: 0 },
+      { name: 'Sleep Architecture', type: 'concept', lineIdx: 0 },
+      { name: 'Sleep Debt', type: 'concept', lineIdx: 0 },
+      { name: 'Sleep Hygiene', type: 'concept', lineIdx: 0 },
+    ],
+    generatedPages: [
+      { title: 'Sleep Architecture', path: 'wiki/concepts/sleep-architecture.md', tags: ['Neuroscience', 'Sleep'], summary: 'The structure of sleep cycles including NREM Stage 3 (deep sleep for physical restoration) and REM (emotional processing and memory consolidation), with each cycle lasting approximately 90 minutes.' },
+      { title: 'Glymphatic System', path: 'wiki/entities/glymphatic-system.md', tags: ['Neuroscience', 'Brain'], summary: 'The brain\'s waste clearance system that operates primarily during deep sleep. Chronic sleep deprivation reduces glymphatic clearance by up to 60%, potentially linking poor sleep to Alzheimer\'s disease.' },
+      { title: 'Sleep Debt', path: 'wiki/concepts/sleep-debt.md', tags: ['Health', 'Cognition'], summary: 'The cumulative effect of insufficient sleep. After one week of 6 hours per night, cognitive performance equals that at 0.05% blood alcohol content. Chronic sleep debt is linked to hormonal disruption and cognitive decline.' },
+      { title: 'Caffeine Half-Life', path: 'wiki/concepts/caffeine-half-life.md', tags: ['Health', 'Sleep'], summary: 'Caffeine has a half-life of approximately 6 hours. Consuming caffeine after 2 PM can significantly disrupt sleep quality by blocking adenosine receptors, preventing the natural buildup of sleep pressure.' },
+    ],
+    links: [
+      { from: 0, to: 1 }, { from: 0, to: 2 }, { from: 1, to: 2 }, { from: 2, to: 3 },
+    ],
+    chatQuestion: 'How does chronic sleep deprivation affect long-term brain health?',
+    chatAnswerLead: <><BoldLink>Chronic sleep deprivation</BoldLink> impairs the <BoldLink>glymphatic system</BoldLink> — the brain\'s waste clearance mechanism that operates during deep sleep. Research shows clearance drops by up to 60% with sustained poor sleep, creating a direct link to neurodegenerative disease risk.</>,
+    chatAnswerDetail: 'Beyond glymphatic dysfunction, sleep debt also disrupts testosterone production (10–15% drop with 5h sleep), impairs insulin sensitivity, and degrades prefrontal cortex function — the area responsible for decision-making and impulse control.',
+    chatSource: 'sleep-hygiene.md',
+    extractedItemsZh: [
+      { name: '黄芪', type: 'entity', lineIdx: 0 },
+      { name: '八段锦', type: 'entity', lineIdx: 0 },
+      { name: '北京中医药大学', type: 'entity', lineIdx: 0 },
+      { name: '九种体质', type: 'concept', lineIdx: 0 },
+      { name: '痰湿质', type: 'concept', lineIdx: 0 },
+      { name: '阴虚质', type: 'concept', lineIdx: 0 },
+    ],
+    generatedPagesZh: [
+      { title: '九种体质学说', path: 'wiki/concepts/nine-constitutions.md', tags: ['中医', '养生'], summary: '中医将人体体质分为九种类型：平和质、气虚质、阳虚质、阴虚质、痰湿质、湿热质、血瘀质、气郁质、特禀质。理解自身体质是个性化健康管理的基础。' },
+      { title: '痰湿质', path: 'wiki/concepts/phlegm-dampness.md', tags: ['中医', '代谢'], summary: '痰湿质表现为体型偏胖、容易困倦、面部油腻。与代谢综合征高度重叠，2型糖尿病风险升高3倍。调理以控制饮食、增加运动为核心。' },
+      { title: '阴虚质', path: 'wiki/concepts/yin-deficiency.md', tags: ['中医', '睡眠'], summary: '阴虚质表现为口干舌燥、手心发热、易失眠。长期熬夜（23:00后入睡）持续6个月即可从平和质转为阴虚质。调理以滋阴降火、规律作息为主。' },
+      { title: '黄芪', path: 'wiki/entities/astragalus.md', tags: ['中药', '补气'], summary: '黄芪为补气要药，常用于气虚质的调理。与党参配伍炖汤，配合八段锦练习，4-6周可改善精力状态。现代研究证实其具有免疫调节和抗疲劳作用。' },
+    ],
+    chatQuestionZh: '长期熬夜对身体有哪些具体的循证影响？',
+    chatAnswerLeadZh: <><BoldLink>长期熬夜</BoldLink>最直接的影响是破坏<BoldLink>昼夜节律</BoldLink>——持续6个月23:00后入睡，即可将<BoldLink>平和质</BoldLink>转为<BoldLink>阴虚质</BoldLink>。研究显示，熬夜人群的皮质醇节律紊乱、胰岛素敏感性下降、炎症标志物升高。</>,
+    chatAnswerDetailZh: '从中医角度，熬夜耗伤阴液，导致阴虚火旺；从现代医学角度，睡眠不足会降低瘦素、升高胃饥饿素，增加高糖高脂食物的摄入欲望，形成"熬夜→吃垃圾食品→痰湿加重"的恶性循环。',
+    chatSourceZh: '养生笔记.md',
+  },
+  {
     id: 'reading',
     label: 'Deep Reading',
     labelZh: '深度阅读',
     Icon: BookOpen,
-    filename: 'zettelkasten-notes.md',
-    sourceNote: `# Zettelkasten Method
+    filename: 'thinking-fast-and-slow.md',
+    sourceNote: `# Thinking, Fast and Slow — Reading Notes
 
-The Zettelkasten is a note-taking system that turns isolated notes into a thinking network.
+Kahneman\'s dual-process model of cognition. The thesis: we think we\'re rational,
+but we\'re governed by an intuitive System 1 that makes systematic errors.
 
-## Core Principles
-- Atomicity: each note captures exactly ONE idea
-- Connection: always link new notes to existing ones
-- Elaboration: rewrite in your own words, not copy-paste
+## System 1 vs System 2
+- System 1: fast, automatic, effortless. Recognizes faces, detects hostility in a
+  voice, answers 2+2. Always on.
+- System 2: slow, deliberate, effortful. Multiplies 17×24, fills out a tax form,
+  checks the validity of a logical argument. Lazily defaults to System 1.
 
-## Workflow
-- Fleeting notes capture sparks in the moment
-- Literature notes distill what you read
-- Permanent notes synthesize into original thought
+The core problem: System 2 is lazy. It endorses System 1\'s snap judgments without
+checking them. This is the source of most cognitive biases.
 
-## Why It Works
-Surprise emerges from the network — ideas collide that you never planned to connect.`,
-    sourceNoteZh: `# 卡片盒笔记法（Zettelkasten）
+## Key Heuristics and Biases
 
-卢曼用这套方法积累了 90000 张卡片，出版了 70 本书。
+**Availability Heuristic**
+We judge frequency by how easily examples come to mind. Shark attacks feel more
+common than diabetes complications because media coverage makes them vivid — yet
+diabetes kills 200,000× more people annually.
 
-## 核心理念
-- 原子化：每张卡片只记录一个想法
-- 关联：新卡片必须与已有卡片建立链接
-- 重述：用自己的话写，不要复制粘贴
+**Anchoring**
+Exposure to a number anchors subsequent judgments. Real estate agents shown a high
+list price estimate 15% higher than those shown a low one — even when they insist
+the anchor had no effect. The effect is unconscious.
 
-## 三种笔记类型
-- 闪念笔记：捕捉瞬间的灵感火花
-- 文献笔记：提炼阅读材料的核心观点
-- 永久笔记：将前两者融合为原创思考
+**Loss Aversion**
+Losses hurt roughly twice as much as equivalent gains feel good. This explains why:
+- People hold losing stocks, sell winners (disposition effect)
+- "Free shipping" works better than "$5 off"
+- Salary cuts are met with outrage, even when inflation-adjusted pay rises
 
-## 为什么有效
-卡片之间的链接网络会产生"意外发现"——你从未想过要连接的思路，在索引中自然相遇。`,
+## Prospect Theory (the Nobel-winning insight)
+Utility is reference-dependent. We evaluate outcomes relative to a reference point,
+not in absolute terms. A $1,000 bonus feels great; a $1,000 bonus when your
+colleague got $2,000 feels like a loss.
+
+## My Takeaways
+- Before any major decision, force System 2 activation: write down the problem,
+  list what biases might apply, sleep on it.
+- Meetings: never present a number first unless you want to anchor the discussion.
+- Personal finance: automate decisions (System 1) to protect savings from impulsive
+  spending. Set it and forget it.
+
+## Questions I\'m Still Thinking About
+- Can System 1 be trained? Chess grandmasters\' pattern recognition suggests yes.
+- Are there domains where System 1 outperforms System 2? (Blink vs. deliberation?)
+- How does this interact with LLM reasoning? Are LLMs pure System 2, or can they
+  simulate System 1 intuition?`,
+    sourceNoteZh: `# 《思考，快与慢》阅读笔记
+
+卡尼曼用"系统1/系统2"的框架，解释了我们为什么明明不傻，却总是做出错误的判断。
+
+## 系统 1 与系统 2
+- 系统 1：快速、自动、不费力。识别面孔、察觉对方语气里的敌意、算 2+2。全天候运行
+- 系统 2：缓慢、需要努力、按步骤推理。算 17×24、填写税表、检查逻辑三段论。它很懒惰，经常直接采纳系统 1 的直觉判断
+
+核心洞见：大多数错误不是"不知道"，而是系统 2 懒得审查。你以为自己在思考，其实你的系统 1 已经替你做完了决定。
+
+## 几个让我停下来的启发式偏差
+
+**可得性启发**
+我们根据"想起来有多容易"来判断概率。空难比糖尿病并发症更让人恐惧，因为新闻每天都在报道——但实际上糖尿病每年多杀死 20 万倍的患者。你的担心和实际风险，毫无关系。
+
+**锚定效应**
+你看到的第一个数字会"锚住"你后续的判断。房地产中介看到高价挂牌价时，估价平均高 15%，并且坚持声称"锚点没有影响我"。这个效应完全不在意识层面。
+
+**损失厌恶**
+亏损的痛苦大约是同等收益带来的快乐的 2 倍。这解释了：
+- 散户永远在止损前三思而不行，却迫不及待落袋为安
+- "免运费"比"立减 5 元"更好卖
+- 降薪会激起巨大愤怒，哪怕实际购买力相比去年是上涨的
+
+## 前景理论（卡尼曼靠这个得了诺奖）
+效用的评判基准是"参照点"，而非绝对值。涨薪 1000 元很高兴；涨薪 1000 元但同事涨了 2000 元——痛不欲生。
+
+## 我打算怎么用
+- 重要决策前（跳槽、大额消费、合作分账），先写下来，列出可能影响的偏差，睡三晚再回来看
+- 开会永远不要先报数字（除非你打算锚定别人），不要被对方第一个数字带跑
+- 个人储蓄和投资，自动化管理：把系统 2 的计划写成规则，让系统 1 无脑执行。每月自动定投，不看不查
+
+## 还在思考的问题
+- 系统 1 能被训练成"直觉=准"吗？象棋大师的pattern recognition似乎证明了可以
+- 有没有「系统 1 比系统 2 更好的」领域？Malcolm Gladwell 的 Blink 就是讲这个
+- LLM 的推理是纯系统 2 吗？还是大模型某种程度上已经形成了系统 1 式的"直觉"？`,
     extractedItems: [
-      { name: 'Niklas Luhmann', type: 'entity', lineIdx: 0 },
-      { name: 'Sönke Ahrens', type: 'entity', lineIdx: 0 },
-      { name: 'Zettelkasten', type: 'concept', lineIdx: 0 },
-      { name: 'Atomicity', type: 'concept', lineIdx: 4 },
-      { name: 'Fleeting notes', type: 'concept', lineIdx: 9 },
-      { name: 'Permanent notes', type: 'concept', lineIdx: 11 },
+      { name: 'Daniel Kahneman', type: 'entity', lineIdx: 0 },
+      { name: 'System 1', type: 'concept', lineIdx: 0 },
+      { name: 'System 2', type: 'concept', lineIdx: 0 },
+      { name: 'Availability Heuristic', type: 'concept', lineIdx: 0 },
+      { name: 'Anchoring', type: 'concept', lineIdx: 0 },
+      { name: 'Loss Aversion', type: 'concept', lineIdx: 0 },
     ],
     generatedPages: [
-      { title: 'Zettelkasten', path: 'wiki/concepts/zettelkasten.md', tags: ['PKM', 'Method'], summary: 'A non-linear note-taking system invented by Niklas Luhmann that treats ideas as nodes in a growing network.' },
-      { title: 'Atomic Notes', path: 'wiki/concepts/atomic-notes.md', tags: ['Writing'], summary: 'Each note captures one single idea in your own words, maximizing reusability and unexpected connections.' },
-      { title: 'Fleeting Notes', path: 'wiki/concepts/fleeting-notes.md', tags: ['Capture'], summary: 'Quick, temporary reminders that capture a thought or spark before it vanishes.' },
-      { title: 'Permanent Notes', path: 'wiki/concepts/permanent-notes.md', tags: ['Synthesis'], summary: 'Evergreen, self-contained pieces of original thinking that form the backbone of your knowledge base.' },
+      { title: 'System 1', path: 'wiki/concepts/system-1.md', tags: ['Cognition', 'Psychology'], summary: 'The fast, automatic, and effortless thinking system that operates continuously. It recognizes patterns, makes snap judgments, and relies on intuition. It is the source of most cognitive biases because it operates below conscious awareness.' },
+      { title: 'System 2', path: 'wiki/concepts/system-2.md', tags: ['Cognition', 'Psychology'], summary: 'The slow, deliberate, and effortful thinking system responsible for complex reasoning, logical analysis, and conscious decision-making. It is lazy by design and often defaults to endorsing System 1\'s judgments without verification.' },
+      { title: 'Anchoring Effect', path: 'wiki/concepts/anchoring-effect.md', tags: ['Bias', 'Decision-Making'], summary: 'A cognitive bias where exposure to an initial number disproportionately influences subsequent judgments. The effect operates unconsciously — even experts who deny being influenced show the full anchoring effect in controlled experiments.' },
+      { title: 'Prospect Theory', path: 'wiki/concepts/prospect-they.md', tags: ['Behavioral Economics', 'Psychology'], summary: 'Developed by Kahneman and Tversky, prospect theory shows that people evaluate outcomes relative to a reference point rather than in absolute terms. Losses hurt approximately twice as much as equivalent gains feel good (loss aversion).' },
     ],
     links: [
-      { from: 0, to: 1 }, { from: 0, to: 2 }, { from: 0, to: 3 }, { from: 1, to: 3 },
+      { from: 0, to: 1 }, { from: 0, to: 2 }, { from: 1, to: 2 }, { from: 2, to: 3 },
     ],
-    chatQuestion: 'How does atomicity enable surprising connections between notes?',
-    chatAnswerLead: <><BoldLink>Atomic Notes</BoldLink>, each expressing a single complete idea, can recombine freely across domains — a neuroscience concept might link to a design pattern, sparking insight neither field could produce alone.</>,
-    chatAnswerDetail: 'Luhmann called this "communicating with the Zettelkasten" — the network itself becomes a conversation partner that surfaces ideas you never planned to connect.',
-    chatSource: 'zettelkasten-notes.md',
+    chatQuestion: 'How does System 1 interact with System 2 in decision-making?',
+    chatAnswerLead: <><BoldLink>System 1</BoldLink> generates intuitions and snap judgments continuously, while <BoldLink>System 2</BoldLink> lazily endorses them without verification most of the time. Effective decision-making requires deliberately forcing <BoldLink>System 2</BoldLink> activation — writing down the problem, listing potential biases, and sleeping on it before acting.</>,
+    chatAnswerDetail: 'The key insight from Kahneman is that System 2 is not a reliable check on System 1. It requires conscious effort to activate, and most of the time it simply rationalizes whatever System 1 already decided.',
+    chatSource: 'thinking-fast-and-slow.md',
     extractedItemsZh: [
-      { name: '卢曼', type: 'entity', lineIdx: 0 },
-      { name: '阿伦斯', type: 'entity', lineIdx: 0 },
-      { name: '卡片盒笔记法', type: 'concept', lineIdx: 0 },
-      { name: '原子化', type: 'concept', lineIdx: 6 },
-      { name: '闪念笔记', type: 'concept', lineIdx: 10 },
-      { name: '永久笔记', type: 'concept', lineIdx: 12 },
+      { name: '丹尼尔·卡尼曼', type: 'entity', lineIdx: 0 },
+      { name: '系统1', type: 'concept', lineIdx: 0 },
+      { name: '系统2', type: 'concept', lineIdx: 0 },
+      { name: '可得性启发', type: 'concept', lineIdx: 0 },
+      { name: '锚定效应', type: 'concept', lineIdx: 0 },
+      { name: '损失厌恶', type: 'concept', lineIdx: 0 },
     ],
     generatedPagesZh: [
-      { title: '卡片盒笔记法', path: 'wiki/concepts/zettelkasten.md', tags: ['知识管理', '方法论'], summary: '卢曼发明的非线性笔记系统，将每条想法视为知识网络中不断生长的一个节点。' },
-      { title: '原子化笔记', path: 'wiki/concepts/atomic-notes.md', tags: ['写作'], summary: '每张卡片只记录一个完整想法，用自己的话重述，最大化可复用性和意外连接的概率。' },
-      { title: '闪念笔记', path: 'wiki/concepts/fleeting-notes.md', tags: ['捕捉'], summary: '短暂的思维提醒，在灵感消失之前快速记录下来的临时载体。' },
-      { title: '永久笔记', path: 'wiki/concepts/permanent-notes.md', tags: ['综合'], summary: '常青的、自成一体的原创思考片段，构成知识库的骨干。' },
+      { title: '系统1与系统2', path: 'wiki/concepts/system-1-system-2.md', tags: ['认知科学', '心理学'], summary: '卡尼曼提出的双系统理论：系统1是快速、自动、直觉的思维；系统2是缓慢、费力、理性的思维。大多数决策错误源于系统2懒得审查系统1的直觉判断。' },
+      { title: '可得性启发', path: 'wiki/concepts/availability-heuristic.md', tags: ['认知偏差', '决策'], summary: '人们根据"想起来有多容易"来判断事件频率。媒体曝光度高的风险（如空难）被高估，而实际更危险的风险（如糖尿病）被低估。可得性启发是投资、健康决策中最常见的偏差之一。' },
+      { title: '锚定效应', path: 'wiki/concepts/anchoring-effect.md', tags: ['认知偏差', '谈判'], summary: '先接触到的数字会锚定后续判断。房地产中介面对高价挂牌价时，估价平均高15%，且声称"未受影响"。锚定效应完全在潜意识层面运作，连专家也无法免疫。' },
+      { title: '前景理论', path: 'wiki/concepts/prospect-theory.md', tags: ['行为经济学', '心理学'], summary: '卡尼曼与特沃斯基提出的理论：人们对收益和损失的效用评估基于参照点而非绝对值。损失带来的痛苦约为同等收益带来快乐的2倍。解释了为何降薪比不涨薪更令人愤怒。' },
     ],
-    chatQuestionZh: '原子化原则如何让笔记之间产生意外连接？',
-    chatAnswerLeadZh: <><BoldLink>原子化笔记</BoldLink>每条只表达一个完整想法，可以跨领域自由重组——一个神经科学概念可能链接到产品设计模式，在两个领域各自都想不到会产生这样的洞见。</>,
-    chatAnswerDetailZh: '卢曼称之为"与卡片盒对话"——这个链接网络本身就成了一个对话伙伴，不断浮现你从未计划要连接的思路。',
-    chatSourceZh: 'zettelkasten-notes.md',
+    chatQuestionZh: '系统1和系统2在决策中如何分工与配合？',
+    chatAnswerLeadZh: <><BoldLink>系统1</BoldLink>全天候运行，负责生成直觉和快速判断；<BoldLink>系统2</BoldLink>本应负责审查这些判断，但它非常懒惰，大多数时候直接采纳系统1的结论。有效的决策需要刻意激活系统2——写下问题、列出可能的偏差、睡一觉再决定。</>,
+    chatAnswerDetailZh: '卡尼曼的核心洞察是：系统2不是系统1的可靠检查员。它需要刻意努力才能激活，而大多数时候它只是为系统1已经做出的决定寻找合理化解释。这也是为什么"道理我都懂，但就是做不到"——知识在系统2，行动在系统1。',
+    chatSourceZh: '思考快与慢.md',
   },
   {
-    id: 'product',
-    label: 'Product Research',
-    labelZh: '产品调研',
-    Icon: TrendingUp,
-    filename: 'notion-analysis.md',
-    sourceNote: `# Notion Competitive Analysis
+    id: 'inspiration',
+    label: 'Inspiration',
+    labelZh: '灵感搜集',
+    Icon: Scissors,
+    filename: 'thinking-clippings.md',
+    sourceNote: `# Mental Models & Thinking — Clippings Collection
 
-Notion dominates the all-in-one workspace space — here is how they did it.
+Random collection. I add to this whenever a mental model shows up across multiple
+books or conversations.
 
-## Product Strategy
-- Start with a blank canvas, not rigid templates
-- Blocks as the atomic unit: text, tables, databases, embeds
-- Template marketplace drives viral distribution
+## On Facts and Beliefs
+> Clipped from James Clear
+"Humans need a reasonably accurate view of the world in order to navigate it. But
+\'accurate\' is not the only thing our minds prioritize. If a brain anticipates a
+reward for adopting a particular belief, it\'s perfectly happy to do so. The result
+is that false beliefs can be held not because they are true, but because they serve
+a social purpose — they help us bond with our tribe."
 
-## Growth Levers
-- Freemium with generous free tier converts teams bottom-up
-- Community ambassadors create content, templates, tutorials
-- SEO strategy targets long-tail use case keywords
+## How to Think for Yourself
+> Clipped from Paul Graham
+"There are some kinds of work that you can\'t do well unless you think differently
+from your peers. The difficulty is that people are often mistaken about where they
+fall on the spectrum. The most conventional-minded people are confident that they\'re
+independent-minded, while the genuinely independent-minded worry they might not be
+independent-minded enough."
 
-## Key Metrics
-- 100M+ users, majority organic acquisition
-- PLG motion: individual → team → organization
+## Second-Order Thinking
+> Clipped from Farnam Street
+"First-order thinking is simplistic and superficial, and just about everyone can do
+it. Second-order thinking is the practice of tracing the chain of consequences that
+follow from a decision. The simplest way to practice it is to repeatedly ask \'And
+then what?\' after each projected outcome. Many extraordinary results come from
+decisions that are first-order negative but second-order positive."
 
-## Weaknesses
-- Offline support is unreliable
-- Performance degrades with large workspaces`,
-    sourceNoteZh: `# 小红书产品分析
+## Inversion
+> Clipped from Farnam Street
+"The core premise of inversion is that you should not approach difficult problems
+from only one direction. Instead, examine them both forward and backward. Instead
+of asking how to achieve a desired outcome, ask how you could guarantee the
+opposite — then systematically avoid those things. Charlie Munger: \'All I want to
+know is where I\'m going to die, so I\'ll never go there.\'"
 
-小红书从香港购物指南转型为生活方式社区，日活突破 1 亿。
+## On Forecasting
+> Clipped from Morgan Housel
+"Most problems are more complicated than they look, but most solutions should be
+simpler than they are. A lot of what people call conviction is really a willful
+disregard for new information that might make you change your mind. Read fewer
+forecasts and more history. Study more failures and fewer successes."
 
-## 产品策略
-- 「种草」心智：用户来小红书是为了发现和决策
-- 双列瀑布流降低选择成本，提升内容消费效率
-- UGC 内容生态：普通人分享真实体验，信任度远超 KOL
+## What I Want To Connect
+- Facts vs beliefs → social bonding mechanism?
+- Second-order thinking + inversion → both reward depth over breadth
+- Graham\'s spectrum → how do I know where I actually fall?`,
+    sourceNoteZh: `# 思考碎片 · 剪藏文集
 
-## 增长引擎
-- 搜索心智持续强化——「遇事不决小红书」
-- 直播电商补齐交易闭环，笔记种草→直播转化
-- 海外华人市场自然增长，无需额外获客
+写在一个杂乱笔记里的各种想法和观察。遇到第三个"跟这个有关"的瞬间就会更新进来。
 
-## 核心指标
-- 月活 3 亿+，搜索渗透率超过 70%
-- 图文+视频双引擎驱动内容供给
+## 信息环境与独立思考
+> 剪自 晚点LatePost 对刘海龙的访谈
+"如果你把所有问题归结为媒介，认为不使用媒介，就没有这些问题。我觉得这过于简化了。
+人类社会就是跟着媒介发展，人的进化也是跟着媒介变化、技术变化不断在变化。整个信息
+环境如同气候，人类得学会适应新的媒介形态、信息分发方式，和它一同进化。不是叙事，
+而是怎样操控你的情绪。我们会失去时间感、历史感。人们搞不清楚很多东西的因果关系。
+这种非理性的思维方式就是反因果、反历史的。"
 
-## 潜在风险
-- 内容审核尺度争议影响创作者积极性
-- 电商基础设施（物流、售后）仍在追赶`,
+## 不要用上一代的方法论
+> 剪自 晚点LatePost 对 MiniMax 创始人闫俊杰的访谈
+"更好的模型可以导向更好的应用，但更好的应用和更多用户并不会导向更好的模型。中国
+大部分公司，不管创业公司还是大厂，都还在用做推荐系统的方法来做大模型产品。推荐的
+逻辑是：用户越多，反馈越多，推荐引擎越聪明。而 AI 大模型和产品的真实关系是：更好
+的模型可以导向更好的应用，但更好的应用和更多用户并不会导向更好的模型。"
+
+## 站在大多数人对面的勇气
+> 剪自 北京青年周刊 对王小伟的访谈
+"马克·吐温讲过，当你发现自己站在大多数人的一边时，你应该停下来反思。这句话除了
+在排队上车时不好用，其他情况都好用。每个人的第一任务，不是读海德格尔，是真诚面对
+自己的日常。我们的注意力需要有开放性，能够接受不愉快，并将其视为一种必要的异质性
+和否定性。哲学就是如鲠在喉，要持续制造不适感。"
+
+## 专注与复利
+> 剪自 晚点LatePost 对宇树科技创始人王兴兴的访谈
+"很多时候就是灵感涌现。你24小时一直在思考这个问题，我不信问题解决不了。我觉得主要
+是你足够专注。我们主要的对手还是自己，就是我们每天、每月、每年比自己过去做得更好，
+同行基本就追不上。当你做的事情符合时代的主旋律，一些好的资源都会向你倾斜。"
+
+## 创新是一种信念
+> 剪自 晚点LatePost 对 DeepSeek 创始人梁文锋的访谈
+"我们真正缺乏的不是资金，而是信心，以及组织高水平人才进行有效创新的能力。有经验
+的人可能会被固有的思维束缚，而没有经验的人更愿意反复摸索，找到符合当前实际情况的
+解决方案。尽可能少干预，让每个人有自由发挥的空间和试错机会。创新首先是一种信念。
+为什么硅谷的创新能力强？首先是敢。所有策略都是上一代的产物，未来未必仍然适用。"
+
+## 我想理清的关系
+- 刘海龙的信息环境 + 王小伟的反思 → 如何不被媒介操控情绪？
+- 闫俊杰的方法论 + 梁文锋的信念 → 创新需要放弃哪些"经验"？
+- 王兴兴的专注 + 梁文锋的敢 → 长期主义的两个侧面`,
     extractedItems: [
-      { name: 'Notion', type: 'entity', lineIdx: 0 },
-      { name: 'Blocks', type: 'concept', lineIdx: 5 },
-      { name: 'Freemium', type: 'concept', lineIdx: 9 },
-      { name: 'PLG', type: 'concept', lineIdx: 14 },
-      { name: 'Template marketplace', type: 'entity', lineIdx: 6 },
-      { name: 'Community', type: 'concept', lineIdx: 10 },
+      { name: 'James Clear', type: 'entity', lineIdx: 0 },
+      { name: 'Paul Graham', type: 'entity', lineIdx: 0 },
+      { name: 'Charlie Munger', type: 'entity', lineIdx: 0 },
+      { name: 'Second-Order Thinking', type: 'concept', lineIdx: 0 },
+      { name: 'Inversion', type: 'concept', lineIdx: 0 },
+      { name: 'Independent-Mindedness', type: 'concept', lineIdx: 0 },
     ],
     generatedPages: [
-      { title: 'Notion', path: 'wiki/entities/notion.md', tags: ['SaaS', 'Productivity'], summary: 'All-in-one workspace founded in 2013, valued at $10B, with 100M+ users and a category-defining product-led growth model.' },
-      { title: 'Block Architecture', path: 'wiki/concepts/block-architecture.md', tags: ['Architecture'], summary: 'Atomic content units (text, database, embed) that compose into any page structure, enabling extreme flexibility.' },
-      { title: 'Product-Led Growth', path: 'wiki/concepts/plg.md', tags: ['Growth', 'Strategy'], summary: 'Bottom-up adoption where individual users become internal champions, driving organizational conversion.' },
-      { title: 'Template Marketplace', path: 'wiki/concepts/template-marketplace.md', tags: ['Distribution'], summary: 'User-generated templates act as acquisition loops — each shared template attracts new users via SEO and social.' },
+      { title: 'Second-Order Thinking', path: 'wiki/concepts/second-order-thinking.md', tags: ['Mental Model', 'Decision-Making'], summary: 'The practice of tracing chains of consequences beyond immediate outcomes. The key technique: repeatedly ask "And then what?" after each projected outcome. Many extraordinary results come from decisions that are first-order negative but second-order positive.' },
+      { title: 'Inversion', path: 'wiki/concepts/inversion.md', tags: ['Mental Model', 'Decision-Making'], summary: 'A problem-solving approach that examines problems from both forward and backward directions. Instead of asking how to achieve an outcome, ask how to guarantee the opposite — then avoid those things. "Avoiding stupidity is easier than seeking brilliance."' },
+      { title: 'Independent-Mindedness', path: 'wiki/concepts/independent-mindedness.md', tags: ['Thinking', 'Psychology'], summary: 'The ability to think differently from one\'s peers. Consists of three components: fastidiousness about truth, resistance to being told what to think, and curiosity. The most conventional-minded often believe they are independent-minded.' },
+      { title: 'Social Belief Formation', path: 'wiki/concepts/social-belief-formation.md', tags: ['Psychology', 'Cognition'], summary: 'False beliefs can be held not because they are true, but because they serve a social purpose — helping us bond with our tribe. The hardest minds to change are those who are not just wrong but lonely.' },
     ],
     links: [
-      { from: 0, to: 1 }, { from: 0, to: 2 }, { from: 1, to: 2 }, { from: 0, to: 3 },
+      { from: 0, to: 1 }, { from: 0, to: 2 }, { from: 1, to: 2 }, { from: 2, to: 3 },
     ],
-    chatQuestion: 'What makes Notion\'s product-led growth strategy so effective?',
-    chatAnswerLead: <>Notion's <BoldLink>Product-Led Growth</BoldLink> succeeds because the <BoldLink>Freemium</BoldLink> tier is genuinely useful — individuals adopt first, then invite teammates, creating an organic organizational pull.</>,
-    chatAnswerDetail: 'Combined with a vibrant community ecosystem and SEO-optimized template marketplace, each user action becomes a distribution event.',
-    chatSource: 'notion-analysis.md',
+    chatQuestion: 'What is the common thread between Second-Order Thinking and Inversion?',
+    chatAnswerLead: <><BoldLink>Second-Order Thinking</BoldLink> and <BoldLink>Inversion</BoldLink> both reward depth over breadth and require resisting System 1\'s immediate intuition. Second-order thinking traces consequences forward; inversion traces failures backward. Both force you to look beyond what is obvious.</>,
+    chatAnswerDetail: 'Where they differ: Second-order thinking is additive (what else happens?), while inversion is subtractive (what should I avoid?). Used together, they form a powerful decision framework: use inversion to eliminate bad options, then use second-order thinking to evaluate the remaining ones.',
+    chatSource: 'thinking-clippings.md',
     extractedItemsZh: [
-      { name: '小红书', type: 'entity', lineIdx: 0 },
-      { name: '种草', type: 'concept', lineIdx: 5 },
-      { name: 'UGC', type: 'concept', lineIdx: 7 },
-      { name: '搜索心智', type: 'concept', lineIdx: 10 },
-      { name: '直播电商', type: 'concept', lineIdx: 11 },
-      { name: '双列瀑布流', type: 'concept', lineIdx: 6 },
+      { name: '刘海龙', type: 'entity', lineIdx: 0 },
+      { name: '闫俊杰', type: 'entity', lineIdx: 0 },
+      { name: '梁文锋', type: 'entity', lineIdx: 0 },
+      { name: '信息茧房', type: 'concept', lineIdx: 0 },
+      { name: '方法论', type: 'concept', lineIdx: 0 },
+      { name: '创新信念', type: 'concept', lineIdx: 0 },
     ],
     generatedPagesZh: [
-      { title: '小红书', path: 'wiki/entities/xiaohongshu.md', tags: ['产品', '社区'], summary: '从香港购物指南转型为月活3亿+的生活方式社区，以"种草"心智驱动用户增长和消费决策。' },
-      { title: '种草经济', path: 'wiki/concepts/seeding-economy.md', tags: ['营销', '用户行为'], summary: '用户来小红书的核心动机是发现和决策——普通人的真实体验比KOL推荐更具信任度。' },
-      { title: '搜索心智', path: 'wiki/concepts/search-mindshare.md', tags: ['增长', '策略'], summary: '"遇事不决小红书"——当用户将搜索习惯迁移至社区内部，平台获得不可替代的分发权力。' },
-      { title: '双列瀑布流', path: 'wiki/concepts/waterfall-feed.md', tags: ['交互设计'], summary: '双列布局降低单条内容的选择成本，提升内容消费效率，是小红书的核心信息架构。' },
+      { title: '信息环境与独立思考', path: 'wiki/concepts/information-environment.md', tags: ['媒介', '认知'], summary: '信息环境如同气候，人类需要学会适应新的媒介形态。真正的风险不是信息偏食，而是失去时间感、历史感和因果判断能力。独立思考的关键是保持注意力的开放性。' },
+      { title: '方法论迭代', path: 'wiki/concepts/methodology-evolution.md', tags: ['创新', '产品'], summary: '每一代技术都有上一代的方法论陷阱。推荐系统的逻辑（用户越多→反馈越多→引擎越聪明）不适用于大模型产品。创新需要识别上一代策略的边界，并建立符合新技术本质的新方法论。' },
+      { title: '批判性思维', path: 'wiki/concepts/critical-thinking.md', tags: ['哲学', '认知'], summary: '当你发现自己站在大多数人一边时，应该停下来反思。注意力需要有开放性，能够接受不愉快，并将其视为必要的异质性。哲学的作用是持续制造不适感，拒绝平滑的生活方式。' },
+      { title: '专注与复利', path: 'wiki/concepts/focus-compound.md', tags: ['成长', '效率'], summary: '24小时持续思考一个问题，问题终究会解决。真正的对手不是同行，而是过去的自己。当你做的事情符合时代的主旋律，资源会自然倾斜。专注是产生复利效应的前提。' },
     ],
-    chatQuestionZh: '小红书的"搜索心智"策略为什么能成为核心增长引擎？',
-    chatAnswerLeadZh: <>小红书的<BoldLink>搜索心智</BoldLink>策略成功在于将用户的决策链路完整迁移至平台内部——"遇事不决小红书"不是一句口号，而是年轻用户真实的搜索行为习惯。</>,
-    chatAnswerDetailZh: '当用户在进行消费决策时首先打开小红书而非搜索引擎，平台就获得了不可替代的流量分发权。结合<BoldLink>种草经济</BoldLink>的内容信任度，搜索+种草形成飞轮效应。',
-    chatSourceZh: 'xiaohongshu-analysis.md',
+    chatQuestionZh: '信息茧房和独立思考之间是什么关系？',
+    chatAnswerLeadZh: <><BoldLink>信息茧房</BoldLink>的本质不是技术问题，而是<BoldLink>注意力</BoldLink>的封闭性。算法推荐只是放大了人类本来就有的"选择性接触"倾向——我们天然倾向于消费让自己舒适的信息。真正的独立思考需要刻意保持<BoldLink>注意力的开放性</BoldLink>，主动接受不愉快的异质性信息。</>,
+    chatAnswerDetailZh: '刘海龙指出：信息环境如同气候，人类得学会和它一同进化。王小伟则补充：哲学的作用是持续制造不适感。两者共同指向一个结论——独立思考不是"找到正确答案"，而是"维持一个能容纳否定性的认知状态"。',
+    chatSourceZh: '思考碎片剪藏.md',
   },
   {
-    id: 'research',
-    label: 'Research Notes',
-    labelZh: '科研笔记',
-    Icon: Microscope,
-    filename: 'memory-sleep-study.md',
-    sourceNote: `# Memory Consolidation During Sleep
+    id: 'creation',
+    label: 'Content Creation',
+    labelZh: '内容创作',
+    Icon: Mic,
+    filename: 'podcast-episode-plan.md',
+    sourceNote: `# The Knowledge Stack — Episode 12 Plan
 
-Sleep transforms fragile short-term memories into stable long-term representations.
+Guest: Dr. Andy Matuschak (independent researcher, ex-Apple, ex-Khan Academy)
+Topic: "Tools for Thought and the Future of Reading"
 
-## Key Mechanisms
-- Hippocampal replay: neurons fire in wake-like patterns during sleep
-- SWS drives systems consolidation across the neocortex
-- REM sleep strengthens emotional and procedural memories
+## Guest Background
+- Led R&D at Khan Academy on mastery learning algorithms
+- Worked at Apple on early iPad education initiatives
+- Now runs independent research lab studying tools for thought
+- Known for: "Evergreen notes" methodology, "Working in public" research practice
+- His essay "Why books don\'t work" sparked major debate in PKM community
 
-## Experimental Evidence
-- Matt Wilson (MIT) showed place cell reactivation during SWS
-- Human fMRI confirms hippocampal-cortical dialogue during NREM
-- Sleep deprivation impairs retention by ~40%
+## Core Questions
+1. You wrote that "books don\'t work" — most people forget 90% of what they read.
+   What would a "working" medium for knowledge transfer look like?
+2. Your "evergreen notes" system emphasizes atomicity and progressive summarization.
+   How does this differ from traditional note-taking?
+3. You\'ve been vocal about the gap between tools-for-thought research and mainstream
+   adoption. What\'s the biggest blocker?
+4. With LLMs now able to answer questions about any book instantly, what\'s the role
+   of human reading in 2026?
+5. Your research practice is radically open — you publish half-finished thoughts daily.
+   Doesn\'t this create noise? How do you balance depth with speed?
 
-## Open Questions
-- How does synaptic downscaling select which memories survive?
-- Can targeted memory reactivation (TMR) enhance specific memories?`,
-    sourceNoteZh: `# 碳中和技术路径研究
+## Key References to Mention
+- Matuschak, A. (2019). "Why books don\'t work"
+- Nielsen, M. (2018). "Reinventing explanation" and "Augmenting human intellect"
+- Bush, V. (1945). "As We May Think" — the original memex concept
+- Engelbart, D. (1962). "Augmenting Human Intellect" — the mother of all demos
 
-中国承诺 2030 年碳达峰、2060 年碳中和，这是一场系统性的能源革命。
+## Narrative Arc
+- Open with the "books don\'t work" provocation (2 min)
+- Andy explains the research on retention and what\'s broken (8 min)
+- Evergreen notes as a proposed solution — atomic, linked, progressive (10 min)
+- The LLM disruption — does AI solve the retention problem or make it worse? (12 min)
+- Closing: What one habit would Andy recommend to every knowledge worker? (3 min)
 
-## 核心路径
-- 能源供给侧：光伏、风电替代煤电，新型电力系统重构电网
-- 能源消费侧：工业电气化、建筑节能改造、交通电动化
-- 碳移除：CCUS 技术捕获工业尾气，林业碳汇作为补充
+## Open Questions for Post-Interview
+- Should I read Andy\'s full "Evergreen notes" essay before recording?
+- Do I need a second guest for counterpoint (someone who defends books)?
+- Recording logistics: async voice memo or live video?`,
+    sourceNoteZh: `# 「纸上谈兵」第 24 期节目策划
 
-## 技术瓶颈
-- 储能成本仍需下降 50% 才能支撑大规模风光并网
-- 氢能储运效率低，绿氢成本是灰氢的 3 倍
-- 碳捕集能耗过高，每吨 CO₂ 需 2.5 GJ 能量
+嘉宾：梁文锋（DeepSeek 创始人）
+话题："硬核创新：为什么中国也能做出世界级的大模型"
 
-## 政策驱动
-- 全国碳市场覆盖电力行业，钢铁、水泥即将纳入
-- 绿色金融定向支持低碳技术研发`,
+## 嘉宾背景
+- DeepSeek 创始人，2023 年底发布 DeepSeek-V2 引发全球关注
+- 幻方量化创始人，国内最早将 AI 应用于量化投资的团队之一
+- 核心理念："我们真正缺乏的不是资金，而是信心，以及组织高水平人才进行有效创新的能力"
+
+## 核心问题链
+1. DeepSeek-V2 的架构创新（MLA 多头潜在注意力）是如何想到的？为什么其他大厂没有先做出来？
+2. 你说"更好的模型可以导向更好的应用，但更好的应用和更多用户并不会导向更好的模型"——这直接挑战了推荐系统的底层逻辑。能详细解释吗？
+3. 你主张"尽可能少干预，让每个人有自由发挥的空间和试错机会"——在幻方和 DeepSeek，这种文化是如何具体落地的？
+4. 面对 OpenAI、Google、Anthropic 这些巨头，DeepSeek 的差异化竞争策略是什么？
+5. "所有策略都是上一代的产物，未来未必仍然适用"——你对 AI 未来 3-5 年的判断是什么？哪些"上一代策略"正在失效？
+
+## 引用资料
+- DeepSeek-V2 技术报告（MLA 架构详解）
+- 梁文锋 2024 年多次访谈合集（晚点LatePost、36氪等）
+- 幻方量化发展历程
+
+## 叙事弧线
+- 开场：DeepSeek-V2 发布时的全球反响（2 分钟）
+- 第一部分：架构创新的来源——为什么不是大厂先做？（8 分钟）
+- 第二部分：组织文化——"少干预"如何落地（10 分钟）
+- 第三部分：竞争格局——巨头的盲区（10 分钟）
+- 结尾：给年轻研究者的建议（5 分钟）
+
+## 待确认事项
+- 录制时间：梁文锋近期行程很紧，需协调
+- 是否增加英文同传？面向海外听众
+- 需要准备哪些技术细节以防深度追问？`,
     extractedItems: [
-      { name: 'Hippocampus', type: 'entity', lineIdx: 4 },
-      { name: 'Amygdala', type: 'entity', lineIdx: 6 },
-      { name: 'Matt Wilson', type: 'entity', lineIdx: 10 },
-      { name: 'Memory Consolidation', type: 'concept', lineIdx: 0 },
-      { name: 'Hippocampal replay', type: 'concept', lineIdx: 4 },
-      { name: 'Synaptic downscaling', type: 'concept', lineIdx: 14 },
+      { name: 'Andy Matuschak', type: 'entity', lineIdx: 0 },
+      { name: 'Khan Academy', type: 'entity', lineIdx: 0 },
+      { name: 'Evergreen Notes', type: 'concept', lineIdx: 0 },
+      { name: 'Tools for Thought', type: 'concept', lineIdx: 0 },
+      { name: 'Progressive Summarization', type: 'concept', lineIdx: 0 },
+      { name: 'Memex', type: 'concept', lineIdx: 0 },
     ],
     generatedPages: [
-      { title: 'Memory Consolidation', path: 'wiki/concepts/memory-consolidation.md', tags: ['Neuroscience'], summary: 'The process by which labile short-term memories are transformed into stable long-term traces, critically dependent on sleep.' },
-      { title: 'Hippocampal Replay', path: 'wiki/concepts/hippocampal-replay.md', tags: ['Hippocampus'], summary: 'During SWS, place cells reactivate in sequences that recapitulate waking experience, strengthening cortical memory traces.' },
-      { title: 'Slow-Wave Sleep', path: 'wiki/concepts/slow-wave-sleep.md', tags: ['Sleep'], summary: 'Deep NREM sleep characterized by delta oscillations (0.5–4 Hz), essential for declarative memory consolidation.' },
-      { title: 'Synaptic Homeostasis', path: 'wiki/concepts/synaptic-homeostasis.md', tags: ['Theory'], summary: 'SHY hypothesis proposes that sleep globally downscales synaptic strength, preserving only the most reinforced connections.' },
-    ],
-    links: [
-      { from: 0, to: 1 }, { from: 0, to: 2 }, { from: 0, to: 3 }, { from: 1, to: 3 },
-    ],
-    chatQuestion: 'How does hippocampal replay during sleep support memory consolidation?',
-    chatAnswerLead: <><BoldLink>Hippocampal Replay</BoldLink> during <BoldLink>Slow-Wave Sleep</BoldLink> reactivates neuronal firing patterns from waking experience, driving long-term potentiation in cortical circuits.</>,
-    chatAnswerDetail: 'This hippocampal-cortical dialogue selectively strengthens salient memories while synaptic downscaling prunes weak connections, improving retention by ~40% compared to sleep-deprived controls.',
-    chatSource: 'memory-sleep-study.md',
-    extractedItemsZh: [
-      { name: '碳达峰', type: 'concept', lineIdx: 2 },
-      { name: '碳中和', type: 'concept', lineIdx: 2 },
-      { name: '光伏', type: 'entity', lineIdx: 5 },
-      { name: 'CCUS', type: 'concept', lineIdx: 7 },
-      { name: '氢能', type: 'concept', lineIdx: 10 },
-      { name: '碳市场', type: 'concept', lineIdx: 14 },
-    ],
-    generatedPagesZh: [
-      { title: '碳中和路径', path: 'wiki/concepts/carbon-neutrality.md', tags: ['能源', '政策'], summary: '中国2030碳达峰、2060碳中和目标下的系统性能源革命，涵盖供给侧、消费侧和碳移除三大方向。' },
-      { title: '光伏发电', path: 'wiki/concepts/photovoltaic.md', tags: ['可再生能源', '技术'], summary: '替代煤电的主力清洁能源，中国光伏装机量全球第一，但储能配套成本仍是主要瓶颈。' },
-      { title: 'CCUS技术', path: 'wiki/concepts/ccus.md', tags: ['碳移除', '工业'], summary: '碳捕集、利用与封存技术，每吨CO₂捕获需2.5GJ能量，能耗过高是商业化最大障碍。' },
-      { title: '全国碳市场', path: 'wiki/concepts/carbon-market.md', tags: ['政策工具'], summary: '以市场机制驱动减排，目前覆盖电力行业，钢铁、水泥即将纳入，碳价信号引导绿色投资。' },
-    ],
-    chatQuestionZh: '中国实现碳中和面临的最大技术瓶颈是什么？',
-    chatAnswerLeadZh: <>当前最大的瓶颈是<BoldLink>储能技术</BoldLink>——成本仍需下降50%才能支撑大规模风光并网，而<BoldLink>氢能</BoldLink>的储运效率低，绿氢成本是灰氢的3倍。</>,
-    chatAnswerDetailZh: '此外，<BoldLink>CCUS技术</BoldLink>的能耗过高（每吨CO₂需2.5GJ），短期内难以规模化。三项技术瓶颈交织，决定了碳中和路径的节奏与成本。',
-    chatSourceZh: 'carbon-neutrality-study.md',
-  },
-  {
-    id: 'creative',
-    label: 'Creative Writing',
-    labelZh: '灵感创作',
-    Icon: Palette,
-    filename: 'stellar-frontier.md',
-    sourceNote: `# Stellar Frontier Universe Bible
-
-A hard sci-fi setting where humanity has splintered across three interstellar civilizations.
-
-## Major Civilizations
-- The Commonwealth: democratic federation of 47 colony worlds, exporter of grain and data
-- The Dynasties: gene-modified aristocratic houses ruling helium-3 fuel monopolies
-- The Void Collective: anarchist flotilla of generation ships, trading in salvage and secrets
-
-## Technology Constraints
-- No FTL travel — interstellar transit takes decades on cryo-ships
-- Quantum entanglement comms work but bandwidth is brutally limited
-- AI is everywhere but banned from holding executive authority
-
-## Central Conflicts
-- The Dynasties control fuel supply; the Commonwealth needs it for expansion
-- A secret Collective AI may have broken the executive-authority ban`,
-    sourceNoteZh: `# 《山海经》重构世界观设定
-
-以《山海经》为蓝本，重构一个上古神兽与人类共存的世界。
-
-## 核心势力
-- 昆仑墟：诸神后裔的议会城邦，掌控天文历法与星象推演
-- 九黎部：蚩尤血脉传承的游牧联盟，驯养异兽为战骑
-- 蓬莱阁：东海隐士组成的秘密结社，掌握失传的上古符文
-
-## 世界法则
-- 灵力来源于地脉流动，每片大陆有一条主脉
-- 神兽可与人类缔结血契，共享生命但一荣俱荣一损俱损
-- 符文刻写在骨甲之上，每枚符文对应一种自然之力
-
-## 核心矛盾
-- 昆仑墟垄断灵脉开采权，九黎部以武力争夺资源
-- 蓬莱阁暗中收集上古神器，意图重写世界法则`,
-    extractedItems: [
-      { name: 'Commonwealth', type: 'entity', lineIdx: 4 },
-      { name: 'Dynasties', type: 'entity', lineIdx: 5 },
-      { name: 'Void Collective', type: 'entity', lineIdx: 6 },
-      { name: 'Helium-3', type: 'entity', lineIdx: 5 },
-      { name: 'Cryo-ships', type: 'concept', lineIdx: 10 },
-      { name: 'Quantum entanglement', type: 'concept', lineIdx: 11 },
-    ],
-    generatedPages: [
-      { title: 'The Commonwealth', path: 'wiki/entities/commonwealth.md', tags: ['Faction', 'Politics'], summary: 'A democratic federation spanning 47 colony worlds, built on data trade and agricultural exports, governed by a rotating council.' },
-      { title: 'The Dynasties', path: 'wiki/entities/dynasties.md', tags: ['Faction', 'Economy'], summary: 'Genetically-enhanced aristocratic houses that monopolize helium-3 extraction, controlling the fuel supply for all interstellar travel.' },
-      { title: 'Void Collective', path: 'wiki/entities/void-collective.md', tags: ['Faction', 'Society'], summary: 'A nomadic civilization of generation ships living outside planetary gravity wells, trading in salvage, information, and forbidden tech.' },
-      { title: 'Helium-3 Economy', path: 'wiki/concepts/helium3-economy.md', tags: ['Technology', 'Economy'], summary: 'The primary fuel source for fusion reactors throughout human space — whoever controls He-3 controls civilization.' },
-    ],
-    links: [
-      { from: 0, to: 1 }, { from: 0, to: 3 }, { from: 1, to: 3 }, { from: 0, to: 2 },
-    ],
-    chatQuestion: 'What is the central conflict between the Commonwealth and the Dynasties?',
-    chatAnswerLead: <>The <BoldLink>Commonwealth</BoldLink> needs <BoldLink>Helium-3</BoldLink> to fuel its expansion, but the <BoldLink>Dynasties</BoldLink> control every major extraction site, creating a chokehold on interstellar civilization.</>,
-    chatAnswerDetail: 'This fuel dependency forces the Commonwealth into unfavorable trade agreements, while the Void Collective exploits the tension, selling salvaged He-3 to both sides.',
-    chatSource: 'stellar-frontier.md',
-    extractedItemsZh: [
-      { name: '昆仑墟', type: 'entity', lineIdx: 5 },
-      { name: '九黎部', type: 'entity', lineIdx: 6 },
-      { name: '蓬莱阁', type: 'entity', lineIdx: 7 },
-      { name: '灵力', type: 'concept', lineIdx: 10 },
-      { name: '血契', type: 'concept', lineIdx: 11 },
-      { name: '符文', type: 'concept', lineIdx: 12 },
-    ],
-    generatedPagesZh: [
-      { title: '昆仑墟', path: 'wiki/entities/kunlun.md', tags: ['势力', '政治'], summary: '诸神后裔组成的议会城邦，掌控天文历法与星象推演，垄断灵脉开采权。' },
-      { title: '九黎部', path: 'wiki/entities/jiuli.md', tags: ['势力', '军事'], summary: '蚩尤血脉传承的游牧联盟，以驯养异兽为战骑，武力争夺灵脉资源。' },
-      { title: '蓬莱阁', path: 'wiki/entities/penglai.md', tags: ['势力', '神秘'], summary: '东海隐士组成的秘密结社，掌握失传的上古符文，暗中收集神器意图重写世界法则。' },
-      { title: '灵力体系', path: 'wiki/concepts/spirit-energy.md', tags: ['世界法则', '能量'], summary: '灵力来源于地脉流动，每片大陆有一条主脉。神兽可与人类缔结血契，共享生命但一荣俱荣一损俱损。' },
-    ],
-    chatQuestionZh: '昆仑墟、九黎部和蓬莱阁之间的矛盾核心是什么？',
-    chatAnswerLeadZh: <>三大势力的矛盾围绕<BoldLink>灵力</BoldLink>资源展开——<BoldLink>昆仑墟</BoldLink>垄断灵脉开采权，<BoldLink>九黎部</BoldLink>以武力争夺，而<BoldLink>蓬莱阁</BoldLink>在暗中收集上古神器，意图从根本上改写世界法则。</>,
-    chatAnswerDetailZh: '这是一场资源争夺与意识形态的三方博弈。昆仑墟守旧、九黎部求变、蓬莱阁图破——三者构成了世界运转的核心张力。',
-    chatSourceZh: 'shanhaijing-worldbuilding.md',
-  },
-  {
-    id: 'growth',
-    label: 'Personal Growth',
-    labelZh: '个人成长',
-    Icon: Compass,
-    filename: 'habit-building.md',
-    sourceNote: `# The Science of Habit Formation
-
-Lasting behavior change comes from systems, not willpower.
-
-## The Habit Loop
-- Cue: a trigger that initiates the behavior
-- Craving: the motivational force behind every habit
-- Response: the actual behavior you perform
-- Reward: the end goal that satisfies the craving
-
-## The Four Laws of Behavior Change
-- Make it Obvious: design your environment for visibility
-- Make it Attractive: bundle habits with things you enjoy
-- Make it Easy: reduce friction, start with 2-minute versions
-- Make it Satisfying: immediate rewards reinforce the loop
-
-## Identity-Based Habits
-Focus on who you wish to become. James Clear: every action is a vote for the person you are becoming.`,
-    sourceNoteZh: `# 曾国藩修身十二法
-
-曾国藩从一介书生到位极人臣，其修身方法至今仍有借鉴意义。
-
-## 日课十二条
-- 主敬：整齐严肃，无事时心在腔子里，应事时专一不杂
-- 静坐：每日不拘何时，静坐一小时，体验静极生阳
-- 早起：黎明即起，醒后勿沾恋
-- 读书不二：一书未点完，断不看他书
-- 读史：每日读《二十三史》十页，虽有事不间断
-
-## 修身理念
-- 天下古今之庸人，皆以一惰字致败
-- 用功不求太猛，但求有恒
-- 日日不断之功，胜于一曝十寒
-
-## 现代应用
-将日课十二条改造为现代习惯追踪系统，每条对应当代一个关键习惯。`,
-    extractedItems: [
-      { name: 'James Clear', type: 'entity', lineIdx: 19 },
-      { name: 'Atomic Habits', type: 'entity', lineIdx: 19 },
-      { name: 'Habit Loop', type: 'concept', lineIdx: 4 },
-      { name: 'Four Laws', type: 'concept', lineIdx: 10 },
-      { name: 'Identity-Based Habits', type: 'concept', lineIdx: 18 },
-      { name: 'Friction', type: 'concept', lineIdx: 13 },
-    ],
-    generatedPages: [
-      { title: 'Habit Loop', path: 'wiki/concepts/habit-loop.md', tags: ['Psychology'], summary: 'A neurological feedback loop consisting of cue, craving, response, and reward that governs all habit formation and maintenance.' },
-      { title: 'Four Laws of Change', path: 'wiki/concepts/four-laws.md', tags: ['Framework'], summary: 'Make it Obvious, Attractive, Easy, and Satisfying — four levers for engineering any behavior, from James Clear\'s Atomic Habits.' },
-      { title: 'Identity Habits', path: 'wiki/concepts/identity-habits.md', tags: ['Identity'], summary: 'Behavior change that starts with self-image — "I am a runner" rather than "I want to run", making each action a vote for identity.' },
-      { title: 'Environment Design', path: 'wiki/concepts/environment-design.md', tags: ['Design'], summary: 'Shaping physical and digital spaces to make good habits the path of least resistance and bad habits invisible.' },
+      { title: 'Andy Matuschak', path: 'wiki/entities/andy-matuschak.md', tags: ['Researcher', 'PKM'], summary: 'Independent researcher studying tools for thought. Formerly at Khan Academy and Apple. Known for "Why books don\'t work" essay and the "evergreen notes" methodology for atomic, linked knowledge management.' },
+      { title: 'Evergreen Notes', path: 'wiki/concepts/evergreen-notes.md', tags: ['PKM', 'Methodology'], summary: 'A note-taking methodology emphasizing atomicity, concept-orientation, and progressive summarization. Notes are written to be permanently useful and continuously refined, rather than capturing transient thoughts.' },
+      { title: 'Tools for Thought', path: 'wiki/concepts/tools-for-thought.md', tags: ['Technology', 'Cognition'], summary: 'Software and systems designed to augment human thinking, memory, and creativity. The field draws from cognitive science, HCI, and AI. Key challenge: closing the gap between research prototypes and mainstream adoption.' },
+      { title: 'Progressive Summarization', path: 'wiki/concepts/progressive-summarization.md', tags: ['PKM', 'Methodology'], summary: 'A technique for distilling notes through multiple layers of summarization. Each pass adds more compression while preserving retrievability. Allows finding specific details within a dense summary without re-reading the full source.' },
     ],
     links: [
       { from: 0, to: 1 }, { from: 0, to: 2 }, { from: 1, to: 3 }, { from: 2, to: 3 },
     ],
-    chatQuestion: 'How do identity-based habits differ from goal-based approaches?',
-    chatAnswerLead: <>Unlike goal-based habits that chase outcomes, <BoldLink>Identity-Based Habits</BoldLink> focus on becoming the person who naturally achieves those outcomes — each small action reinforces self-image.</>,
-    chatAnswerDetail: <>"Every action you take is a vote for the type of person you wish to become" — the <BoldLink>Habit Loop</BoldLink> drives behavior, but identity provides the motivation that outlasts any single goal.</>,
-    chatSource: 'habit-building.md',
+    chatQuestion: 'What is the core difference between evergreen notes and traditional note-taking?',
+    chatAnswerLead: <><BoldLink>Evergreen notes</BoldLink> are written to be permanently useful and continuously refined, while traditional note-taking captures transient thoughts for short-term recall. Evergreen notes emphasize <BoldLink>atomicity</BoldLink> (one idea per note), <BoldLink>concept-orientation</BoldLink> (named by concept, not source), and <BoldLink>progressive summarization</BoldLink> (multi-layer distillation).</>,
+    chatAnswerDetail: 'The key shift is from "what did I read?" to "what do I believe?" Traditional notes are bibliographic; evergreen notes are epistemic. This makes them composable — you can build new ideas by linking atomic notes without re-reading original sources.',
+    chatSource: 'podcast-episode-plan.md',
     extractedItemsZh: [
-      { name: '曾国藩', type: 'entity', lineIdx: 0 },
-      { name: '日课十二条', type: 'concept', lineIdx: 5 },
-      { name: '主敬', type: 'concept', lineIdx: 6 },
-      { name: '静坐', type: 'concept', lineIdx: 7 },
-      { name: '早起', type: 'concept', lineIdx: 8 },
-      { name: '读书不二', type: 'concept', lineIdx: 9 },
+      { name: '梁文锋', type: 'entity', lineIdx: 0 },
+      { name: 'DeepSeek', type: 'entity', lineIdx: 0 },
+      { name: '幻方量化', type: 'entity', lineIdx: 0 },
+      { name: 'MLA架构', type: 'concept', lineIdx: 0 },
+      { name: '硬核创新', type: 'concept', lineIdx: 0 },
+      { name: '组织文化', type: 'concept', lineIdx: 0 },
     ],
     generatedPagesZh: [
-      { title: '曾国藩', path: 'wiki/entities/zeng-guofan.md', tags: ['人物', '历史'], summary: '晚清中兴名臣，以一介书生位极人臣。其修身方法论历经150余年仍有现实借鉴意义。' },
-      { title: '日课十二条', path: 'wiki/concepts/twelve-daily-rules.md', tags: ['框架', '习惯'], summary: '曾国藩为自己定下的十二条每日必修课，涵盖静坐、早起、读书、谨言等修身维度。' },
-      { title: '恒心之道', path: 'wiki/concepts/persistence.md', tags: ['修身'], summary: '"用功不求太猛，但求有恒"——日日不断之功，胜于一曝十寒。现代社会习惯追踪的科学印证。' },
-      { title: '修身哲学', path: 'wiki/concepts/self-cultivation.md', tags: ['哲学', '个人成长'], summary: '"天下古今之庸人，皆以一惰字致败"——从曾国藩到原子习惯，跨时代的自我管理智慧。' },
+      { title: '梁文锋', path: 'wiki/entities/liang-wenfeng.md', tags: ['创业者', 'AI'], summary: 'DeepSeek创始人，幻方量化创始人。核心理念：中国真正缺乏的不是资金，而是信心和组织高水平人才进行有效创新的能力。主张"尽可能少干预，让每个人有自由发挥的空间和试错机会"。' },
+      { title: 'DeepSeek', path: 'wiki/entities/deepseek.md', tags: ['AI', '大模型'], summary: '中国AI公司，2023年底发布DeepSeek-V2引发全球关注。核心创新为MLA（多头潜在注意力）架构，显著降低了推理成本。代表了中国在大模型基础架构层面的原创性突破。' },
+      { title: 'MLA架构', path: 'wiki/concepts/mla-architecture.md', tags: ['AI', '架构'], summary: 'Multi-head Latent Attention，DeepSeek-V2的核心创新。通过低秩压缩键值缓存，将推理时的KV缓存减少数倍，同时保持模型性能。这一架构创新使得大模型的推理成本显著降低。' },
+      { title: '硬核创新', path: 'wiki/concepts/hardcore-innovation.md', tags: ['创新', '文化'], summary: '梁文锋提出的创新理念：真正的创新来自对技术本质的深度理解，而非应用层的快速迭代。关键要素：敢于挑战主流共识、给予人才充分的试错空间、将组织目标与技术突破深度绑定。' },
     ],
-    chatQuestionZh: '曾国藩的"日课十二条"和现代习惯追踪有什么相通之处？',
-    chatAnswerLeadZh: <><BoldLink>日课十二条</BoldLink>的本质和James Clear的<BoldLink>原子习惯</BoldLink>惊人一致——曾国藩强调"日日不断之功"，Clear说"每个行动都是为你想成为的人投票"。</>,
-    chatAnswerDetailZh: '十二条日课每一条都是一个小闭环：主敬=环境设计，静坐=冥想，读书不二=专注单任务。150年前的修身方法与现代行为科学殊途同归。',
-    chatSourceZh: 'zeng-guofan-self-cultivation.md',
+    chatQuestionZh: '梁文锋说的"更好的应用不会导向更好的模型"是什么意思？',
+    chatAnswerLeadZh: <>梁文锋指出，<BoldLink>大模型</BoldLink>和<BoldLink>推荐系统</BoldLink>遵循完全不同的增长逻辑。推荐系统的逻辑是"用户越多→反馈越多→引擎越聪明"，但大模型的真实关系是"更好的模型可以导向更好的应用，但更好的应用和更多用户并不会导向更好的模型"。模型能力的提升来自算法、数据和算力的突破，而非用户反馈的循环。</>,
+    chatAnswerDetailZh: '这一判断直接挑战了中国互联网"流量至上"的默认假设。它意味着做大模型不能像做App那样追求DAU增长，而需要长期、高额、低反馈的基础研发投入。DeepSeek选择了一条与多数大厂不同的路：优先投入基础研究，而非优先追求产品化。',
+    chatSourceZh: '播客节目策划.md',
   },
   {
-    id: 'tech',
-    label: 'Tech Mastery',
-    labelZh: '技术精进',
-    Icon: Terminal,
-    filename: 'distributed-systems.md',
-    sourceNote: `# Distributed Systems Design
+    id: 'ai-frontier',
+    label: 'AI Frontier',
+    labelZh: 'AI 前沿',
+    Icon: Cpu,
+    filename: 'attention-is-all-you-need.md',
+    sourceNote: `# Attention Is All You Need — Notes
 
-Building reliable systems from unreliable components.
+The paper that killed RNNs and birthed the Transformer. Vaswani et al., 2017.
 
-## Foundational Theorems
-- CAP Theorem: pick two of Consistency, Availability, Partition Tolerance
-- FLP Impossibility: no deterministic consensus in async systems with one faulty node
-- PACELC: when Partition, trade Availability for Consistency; Else, trade Latency for Consistency
+## The Core Idea
+Instead of processing tokens sequentially (RNN style), process everything in
+parallel using "attention" — let each token look at every other token and decide
+which ones matter. The key insight: sequential processing was the bottleneck,
+not a feature.
 
-## Consensus Protocols
-- Paxos: Lamport's classic protocol, notoriously hard to implement
-- Raft: designed for understandability, leader-based consensus
-- Gossip protocols: eventual consistency through epidemic message spreading
+## Three Attention Mechanisms
+- Self-Attention: every word in a sentence attends to every other word. This
+captures long-range dependencies that RNNs lose after ~50 tokens.
+- Multi-Head Attention: run 8 parallel attention operations, each learning
+different relationship types (syntax, semantics, coreference). Concatenate
+the results. Each head specializes in something different.
+- Scaled Dot-Product: the Q·K^T operation divided by sqrt(d_k). Without the
+scaling factor, gradients explode at high dimensions. The math is simple;
+the engineering insight is the scaling.
 
-## Real-World Patterns
-- Netflix uses Chaos Engineering to test resilience assumptions
-- Amazon DynamoDB opts for AP under partition with eventual consistency
-- CoreOS etcd uses Raft for strongly consistent leader election`,
-    sourceNoteZh: `# Rust 语言在国内技术圈的采用分析
+## Positional Encoding
+Since there's no recurrence, the model has no idea about word order. The fix:
+add sine/cosine waves of different frequencies to input embeddings. This gives
+the model position information without adding parameters. Delete this section
+and the model becomes a bag-of-words.
 
-Rust 连续多年蝉联 Stack Overflow 最受喜爱语言，国内大厂正加速采用。
+## Why This Changed Everything
+- Training was parallelizable (RNNs trained token-by-token, Transformers train
+the whole sequence at once) → scale to larger datasets
+- Long-range dependencies: RNNs had ~50-token memory; Transformers have no
+fixed limit (bounded by context window, which grew from 512 to 1M+ tokens)
+- This paper led directly to: BERT (2018), GPT (2018+), every modern LLM
 
-## 采用驱动力
-- 内存安全无 GC，适合系统编程和高性能场景
-- C++ 替代趋势：字节跳动用 Rust 重写部分存储引擎
-- 云原生基础设施：TiKV、RisingWave 等国产开源项目引领
+## Open Questions
+- Is attention truly the final form? State Space Models (Mamba, S4) challenge
+the quadratic complexity of attention
+- Do multiple heads actually learn distinct patterns, or are they redundant?`,
+    sourceNoteZh: `# Transformer 论文核心要点
 
-## 落地场景
-- 数据库与存储：TiDB 的底层存储 TiKV 由 Rust 编写
-- WebAssembly：字节内部大量使用 Rust → Wasm 编译
-- 区块链：Solana、Sui 等公链核心均使用 Rust
-- 嵌入式与 IoT：华为在鸿蒙中投入 Rust 组件研发
+"Attention Is All You Need" — 这篇论文终结了 RNN 时代。
+Vaswani 等，2017，Google Brain。
 
-## 主要障碍
-- 学习曲线陡峭：所有权、生命周期概念需要时间消化
-- 编译速度慢：大型项目增量编译体验有待优化
-- 生态仍在成长：部分领域的库不如 Go/Java 成熟`,
+## 核心思想
+RNN 逐词处理序列（像念书一样一个字一个字读），Transformer 一次看完整句话，
+用"注意力机制"让每个词自己决定要关注句子里的哪些其他词。关键洞察：
+顺序处理不是优点，是瓶颈。
+
+## 三个注意力机制
+- 自注意力（Self-Attention）：句子中每个词同时关注所有词，捕捉长距离依赖。
+RNN 在超过 50 个 token 后"记忆"衰减，Transformer 没有这个限制
+- 多头注意力（Multi-Head）：8 组并行的注意力运算，每组学习不同类型的关系
+——句法、语义、指代。然后拼接起来。不同头会各自专精某种模式
+- 缩放点积：Q·K^T 除以 sqrt(d_k)。不用这个缩放因子，高维空间内积值过大，
+梯度会爆炸。数学很直白，但工程上这个因子是整个计算的定海神针
+
+## 位置编码
+Transformer 没有循环结构，天然不知道词的顺序。方案：在输入嵌入上叠加不同
+频率的正弦/余弦波。这样模型获得了位置信息，且不增加任何可训练参数。
+删掉这一段，模型就退化成一个词袋模型——"今天吃午饭"和"午饭吃今天"没有区别。
+
+## 为什么这篇论文改变了整个 AI
+- 训练可并行化：RNN 必须逐 token 跑，Transformer 一次处理全序列 → 数据量级
+直接飞跃。GPT 系列、BERT、Claude、Gemini 全都站在这个地基上
+- 长距离依赖：RNN 记忆约 50 个 token 后衰减，Transformer 只受上下文窗口限制。
+从 2017 年的 512 token 到今天的 1M+ token——全部建立在"不再需要 RNN"这个基础
+决策之上
+- 这条线的直接产物：BERT (2018) → GPT 系列 → 你今天能用的每一个 LLM
+
+## 还没弄懂
+- 注意力是"终极形态"吗？State Space Models（Mamba, S4）正在挑战注意力的二次
+复杂度。线性注意力不需要 O(n²)
+- 多头注意力的各个"头"真的学到了不同的东西吗？还是大部分头其实是冗余的？
+论文说要验证，但我没找到权威的实验证据`,
     extractedItems: [
-      { name: 'Leslie Lamport', type: 'entity', lineIdx: 9 },
-      { name: 'Netflix', type: 'entity', lineIdx: 14 },
-      { name: 'Amazon DynamoDB', type: 'entity', lineIdx: 15 },
-      { name: 'CAP Theorem', type: 'concept', lineIdx: 5 },
-      { name: 'Raft', type: 'concept', lineIdx: 10 },
-      { name: 'Chaos Engineering', type: 'concept', lineIdx: 14 },
+      { name: 'Vaswani et al.', type: 'entity', lineIdx: 0 },
+      { name: 'BERT', type: 'entity', lineIdx: 0 },
+      { name: 'GPT', type: 'entity', lineIdx: 0 },
+      { name: 'Self-Attention', type: 'concept', lineIdx: 0 },
+      { name: 'Multi-Head Attention', type: 'concept', lineIdx: 0 },
+      { name: 'Positional Encoding', type: 'concept', lineIdx: 0 },
     ],
     generatedPages: [
-      { title: 'CAP Theorem', path: 'wiki/concepts/cap-theorem.md', tags: ['Theory', 'Tradeoffs'], summary: 'A distributed system can guarantee at most two of: Consistency (same data everywhere), Availability (every request succeeds), Partition Tolerance.' },
-      { title: 'Raft Consensus', path: 'wiki/concepts/raft.md', tags: ['Protocol', 'Consensus'], summary: 'A leader-based consensus algorithm designed for understandability, splitting consensus into leader election, log replication, and safety.' },
-      { title: 'Gossip Protocols', path: 'wiki/concepts/gossip.md', tags: ['Protocol', 'Scalability'], summary: 'Nodes periodically exchange state with random peers, achieving eventual consistency through epidemic-style information propagation.' },
-      { title: 'Chaos Engineering', path: 'wiki/concepts/chaos-engineering.md', tags: ['Resilience', 'Testing'], summary: 'Deliberately injecting failures into production systems to verify that redundancy mechanisms actually work under real conditions.' },
+      { title: 'Self-Attention', path: 'wiki/concepts/self-attention.md', tags: ['AI', 'NLP'], summary: 'The core mechanism of the Transformer: every token in a sequence attends to every other token simultaneously, computing weighted relationships. This enables parallel processing and captures long-range dependencies that RNNs cannot maintain beyond ~50 tokens.' },
+      { title: 'Multi-Head Attention', path: 'wiki/concepts/multi-head-attention.md', tags: ['AI', 'NLP'], summary: 'Runs multiple parallel attention operations (typically 8-16 heads), each learning different types of relationships (syntax, semantics, coreference). The outputs are concatenated and linearly projected, allowing the model to jointly attend to information from different representation subspaces.' },
+      { title: 'Positional Encoding', path: 'wiki/concepts/positional-encoding.md', tags: ['AI', 'NLP'], summary: 'Since Transformers process all tokens in parallel (not sequentially), they have no inherent notion of word order. Positional encoding adds sine/cosine waves of varying frequencies to input embeddings, encoding position information without adding trainable parameters.' },
+      { title: 'State Space Models', path: 'wiki/concepts/state-space-models.md', tags: ['AI', 'Architecture'], summary: 'A new class of sequence models (Mamba, S4) that challenge Transformer\'s O(n²) attention complexity. They achieve linear scaling with sequence length while maintaining competitive performance, potentially replacing attention as the dominant architecture.' },
     ],
     links: [
       { from: 0, to: 1 }, { from: 0, to: 2 }, { from: 1, to: 2 }, { from: 0, to: 3 },
     ],
-    chatQuestion: 'When should I choose Raft over a gossip protocol for my system?',
-    chatAnswerLead: <>Choose <BoldLink>Raft</BoldLink> when you need strong consistency and a single source of truth — think leader election, configuration stores, distributed locking.</>,
-    chatAnswerDetail: <><BoldLink>Gossip Protocols</BoldLink> excel when availability and partition tolerance matter more than immediate consistency — service discovery, membership lists, eventually-consistent state.</>,
-    chatSource: 'distributed-systems.md',
+    chatQuestion: 'Is attention the final form, or will State Space Models replace it?',
+    chatAnswerLead: <><BoldLink>Attention</BoldLink> is not the final form — <BoldLink>State Space Models</BoldLink> (Mamba, S4) are already challenging its O(n²) complexity. SSMs achieve <BoldLink>linear scaling</BoldLink> with sequence length while maintaining competitive performance on long-context tasks.</>,
+    chatAnswerDetail: 'However, attention has a massive ecosystem advantage: every major LLM (GPT, Claude, Gemini) is built on it, and the hardware (GPUs) is optimized for matrix multiplication. SSMs need to prove not just theoretical efficiency but practical superiority at scale before replacing attention entirely.',
+    chatSource: 'attention-is-all-you-need.md',
     extractedItemsZh: [
-      { name: 'Rust', type: 'entity', lineIdx: 0 },
-      { name: '字节跳动', type: 'entity', lineIdx: 5 },
-      { name: 'TiKV', type: 'entity', lineIdx: 6 },
-      { name: '内存安全', type: 'concept', lineIdx: 4 },
-      { name: 'WebAssembly', type: 'concept', lineIdx: 10 },
-      { name: '所有权', type: 'concept', lineIdx: 15 },
+      { name: 'Vaswani', type: 'entity', lineIdx: 0 },
+      { name: 'Google Brain', type: 'entity', lineIdx: 0 },
+      { name: 'DeepSeek', type: 'entity', lineIdx: 0 },
+      { name: '自注意力', type: 'concept', lineIdx: 0 },
+      { name: '多头注意力', type: 'concept', lineIdx: 0 },
+      { name: '位置编码', type: 'concept', lineIdx: 0 },
     ],
     generatedPagesZh: [
-      { title: 'Rust语言', path: 'wiki/entities/rust.md', tags: ['编程语言', '系统编程'], summary: '连续多年最受喜爱语言，以内存安全无GC的独特定位在系统编程和高性能场景中快速崛起。' },
-      { title: 'TiKV', path: 'wiki/entities/tikv.md', tags: ['数据库', '开源'], summary: 'CNCF毕业项目，TiDB的底层分布式存储引擎，由Rust编写，是国内Rust生态的标杆项目。' },
-      { title: '所有权系统', path: 'wiki/concepts/ownership.md', tags: ['语言特性'], summary: 'Rust的核心创新——通过所有权、借用和生命周期在编译期保证内存安全，无需垃圾回收。' },
-      { title: 'WebAssembly生态', path: 'wiki/concepts/wasm.md', tags: ['Wasm', '前端'], summary: 'Rust→Wasm编译链在国内大厂广泛使用，字节跳动大量内部工具采用此方案实现浏览器端高性能计算。' },
+      { title: '自注意力机制', path: 'wiki/concepts/self-attention.md', tags: ['AI', 'NLP'], summary: 'Transformer的核心机制：序列中每个词同时关注所有其他词，计算加权关系。这使得并行处理成为可能，并能捕捉RNN无法维持的长距离依赖（超过50个token后RNN记忆衰减）。' },
+      { title: '多头注意力', path: 'wiki/concepts/multi-head-attention.md', tags: ['AI', 'NLP'], summary: '并行运行多组注意力运算（通常8-16个头），每组学习不同类型的关系（句法、语义、指代）。输出拼接后线性投影，使模型能够联合关注不同表示子空间的信息。' },
+      { title: '位置编码', path: 'wiki/concepts/positional-encoding.md', tags: ['AI', 'NLP'], summary: '由于Transformer并行处理所有词，没有词序概念。位置编码通过叠加不同频率的正弦/余弦波到输入嵌入上，在不增加可训练参数的情况下编码位置信息。' },
+      { title: '状态空间模型', path: 'wiki/concepts/state-space-models.md', tags: ['AI', '架构'], summary: '一类新型序列模型（Mamba, S4），挑战Transformer的O(n²)注意力复杂度。它们实现与序列长度成线性比例的扩展，同时保持竞争性能，有可能取代注意力成为主导架构。' },
     ],
-    chatQuestionZh: 'Rust在国内技术圈的采用主要受什么驱动？',
-    chatAnswerLeadZh: <>国内大厂采用Rust的核心驱动力是<BoldLink>内存安全</BoldLink>无GC——字节跳动用Rust重写存储引擎，<BoldLink>TiKV</BoldLink>等项目证明了Rust在数据库和云原生基础设施中的可靠性。</>,
-    chatAnswerDetailZh: '除此之外，<BoldLink>WebAssembly</BoldLink>编译链让Rust进入前端高性能计算场景，区块链（Solana、Sui）的底层也大量使用Rust。但学习曲线陡峭和编译速度仍是主要障碍。',
-    chatSourceZh: 'rust-adoption-analysis.md',
+    chatQuestionZh: 'Transformer的注意力机制会被状态空间模型取代吗？',
+    chatAnswerLeadZh: <><BoldLink>注意力</BoldLink>不是终极形态——<BoldLink>状态空间模型</BoldLink>（Mamba, S4）正在挑战其O(n²)的二次复杂度。SSM实现了与序列长度成<BoldLink>线性比例</BoldLink>的扩展，在长上下文任务上保持竞争性能。</>,
+    chatAnswerDetailZh: '但注意力拥有巨大的生态优势：GPT、Claude、Gemini等所有主流LLM都建立在它之上，GPU硬件也针对矩阵乘法优化。SSM需要证明的不仅是理论效率，还有大规模实践中的优越性，才能真正取代注意力。',
+    chatSourceZh: 'Transformer论文笔记.md',
+  },
+  {
+    id: 'business',
+    label: 'Business',
+    labelZh: '商业分析',
+    Icon: TrendingUp,
+    filename: 'stripe-strategy.md',
+    sourceNote: `# Stripe's Strategic Evolution
+
+## From Developer Tool to Economic Infrastructure
+
+Stripe started as "7 lines of code to accept payments." But that framing
+obscures the real strategy: they didn't win by making payments easier —
+they won by making the developer the buyer.
+
+## Key Strategic Moves
+- **API-first distribution**: every developer who integrates Stripe becomes
+  an internal champion. No sales team needed for SMB segment
+- **Compound product**: Payments → Billing → Tax → Treasury → Issuing. Each
+  product leverages data from the previous one. Switching costs increase
+  exponentially — you can replace a payment processor, you can't replace
+  your entire financial stack
+- **Card network bypass**: Stripe's direct integrations with Visa/Mastercard
+  remove acquirer middlemen. Estimated 15–25 bps margin advantage over
+  competitors who route through legacy acquirers
+
+## Revenue Model
+- 2.9% + $0.30 per transaction (core payments)
+- Billing/Tax/Radar: additional 0.4–0.8% per transaction
+- Growing revenue share from non-payment products (Link, Capital, Atlas)
+- Estimated $1T+ total payment volume (2023), implying ~$14B+ net revenue
+
+## Competitive Position
+- vs Adyen: Stripe wins on developer experience; Adyen wins on enterprise
+- vs Square: Stripe online-first; Square POS-first. Converging
+- vs Braintree: Stripe has pulled ahead significantly since 2020
+- Threat: in-house builds by large merchants (Shopify, DoorDash)
+
+## Open Questions
+- Can Stripe maintain growth without expanding into lending/lending-adjacent?
+- China/SEA expansion still minimal — regulatory barrier or strategic choice?`,
+    sourceNoteZh: `# Temu 出海策略分析
+
+Temu 上线不到两年，下载量超过 2 亿。靠的不是低价——中国跨境电商从来不缺低价。
+它的真正策略被大多数人误读了。
+
+## 核心策略不是"便宜"
+
+**全托管模式才是真正的护城河**
+传统跨境电商：商家负责选品、定价、物流、售后，平台只是流量入口。
+Temu 全托管：商家只负责供货和报一个出厂价。定什么价、上什么渠道、
+怎么发货、怎么退款——全部由 Temu 决定。
+
+这意味着什么？Temu 不是"卖便宜货的电商"，而是"具有零售定价权
+的全球供应链调度系统"。它掌握了从工厂到消费者之间的每一个环节的
+全部数据。这个数据闭环，SHEIN 用 10 年做到，Temu 用 18 个月。
+
+## 单位经济学的关键
+- 航空小包直邮，单件履约成本约 $3–5，比亚马逊 FBA 便宜 60%
+- 免运费门槛从 $10 提到 $29，证明履约成本正在被规模摊薄
+- 但：退货率约 30%（服装品类），远超亚马逊的 15%。退货是 Temu
+  最大的成本黑洞
+
+## 争议与风险
+- 美国国会正在推进 de minimis 规则修改（800 美元以下免税政策），
+  若取消将直接冲击 Temu 的单位经济模型
+- 品牌化缺失：用户记住的是"Temu 便宜"，记不住任何品牌
+- SHEIN 和 TikTok Shop 正在加速追赶。拼多多在国内靠"五环外"起家
+  ——但美国没有"五环外"这个需求结构
+
+## 还没想清楚的问题
+- Temu 的终局是"全球版的拼多多"还是"下一个 Wish"？
+- 全托管模式的盈利路径：PDD Holdings 财报从未单独披露 Temu 亏损，
+  但市场估算 Temu 每年烧掉 50–80 亿人民币。什么时候能回正？
+- 如果 de minimis 取消，Temu 的应对方案是什么？海外仓？本土化？`,
+    extractedItems: [
+      { name: 'Stripe', type: 'entity', lineIdx: 0 },
+      { name: 'Visa', type: 'entity', lineIdx: 0 },
+      { name: 'Mastercard', type: 'entity', lineIdx: 0 },
+      { name: 'API-First Distribution', type: 'concept', lineIdx: 0 },
+      { name: 'Compound Product', type: 'concept', lineIdx: 0 },
+      { name: 'Payment Volume', type: 'concept', lineIdx: 0 },
+    ],
+    generatedPages: [
+      { title: 'Stripe', path: 'wiki/entities/stripe.md', tags: ['Fintech', 'SaaS'], summary: 'Payment infrastructure company founded in 2010. Core strategy: API-first distribution targeting developers as buyers, then expanding into compound products (Billing, Tax, Treasury, Issuing). Estimated $1T+ payment volume and $14B+ net revenue.' },
+      { title: 'API-First Distribution', path: 'wiki/concepts/api-first-distribution.md', tags: ['Strategy', 'Go-to-Market'], summary: 'A go-to-market strategy where the product is primarily accessed and distributed through APIs. Every developer who integrates becomes an internal champion, creating bottom-up adoption without traditional sales teams. Stripe is the canonical example.' },
+      { title: 'Compound Product Strategy', path: 'wiki/concepts/compound-product.md', tags: ['Strategy', 'Product'], summary: 'Building interconnected products where each new layer leverages data and relationships from previous layers. Switching costs increase exponentially — replacing one product is easy, replacing the entire stack is nearly impossible. Stripe\'s Payments → Billing → Tax → Treasury → Issuing is the archetype.' },
+      { title: 'Card Network Economics', path: 'wiki/concepts/card-network-economics.md', tags: ['Fintech', 'Payments'], summary: 'The fee structure of card payment networks (Visa, Mastercard) and how payment processors interact with them. Direct integration (bypassing acquirers) can yield 15–25 basis points of margin advantage. Understanding interchange fees, scheme fees, and acquirer margins.' },
+    ],
+    links: [
+      { from: 0, to: 1 }, { from: 0, to: 2 }, { from: 1, to: 2 }, { from: 2, to: 3 },
+    ],
+    chatQuestion: 'Can Stripe maintain growth without expanding into lending?',
+    chatAnswerLead: <><BoldLink>Stripe</BoldLink> faces a classic growth ceiling: payment processing margins are compressing (2.9% + $0.30 is already under pressure from in-house builds by Shopify, DoorDash, etc.). The company must either expand into higher-margin adjacent services (lending, treasury, capital) or accept lower growth rates.</>,
+    chatAnswerDetail: 'The compound product strategy (Payments → Billing → Tax → Treasury → Issuing) is Stripe\'s answer: each layer builds on the previous one, making the entire stack progressively harder to replace. But lending is the highest-margin financial service — and the one Stripe has been most cautious about entering.',
+    chatSource: 'stripe-strategy.md',
+    extractedItemsZh: [
+      { name: 'Temu', type: 'entity', lineIdx: 0 },
+      { name: '拼多多', type: 'entity', lineIdx: 0 },
+      { name: 'SHEIN', type: 'entity', lineIdx: 0 },
+      { name: '全托管模式', type: 'concept', lineIdx: 0 },
+      { name: '单位经济学', type: 'concept', lineIdx: 0 },
+      { name: 'de minimis', type: 'concept', lineIdx: 0 },
+    ],
+    generatedPagesZh: [
+      { title: 'Temu', path: 'wiki/entities/temu.md', tags: ['跨境电商', '出海'], summary: '拼多多旗下跨境电商平台，2022年上线。核心创新为"全托管模式"——商家只供货，定价、物流、售后全部由平台决定。18个月内构建了覆盖全球的供应链调度系统，下载量超2亿。' },
+      { title: '全托管模式', path: 'wiki/concepts/full-service-model.md', tags: ['跨境电商', '商业模式'], summary: 'Temu的核心商业模式：商家只负责供货和报出厂价，平台掌握定价权、渠道选择、物流和售后。这使得Temu成为"具有零售定价权的全球供应链调度系统"，而非传统的流量中介平台。' },
+      { title: '单位经济学', path: 'wiki/concepts/unit-economics.md', tags: ['商业', '财务'], summary: 'Temu的单位经济学关键数据：航空小包直邮单件履约成本$3-5（比亚马逊FBA便宜60%），免运费门槛从$10提至$29证明规模效应。但退货率约30%（服装品类）是最大成本黑洞。' },
+      { title: 'de minimis规则', path: 'wiki/concepts/de-minimis.md', tags: ['政策', '贸易'], summary: '美国海关规定：价值800美元以下的进口商品免征关税。Temu和SHEIN严重依赖此政策降低履约成本。美国国会正推进修改此规则，若取消将直接冲击Temu的单位经济模型。' },
+    ],
+    chatQuestionZh: 'Temu 的终局是全球版的拼多多还是下一个 Wish？',
+    chatAnswerLeadZh: <>Temu面临两个根本性挑战：<BoldLink>品牌化缺失</BoldLink>（用户记住的是"便宜"而非任何品牌）和<BoldLink>政策风险</BoldLink>（de minimis规则若取消，单位经济模型直接崩塌）。如果无法解决这两个问题，Temu可能成为下一个Wish——低价平台的典型失败案例：高速增长后迅速萎缩。</>,
+    chatAnswerDetailZh: '但Temu也有拼多多不具备的优势：全托管模式积累的数据闭环、母公司PDD Holdings的资金支持、以及供应链深度整合的能力。如果能利用这些优势建立品牌认知（而非平台认知），并提前布局海外仓应对de minimis风险，Temu有机会成为真正的全球零售基础设施。',
+    chatSourceZh: 'Temu出海策略.md',
   },
 ];
