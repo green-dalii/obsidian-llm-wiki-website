@@ -313,8 +313,8 @@ export const en: Translations = {
 
 export const zh: Translations = {
   nav: {
-    howItWorks: '原理',
-    comparison: '价值',
+    howItWorks: '怎么运作',
+    comparison: '为何重要',
     features: '功能',
     providers: '开源',
     ecosystem: '生态',
@@ -336,7 +336,7 @@ export const zh: Translations = {
     scrollHint: '继续',
   },
   wikiDemo: {
-    label: '原理',
+    label: '怎么运作',
     title: '笔记变 Wiki',
     subtitle: '一条笔记，万千连接。',
     step1Title: '随手放入',
@@ -360,7 +360,7 @@ export const zh: Translations = {
     answer: '回答',
   },
   comparison: {
-    label: '价值',
+    label: '为何重要',
     title: '任其散落，还是日渐丰盈？',
     subtitle: '当你的笔记开始为你工作时，一切都会不同。',
     beforeLabel: '之前',
