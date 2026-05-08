@@ -14,14 +14,9 @@ const t = locale === 'zh' ? translations.zh : translations.en;
     <div class="mb-12 text-center">
       <span class="text-[11px] font-mono text-obsidian-purple tracking-[0.15em] uppercase">{t.comparison.label}</span>
       <div class="mb-8">
-        <p class="text-[clamp(1.4rem,3.5vw,2rem)] text-obsidian-muted font-normal leading-snug max-w-2xl mx-auto">
-          {locale === 'en'
-            ? 'Every article you read should never be forgotten.'
-            : '你读过的每一篇,都不该白读。'}
-        </p>
+        <h2 class="text-[clamp(1.6rem,4vw,2.8rem)] font-semibold mt-3 mb-3 text-obsidian-heading reveal" data-delay="1">{t.comparison.title}</h2>
+        <p class="text-obsidian-muted text-sm max-w-md mx-auto reveal" data-delay="2">{t.comparison.subtitle}</p>
       </div>
-      <h2 class="text-[clamp(1.6rem,4vw,2.8rem)] font-semibold mt-3 mb-3 text-obsidian-heading reveal" data-delay="1">{t.comparison.title}</h2>
-      <p class="text-obsidian-muted text-sm max-w-md mx-auto reveal" data-delay="2">{t.comparison.subtitle}</p>
     </div>
 
     <!-- Desktop header -->
