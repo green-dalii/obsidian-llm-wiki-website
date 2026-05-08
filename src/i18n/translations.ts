@@ -315,10 +315,10 @@ export const zh: Translations = {
   nav: {
     howItWorks: '怎么运作',
     comparison: '为何重要',
-    features: '功能',
+    features: '亮点',
     providers: '开源',
     ecosystem: '生态',
-    install: '安装',
+    install: '快速开始',
     download: '下载',
   },
   hero: {
@@ -384,7 +384,7 @@ export const zh: Translations = {
     ],
   },
   features: {
-    label: '功能',
+    label: '亮点',
     title: '真正的改变',
     subtitle: '不是功能清单。是你与知识相处方式的改变。',
     organizeTitle: '水到渠成',
