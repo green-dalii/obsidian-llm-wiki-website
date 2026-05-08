@@ -146,6 +146,13 @@ Deploy via GitHub Actions. **Not recommended** for China users (slow access due 
 
 ## Optimization History
 
+### v1.3.1 (2026-05-08) ✅
+- Apple-standard copywriting polish — Iterative EN/ZH translation refinement across 3 rounds
+- Removed personification (pages don't "know" or "breathe", software doesn't "栖息")
+- Fixed `organizeTag: ' effortless'` bug (English string with space in ZH locale)
+- Natural Chinese nav labels — conversational, benefit-oriented, synced with section labels
+- Unified tone: confident simplicity, active verbs, everyday language, emotional resonance
+
 ### v1.3.0 (2026-05-07) ✅
 - Hero UI enhancement — Obsidian install guidance, Karpathy concept link, layout optimization
 - Install section improvements — Step 1 dual-download buttons, Step 2 SVG icons using standard Lucide paths with vertical centering
