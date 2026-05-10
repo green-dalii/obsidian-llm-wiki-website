@@ -38,6 +38,10 @@ const ogImage = siteUrl + 'og-image.jpg';
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <link rel="apple-touch-icon" href="/favicon.svg" />
 
+    <!-- Font preload -->
+    <link rel="preload" href="/fonts/outfit.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href="/fonts/jetbrains-mono.woff2" as="font" type="font/woff2" crossorigin />
+
     <!-- Open Graph -->
     <meta property="og:type" content="website" />
     <meta property="og:site_name" content="LLM Wiki for Obsidian" />
@@ -57,16 +61,11 @@ const ogImage = siteUrl + 'og-image.jpg';
     <meta name="twitter:description" content="Karpathy's LLM Wiki for Obsidian. You write. AI organizes. You ask." />
     <meta name="twitter:image" content={ogImage} />
 
-    <!-- Canonical -->
+    <!-- Canonical & hreflang -->
     <link rel="canonical" href={Astro.site} />
     <link rel="alternate" hreflang="en" href={Astro.site} />
     <link rel="alternate" hreflang="zh" href={zhUrl} />
     <link rel="alternate" hreflang="x-default" href={Astro.site} />
-
-    <!-- Preconnect -->
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=optional" rel="stylesheet" />
 
     <!-- JSON-LD Structured Data -->
     <script type="application/ld+json" set:html={JSON.stringify({
