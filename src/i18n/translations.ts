@@ -122,7 +122,9 @@ export interface Translations {
     cta: string;
   };
   footer: {
-    license: string;
+    emailUser: string;
+    emailDomain: string;
+    emailLabel: string;
     github: string;
     discussions: string;
     releases: string;
@@ -298,7 +300,9 @@ export const en: Translations = {
     cta: 'Just the beginning. When your knowledge has structure, every plugin becomes more powerful.',
   },
   footer: {
-    license: 'MIT License',
+    emailUser: 'hi',
+    emailDomain: 'greenerai.top',
+    emailLabel: 'Contact:',
     github: 'GitHub',
     discussions: 'Feedback',
     releases: 'Releases',
@@ -474,7 +478,9 @@ export const zh: Translations = {
     cta: '这只是开始。当知识有了结构，Obsidian 的每个插件都会更加强大。',
   },
   footer: {
-    license: 'MIT 许可证',
+    emailUser: 'hi',
+    emailDomain: 'greenerai.top',
+    emailLabel: '联系作者：',
     github: 'GitHub',
     discussions: '反馈意见',
     releases: '版本',

@@ -1,5 +1,4 @@
 User-agent: *
 Allow: /
-Disallow: /assets/
 
-Sitemap: https://green-dalii.github.io/obsidian-llm-wiki/sitemap.xml
+Sitemap: https://llmwiki.greenerai.top/sitemap.xml
