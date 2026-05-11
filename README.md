@@ -6,7 +6,7 @@ Marketing website for the [Obsidian LLM Wiki plugin](https://github.com/green-da
 
 - **Astro 6.2** — Static site generation with Islands architecture
 - **React 19** — Interactive components (client-side hydration)
-- **Tailwind CSS 4.0** — CSS-first utility styling with @theme directive
+- **Tailwind CSS 4.3** — CSS-first utility styling with @theme directive
 - **IntersectionObserver** — Scroll-triggered animations for static sections
 - **Canvas 2D** — Organic "Knowledge Growth" animation for hero background
 - **lucide-react** — Consistent icon system
@@ -36,9 +36,8 @@ All purple values in Canvas animations, SVGs, and CSS have been unified to offic
 
 **Interactive Islands (React):**
 - HeaderIsland — Navigation, language toggle, GitHub stars
-- HeroIsland — KnowledgeGrowth Canvas animation
-- WikiDemoIsland — Interactive 5-step demo
-- FooterIsland — Dynamic footer content
+- HeroBackgroundIsland — KnowledgeGrowth Canvas animation (client:load)
+- WikiDemoIsland — Interactive 5-step demo (client:visible)
 - ProgressBar — Scroll progress indicator
 
 ### Key Benefits
@@ -67,18 +66,19 @@ src/
     index.astro           English landing page (static HTML)
     zh/index.astro        Chinese landing page (static HTML)
   components/
-    astro/                Static Astro components (zero JS)
+    astro/                Static Astro components (zero JS, SSR)
       Comparison.astro    Before/after comparison grid
       Features.astro      Feature cards with code snippets
       Install.astro       Installation guide
       Ecosystem.astro     Obsidian ecosystem integration
       Providers.astro     LLM provider grid
+      Hero.astro          Hero section with CSS animations
+      Footer.astro        Contact email + links
       Icon.astro          SVG icon component
     HeaderIsland.tsx      Navigation with language toggle
-    HeroIsland.tsx        Hero with KnowledgeGrowth animation
     WikiDemoIsland.tsx    Interactive 5-step demo
-    FooterIsland.tsx      Dynamic footer
     ProgressBar.tsx       Scroll progress
+    HeroBackgroundIsland.tsx  KnowledgeGrowth Canvas animation
     KnowledgeGrowth.tsx   Canvas 2D organic growth animation
   i18n/
     astro.ts              Translation strings for both languages
@@ -130,10 +130,10 @@ Deploy via GitHub Actions. **Not recommended** for China users (slow access due 
 - FCP: 1.6s (英文), 5.1s (中文首次加载)
 
 **Bundle Size:**
-- HTML: 13KB per page
-- JavaScript: ~101KB total (React + components)
-- CSS: 37KB (Tailwind v4 CSS-first, larger but all variables)
-- Fonts: 40KB (Outfit wght@400;500;600 + JetBrains Mono wght@400;500, optimized)
+- HTML: 68KB (EN), 69KB (ZH) — full static content with SEO meta
+- JavaScript: ~405KB total (React runtime + islands + Canvas graph physics)
+- CSS: 38KB (Tailwind v4 CSS-first, JIT tree-shaken)
+- Fonts: 94KB (Outfit + JetBrains Mono self-hosted woff2)
 
 ## Accessibility Improvements (2026-04-30)
 
@@ -145,6 +145,19 @@ Deploy via GitHub Actions. **Not recommended** for China users (slow access due 
 - ✅ Favicon redesigned (BookOpen icon + Obsidian purple border, matches official branding)
 
 ## Optimization History
+
+### v1.4.0 (2026-05-11) ✅
+- **SEO overhaul** — Correct domain migration (llmwiki.greenerai.top), sitemap with both locales, hreflang x-default, robots.txt fix, JSON-LD for ZH page
+- **Meta description rewrite** — Aligned with GitHub repo description and README philosophy
+- **Contact email in footer** — JS-based anti-spam obfuscation (hi@greenerai.top)
+- **Font self-hosting** — Outfit + JetBrains Mono as local woff2, no external font requests (LCP +150-250ms)
+- **Hero SSR** — Static content (badge, title, CTA) rendered in HTML, instant LCP. GSAP replaced with CSS animations
+- **WikiDemo lazy load** — Changed to `client:visible`, 122KB JS deferred
+- **HeroBackgroundIsland** — Canvas animation uses `client:load` for immediate hydrate
+- **og-image refresh** — Replaced generic screenshot with plugin banner (llm_wiki_banner.jpg → 47KB WebP)
+- **Scroll-reveal shared module** — Extracted duplicated 70-line inline scripts to shared file
+- **Tailwind 4.0 → 4.3** — Build performance improvements
+- **Code cleanup** — Removed 7 unused React-to-Astro migration files, 7 unused devDependencies
 
 ### v1.3.1 (2026-05-08) ✅
 - Apple-standard copywriting polish — Iterative EN/ZH translation refinement across 3 rounds
