@@ -12,7 +12,7 @@ const t = locale === 'zh' ? translations.zh : translations.en;
 <section class="relative h-[calc(100dvh-3.5rem)] w-full flex items-center justify-center overflow-hidden">
   <!-- Canvas background - lazy load -->
   <div class="absolute inset-0 z-0">
-    <HeroBackgroundIsland client:visible="react" />
+    <HeroBackgroundIsland client:load />
   </div>
 
   <!-- Static content - SSR -->
