@@ -15,7 +15,7 @@ import CTA from '../../components/astro/CTA.astro';
 const siteUrl = Astro.site;
 const title = 'LLM Wiki for Obsidian — AI驱动的自组织知识库';
 const description = 'Karpathy LLM Wiki 的 Obsidian 实现——AI 读取你的笔记，生成包含实体/概念页面、双向链接和对话查询的互联 Wiki。';
-const ogImage = siteUrl + 'og-image.jpg';
+const ogImage = siteUrl + 'og-image.webp';
 const zhUrl = siteUrl + 'zh/';
 ---
 
@@ -130,76 +130,4 @@ const zhUrl = siteUrl + 'zh/';
   </body>
 </html>
 
-<script define:vars={{}}>
-  /**
-   * Scroll reveal - IntersectionObserver-based entrance animations.
-   * Optimized for Astro Islands architecture - waits for React components to render.
-   */
-
-  // Global observer instance (accessible from all strategies)
-  let revealObserver = null;
-
-  function initReveal() {
-    // Create observer if not exists
-    if (!revealObserver) {
-      revealObserver = new IntersectionObserver(
-        (entries) => {
-          entries.forEach((entry) => {
-            if (entry.isIntersecting) {
-              const el = entry.target;
-              const delay = parseInt(el.dataset.delay || '0', 10);
-              setTimeout(() => {
-                el.classList.add('is-visible');
-              }, delay * 80);
-              revealObserver.unobserve(el);
-            }
-          });
-        },
-        { threshold: 0.08, rootMargin: '0px 0px -40px 0px' }
-      );
-    }
-
-    // Observe all existing .reveal elements
-    document.querySelectorAll('.reveal').forEach((el) => {
-      revealObserver.observe(el);
-    });
-  }
-
-  // Strategy 1: Run when DOM is ready (for static Astro content)
-  if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', initReveal);
-  } else {
-    initReveal();
-  }
-
-  // Strategy 2: Wait for React Islands to hydrate (Astro official recommendation)
-  document.addEventListener('astro:page-load', initReveal);
-
-  // Strategy 3: Delayed initialization as fallback (ensures React mounted)
-  setTimeout(initReveal, 300);
-
-  // Strategy 4: MutationObserver for dynamic content
-  const mutationObserver = new MutationObserver((mutations) => {
-    mutations.forEach((mutation) => {
-      mutation.addedNodes.forEach((node) => {
-        if (node.nodeType === 1) { // Element node
-          if (node.classList?.contains('reveal') && revealObserver) {
-            revealObserver.observe(node);
-          }
-          // Also check children
-          if (node.querySelectorAll && revealObserver) {
-            node.querySelectorAll('.reveal').forEach((el) => {
-              revealObserver.observe(el);
-            });
-          }
-        }
-      });
-    });
-  });
-
-  // Start observing DOM changes after initial load
-  mutationObserver.observe(document.body, {
-    childList: true,
-    subtree: true
-  });
-</script>
+<script src="../../scripts/scroll-reveal.ts"></script>
