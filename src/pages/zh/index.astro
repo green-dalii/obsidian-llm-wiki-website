@@ -2,7 +2,7 @@
 import '../../index.css';
 import ProgressBar from '../../components/ProgressBar';
 import HeaderIsland from '../../components/HeaderIsland';
-import HeroIsland from '../../components/HeroIsland';
+import Hero from '../../components/astro/Hero.astro';
 import WikiDemoIsland from '../../components/WikiDemoIsland';
 import Footer from '../../components/astro/Footer.astro';
 import Comparison from '../../components/astro/Comparison.astro';
@@ -115,7 +115,7 @@ const zhUrl = siteUrl + 'zh/';
       <ProgressBar client:only="react" />
       <HeaderIsland client:only="react" currentLocale="zh" />
       <main class="pt-14">
-        <HeroIsland client:only="react" locale="zh" />
+        <Hero locale="zh" />
         <Comparison locale="zh" />
         <WikiDemoIsland client:only="react" locale="zh" />
         <div class="h-px max-w-5xl mx-auto bg-gradient-to-r from-transparent via-obsidian-purple/20 to-transparent" />
