@@ -14,6 +14,15 @@ gsap.registerPlugin(ScrollTrigger);
 
 type WikiDemoKey = keyof Translations['wikiDemo'];
 
+const SCENARIO_LABELS: Record<string, Record<ScenarioId, string>> = {
+  en: { 'daily-life': 'Daily Life', 'reading': 'Deep Reading', 'inspiration': 'Inspiration', 'creation': 'Content Creation', 'academic': 'Academic Research', 'business': 'Business' },
+  zh: { 'daily-life': '日常生活', 'reading': '深度阅读', 'inspiration': '灵感捕捉', 'creation': '内容创作', 'academic': '学术研究', 'business': '商业决策' },
+  ja: { 'daily-life': '日常生活', 'reading': '深い読書', 'inspiration': 'ひらめき', 'creation': 'コンテンツ作成', 'academic': '学術研究', 'business': 'ビジネス' },
+  ko: { 'daily-life': '일상', 'reading': '깊은 읽기', 'inspiration': '영감', 'creation': '콘텐츠 제작', 'academic': '학술 연구', 'business': '비즈니스' },
+  de: { 'daily-life': 'Alltag', 'reading': 'Tiefes Lesen', 'inspiration': 'Inspiration', 'creation': 'Inhalte erstellen', 'academic': 'Akademische Forschung', 'business': 'Business' },
+  es: { 'daily-life': 'Vida diaria', 'reading': 'Lectura profunda', 'inspiration': 'Inspiración', 'creation': 'Creación de contenido', 'academic': 'Investigación académica', 'business': 'Negocios' },
+};
+
 const STEPS: Array<{ id: number; titleKey: WikiDemoKey; descKey: WikiDemoKey }> = [
   { id: 1, titleKey: 'step1Title', descKey: 'step1Desc' },
   { id: 2, titleKey: 'step2Title', descKey: 'step2Desc' },
@@ -23,11 +32,11 @@ const STEPS: Array<{ id: number; titleKey: WikiDemoKey; descKey: WikiDemoKey }> 
 ];
 
 interface Props {
-  locale?: 'en' | 'zh';
+  locale?: string;
 }
 
 export default function WikiDemo({ locale = 'en' }: Props) {
-  const t = locale === 'zh' ? translations.zh : translations.en;
+  const tMap: Record<string, any> = translations; const t = tMap[locale] || translations.en;
   const sectionRef = useRef<HTMLElement>(null);
   const [step, setStep] = useState(0);
   const [autoPlay, setAutoPlay] = useState(true);
@@ -100,7 +109,7 @@ export default function WikiDemo({ locale = 'en' }: Props) {
               }`}
             >
               <s.Icon className="w-3.5 h-3.5 flex-shrink-0" />
-              {locale === 'zh' ? s.labelZh : s.label}
+              {SCENARIO_LABELS[locale]?.[s.id] || s.label}
             </button>
           ))}
         </div>

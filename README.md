@@ -10,7 +10,7 @@ Marketing website for the [Obsidian LLM Wiki plugin](https://github.com/green-da
 - **IntersectionObserver** — Scroll-triggered animations for static sections
 - **Canvas 2D** — Organic "Knowledge Growth" animation for hero background
 - **lucide-react** — Consistent icon system
-- **i18n routing** — Static pages per language (EN: `/`, ZH: `/zh/`)
+- **i18n routing** — Static pages per language (EN: `/`, ZH: `/zh/`, JA: `/ja/`, KO: `/ko/`, DE: `/de/`, ES: `/es/`)
 
 ## Brand Consistency
 
@@ -146,6 +146,20 @@ Deploy via GitHub Actions. **Not recommended** for China users (slow access due 
 
 ## Optimization History
 
+### v1.7.0 (2026-05-15) ✅
+- **German & Spanish i18n** — 107 translated strings per language, landing pages at /de/ and /es/
+- **Japanese & Korean i18n** — 107 translated strings per language, landing pages at /ja/ and /ko/
+- **6-language support** — EN, ZH, JA, KO, DE, ES with full hreflang cross-references
+- **Language switcher** — Button-triggered dropdown in desktop, horizontal row in mobile, supports all 6 locales
+- **WikiDemo scenario labels** — Translated scenario selector buttons in all 6 languages via SCENARIO_LABELS lookup
+- **Component i18n refactor** — All locale props widened to `string`, dynamic translation lookup via getT()
+
+### v1.6.0 (2026-05-15) ✅
+- **Japanese & Korean i18n** — 107 translated strings per language, full JA/KO landing pages at /ja/ and /ko/
+- **Language switcher redesign** — Button-triggered dropdown replacing EN↔ZH toggle, supports 4 languages
+- **Component i18n refactor** — All locale props widened to `string`, dynamic translation lookup via `getT()`
+- **hreflang expanded** — All 4 pages cross-reference each other for SEO
+
 ### v1.5.0 (2026-05-15) ✅
 - **Install section redesigned** — 3 steps (not 4) reflecting community plugin market availability. New SVG illustration showing Obsidian's plugin browser with search and Install button
 - **CTA links migrated** — Header, Hero, and footer CTA now point to `community.obsidian.md/plugins/karpathywiki` instead of GitHub releases
@@ -206,8 +220,12 @@ Deploy via GitHub Actions. **Not recommended** for China users (slow access due 
 - WikiDemo layout fixes (Step 3 padding, prevent indicator occlusion)
 ## i18n
 
-- **English:** `/` (default, no prefix)
-- **Chinese:** `/zh/` (prefix)
+- **English:** `/` (default)
+- **Chinese:** `/zh/`
+- **Japanese:** `/ja/`
+- **Korean:** `/ko/`
+- **German:** `/de/`
+- **Spanish:** `/es/`
 
 Static HTML per language, no client-side language switching.Hreflang tags configured for SEO.
 

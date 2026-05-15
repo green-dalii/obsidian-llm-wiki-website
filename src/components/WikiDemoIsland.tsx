@@ -1,7 +1,7 @@
 import WikiDemo from './WikiDemo';
 
 interface Props {
-  locale?: 'en' | 'zh';
+  locale?: string;
 }
 
 export default function WikiDemoIsland({ locale = 'en' }: Props) {

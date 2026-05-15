@@ -1,7 +1,7 @@
 import Header from './Header';
 
 interface Props {
-  currentLocale?: 'en' | 'zh';
+  currentLocale?: string;
 }
 
 export default function HeaderIsland({ currentLocale = 'en' }: Props) {

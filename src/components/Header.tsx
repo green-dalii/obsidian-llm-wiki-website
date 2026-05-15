@@ -2,6 +2,15 @@ import { useEffect, useState } from 'react';
 import { Download, Menu, Star, X } from 'lucide-react';
 import { translations } from '../i18n/astro';
 
+const LANGUAGES = [
+  { code: 'en', label: 'English', path: '/' },
+  { code: 'zh', label: '中文', path: '/zh/' },
+  { code: 'ja', label: '日本語', path: '/ja/' },
+  { code: 'ko', label: '한국어', path: '/ko/' },
+  { code: 'de', label: 'Deutsch', path: '/de/' },
+  { code: 'es', label: 'Español', path: '/es/' },
+];
+
 const NAV_ITEMS = [
   { key: 'comparison', labelKey: 'comparison' as const, target: '#comparison' },
   { key: 'how-it-works', labelKey: 'howItWorks' as const, target: '#how-it-works' },
@@ -17,14 +26,16 @@ function formatStars(n: number): string {
 }
 
 interface Props {
-  currentLocale?: 'en' | 'zh';
+  currentLocale?: string;
 }
 
 export default function Header({ currentLocale = 'en' }: Props) {
-  const t = currentLocale === 'zh' ? translations.zh : translations.en;
+  const t = (translations as Record<string, any>)[currentLocale] || translations.en;
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
   const [stars, setStars] = useState<string | null>(null);
+  const [langOpen, setLangOpen] = useState(false);
+  const currentLang = LANGUAGES.find(l => l.code === currentLocale) || LANGUAGES[0];
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 60);
@@ -52,7 +63,7 @@ export default function Header({ currentLocale = 'en' }: Props) {
         : 'bg-[#1f1f1f]/0 border-transparent'
     }`}>
       <div className="max-w-6xl mx-auto px-4 sm:px-6 flex items-center justify-between h-14">
-        <button onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })} className="flex items-center gap-2 group" aria-label={currentLocale === 'zh' ? '回到顶部' : 'Scroll to top'}>
+        <button onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })} className="flex items-center gap-2 group" aria-label="Scroll to top">
           <img src="/favicon.svg" alt="" className="w-7 h-7 rounded-lg" aria-hidden="true" />
           <span className="text-sm font-semibold text-[#e5e5e5] tracking-tight">LLM Wiki for Obsidian</span>
         </button>
@@ -65,10 +76,27 @@ export default function Header({ currentLocale = 'en' }: Props) {
             </button>
           ))}
           <div className="w-px h-4 bg-obsidian-border mx-1.5" />
-          <a href={currentLocale === 'en' ? '/zh/' : '/'}
-            className="px-2.5 py-1.5 text-xs font-mono text-obsidian-dim hover:text-obsidian-text border border-obsidian-border rounded-md hover:border-obsidian-purple/40 transition-all">
-            {currentLocale === 'en' ? '中' : 'EN'}
-          </a>
+          <div className="relative">
+            <button
+              onClick={() => setLangOpen(!langOpen)}
+              onBlur={() => setTimeout(() => setLangOpen(false), 150)}
+              className="px-2 py-1.5 text-xs font-mono text-obsidian-dim hover:text-obsidian-heading border border-obsidian-border rounded-md hover:border-obsidian-purple/40 transition-all inline-flex items-center gap-1"
+            >
+              {currentLang.label}
+              <svg className="w-3 h-3 opacity-50" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="m6 9 6 6 6-6"/></svg>
+            </button>
+            {langOpen && (
+              <div className="absolute right-0 top-full mt-1 bg-obsidian-surface border border-obsidian-border rounded-md shadow-lg z-50 min-w-[120px] py-1">
+                {LANGUAGES.map(lang => (
+                  <a key={lang.code} href={lang.path}
+                    className={`block px-3 py-1.5 text-xs hover:bg-white/[0.08] transition-colors ${lang.code === currentLocale ? 'text-obsidian-purple-light' : 'text-obsidian-muted'}`}
+                  >
+                    {lang.label}
+                  </a>
+                ))}
+              </div>
+            )}
+          </div>
           <a href="https://github.com/green-dalii/obsidian-llm-wiki" target="_blank" rel="noopener noreferrer"
             className="ml-1.5 px-2.5 py-1.5 text-xs font-medium text-obsidian-muted hover:text-[#e5e5e5] border border-obsidian-border rounded-md hover:border-obsidian-purple/30 transition-all inline-flex items-center gap-1.5">
             <Star className="w-3 h-3" />
@@ -85,7 +113,7 @@ export default function Header({ currentLocale = 'en' }: Props) {
         <button
           className="md:hidden p-2 text-obsidian-muted"
           onClick={() => setMobileOpen(!mobileOpen)}
-          aria-label={mobileOpen ? (currentLocale === 'zh' ? '关闭菜单' : 'Close menu') : (currentLocale === 'zh' ? '打开菜单' : 'Open menu')}
+          aria-label={mobileOpen ? 'Close menu' : 'Open menu'}
           aria-expanded={mobileOpen}
         >
           {mobileOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
@@ -100,10 +128,17 @@ export default function Header({ currentLocale = 'en' }: Props) {
               {t.nav[item.labelKey]}
             </button>
           ))}
-          <div className="flex items-center gap-3 mt-3 pt-3 border-t border-obsidian-border">
-            <a href={currentLocale === 'en' ? '/zh/' : '/'} className="px-2.5 py-1.5 text-xs font-mono text-obsidian-dim border border-obsidian-border rounded-md">
-              {currentLocale === 'en' ? '中' : 'EN'}
-            </a>
+          <div className="flex flex-col gap-3 mt-3 pt-3 border-t border-obsidian-border">
+            <div className="flex flex-row gap-1.5 flex-wrap">
+              {LANGUAGES.map(lang => (
+                <a key={lang.code} href={lang.path}
+                  className={`px-2 py-1 text-xs rounded-md transition-colors ${lang.code === currentLocale ? 'text-obsidian-purple-light bg-obsidian-purple/10' : 'text-obsidian-muted hover:bg-white/[0.06]'}`}
+                >
+                  {lang.label}
+                </a>
+              ))}
+            </div>
+            <div className="flex items-center gap-3">
             <a href="https://github.com/green-dalii/obsidian-llm-wiki" target="_blank" rel="noopener noreferrer"
               className="px-2.5 py-1.5 text-xs font-medium text-obsidian-muted border border-obsidian-border rounded-md inline-flex items-center gap-1.5">
               <Star className="w-3 h-3" />
@@ -117,6 +152,7 @@ export default function Header({ currentLocale = 'en' }: Props) {
             </a>
           </div>
         </div>
+      </div>
       )}
     </header>
   );

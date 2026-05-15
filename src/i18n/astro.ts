@@ -1,10 +1,11 @@
-import { en, zh } from './translations';
+import { en, zh, ja, ko, de, es } from './translations';
 import type { Translations } from './translations';
 
-export const translations = { en, zh };
+export const translations = { en, zh, ja, ko, de, es };
 
 export function getT(lang: string): Translations {
-  return lang === 'zh' ? zh : en;
+  const map: Record<string, Translations> = { en, zh, ja, ko, de, es };
+  return map[lang] || en;
 }
 
 /**

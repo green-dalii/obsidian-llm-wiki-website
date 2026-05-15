@@ -3,10 +3,10 @@ import Icon from './Icon.astro';
 import { translations } from '../../i18n/astro';
 
 interface Props {
-  locale?: 'en' | 'zh';
+  locale?: string;
 }
 const { locale = 'en' } = Astro.props;
-const t = locale === 'zh' ? translations.zh : translations.en;
+const tMap: Record<string, any> = translations; const t = tMap[locale] || translations.en;
 ---
 
 <footer class="relative w-full py-14 border-t border-obsidian-border transition-opacity duration-700 ease-out reveal">

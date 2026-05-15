@@ -13,20 +13,20 @@ import Providers from '../../components/astro/Providers.astro';
 import CTA from '../../components/astro/CTA.astro';
 
 const siteUrl = Astro.site;
-const title = 'LLM Wiki for Obsidian — AI驱动的自组织知识库';
-const description = 'Karpathy LLM Wiki 的 Obsidian 实现——AI 读取你的笔记，生成包含实体/概念页面、双向链接和对话查询的互联 Wiki。';
+const title = 'LLM Wiki for Obsidian — AI 기반 자기 조직화 지식 베이스';
+const description = 'Karpathy LLM Wiki의 Obsidian 구현 — AI가 노트를 읽고 엔티티/개념 페이지, 양방향 링크, 대화형 쿼리를 갖춘 연결된 Wiki를 생성합니다.';
 const ogImage = siteUrl + 'og-image.webp';
-const zhUrl = siteUrl + 'zh/';
+const pageUrl = siteUrl + 'ko/';
 ---
 
 <!doctype html>
-<html lang="zh-CN">
+<html lang="ko">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>{title}</title>
     <meta name="description" content={description} />
-    <meta name="keywords" content="Obsidian 插件, LLM Wiki, AI 知识管理, 知识图谱, 双向链接, 笔记, AI wiki, 自组织笔记, Andrej Karpathy, Obsidian AI, markdown wiki" />
+    <meta name="keywords" content="Obsidian 플러그인, LLM Wiki, AI 지식 관리, 지식 그래프, 양방향 링크, 노트, AI wiki, 자기 조직화 노트, Andrej Karpathy, Obsidian AI, markdown wiki" />
     <meta name="author" content="Greener-Dalii" />
     <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large" />
     <meta name="theme-color" content="#1a1a1a" />
@@ -45,20 +45,20 @@ const zhUrl = siteUrl + 'zh/';
     <!-- Open Graph -->
     <meta property="og:type" content="website" />
     <meta property="og:site_name" content="LLM Wiki for Obsidian" />
-    <meta property="og:url" content={zhUrl} />
+    <meta property="og:url" content={pageUrl} />
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
     <meta property="og:image" content={ogImage} />
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="630" />
-    <meta property="og:locale" content="zh_CN" />
+    <meta property="og:locale" content="ko_KR" />
 
     <!-- Twitter -->
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:site" content="@GreenerDalii" />
     <meta name="twitter:creator" content="@GreenerDalii" />
     <meta name="twitter:title" content="LLM Wiki for Obsidian" />
-    <meta name="twitter:description" content="Karpathy LLM Wiki 的 Obsidian 实现。你书写，AI 组织，你提问。" />
+    <meta name="twitter:description" content={description} />
     <meta name="twitter:image" content={ogImage} />
 
     <!-- JSON-LD Structured Data -->
@@ -67,15 +67,15 @@ const zhUrl = siteUrl + 'zh/';
       "@graph": [
         {
           "@type": "WebSite",
-          "@id": siteUrl + "zh/#website",
+          "@id": siteUrl + "ko/#website",
           "name": "LLM Wiki for Obsidian",
-          "url": siteUrl + "zh/",
+          "url": pageUrl,
           "description": description,
           "publisher": { "@type": "Person", "name": "Greener-Dalii" }
         },
         {
           "@type": "SoftwareApplication",
-          "@id": siteUrl + "zh/#software",
+          "@id": siteUrl + "ko/#software",
           "name": "LLM Wiki for Obsidian",
           "applicationCategory": "DeveloperApplication",
           "operatingSystem": "Cross-platform",
@@ -98,18 +98,18 @@ const zhUrl = siteUrl + 'zh/';
         {
           "@type": "BreadcrumbList",
           "itemListElement": [
-            { "@type": "ListItem", "position": 1, "name": "Home", "item": siteUrl + "zh/" }
+            { "@type": "ListItem", "position": 1, "name": "Home", "item": pageUrl }
           ]
         }
       ]
     })} />
 
     <!-- Canonical -->
-    <link rel="canonical" href={zhUrl} />
+    <link rel="canonical" href={pageUrl} />
     <link rel="alternate" hreflang="en" href={Astro.site} />
-    <link rel="alternate" hreflang="zh" href={zhUrl} />
+    <link rel="alternate" hreflang="zh" href={siteUrl + 'zh/'} />
     <link rel="alternate" hreflang="ja" href={siteUrl + 'ja/'} />
-    <link rel="alternate" hreflang="ko" href={siteUrl + 'ko/'} />
+    <link rel="alternate" hreflang="ko" href={pageUrl} />
     <link rel="alternate" hreflang="de" href={siteUrl + 'de/'} />
     <link rel="alternate" hreflang="es" href={siteUrl + 'es/'} />
     <link rel="alternate" hreflang="x-default" href={Astro.site} />
@@ -117,19 +117,19 @@ const zhUrl = siteUrl + 'zh/';
   <body>
     <div class="relative bg-obsidian-bg text-obsidian-text">
       <ProgressBar client:only="react" />
-      <HeaderIsland client:only="react" currentLocale="zh" />
+      <HeaderIsland client:only="react" currentLocale="ko" />
       <main class="pt-14">
-        <Hero locale="zh" />
-        <Comparison locale="zh" />
-        <WikiDemoIsland client:visible locale="zh" />
+        <Hero locale="ko" />
+        <Comparison locale="ko" />
+        <WikiDemoIsland client:visible locale="ko" />
         <div class="h-px max-w-5xl mx-auto bg-gradient-to-r from-transparent via-obsidian-purple/20 to-transparent" />
-        <Features locale="zh" />
-        <Install locale="zh" />
-        <Ecosystem locale="zh" />
-        <Providers locale="zh" />
-        <CTA locale="zh" />
+        <Features locale="ko" />
+        <Install locale="ko" />
+        <Ecosystem locale="ko" />
+        <Providers locale="ko" />
+        <CTA locale="ko" />
       </main>
-      <Footer locale="zh" />
+      <Footer locale="ko" />
     </div>
   </body>
 </html>

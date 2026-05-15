@@ -3,10 +3,10 @@ import Icon from './Icon.astro';
 import { translations } from '../../i18n/astro';
 
 interface Props {
-  locale?: 'en' | 'zh';
+  locale?: string;
 }
 const { locale = 'en' } = Astro.props;
-const t = locale === 'zh' ? translations.zh : translations.en;
+const tMap: Record<string, any> = translations; const t = tMap[locale] || translations.en;
 
 const PROVIDERS = [
   { name: 'DeepSeek', model: 'DeepSeek V4', context: '1M', status: 'Cloud', badge: 'bestValue' },

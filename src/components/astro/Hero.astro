@@ -3,10 +3,10 @@ import { translations } from '../../i18n/astro';
 import HeroBackgroundIsland from '../HeroBackgroundIsland';
 
 interface Props {
-  locale?: 'en' | 'zh';
+  locale?: string;
 }
 const { locale = 'en' } = Astro.props;
-const t = locale === 'zh' ? translations.zh : translations.en;
+const tMap: Record<string, any> = translations; const t = tMap[locale] || translations.en;
 ---
 
 <section class="relative h-[calc(100dvh-3.5rem)] w-full flex items-center justify-center overflow-hidden">
