@@ -146,6 +146,13 @@ Deploy via GitHub Actions. **Not recommended** for China users (slow access due 
 
 ## Optimization History
 
+### v1.5.0 (2026-05-15) ✅
+- **Install section redesigned** — 3 steps (not 4) reflecting community plugin market availability. New SVG illustration showing Obsidian's plugin browser with search and Install button
+- **CTA links migrated** — Header, Hero, and footer CTA now point to `community.obsidian.md/plugins/karpathywiki` instead of GitHub releases
+- **Button text unified** — "Add to Obsidian" across Header, CTA section, and install plugin page button
+- **Install descriptions updated** — Both EN and ZH now mention plugin page as alternative install method
+- **Nav label refresh** — "Download" → "Add to Obsidian" to reflect community plugin availability
+
 ### v1.4.0 (2026-05-11) ✅
 - **SEO overhaul** — Correct domain migration (llmwiki.greenerai.top), sitemap with both locales, hreflang x-default, robots.txt fix, JSON-LD for ZH page
 - **Meta description rewrite** — Aligned with GitHub repo description and README philosophy

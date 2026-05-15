@@ -75,7 +75,7 @@ export default function Header({ currentLocale = 'en' }: Props) {
             GitHub
             <span className="text-obsidian-dim">{stars ?? '...'}</span>
           </a>
-          <a href="https://github.com/green-dalii/obsidian-llm-wiki/releases" target="_blank" rel="noopener noreferrer"
+          <a href="https://community.obsidian.md/plugins/karpathywiki" target="_blank" rel="noopener noreferrer"
             className="ml-1 px-3 py-1.5 text-xs font-medium text-white bg-obsidian-purple-dark rounded-md hover:bg-obsidian-purple transition-colors inline-flex items-center gap-1.5">
             <Download className="w-3 h-3" />
             {t.nav.download}
@@ -110,7 +110,7 @@ export default function Header({ currentLocale = 'en' }: Props) {
               GitHub
               <span className="text-obsidian-dim">{stars ?? '...'}</span>
             </a>
-            <a href="https://github.com/green-dalii/obsidian-llm-wiki/releases" target="_blank" rel="noopener noreferrer"
+            <a href="https://community.obsidian.md/plugins/karpathywiki" target="_blank" rel="noopener noreferrer"
               className="px-3.5 py-1.5 text-xs font-medium text-[#1e1e1e] bg-obsidian-purple rounded-md inline-flex items-center gap-1.5">
               <Download className="w-3 h-3" />
               {t.nav.download}

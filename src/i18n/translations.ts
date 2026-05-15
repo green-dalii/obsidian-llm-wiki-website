@@ -81,16 +81,11 @@ export interface Translations {
     subtitle: string;
     step1Title: string;
     step1Desc: string;
-    obsidianRequired: string;
-    downloadPlugin: string;
-    downloadObsidian: string;
-    pluginHint: string;
     step2Title: string;
     step2Desc: string;
     step3Title: string;
     step3Desc: string;
-    step4Title: string;
-    step4Desc: string;
+    pluginPageButton: string;
     cta: string;
   };
   providers: {
@@ -145,7 +140,7 @@ export const en: Translations = {
     providers: 'Open Source',
     ecosystem: 'Ecosystem',
     install: 'Install',
-    download: 'Download',
+    download: 'Add to Obsidian',
   },
   hero: {
     badge: 'Andrej Karpathy\'s LLM Wiki concept',
@@ -230,19 +225,14 @@ export const en: Translations = {
     label: 'Get Started',
     title: 'Ready in minutes',
     subtitle: 'Obsidian is all you need.',
-    step1Title: 'Download',
-    step1Desc: 'Three files from GitHub: <em>main.js</em>, <em>manifest.json</em>, <em>styles.css</em>. That\'s it.',
-    obsidianRequired: 'Need Obsidian first.',
-    downloadPlugin: 'Download Plugin',
-    downloadObsidian: 'Download Obsidian',
-    pluginHint: 'Obsidian must be installed.',
-    step2Title: 'Install',
-    step2Desc: 'Obsidian → Settings → Community plugins. Click <em><i>folder</i> icon</em>. Create <em>llm-wiki</em> folder, drop files in. Click <em><i>refresh-cw</i> icon</em>. Enable.',
-    step3Title: 'Configure',
-    step3Desc: 'Settings → <em>Karpathy LLM Wiki</em>. Pick your LLM, enter key, test, save.',
-    step4Title: 'Use',
-    step4Desc: '<em>Cmd+P</em> (or <em>Ctrl+P</em>). Type <em>Ingest</em> to add sources. Type <em>Query</em> to ask.',
-    cta: 'Download Latest',
+    step1Title: 'Install',
+    step1Desc: 'In Obsidian: Settings → Community plugins → Browse, search <em>Karpathy LLM Wiki</em>, click <em>Install</em> then <em>Enable</em>.',
+    step2Title: 'Configure',
+    step2Desc: 'Settings → <em>Karpathy LLM Wiki</em>. Pick your LLM, enter key, test, save.',
+    step3Title: 'Use',
+    step3Desc: '<em>Cmd+P</em> (or <em>Ctrl+P</em>). Type <em>Ingest</em> to add sources. Type <em>Query</em> to ask.',
+    pluginPageButton: 'Open Plugin Page',
+    cta: 'Get it on Obsidian',
   },
   providers: {
     label: 'Open Source',
@@ -311,7 +301,7 @@ export const en: Translations = {
   cta: {
     title: 'Ready to build your wiki?',
     subtitle: 'Open source. Community driven. Just Obsidian.',
-    button: 'Get it on GitHub',
+    button: 'Add to Obsidian',
   },
 };
 
@@ -323,7 +313,7 @@ export const zh: Translations = {
     providers: '开源',
     ecosystem: '生态',
     install: '快速开始',
-    download: '下载',
+    download: '添加到 Obsidian',
   },
   hero: {
     badge: 'Andrej Karpathy 的 LLM Wiki 理念',
@@ -408,19 +398,14 @@ export const zh: Translations = {
     label: '快速开始',
     title: '几分钟就好',
     subtitle: '只需 Obsidian，别无他求。',
-    step1Title: '下载',
-    step1Desc: 'GitHub 三个文件：<em>main.js</em>、<em>manifest.json</em>、<em>styles.css</em>。仅此而已。',
-    obsidianRequired: '需要先有 Obsidian',
-    downloadPlugin: '下载插件',
-    downloadObsidian: '下载 Obsidian',
-    pluginHint: '必须先安装 Obsidian',
-    step2Title: '安装',
-    step2Desc: 'Obsidian → 设置 → 第三方插件。点<em><i>folder</i> 图标</em>，建 <em>llm-wiki</em> 文件夹，放文件。点<em><i>refresh-cw</i> 图标</em>，启用。',
-    step3Title: '配置',
-    step3Desc: '设置 → <em>Karpathy LLM Wiki</em>。选你的 LLM，填密钥，测试，保存。',
-    step4Title: '使用',
-    step4Desc: '<em>Cmd+P</em>（Windows <em>Ctrl+P</em>）。输 <em>Ingest</em> 添加来源。输 <em>Query</em> 提问。',
-    cta: '下载最新版',
+    step1Title: '安装',
+    step1Desc: '在 Obsidian 中：设置 → 第三方插件 → 浏览，搜索 <em>Karpathy LLM Wiki</em>，点击 <em>安装</em> 再 <em>启用</em>。',
+    step2Title: '配置',
+    step2Desc: '设置 → <em>Karpathy LLM Wiki</em>。选你的 LLM，填密钥，测试，保存。',
+    step3Title: '使用',
+    step3Desc: '<em>Cmd+P</em>（Windows <em>Ctrl+P</em>）。输 <em>Ingest</em> 添加来源。输 <em>Query</em> 提问。',
+    pluginPageButton: '打开插件页面',
+    cta: 'Obsidian 获取',
   },
   providers: {
     label: '开源',
@@ -489,6 +474,6 @@ export const zh: Translations = {
   cta: {
     title: '开始构建你的 Wiki',
     subtitle: '开源。社区驱动。只需 Obsidian。',
-    button: 'GitHub 获取',
+    button: '添加到 Obsidian',
   },
 };
