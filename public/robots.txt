@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://llmwiki.greenerai.top/sitemap.xml
+Sitemap: https://llmwiki.greenerai.top/sitemap-index.xml
