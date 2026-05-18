@@ -12,7 +12,7 @@ export default defineConfig({
     sitemap({
       i18n: {
         defaultLocale: 'en',
-        locales: { en: 'en-US', zh: 'zh-CN', ja: 'ja-JP', ko: 'ko-KR', de: 'de-DE', es: 'es-ES' },
+        locales: { en: 'en', zh: 'zh', ja: 'ja', ko: 'ko', de: 'de', es: 'es' },
       },
     }),
   ],
