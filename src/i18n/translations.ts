@@ -74,6 +74,14 @@ export interface Translations {
     autoMaintenanceTitle: string;
     autoMaintenanceDesc: string;
     autoMaintenanceTag: string;
+    smartFixTitle: string;
+    smartFixDesc: string;
+    smartFixTag: string;
+    granularityTitle: string;
+    granularityDesc: string;
+    granularityTag: string;
+    moreCapabilities: string[];
+    moreLabel: string;
   };
   install: {
     label: string;
@@ -220,6 +228,14 @@ export const en: Translations = {
     autoMaintenanceTitle: 'Stays current',
     autoMaintenanceDesc: 'New files? Auto-ingested. Contradictions? Found. Health? Checked. On your terms.',
     autoMaintenanceTag: 'On your terms',
+    smartFixTitle: 'One click fixes everything',
+    smartFixDesc: 'Causality-ordered batch fix: aliases → duplicates → dead links → orphans → empty pages. Five phases run in sequence with parallel processing.',
+    smartFixTag: 'Smart Fix All',
+    granularityTitle: 'Fine to coarse. You decide.',
+    granularityDesc: 'Control extraction depth per source. Standard for daily use, Fine for research, Coarse for quick overviews.',
+    granularityTag: 'Granularity',
+        moreLabel: 'And more:',
+    moreCapabilities: ['8-Language Wiki Output', 'Duplicate Detection & Merge', 'Page Aliases', 'Parallel Generation', 'Contradiction Detection', '5xx Auto-Retry', 'Smart Batch Skip'],
   },
   install: {
     label: 'Get Started',
@@ -393,6 +409,14 @@ export const zh: Translations = {
     autoMaintenanceTitle: '保持更新',
     autoMaintenanceDesc: '新文件？自动收录。有矛盾？自动发现。要检查？按需开启。',
     autoMaintenanceTag: '随你',
+    smartFixTitle: '一键修复一切',
+    smartFixDesc: '因果链式批量修复：别名→重复→死链→孤立→空页。五个阶段按序运行，并行处理。',
+    smartFixTag: '智能修复',
+    granularityTitle: '粗细由你决定',
+    granularityDesc: '控制每个来源的提取深度。日常用标准，研究用精细，概览用粗略。',
+    granularityTag: '粒度控制',
+        moreLabel: '更多能力：',
+    moreCapabilities: ['8 语言 Wiki 输出', '重复检测与合并', '页面别名', '并行生成', '矛盾检测', '5xx 自动重试', '智能批量跳过'],
   },
   install: {
     label: '快速开始',
@@ -554,6 +578,14 @@ export const ja: Translations = {
     autoMaintenanceTitle: '常に最新',
     autoMaintenanceDesc: '新しいファイル？自動取込。矛盾？発見。整合性？確認。すべてあなたの設定で。',
     autoMaintenanceTag: 'あなたのペースで',
+    smartFixTitle: 'ワンクリックですべて修復',
+    smartFixDesc: '因果順のバッチ修復：エイリアス→重複→リンク切れ→孤立→空ページ。5フェーズを並列処理で実行。',
+    smartFixTag: 'スマート修復',
+    granularityTitle: '細かさはあなた次第',
+    granularityDesc: 'ソースごとの抽出深度を制御。日常は標準、研究は詳細、概要は粗く。',
+    granularityTag: '粒度',
+        moreLabel: 'さらに：',
+    moreCapabilities: ['8言語Wiki出力', '重複検出と統合', 'ページエイリアス', '並列生成', '矛盾検出', '5xx自動リトライ', 'スマートバッチスキップ'],
   },
   install: {
     label: 'はじめに',
@@ -691,6 +723,14 @@ export const ko: Translations = {
     autoMaintenanceTitle: '최신 상태 유지',
     autoMaintenanceDesc: '새 파일? 자동 수집. 모순? 발견됨. 상태? 확인됨. 당신의 방식대로.',
     autoMaintenanceTag: '당신의 방식대로',
+    smartFixTitle: '한 번의 클릭으로 모든 것 수정',
+    smartFixDesc: '인과 관계 순서 배치 수정: 별칭→중복→끊긴 링크→고립→빈 페이지. 5단계를 병렬 처리로 실행.',
+    smartFixTag: '스마트 수정',
+    granularityTitle: '세밀함은 당신이 결정',
+    granularityDesc: '소스별 추출 깊이 제어. 일상은 표준, 연구는 세밀하게, 개요는 거칠게.',
+    granularityTag: '세분화',
+        moreLabel: '그리고 더:',
+    moreCapabilities: ['8개 언어 Wiki 출력', '중복 감지 및 병합', '페이지 별칭', '병렬 생성', '모순 감지', '5xx 자동 재시도', '스마트 배치 건너뛰기'],
   },
   install: {
     label: '시작하기',
@@ -757,7 +797,15 @@ export const de: Translations = {
   hero: { badge: 'Andrej Karpathys LLM-Wiki-Konzept', title1: 'Deine Notizen.', title2: 'Ein lebendiges Wiki.', subtitle: 'Schreibe in Obsidian. Jede Notiz verbindet sich mit einem Netzwerk, das ständig wächst.', ctaInstall: 'Plugin holen', ctaObsidian: 'Obsidian holen', obsidianHint: 'Obsidian erforderlich.', ctaRead: 'Das Original-Konzept lesen', legendSources: 'sources/', legendEntities: 'entities/', legendConcepts: 'concepts/', scrollHint: 'Scrollen' },
   wikiDemo: { label: "So funktioniert's", title: 'Von der Notiz zum Wiki', subtitle: 'Eine Notiz. Eine Welt voller Verbindungen.', step1Title: 'Einfach hineinlegen', step1Desc: 'Artikel, Papers, Ideen. Lege sie in sources/. Das Plugin liest jedes Wort.', step2Title: 'Das Wesentliche erkennen', step2Desc: 'Personen, Orte, Themen. Die KI erfasst das Gesamtbild und hebt hervor, was zählt.', step3Title: 'Seiten entstehen', step3Desc: 'Jedes Konzept erhält seinen eigenen Raum. Inhalt, Bedeutung, Verbindungen — alles bereit für dich.', step4Title: 'Verbindungen beobachten', step4Desc: 'Seiten verknüpfen sich automatisch. Öffne die Graph-Ansicht und sieh, wie dein Wissen Gestalt annimmt.', step5Title: 'Einfach fragen', step5Desc: 'Frag ganz natürlich. Dein Wiki antwortet mit Quellen, die du überprüfen kannst — und speichert als neue Seiten.', next: 'Weiter', prev: 'Zurück', restart: 'Neustart', sourceNote: 'Quelle', extracted: 'Gefunden', generated: 'Erstellt', linked: 'Verknüpft', ask: 'Frage', answer: 'Antwort' },
   comparison: { label: 'Warum es wichtig ist', title: 'Nichts, was du liest, sollte verloren gehen.', subtitle: 'Verlieren oder wachsen?', beforeLabel: 'Vorher', afterLabel: 'Nachher', items: [{ category: 'Speichern', before: 'Artikel speichern. Ort vergessen. Später suchen. Nichts gefunden.', after: 'In sources/ ablegen. Ideen gefunden, Seiten erstellt, Zusammenfassung bereit. In Sekunden.' }, { category: 'Verknüpfen', before: 'Zwei Notizen manuell verlinken. Eine ändert sich. Die andere bleibt alt. Der Link stirbt.', after: 'Links bleiben lebendig. Wenn neue Informationen alte widersprechen, bleiben alle verbundenen Seiten aktuell.' }, { category: 'Wachsen', before: 'Ein Jahr Notizen. Nur Dateien. Jedes Projekt beginnt von vorn. Gleiches Lesen. Gleiche Schlussfolgerungen.', after: 'Ein Jahr baut ein Wiki. Jede neue Frage schöpft aus allem, was du gesammelt hast. Dein Wissen wächst.' }] },
-  features: { label: 'Funktionen', title: 'Was sich ändert', subtitle: 'Keine Funktionen. Eine neue Beziehung zu allem, was du liest.', organizeTitle: 'Es passiert einfach', organizeDesc: 'In sources/ ablegen. KI liest, extrahiert, baut. Keine Ordner. Keine Tags. Keine Arbeit.', organizeTag: 'Null Aufwand', bidirectionalTitle: 'Lebendige Links', bidirectionalDesc: 'Jede Seite wird Teil deines Obsidian-Graphen. Öffne die Graph-Ansicht — und sieh dein Wissen wachsen.', bidirectionalTag: 'Vernetzt', conversationalTitle: 'Einfach sprechen', conversationalDesc: 'Frag wie einen Freund. Dein Wiki antwortet mit Quellen, die du sehen und vertrauen kannst.', conversationalTag: 'Natürlich', autoMaintenanceTitle: 'Bleibt aktuell', autoMaintenanceDesc: 'Neue Dateien? Automatisch erfasst. Widersprüche? Gefunden. Gesundheit? Geprüft. Nach deinen Regeln.', autoMaintenanceTag: 'Nach deinen Regeln' },
+  features: { label: 'Funktionen', title: 'Was sich ändert', subtitle: 'Keine Funktionen. Eine neue Beziehung zu allem, was du liest.', organizeTitle: 'Es passiert einfach', organizeDesc: 'In sources/ ablegen. KI liest, extrahiert, baut. Keine Ordner. Keine Tags. Keine Arbeit.', organizeTag: 'Null Aufwand', bidirectionalTitle: 'Lebendige Links', bidirectionalDesc: 'Jede Seite wird Teil deines Obsidian-Graphen. Öffne die Graph-Ansicht — und sieh dein Wissen wachsen.', bidirectionalTag: 'Vernetzt', conversationalTitle: 'Einfach sprechen', conversationalDesc: 'Frag wie einen Freund. Dein Wiki antwortet mit Quellen, die du sehen und vertrauen kannst.', conversationalTag: 'Natürlich', autoMaintenanceTitle: 'Bleibt aktuell', autoMaintenanceDesc: 'Neue Dateien? Automatisch erfasst. Widersprüche? Gefunden. Gesundheit? Geprüft. Nach deinen Regeln.', autoMaintenanceTag: 'Nach deinen Regeln',
+    smartFixTitle: 'Ein Klick repariert alles',
+    smartFixDesc: 'Kausal geordnete Stapelreparatur: Aliase → Duplikate → tote Links → Waisen → leere Seiten. Fünf Phasen mit paralleler Verarbeitung.',
+    smartFixTag: 'Smart Fix All',
+    granularityTitle: 'Fein oder grob. Du entscheidest.',
+    granularityDesc: 'Extraktionstiefe pro Quelle steuern. Standard für den Alltag, Fein für Forschung, Grob für Überblicke.',
+    granularityTag: 'Granularität',
+        moreLabel: 'Und mehr:',
+    moreCapabilities: ['8-sprachige Wiki-Ausgabe', 'Duplikaterkennung & Merge', 'Seiten-Aliase', 'Parallele Generierung', 'Widerspruchserkennung', '5xx Auto-Retry', 'Smart Batch Skip'], },
   install: { label: 'Loslegen', title: 'In Minuten bereit', subtitle: 'Obsidian ist alles, was du brauchst.', step1Title: 'Installieren', step1Desc: 'In Obsidian: Einstellungen → Community-Plugins → Durchsuchen, <em>Karpathy LLM Wiki</em> suchen, auf <em>Installieren</em> dann <em>Aktivieren</em> klicken.', step2Title: 'Konfigurieren', step2Desc: 'Einstellungen → <em>Karpathy LLM Wiki</em>. Wähle dein LLM, gib den Schlüssel ein, teste, speichere.', step3Title: 'Nutzen', step3Desc: '<em>Cmd+P</em> (oder <em>Ctrl+P</em>). <em>Ingest</em> eingeben um Quellen hinzuzufügen. <em>Query</em> eingeben um zu fragen.', pluginPageButton: 'Plugin-Seite öffnen', cta: 'Bei Obsidian holen' },
   providers: { label: 'Open Source', title: 'Offen entwickelt', subtitle: 'Open Source. Deine Daten bleiben deine.', openSourceTitle: 'Open Source', openSourceDesc: 'MIT-Lizenz. Vollständiger Quellcode auf GitHub. Forke, erweitere, mach es zu deinem.', communityTitle: 'Community', communityDesc: 'GitHub Discussions für Ideen und Hilfe. Beiträge willkommen.', vendorTitle: 'Datenschutz zuerst', vendorDesc: 'Kein Speicher. Kein Backend. Keine Datenerfassung. Deine Notizen bleiben in deinem Obsidian — nur während Ingest oder Query an dein LLM gesendet. Lokale Modelle halten alles offline.', obsidianTitle: 'Pures Obsidian', obsidianDesc: 'Keine zusätzlichen Apps. Lebt vollständig in deinem Obsidian.', cardLabel: 'Dein LLM, deine Wahl', cardSubtitle: 'Funktioniert mit jedem Anbieter. Kein Lock-in.', contextNote: 'Modelle mit langem Kontext (256K+) empfohlen. Dein ganzes Wiki in einem Aufruf, vollständiges Verständnis.', bestValue: 'Bester Wert' },
   ecosystem: { label: 'Ökosystem', title: 'Jedes Plugin, verstärkt', subtitle: 'Keine Insel. Jedes Tool, das du liebst, jetzt besser.', items: [{ name: 'Graph-Ansicht', standalone: 'Links sehen', amplified: 'Wiki gibt deinem Graphen Bedeutung. Hub-Seiten, Cluster, Waisen. Erkundung, nicht Dekoration.' }, { name: 'Web Clipper', standalone: 'Artikel speichern', amplified: 'In sources/ ablegen. KI extrahiert, verlinkt, aktualisiert. Ein Clip wird zu 10+ Wiki-Seiten.' }, { name: 'Dataview', standalone: 'Daten abfragen', amplified: 'KI fügt Struktur hinzu. Tags, Daten, Kategorien. Leere Tabellen werden zu lebendigen Dashboards.' }, { name: 'Git', standalone: 'Versionen verfolgen', amplified: 'Sieh dein Wissen wachsen. Jeder Commit erzählt die Geschichte, wie du gewachsen bist.' }, { name: 'Marp', standalone: 'Folien erstellen', amplified: 'Frag: „Fasse meine Forschung für einen 10-Minuten-Vortrag zusammen." Wiki baut Folien aus deinem Wissen.' }, { name: 'Canvas', standalone: 'Visueller Canvas', amplified: 'KI baut Konzeptkarten, Zeitleisten, Entscheidungsbaum aus deinem Wissen. Kein leeres Blatt mehr.' }], cta: 'Erst der Anfang. Wenn dein Wissen Struktur hat, wird jedes Plugin mächtiger.' },
@@ -770,7 +818,15 @@ export const es: Translations = {
   hero: { badge: 'El concepto LLM Wiki de Andrej Karpathy', title1: 'Tus notas.', title2: 'Una wiki viva.', subtitle: 'Escribe en Obsidian. Cada nota se conecta a una red que no deja de crecer.', ctaInstall: 'Obtener el plugin', ctaObsidian: 'Obtener Obsidian', obsidianHint: 'Requiere Obsidian.', ctaRead: 'Leer el concepto original', legendSources: 'sources/', legendEntities: 'entities/', legendConcepts: 'concepts/', scrollHint: 'Desplazar' },
   wikiDemo: { label: 'Cómo funciona', title: 'De nota a wiki', subtitle: 'Una nota. Un mundo de conexiones.', step1Title: 'Déjalo ahí', step1Desc: 'Artículos, papers, ideas. Ponlos en sources/. El plugin lee cada palabra.', step2Title: 'Ve lo que importa', step2Desc: 'Personas, lugares, temas. La IA lee el panorama completo y resalta lo que importa.', step3Title: 'Aparecen páginas', step3Desc: 'Cada concepto tiene su espacio. Contenido, significado, conexiones — todo listo para ti.', step4Title: 'Mira cómo conecta', step4Desc: 'Las páginas se enlazan entre sí. Abre Vista de gráfico y mira tu conocimiento tomar forma.', step5Title: 'Solo pregunta', step5Desc: 'Pregunta con naturalidad. Tu wiki responde con fuentes que puedes verificar — y guardar como nuevas páginas.', next: 'Siguiente', prev: 'Anterior', restart: 'Reiniciar', sourceNote: 'Fuente', extracted: 'Encontrado', generated: 'Creado', linked: 'Conectado', ask: 'Preguntar', answer: 'Respuesta' },
   comparison: { label: 'Por qué importa', title: 'Nada de lo que leas debería perderse.', subtitle: '¿Perderlo o hacerlo crecer?', beforeLabel: 'Antes', afterLabel: 'Después', items: [{ category: 'Guardar', before: 'Guardas un artículo. Olvidas dónde. Buscas después. Nada.', after: 'Lo dejas en sources/. Las ideas se encuentran, las páginas se construyen, el resumen está listo. En segundos.' }, { category: 'Conectar', before: 'Enlazas dos notas a mano. Una cambia. La otra se queda vieja. El enlace muere.', after: 'Los enlaces se mantienen vivos. Cuando nueva información contradice la anterior, cada página relacionada se mantiene actualizada.' }, { category: 'Crecer', before: 'Un año de notas. Solo archivos. Cada proyecto empieza de cero. Misma lectura. Mismas conclusiones.', after: 'Un año construye una wiki. Cada nueva pregunta aprovecha todo lo que has recopilado. Tu conocimiento crece.' }] },
-  features: { label: 'Funciones', title: 'Lo que cambia', subtitle: 'No funciones. Una nueva relación con todo lo que lees.', organizeTitle: 'Sucede solo', organizeDesc: 'Déjalo en sources/. La IA lee, extrae, construye. Sin carpetas. Sin etiquetas. Sin trabajo.', organizeTag: 'Cero esfuerzo', bidirectionalTitle: 'Enlaces vivos', bidirectionalDesc: 'Cada página se une a tu grafo de Obsidian. Abre Vista de gráfico — y mira crecer tu conocimiento.', bidirectionalTag: 'Conectado', conversationalTitle: 'Solo habla', conversationalDesc: 'Pregunta como a un amigo. Tu wiki responde con fuentes que puedes ver y en las que puedes confiar.', conversationalTag: 'Natural', autoMaintenanceTitle: 'Se mantiene al día', autoMaintenanceDesc: '¿Nuevos archivos? Se ingestan. ¿Contradicciones? Se encuentran. ¿Salud? Se comprueba. En tus términos.', autoMaintenanceTag: 'En tus términos' },
+  features: { label: 'Funciones', title: 'Lo que cambia', subtitle: 'No funciones. Una nueva relación con todo lo que lees.', organizeTitle: 'Sucede solo', organizeDesc: 'Déjalo en sources/. La IA lee, extrae, construye. Sin carpetas. Sin etiquetas. Sin trabajo.', organizeTag: 'Cero esfuerzo', bidirectionalTitle: 'Enlaces vivos', bidirectionalDesc: 'Cada página se une a tu grafo de Obsidian. Abre Vista de gráfico — y mira crecer tu conocimiento.', bidirectionalTag: 'Conectado', conversationalTitle: 'Solo habla', conversationalDesc: 'Pregunta como a un amigo. Tu wiki responde con fuentes que puedes ver y en las que puedes confiar.', conversationalTag: 'Natural', autoMaintenanceTitle: 'Se mantiene al día', autoMaintenanceDesc: '¿Nuevos archivos? Se ingestan. ¿Contradicciones? Se encuentran. ¿Salud? Se comprueba. En tus términos.', autoMaintenanceTag: 'En tus términos',
+    smartFixTitle: 'Un clic lo arregla todo',
+    smartFixDesc: 'Reparación por lotes ordenada causalmente: alias → duplicados → enlaces rotos → huérfanos → páginas vacías. Cinco fases con procesamiento paralelo.',
+    smartFixTag: 'Smart Fix All',
+    granularityTitle: 'Fino o grueso. Tú decides.',
+    granularityDesc: 'Controla la profundidad de extracción por fuente. Estándar para uso diario, Fino para investigación, Grueso para vistas generales.',
+    granularityTag: 'Granularidad',
+        moreLabel: 'Y más:',
+    moreCapabilities: ['Salida Wiki en 8 idiomas', 'Detección y fusión de duplicados', 'Alias de página', 'Generación paralela', 'Detección de contradicciones', 'Reintento automático 5xx', 'Omisión inteligente por lotes'], },
   install: { label: 'Empezar', title: 'Listo en minutos', subtitle: 'Obsidian es todo lo que necesitas.', step1Title: 'Instalar', step1Desc: 'En Obsidian: Ajustes → Plugins de la comunidad → Explorar, busca <em>Karpathy LLM Wiki</em>, haz clic en <em>Instalar</em> y luego <em>Activar</em>.', step2Title: 'Configurar', step2Desc: 'Ajustes → <em>Karpathy LLM Wiki</em>. Elige tu LLM, introduce la clave, prueba, guarda.', step3Title: 'Usar', step3Desc: '<em>Cmd+P</em> (o <em>Ctrl+P</em>). Escribe <em>Ingest</em> para añadir fuentes. Escribe <em>Query</em> para preguntar.', pluginPageButton: 'Abrir página del plugin', cta: 'Obtener en Obsidian' },
   providers: { label: 'Código abierto', title: 'Construido en abierto', subtitle: 'Código abierto. Tus datos siguen siendo tuyos.', openSourceTitle: 'Código abierto', openSourceDesc: 'Licencia MIT. Código completo en GitHub. Fork, extiéndelo, hazlo tuyo.', communityTitle: 'Comunidad', communityDesc: 'GitHub Discussions para ideas y ayuda. Contribuciones bienvenidas.', vendorTitle: 'Privacidad primero', vendorDesc: 'Sin almacenamiento. Sin backend. Sin recopilación de datos. Tus notas se quedan en tu Obsidian — solo se envían a tu LLM durante la ingestión o consulta. Los modelos locales mantienen todo sin conexión.', obsidianTitle: 'Obsidian puro', obsidianDesc: 'Sin aplicaciones extra. Vive completamente en tu Obsidian.', cardLabel: 'Tu LLM, tú eliges', cardSubtitle: 'Funciona con cualquier proveedor. Sin bloqueos.', contextNote: 'Modelos de contexto largo (256K+) recomendados. Toda tu wiki en una llamada, comprensión completa.', bestValue: 'Mejor valor' },
   ecosystem: { label: 'Ecosistema', title: 'Cada plugin, amplificado', subtitle: 'No es una isla. Cada herramienta que amas, ahora mejor.', items: [{ name: 'Graph View', standalone: 'Ver enlaces', amplified: 'La wiki da significado a tu grafo. Páginas centrales, clústeres, huérfanos. Exploración, no decoración.' }, { name: 'Web Clipper', standalone: 'Guardar artículos', amplified: 'Déjalo en sources/. La IA extrae, enlaza, actualiza. Un clip se convierte en más de 10 páginas wiki.' }, { name: 'Dataview', standalone: 'Consultar datos', amplified: 'La IA añade estructura. Etiquetas, fechas, categorías. Las tablas vacías se convierten en dashboards vivos.' }, { name: 'Git', standalone: 'Rastrear versiones', amplified: 'Mira evolucionar tu conocimiento. Cada commit cuenta la historia de cómo creciste.' }, { name: 'Marp', standalone: 'Crear slides', amplified: 'Pregunta: "Resume mi investigación para una charla de 10 minutos." La wiki construye slides desde tu conocimiento.' }, { name: 'Canvas', standalone: 'Lienzo visual', amplified: 'La IA construye mapas conceptuales, líneas de tiempo, árboles de decisión desde tu conocimiento. Lienzo nunca más en blanco.' }], cta: 'Solo el comienzo. Cuando tu conocimiento tiene estructura, cada plugin se vuelve más potente.' },

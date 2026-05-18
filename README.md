@@ -146,6 +146,13 @@ Deploy via GitHub Actions. **Not recommended** for China users (slow access due 
 
 ## Optimization History
 
+### v1.8.0 (2026-05-18) ✅
+- **Features section expanded** — From 4 to 6 hero cards (Smart Fix All + Extraction Granularity), 3×2 grid with new icons (zap, sliders)
+- **Capability tag row** — Compact pill tags below hero cards showing 7 additional features (Duplicate Detection, 8-Language Wiki Output, Page Aliases, etc.), i18n-aware labels
+- **Install Step 3 command palette** — Expanded from 3 to 5 commands matching plugin README (Ingest single source, Ingest from folder, Query wiki, Lint wiki, Regenerate index), each with description
+- **Obsidian-accurate command palette UI** — "Select a command to add..." placeholder with blinking cursor, proper vertical alignment
+- **moreLabel i18n** — "And more:" translated across all 6 languages
+
 ### v1.7.0 (2026-05-15) ✅
 - **German & Spanish i18n** — 107 translated strings per language, landing pages at /de/ and /es/
 - **Japanese & Korean i18n** — 107 translated strings per language, landing pages at /ja/ and /ko/

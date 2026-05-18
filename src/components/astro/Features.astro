@@ -13,7 +13,11 @@ const features = [
   { title: t.features.bidirectionalTitle, tag: t.features.bidirectionalTag, desc: t.features.bidirectionalDesc, icon: 'link-2' },
   { title: t.features.conversationalTitle, tag: t.features.conversationalTag, desc: t.features.conversationalDesc, icon: 'message-square' },
   { title: t.features.autoMaintenanceTitle, tag: t.features.autoMaintenanceTag, desc: t.features.autoMaintenanceDesc, icon: 'refresh-cw' },
+  { title: t.features.smartFixTitle, tag: t.features.smartFixTag, desc: t.features.smartFixDesc, icon: 'zap' },
+  { title: t.features.granularityTitle, tag: t.features.granularityTag, desc: t.features.granularityDesc, icon: 'sliders' },
 ];
+
+const moreCaps = t.features.moreCapabilities || [];
 ---
 
 <section id="features" class="relative w-full py-28 sm:py-36 reveal">
@@ -69,10 +73,37 @@ const features = [
                   <span class="text-obsidian-muted">  (default: OFF)</span>
                 </div>
               )}
+              {i === 4 && (
+                <div>
+                  <span class="text-obsidian-purple font-semibold">Lint Report</span><br/>
+                  <span class="text-obsidian-muted">  3 duplicates</span> · <span class="text-obsidian-muted">2 dead links</span><br/>
+                  <span class="text-obsidian-purple font-semibold">→ Smart Fix All</span><br/>
+                  <span class="text-obsidian-muted">  one click, all resolved</span>
+                </div>
+              )}
+              {i === 5 && (
+                <div>
+                  <span class="text-obsidian-muted">Granularity:</span><br/>
+                  <span class="text-obsidian-purple">Fine</span> <span class="text-obsidian-dim">deep extraction</span><br/>
+                  <span class="text-obsidian-purple">Standard</span> <span class="text-obsidian-dim">balanced</span><br/>
+                  <span class="text-obsidian-purple">Coarse</span> <span class="text-obsidian-dim">quick overview</span>
+                </div>
+              )}
             </div>
           </div>
         </div>
       ))}
     </div>
+
+    {moreCaps.length > 0 && (
+      <div class="mt-10 text-center reveal" data-delay="12">
+        <span class="text-sm text-obsidian-dim">{t.features.moreLabel}</span>
+        <div class="flex flex-wrap gap-2.5 justify-center mt-3">
+          {moreCaps.map((cap: string) => (
+            <span class="text-xs px-3 py-1.5 rounded-full bg-obsidian-purple/10 border border-obsidian-purple/20 text-obsidian-purple-light">{cap}</span>
+          ))}
+        </div>
+      </div>
+    )}
   </div>
 </section>
