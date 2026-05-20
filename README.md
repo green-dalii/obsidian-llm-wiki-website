@@ -10,7 +10,7 @@ Marketing website for the [Obsidian LLM Wiki plugin](https://github.com/green-da
 - **IntersectionObserver** — Scroll-triggered animations for static sections
 - **Canvas 2D** — Organic "Knowledge Growth" animation for hero background
 - **lucide-react** — Consistent icon system
-- **i18n routing** — Static pages per language (EN: `/`, ZH: `/zh/`, JA: `/ja/`, KO: `/ko/`, DE: `/de/`, ES: `/es/`)
+- **i18n routing** — Static pages per language (EN: `/`, ZH: `/zh/`, JA: `/ja/`, KO: `/ko/`, DE: `/de/`, ES: `/es/`, FR: `/fr/`, PT: `/pt/`)
 
 ## Brand Consistency
 
@@ -145,6 +145,13 @@ Deploy via GitHub Actions. **Not recommended** for China users (slow access due 
 - ✅ Favicon redesigned (BookOpen icon + Obsidian purple border, matches official branding)
 
 ## Optimization History
+
+### v1.9.0 (2026-05-20) ✅
+- **FAQ section** — 4 essential Q&A items (duplicate pages, ingestion speed, Smart Fix All, API costs), accordion-style UI
+- **French & Portuguese i18n** — 107 translated strings each, landing pages at /fr/ and /pt/
+- **8-language support** — EN/ZH/JA/KO/DE/ES/FR/PT, fully aligned with plugin's Wiki output languages
+- **Nav FAQ entry** — Added to header navigation across all 8 languages
+- **Auto-redirect expanded** — Browser language detection now covers all 8 locales
 
 ### v1.8.0 (2026-05-18) ✅
 - **Features section expanded** — From 4 to 6 hero cards (Smart Fix All + Extraction Granularity), 3×2 grid with new icons (zap, sliders)

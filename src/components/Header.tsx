@@ -9,6 +9,8 @@ const LANGUAGES = [
   { code: 'ko', label: '한국어', path: '/ko/' },
   { code: 'de', label: 'Deutsch', path: '/de/' },
   { code: 'es', label: 'Español', path: '/es/' },
+  { code: 'fr', label: 'Français', path: '/fr/' },
+  { code: 'pt', label: 'Português', path: '/pt/' },
 ];
 
 const NAV_ITEMS = [
@@ -16,6 +18,7 @@ const NAV_ITEMS = [
   { key: 'how-it-works', labelKey: 'howItWorks' as const, target: '#how-it-works' },
   { key: 'features', labelKey: 'features' as const, target: '#features' },
   { key: 'install', labelKey: 'install' as const, target: '#install' },
+  { key: 'faq', labelKey: 'faq' as const, target: '#faq' },
   { key: 'ecosystem', labelKey: 'ecosystem' as const, target: '#ecosystem' },
   { key: 'providers', labelKey: 'providers' as const, target: '#providers' },
 ];

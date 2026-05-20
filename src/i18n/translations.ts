@@ -7,6 +7,7 @@ export interface Translations {
     providers: string;
     install: string;
     download: string;
+    faq: string;
   };
   hero: {
     badge: string;
@@ -138,6 +139,12 @@ export interface Translations {
     subtitle: string;
     button: string;
   };
+  faq: {
+    label: string;
+    title: string;
+    subtitle: string;
+    items: Array<{ q: string; a: string }>;
+  };
 }
 
 export const en: Translations = {
@@ -149,6 +156,7 @@ export const en: Translations = {
     ecosystem: 'Ecosystem',
     install: 'Install',
     download: 'Add to Obsidian',
+    faq: 'FAQ',
   },
   hero: {
     badge: 'Andrej Karpathy\'s LLM Wiki concept',
@@ -319,6 +327,29 @@ export const en: Translations = {
     subtitle: 'Open source. Community driven. Just Obsidian.',
     button: 'Add to Obsidian',
   },
+  faq: {
+    label: 'FAQ',
+    title: 'Common questions',
+    subtitle: 'Everything you need to know to get started.',
+    items: [
+      {
+        q: 'Why do I see duplicate pages with similar names?',
+        a: 'Older versions didn\'t have alias-aware duplicate detection. Run <em>Lint Wiki</em> — if duplicates are found, click <em>Merge Duplicates</em> to fuse them. The merged page preserves aliases from both, preventing future duplicates.',
+      },
+      {
+        q: 'How do I speed up ingestion for large source files?',
+        a: 'In Settings → Ingestion Acceleration, increase <em>Page Generation Concurrency</em> to 3 (or 5 for high-rate-limit providers) to process pages in parallel. Set <em>Batch Delay</em> to 300ms. Use <em>Standard</em> or <em>Coarse</em> extraction granularity for fewer API calls.',
+      },
+      {
+        q: 'What does Smart Fix All do?',
+        a: 'It runs fixes in causality order: <em>Complete Aliases</em> → <em>Merge Duplicates</em> → <em>Fix Dead Links</em> → <em>Link Orphans</em> → <em>Expand Empty Pages</em>. One click, all resolved.',
+      },
+      {
+        q: 'How do I avoid unexpected API costs?',
+        a: 'Auto-Maintenance is <em>OFF</em> by default — don\'t enable unless needed. Smart Batch Skip avoids re-processing ingested files. Use <em>Standard</em> or <em>Coarse</em> granularity to reduce API calls. The Lint report shows counts before you run fixes.',
+      },
+    ],
+  },
 };
 
 export const zh: Translations = {
@@ -330,6 +361,7 @@ export const zh: Translations = {
     ecosystem: '生态',
     install: '快速开始',
     download: '添加到 Obsidian',
+    faq: 'FAQ',
   },
   hero: {
     badge: 'Andrej Karpathy 的 LLM Wiki 理念',
@@ -500,6 +532,29 @@ export const zh: Translations = {
     subtitle: '开源。社区驱动。只需 Obsidian。',
     button: '添加到 Obsidian',
   },
+  faq: {
+    label: '常见问题',
+    title: '你可能想了解的',
+    subtitle: '上手前你需要知道的一切。',
+    items: [
+      {
+        q: '为什么我会看到名称相似的重复页面？',
+        a: '旧版本没有别名感知的重复检测。运行 <em>Lint Wiki</em> — 如果发现重复页面，点击 <em>Merge Duplicates</em> 进行合并。合并后的页面会保留双方的别名，防止将来再次出现重复。',
+      },
+      {
+        q: '如何加快大文件的收录速度？',
+        a: '在设置 → 收录加速中，将 <em>页面生成并发数</em> 提高到 3（对于高速率限制的提供商可设为 5）以并行处理页面。将 <em>批次延迟</em> 设为 300ms。使用 <em>Standard</em> 或 <em>Coarse</em> 提取粒度以减少 API 调用。',
+      },
+      {
+        q: 'Smart Fix All 做什么？',
+        a: '它按因果顺序运行修复：<em>Complete Aliases</em> → <em>Merge Duplicates</em> → <em>Fix Dead Links</em> → <em>Link Orphans</em> → <em>Expand Empty Pages</em>。一键搞定。',
+      },
+      {
+        q: '如何避免意外的 API 费用？',
+        a: 'Auto-Maintenance 默认 <em>关闭</em> — 除非需要否则不要启用。Smart Batch Skip 避免重新处理已收录的文件。使用 <em>Standard</em> 或 <em>Coarse</em> 粒度减少 API 调用。Lint 报告会在你运行修复前显示数量。',
+      },
+    ],
+  },
 };
 
 export const ja: Translations = {
@@ -511,6 +566,7 @@ export const ja: Translations = {
     providers: 'オープンソース',
     install: 'インストール',
     download: 'Obsidianに追加',
+    faq: 'FAQ',
   },
   hero: {
     badge: 'Andrej KarpathyのLLM Wikiコンセプト',
@@ -645,6 +701,29 @@ export const ja: Translations = {
     subtitle: 'オープンソース。コミュニティ主導。Obsidianだけで。',
     button: 'Obsidianに追加',
   },
+  faq: {
+    label: 'FAQ',
+    title: 'よくある質問',
+    subtitle: 'はじめる前に知っておくべきこと。',
+    items: [
+      {
+        q: 'なぜ似た名前の重複ページが表示されるのですか？',
+        a: '古いバージョンにはエイリアスを考慮した重複検出がありませんでした。<em>Lint Wiki</em> を実行し、重複が見つかった場合は <em>Merge Duplicates</em> をクリックして統合してください。統合されたページは両方のエイリアスを保持し、将来の重複を防ぎます。',
+      },
+      {
+        q: '大きなソースファイルの取り込みを高速化するには？',
+        a: '設定 → 取り込みアクセラレーションで、<em>ページ生成の並列数</em> を 3（高速レート制限のプロバイダーの場合は 5）に増やしてページを並列処理します。<em>バッチ遅延</em> を 300ms に設定。API 呼び出しを減らすには <em>Standard</em> または <em>Coarse</em> 抽出粒度を使用してください。',
+      },
+      {
+        q: 'Smart Fix All とは何ですか？',
+        a: '因果順に修復を実行します: <em>Complete Aliases</em> → <em>Merge Duplicates</em> → <em>Fix Dead Links</em> → <em>Link Orphans</em> → <em>Expand Empty Pages</em>。ワンクリックですべて解決。',
+      },
+      {
+        q: '予期しない API コストを避けるには？',
+        a: 'Auto-Maintenance はデフォルトで <em>OFF</em> です — 必要でない限り有効にしないでください。Smart Batch Skip は既に取り込み済みのファイルの再処理を回避します。<em>Standard</em> または <em>Coarse</em> 粒度を使用して API 呼び出しを削減。Lint レポートは修復実行前にカウントを表示します。',
+      },
+    ],
+  },
 };
 
 export const ko: Translations = {
@@ -656,6 +735,7 @@ export const ko: Translations = {
     providers: '오픈 소스',
     install: '설치',
     download: 'Obsidian에 추가',
+    faq: 'FAQ',
   },
   hero: {
     badge: '안드레이 카파시의 LLM Wiki 컨셉',
@@ -790,10 +870,33 @@ export const ko: Translations = {
     subtitle: '오픈 소스. 커뮤니티 주도. Obsidian만 있으면 됩니다.',
     button: 'Obsidian에 추가',
   },
+  faq: {
+    label: 'FAQ',
+    title: '자주 묻는 질문',
+    subtitle: '시작하기 전에 알아야 할 모든 것.',
+    items: [
+      {
+        q: '비슷한 이름의 중복 페이지가 왜 생기나요?',
+        a: '이전 버전에는 별칭 인식 중복 감지가 없었습니다. <em>Lint Wiki</em> 를 실행하고 중복이 발견되면 <em>Merge Duplicates</em> 를 클릭하여 통합하세요. 통합된 페이지는 양쪽 별칭을 보존하여 향후 중복을 방지합니다.',
+      },
+      {
+        q: '대용량 소스 파일 수집 속도를 높이는 방법은?',
+        a: '설정 → 수집 가속화에서 <em>페이지 생성 동시성</em> 을 3(고속 제한 프로바이더의 경우 5)으로 늘려 페이지를 병렬 처리하세요. <em>배치 지연</em> 을 300ms로 설정. API 호출을 줄이려면 <em>Standard</em> 또는 <em>Coarse</em> 추출 입자를 사용하세요.',
+      },
+      {
+        q: 'Smart Fix All 은 무엇을 하나요?',
+        a: '인과 관계 순서로 수정을 실행합니다: <em>Complete Aliases</em> → <em>Merge Duplicates</em> → <em>Fix Dead Links</em> → <em>Link Orphans</em> → <em>Expand Empty Pages</em>. 한 번의 클릭으로 모두 해결.',
+      },
+      {
+        q: '예상치 못한 API 비용을 피하는 방법은?',
+        a: 'Auto-Maintenance 는 기본적으로 <em>끄기</em> 상태입니다 — 필요하지 않으면 활성화하지 마세요. Smart Batch Skip 은 이미 수집된 파일의 재처리를 피합니다. <em>Standard</em> 또는 <em>Coarse</em> 입자를 사용하여 API 호출을 줄이세요. Lint 보고서는 수정 실행 전 카운트를 보여줍니다.',
+      },
+    ],
+  },
 };
 
 export const de: Translations = {
-  nav: { howItWorks: "So funktioniert's", comparison: 'Warum es wichtig ist', features: 'Funktionen', ecosystem: 'Ökosystem', providers: 'Open Source', install: 'Installation', download: 'Zu Obsidian hinzufügen' },
+  nav: { howItWorks: "So funktioniert's", comparison: 'Warum es wichtig ist', features: 'Funktionen', ecosystem: 'Ökosystem', providers: 'Open Source', install: 'Installation', download: 'Zu Obsidian hinzufügen', faq: 'FAQ' },
   hero: { badge: 'Andrej Karpathys LLM-Wiki-Konzept', title1: 'Deine Notizen.', title2: 'Ein lebendiges Wiki.', subtitle: 'Schreibe in Obsidian. Jede Notiz verbindet sich mit einem Netzwerk, das ständig wächst.', ctaInstall: 'Plugin holen', ctaObsidian: 'Obsidian holen', obsidianHint: 'Obsidian erforderlich.', ctaRead: 'Das Original-Konzept lesen', legendSources: 'sources/', legendEntities: 'entities/', legendConcepts: 'concepts/', scrollHint: 'Scrollen' },
   wikiDemo: { label: "So funktioniert's", title: 'Von der Notiz zum Wiki', subtitle: 'Eine Notiz. Eine Welt voller Verbindungen.', step1Title: 'Einfach hineinlegen', step1Desc: 'Artikel, Papers, Ideen. Lege sie in sources/. Das Plugin liest jedes Wort.', step2Title: 'Das Wesentliche erkennen', step2Desc: 'Personen, Orte, Themen. Die KI erfasst das Gesamtbild und hebt hervor, was zählt.', step3Title: 'Seiten entstehen', step3Desc: 'Jedes Konzept erhält seinen eigenen Raum. Inhalt, Bedeutung, Verbindungen — alles bereit für dich.', step4Title: 'Verbindungen beobachten', step4Desc: 'Seiten verknüpfen sich automatisch. Öffne die Graph-Ansicht und sieh, wie dein Wissen Gestalt annimmt.', step5Title: 'Einfach fragen', step5Desc: 'Frag ganz natürlich. Dein Wiki antwortet mit Quellen, die du überprüfen kannst — und speichert als neue Seiten.', next: 'Weiter', prev: 'Zurück', restart: 'Neustart', sourceNote: 'Quelle', extracted: 'Gefunden', generated: 'Erstellt', linked: 'Verknüpft', ask: 'Frage', answer: 'Antwort' },
   comparison: { label: 'Warum es wichtig ist', title: 'Nichts, was du liest, sollte verloren gehen.', subtitle: 'Verlieren oder wachsen?', beforeLabel: 'Vorher', afterLabel: 'Nachher', items: [{ category: 'Speichern', before: 'Artikel speichern. Ort vergessen. Später suchen. Nichts gefunden.', after: 'In sources/ ablegen. Ideen gefunden, Seiten erstellt, Zusammenfassung bereit. In Sekunden.' }, { category: 'Verknüpfen', before: 'Zwei Notizen manuell verlinken. Eine ändert sich. Die andere bleibt alt. Der Link stirbt.', after: 'Links bleiben lebendig. Wenn neue Informationen alte widersprechen, bleiben alle verbundenen Seiten aktuell.' }, { category: 'Wachsen', before: 'Ein Jahr Notizen. Nur Dateien. Jedes Projekt beginnt von vorn. Gleiches Lesen. Gleiche Schlussfolgerungen.', after: 'Ein Jahr baut ein Wiki. Jede neue Frage schöpft aus allem, was du gesammelt hast. Dein Wissen wächst.' }] },
@@ -811,10 +914,33 @@ export const de: Translations = {
   ecosystem: { label: 'Ökosystem', title: 'Jedes Plugin, verstärkt', subtitle: 'Keine Insel. Jedes Tool, das du liebst, jetzt besser.', items: [{ name: 'Graph-Ansicht', standalone: 'Links sehen', amplified: 'Wiki gibt deinem Graphen Bedeutung. Hub-Seiten, Cluster, Waisen. Erkundung, nicht Dekoration.' }, { name: 'Web Clipper', standalone: 'Artikel speichern', amplified: 'In sources/ ablegen. KI extrahiert, verlinkt, aktualisiert. Ein Clip wird zu 10+ Wiki-Seiten.' }, { name: 'Dataview', standalone: 'Daten abfragen', amplified: 'KI fügt Struktur hinzu. Tags, Daten, Kategorien. Leere Tabellen werden zu lebendigen Dashboards.' }, { name: 'Git', standalone: 'Versionen verfolgen', amplified: 'Sieh dein Wissen wachsen. Jeder Commit erzählt die Geschichte, wie du gewachsen bist.' }, { name: 'Marp', standalone: 'Folien erstellen', amplified: 'Frag: „Fasse meine Forschung für einen 10-Minuten-Vortrag zusammen." Wiki baut Folien aus deinem Wissen.' }, { name: 'Canvas', standalone: 'Visueller Canvas', amplified: 'KI baut Konzeptkarten, Zeitleisten, Entscheidungsbaum aus deinem Wissen. Kein leeres Blatt mehr.' }], cta: 'Erst der Anfang. Wenn dein Wissen Struktur hat, wird jedes Plugin mächtiger.' },
   footer: { emailUser: 'hi', emailDomain: 'greenerai.top', emailLabel: 'Kontakt:', github: 'GitHub', discussions: 'Feedback', releases: 'Releases', obsidian: 'Obsidian' },
   cta: { title: 'Bereit, dein Wiki zu bauen?', subtitle: 'Open Source. Community-getrieben. Nur Obsidian.', button: 'Zu Obsidian hinzufügen' },
+  faq: {
+    label: 'FAQ',
+    title: 'Häufige Fragen',
+    subtitle: 'Alles, was du für den Einstieg wissen musst.',
+    items: [
+      {
+        q: 'Warum sehe ich doppelte Seiten mit ähnlichen Namen?',
+        a: 'Ältere Versionen hatten keine alias-bew Duplicate-Erkennung. Führe <em>Lint Wiki</em> aus — wenn Duplikate gefunden werden, klicke auf <em>Merge Duplicates</em>, um sie zu fusionieren. Die fusionierte Seite behält Aliase von beiden und verhindert zukünftige Duplikate.',
+      },
+      {
+        q: 'Wie beschleunige ich die Erfassung großer Quelldateien?',
+        a: 'In Einstellungen → Erfassungsbeschleunigung erhöhe <em>Parallelität der Seitengenerierung</em> auf 3 (oder 5 für Provider mit hohem Rate-Limit), um Seiten parallel zu verarbeiten. Setze <em>Batch Delay</em> auf 300ms. Verwende <em>Standard</em> oder <em>Coarse</em> Extraktionsgranularität für weniger API-Aufrufe.',
+      },
+      {
+        q: 'Was macht Smart Fix All?',
+        a: 'Es führt Reparaturen in Kausalitätsreihenfolge aus: <em>Complete Aliases</em> → <em>Merge Duplicates</em> → <em>Fix Dead Links</em> → <em>Link Orphans</em> → <em>Expand Empty Pages</em>. Ein Klick, alles gelöst.',
+      },
+      {
+        q: 'Wie vermeide ich unerwartete API-Kosten?',
+        a: 'Auto-Maintenance ist standardmäßig <em>AUS</em> — aktivieren, nur wenn nötig. Smart Batch Skip vermeidet die Neuverarbeitung bereits erfasster Dateien. Verwende <em>Standard</em> oder <em>Coarse</em> Granularität, um API-Aufrufe zu reduzieren. Der Lint-Bericht zeigt die Anzahl, bevor du Reparaturen ausführst.',
+      },
+    ],
+  },
 };
 
 export const es: Translations = {
-  nav: { howItWorks: 'Cómo funciona', comparison: 'Por qué importa', features: 'Funciones', ecosystem: 'Ecosistema', providers: 'Código abierto', install: 'Instalar', download: 'Añadir a Obsidian' },
+  nav: { howItWorks: 'Cómo funciona', comparison: 'Por qué importa', features: 'Funciones', ecosystem: 'Ecosistema', providers: 'Código abierto', install: 'Instalar', download: 'Añadir a Obsidian', faq: 'FAQ' },
   hero: { badge: 'El concepto LLM Wiki de Andrej Karpathy', title1: 'Tus notas.', title2: 'Una wiki viva.', subtitle: 'Escribe en Obsidian. Cada nota se conecta a una red que no deja de crecer.', ctaInstall: 'Obtener el plugin', ctaObsidian: 'Obtener Obsidian', obsidianHint: 'Requiere Obsidian.', ctaRead: 'Leer el concepto original', legendSources: 'sources/', legendEntities: 'entities/', legendConcepts: 'concepts/', scrollHint: 'Desplazar' },
   wikiDemo: { label: 'Cómo funciona', title: 'De nota a wiki', subtitle: 'Una nota. Un mundo de conexiones.', step1Title: 'Déjalo ahí', step1Desc: 'Artículos, papers, ideas. Ponlos en sources/. El plugin lee cada palabra.', step2Title: 'Ve lo que importa', step2Desc: 'Personas, lugares, temas. La IA lee el panorama completo y resalta lo que importa.', step3Title: 'Aparecen páginas', step3Desc: 'Cada concepto tiene su espacio. Contenido, significado, conexiones — todo listo para ti.', step4Title: 'Mira cómo conecta', step4Desc: 'Las páginas se enlazan entre sí. Abre Vista de gráfico y mira tu conocimiento tomar forma.', step5Title: 'Solo pregunta', step5Desc: 'Pregunta con naturalidad. Tu wiki responde con fuentes que puedes verificar — y guardar como nuevas páginas.', next: 'Siguiente', prev: 'Anterior', restart: 'Reiniciar', sourceNote: 'Fuente', extracted: 'Encontrado', generated: 'Creado', linked: 'Conectado', ask: 'Preguntar', answer: 'Respuesta' },
   comparison: { label: 'Por qué importa', title: 'Nada de lo que leas debería perderse.', subtitle: '¿Perderlo o hacerlo crecer?', beforeLabel: 'Antes', afterLabel: 'Después', items: [{ category: 'Guardar', before: 'Guardas un artículo. Olvidas dónde. Buscas después. Nada.', after: 'Lo dejas en sources/. Las ideas se encuentran, las páginas se construyen, el resumen está listo. En segundos.' }, { category: 'Conectar', before: 'Enlazas dos notas a mano. Una cambia. La otra se queda vieja. El enlace muere.', after: 'Los enlaces se mantienen vivos. Cuando nueva información contradice la anterior, cada página relacionada se mantiene actualizada.' }, { category: 'Crecer', before: 'Un año de notas. Solo archivos. Cada proyecto empieza de cero. Misma lectura. Mismas conclusiones.', after: 'Un año construye una wiki. Cada nueva pregunta aprovecha todo lo que has recopilado. Tu conocimiento crece.' }] },
@@ -832,4 +958,115 @@ export const es: Translations = {
   ecosystem: { label: 'Ecosistema', title: 'Cada plugin, amplificado', subtitle: 'No es una isla. Cada herramienta que amas, ahora mejor.', items: [{ name: 'Graph View', standalone: 'Ver enlaces', amplified: 'La wiki da significado a tu grafo. Páginas centrales, clústeres, huérfanos. Exploración, no decoración.' }, { name: 'Web Clipper', standalone: 'Guardar artículos', amplified: 'Déjalo en sources/. La IA extrae, enlaza, actualiza. Un clip se convierte en más de 10 páginas wiki.' }, { name: 'Dataview', standalone: 'Consultar datos', amplified: 'La IA añade estructura. Etiquetas, fechas, categorías. Las tablas vacías se convierten en dashboards vivos.' }, { name: 'Git', standalone: 'Rastrear versiones', amplified: 'Mira evolucionar tu conocimiento. Cada commit cuenta la historia de cómo creciste.' }, { name: 'Marp', standalone: 'Crear slides', amplified: 'Pregunta: "Resume mi investigación para una charla de 10 minutos." La wiki construye slides desde tu conocimiento.' }, { name: 'Canvas', standalone: 'Lienzo visual', amplified: 'La IA construye mapas conceptuales, líneas de tiempo, árboles de decisión desde tu conocimiento. Lienzo nunca más en blanco.' }], cta: 'Solo el comienzo. Cuando tu conocimiento tiene estructura, cada plugin se vuelve más potente.' },
   footer: { emailUser: 'hi', emailDomain: 'greenerai.top', emailLabel: 'Contacto:', github: 'GitHub', discussions: 'Feedback', releases: 'Versiones', obsidian: 'Obsidian' },
   cta: { title: '¿Listo para construir tu wiki?', subtitle: 'Código abierto. Impulsado por la comunidad. Solo Obsidian.', button: 'Añadir a Obsidian' },
+  faq: {
+    label: 'FAQ',
+    title: 'Preguntas frecuentes',
+    subtitle: 'Todo lo que necesitas saber para empezar.',
+    items: [
+      {
+        q: '¿Por qué veo páginas duplicadas con nombres similares?',
+        a: 'Las versiones antiguas no tenían detección de duplicados consciente de alias. Ejecuta <em>Lint Wiki</em> — si se encuentran duplicados, haz clic en <em>Merge Duplicates</em> para fusionarlos. La página fusionada conserva los alias de ambas, evitando futuros duplicados.',
+      },
+      {
+        q: '¿Cómo acelero la ingestión de archivos fuente grandes?',
+        a: 'En Ajustes → Aceleración de ingestión, aumenta <em>Page Generation Concurrency</em> a 3 (o 5 para proveedores con límite alto) para procesar páginas en paralelo. Configura <em>Batch Delay</em> en 300ms. Usa granularidad <em>Standard</em> o <em>Coarse</em> para menos llamadas API.',
+      },
+      {
+        q: '¿Qué hace Smart Fix All?',
+        a: 'Ejecuta reparaciones en orden de causalidad: <em>Complete Aliases</em> → <em>Merge Duplicates</em> → <em>Fix Dead Links</em> → <em>Link Orphans</em> → <em>Expand Empty Pages</em>. Un clic, todo resuelto.',
+      },
+      {
+        q: '¿Cómo evito costos API inesperados?',
+        a: 'Auto-Maintenance está <em>DESACTIVADO</em> por defecto — no actives a menos que sea necesario. Smart Batch Skip evita reprocesar archivos ya ingestados. Usa granularidad <em>Standard</em> o <em>Coarse</em> para reducir llamadas API. El informe Lint muestra las cantidades antes de ejecutar reparaciones.',
+      },
+    ],
+  },
+};
+
+export const fr: Translations = {
+  nav: { howItWorks: "Comment ça marche", comparison: "Pourquoi c'est important", features: "Fonctionnalités", ecosystem: "Écosystème", providers: "Open source", install: "Installation", download: "Ajouter à Obsidian", faq: "FAQ" },
+  hero: { badge: "Le concept LLM Wiki d'Andrej Karpathy", title1: "Vos notes.", title2: "Un wiki vivant.", subtitle: "Écrivez dans Obsidian. Chaque note se connecte à un réseau qui ne cesse de grandir.", ctaInstall: "Obtenir le plugin", ctaObsidian: "Obtenir Obsidian", obsidianHint: "Obsidian requis.", ctaRead: "Lire le concept original", legendSources: "sources/", legendEntities: "entities/", legendConcepts: "concepts/", scrollHint: "Faire défiler" },
+  wikiDemo: { label: "Comment ça marche", title: "De la note au wiki", subtitle: "Une note. Un monde de connexions.", step1Title: "Déposez-le", step1Desc: "Articles, papiers, idées. Placez-les dans sources/. Le plugin lit chaque mot.", step2Title: "Voyez l'essentiel", step2Desc: "Personnes, lieux, thèmes. L'IA lit l'ensemble et fait émerger ce qui compte.", step3Title: "Les pages apparaissent", step3Desc: "Chaque concept a son propre espace. Contenu, sens, connexions — tout est prêt pour vous.", step4Title: "Regardez les liens se tisser", step4Desc: "Les pages se lient entre elles. Ouvrez la Vue du graphe et voyez votre savoir prendre forme.", step5Title: "Posez vos questions", step5Desc: "Demandez naturellement. Votre wiki répond avec des sources vérifiables — et les sauve en nouvelles pages.", next: "Suivant", prev: "Précédent", restart: "Recommencer", sourceNote: "Source", extracted: "Trouvé", generated: "Créé", linked: "Connecté", ask: "Question", answer: "Réponse" },
+  comparison: { label: "Pourquoi c'est important", title: "Rien de ce que vous lisez ne devrait être perdu.", subtitle: "Le perdre ou le cultiver ?", beforeLabel: "Avant", afterLabel: "Après", items: [{ category: "Sauvegarder", before: "Vous sauvegardez un article. Oubliez où. Cherchez plus tard. Rien.", after: "Déposez-le dans sources/. Les idées trouvées, les pages construites, le résumé prêt. En quelques secondes." }, { category: "Connecter", before: "Deux notes liées à la main. L'une change. L'autre reste ancienne. Le lien meurt.", after: "Les liens restent vivants. Quand une nouvelle information contredit l'ancienne, chaque page concernée reste à jour." }, { category: "Grandir", before: "Un an de notes. Juste des fichiers. Chaque projet recommence. Mêmes lectures. Mêmes conclusions.", after: "Un an construit un wiki. Chaque nouvelle question puise dans tout ce que vous avez collecté. Votre savoir grandit." }] },
+  features: { label: "Fonctionnalités", title: "Ce qui change", subtitle: "Pas des fonctionnalités. Une nouvelle relation avec tout ce que vous lisez.", organizeTitle: "Ça se fait tout seul", organizeDesc: "Déposez-le dans sources/. L'IA lit, extrait, construit. Pas de dossiers. Pas de tags. Aucun effort.", organizeTag: "Zéro effort", bidirectionalTitle: "Des liens vivants", bidirectionalDesc: "Chaque page rejoint votre graphe Obsidian. Ouvrez la Vue du graphe — et regardez votre savoir grandir.", bidirectionalTag: "Connecté", conversationalTitle: "Parlez simplement", conversationalDesc: "Demandez comme à un ami. Votre wiki répond avec des sources que vous pouvez voir et vérifier.", conversationalTag: "Naturel", autoMaintenanceTitle: "Reste à jour", autoMaintenanceDesc: "Nouveaux fichiers ? Pris automatiquement. Contradictions ? Détectées. Santé ? Vérifiée. À votre rythme.", autoMaintenanceTag: "À votre rythme",
+    smartFixTitle: "Un clic pour tout réparer",
+    smartFixDesc: "Réparation par lots en ordre causal : alias → doublons → liens morts → orphelins → pages vides. Cinq phases exécutées en séquence avec traitement parallèle.",
+    smartFixTag: "Smart Fix All",
+    granularityTitle: "Du fin au grossier. Vous décidez.",
+    granularityDesc: "Contrôlez la profondeur d'extraction par source. Standard pour le quotidien, Fin pour la recherche, Grossier pour un aperçu rapide.",
+    granularityTag: "Granularité",
+    moreLabel: "Et encore :",
+    moreCapabilities: ["Wiki en 8 langues", "Détection et fusion des doublons", "Alias de pages", "Génération parallèle", "Détection de contradictions", "Auto-Retry 5xx", "Smart Batch Skip"], },
+  install: { label: "Pour commencer", title: "Prêt en quelques minutes", subtitle: "Obsidian est tout ce qu'il vous faut.", step1Title: "Installer", step1Desc: "Dans Obsidian : Paramètres → Plugins communautaires → Parcourir, cherchez <em>Karpathy LLM Wiki</em>, cliquez sur <em>Installer</em> puis <em>Activer</em>.", step2Title: "Configurer", step2Desc: "Paramètres → <em>Karpathy LLM Wiki</em>. Choisissez votre LLM, entrez la clé, testez, sauvegardez.", step3Title: "Utiliser", step3Desc: "<em>Cmd+P</em> (ou <em>Ctrl+P</em>). Tapez <em>Ingest</em> pour ajouter des sources. Tapez <em>Query</em> pour poser une question.", pluginPageButton: "Ouvrir la page du plugin", cta: "Obtenir sur Obsidian" },
+  providers: { label: "Open source", title: "Construit ouvertement", subtitle: "Open source. Vos données restent les vôtres.", openSourceTitle: "Open source", openSourceDesc: "Licence MIT. Code source complet sur GitHub. Forkez, étendez, appropriez-vous-le.", communityTitle: "Communauté", communityDesc: "GitHub Discussions pour les idées et l'entraide. Contributions bienvenues.", vendorTitle: "La vie privée d'abord", vendorDesc: "Pas de stockage. Pas de backend. Aucune collecte de données. Vos notes restent dans votre Obsidian — envoyées à votre LLM uniquement pendant l'ingestion ou la requête. Les modèles locaux gardent tout hors ligne.", obsidianTitle: "Obsidian pur", obsidianDesc: "Pas d'applications supplémentaires. Vit entièrement dans votre Obsidian.", cardLabel: "Votre LLM, votre choix", cardSubtitle: "Compatible avec tous les fournisseurs. Pas de dépendance.", contextNote: "Modèles long contexte (256K+) recommandés. Tout votre wiki en une seule requête, compréhension totale.", bestValue: "Meilleur rapport qualité-prix" },
+  ecosystem: { label: "Écosystème", title: "Chaque plugin, amplifié", subtitle: "Pas une île. Chaque outil que vous aimez, maintenant meilleur.", items: [{ name: "Vue du graphe", standalone: "Voir les liens", amplified: "Le wiki donne du sens à votre graphe. Pages centrales, regroupements, orphelins. L'exploration, pas la décoration." }, { name: "Web Clipper", standalone: "Sauvegarder des articles", amplified: "Déposez dans sources/. L'IA extrait, lie, met à jour. Un clip devient 10+ pages wiki." }, { name: "Dataview", standalone: "Interroger des données", amplified: "L'IA ajoute de la structure. Tags, dates, catégories. Les tables vides deviennent des tableaux de bord vivants." }, { name: "Git", standalone: "Suivre les versions", amplified: "Regardez votre savoir évoluer. Chaque commit raconte l'histoire de votre progression." }, { name: "Marp", standalone: "Créer des diapositives", amplified: "Demandez : « Résume ma recherche pour une présentation de 10 minutes. » Le wiki construit les diapositives depuis votre savoir." }, { name: "Canvas", standalone: "Toile visuelle", amplified: "L'IA construit des cartes conceptuelles, des frises chronologiques, des arbres de décision depuis votre savoir. Fini la toile vide." }], cta: "Ce n'est que le commencement. Quand votre savoir a une structure, chaque plugin devient plus puissant." },
+  footer: { emailUser: "hi", emailDomain: "greenerai.top", emailLabel: "Contact :", github: "GitHub", discussions: "Retours", releases: "Versions", obsidian: "Obsidian" },
+  cta: { title: "Prêt à construire votre wiki ?", subtitle: "Open source. Porté par la communauté. Juste Obsidian.", button: "Ajouter à Obsidian" },
+  faq: {
+    label: "FAQ",
+    title: "Questions fréquentes",
+    subtitle: "Tout ce que vous devez savoir pour commencer.",
+    items: [
+      {
+        q: "Pourquoi vois-je des pages dupliquées avec des noms similaires ?",
+        a: "Les anciennes versions n'avaient pas de détection des doublons prenant en compte les alias. Lancez <em>Lint Wiki</em> — si des doublons sont trouvés, cliquez sur <em>Merge Duplicates</em> pour les fusionner. La page fusionnée conserve les alias des deux pages, empêchant les futurs doublons.",
+      },
+      {
+        q: "Comment accélérer l'ingestion de gros fichiers source ?",
+        a: "Dans Paramètres → Accélération de l'ingestion, augmentez <em>Page Generation Concurrency</em> à 3 (ou 5 pour les fournisseurs à taux élevé) pour traiter les pages en parallèle. Réglez <em>Batch Delay</em> à 300ms. Utilisez la granularité <em>Standard</em> ou <em>Coarse</em> pour moins d'appels API.",
+      },
+      {
+        q: "Que fait Smart Fix All ?",
+        a: "Il exécute les réparations dans l'ordre causal : <em>Complete Aliases</em> → <em>Merge Duplicates</em> → <em>Fix Dead Links</em> → <em>Link Orphans</em> → <em>Expand Empty Pages</em>. Un clic, tout est résolu.",
+      },
+      {
+        q: "Comment éviter les coûts API imprévus ?",
+        a: "Auto-Maintenance est <em>DÉSACTIVÉ</em> par défaut — n'activez que si nécessaire. Smart Batch Skip évite de retraiter les fichiers déjà ingérés. Utilisez la granularité <em>Standard</em> ou <em>Coarse</em> pour réduire les appels API. Le rapport Lint affiche les comptages avant l'exécution des réparations.",
+      },
+    ],
+  },
+};
+
+export const pt: Translations = {
+  nav: { howItWorks: 'Como funciona', comparison: 'Por que importa', features: 'Recursos', ecosystem: 'Ecossistema', providers: 'Código aberto', install: 'Instalar', download: 'Adicionar ao Obsidian' },
+  hero: { badge: 'Conceito LLM Wiki de Andrej Karpathy', title1: 'Suas notas.', title2: 'Uma wiki viva.', subtitle: 'Escreva no Obsidian. Cada nota se conecta a uma rede que não para de crescer.', ctaInstall: 'Baixar o plugin', ctaObsidian: 'Baixar Obsidian', obsidianHint: 'Requer Obsidian.', ctaRead: 'Leia o conceito original', legendSources: 'sources/', legendEntities: 'entities/', legendConcepts: 'concepts/', scrollHint: 'Rolar' },
+  wikiDemo: { label: 'Como funciona', title: 'De nota a wiki', subtitle: 'Uma nota. Um mundo de conexões.', step1Title: 'Jogue aqui', step1Desc: 'Artigos, papers, ideias. Coloque em sources/. O plugin lê cada palavra.', step2Title: 'Veja o que importa', step2Desc: 'Pessoas, lugares, temas. A IA lê o panorama completo e destaca o que importa.', step3Title: 'Páginas surgem', step3Desc: 'Cada conceito ganha seu espaço. Conteúdo, significado, conexões — tudo pronto para você.', step4Title: 'Veja as conexões', step4Desc: 'As páginas se ligam umas às outras. Abra o Graph View e veja seu conhecimento tomar forma.', step5Title: 'É só perguntar', step5Desc: 'Pergunte naturalmente. Sua wiki responde com fontes que você pode verificar — e salvar como novas páginas.', next: 'Próximo', prev: 'Anterior', restart: 'Recomeçar', sourceNote: 'Fonte', extracted: 'Encontrado', generated: 'Criado', linked: 'Conectado', ask: 'Perguntar', answer: 'Resposta' },
+  comparison: { label: 'Por que importa', title: 'Nada do que você lê deveria ser desperdiçado.', subtitle: 'Perder ou fazer crescer?', beforeLabel: 'Antes', afterLabel: 'Depois', items: [{ category: 'Salvar', before: 'Salva um artigo. Esquece onde. Pesquisa depois. Nada.', after: 'Coloca em sources/. Ideias encontradas, páginas construídas, resumo pronto. Em segundos.' }, { category: 'Conectar', before: 'Liga duas notas à mão. Uma muda. A outra fica desatualizada. O link morre.', after: 'Os links se mantêm vivos. Quando novas informações contradizem as antigas, todas as páginas relacionadas se atualizam.' }, { category: 'Crescer', before: 'Um ano de notas. Só arquivos. Todo projeto começa do zero. Mesmas leituras. Mesmas conclusões.', after: 'Um ano constrói uma wiki. Cada nova pergunta se baseia em tudo que você coletou. Seu conhecimento cresce.' }] },
+  features: { label: 'Recursos', title: 'O que muda', subtitle: 'Não são recursos. Uma nova relação com tudo que você lê.', organizeTitle: 'Acontece sozinho', organizeDesc: 'Coloca em sources/. A IA lê, extrai, constrói. Sem pastas. Sem tags. Sem trabalho.', organizeTag: 'Zero esforço', bidirectionalTitle: 'Links vivos', bidirectionalDesc: 'Cada página se integra ao seu grafo do Obsidian. Abra o Graph View — e veja seu conhecimento crescer.', bidirectionalTag: 'Conectado', conversationalTitle: 'Só conversar', conversationalDesc: 'Pergunte como a um amigo. Sua wiki responde com fontes que você pode ver e confiar.', conversationalTag: 'Natural', autoMaintenanceTitle: 'Sempre atualizado', autoMaintenanceDesc: 'Novos arquivos? Incluídos automaticamente. Contradições? Detectadas. Saúde? Verificada. Do seu jeito.', autoMaintenanceTag: 'Do seu jeito',
+    smartFixTitle: 'Um clique resolve tudo',
+    smartFixDesc: 'Correção em lotes com ordem causal: aliases → duplicatas → links quebrados → órfãos → páginas vazias. Cinco fases em sequência com processamento paralelo.',
+    smartFixTag: 'Smart Fix All',
+    granularityTitle: 'Do fino ao grosso. Você decide.',
+    granularityDesc: 'Controle a profundidade de extração por fonte. Padrão para o dia a dia, Fino para pesquisa, Grosso para visão rápida.',
+    granularityTag: 'Granularidade',
+    moreLabel: 'E mais:',
+    moreCapabilities: ['Wiki em 8 idiomas', 'Detecção e fusão de duplicatas', 'Aliases de página', 'Geração paralela', 'Detecção de contradições', 'Auto-Retry 5xx', 'Smart Batch Skip'], },
+  install: { label: 'Comece agora', title: 'Pronto em minutos', subtitle: 'Obsidian é tudo que você precisa.', step1Title: 'Instalar', step1Desc: 'No Obsidian: Configurações → Plugins da comunidade → Procurar, busque por <em>Karpathy LLM Wiki</em>, clique em <em>Instalar</em> e depois <em>Ativar</em>.', step2Title: 'Configurar', step2Desc: 'Configurações → <em>Karpathy LLM Wiki</em>. Escolha seu LLM, insira a chave, teste, salve.', step3Title: 'Usar', step3Desc: '<em>Cmd+P</em> (ou <em>Ctrl+P</em>). Digite <em>Ingest</em> para adicionar fontes. Digite <em>Query</em> para perguntar.', pluginPageButton: 'Abrir página do plugin', cta: 'Baixar no Obsidian' },
+  providers: { label: 'Código aberto', title: 'Construído abertamente', subtitle: 'Código aberto. Seus dados continuam seus.', openSourceTitle: 'Código aberto', openSourceDesc: 'Licença MIT. Código fonte completo no GitHub. Faça fork, estenda, faça do seu jeito.', communityTitle: 'Comunidade', communityDesc: 'GitHub Discussions para ideias e suporte. Contribuições são bem-vindas.', vendorTitle: 'Privacidade primeiro', vendorDesc: 'Sem armazenamento. Sem backend. Sem coleta de dados. Suas notas ficam no seu Obsidian — enviadas ao seu LLM apenas durante ingestão ou consulta. Modelos locais mantêm tudo offline.', obsidianTitle: 'Obsidian puro', obsidianDesc: 'Sem apps extras. Vive inteiramente dentro do seu Obsidian.', cardLabel: 'Seu LLM, sua escolha', cardSubtitle: 'Funciona com qualquer provedor. Sem lock-in.', contextNote: 'Modelos de contexto longo (256K+) recomendados. Sua wiki inteira em uma chamada, compreensão total.', bestValue: 'Melhor custo-benefício' },
+  ecosystem: { label: 'Ecossistema', title: 'Cada plugin, potencializado', subtitle: 'Não é uma ilha. Cada ferramenta que você ama, agora melhor.', items: [{ name: 'Graph View', standalone: 'Ver links', amplified: 'A wiki dá significado ao seu grafo. Páginas centrais, clusters, órfãos. Exploração, não decoração.' }, { name: 'Web Clipper', standalone: 'Salvar artigos', amplified: 'Coloca em sources/. A IA extrai, conecta, atualiza. Um clip vira 10+ páginas wiki.' }, { name: 'Dataview', standalone: 'Consultar dados', amplified: 'A IA adiciona estrutura. Tags, datas, categorias. Tabelas vazias viram dashboards vivos.' }, { name: 'Git', standalone: 'Rastrear versões', amplified: 'Veja seu conhecimento evoluir. Cada commit conta a história de como você cresceu.' }, { name: 'Marp', standalone: 'Criar slides', amplified: 'Pergunte: "Resuma minha pesquisa para uma apresentação de 10 minutos." A wiki monta os slides a partir do seu conhecimento.' }, { name: 'Canvas', standalone: 'Canvas visual', amplified: 'A IA cria mapas conceituais, linhas do tempo, árvores de decisão a partir do seu conhecimento. Adeus, canvas em branco.' }], cta: 'Só o começo. Quando seu conhecimento tem estrutura, cada plugin fica mais poderoso.' },
+  footer: { emailUser: 'hi', emailDomain: 'greenerai.top', emailLabel: 'Contato:', github: 'GitHub', discussions: 'Feedback', releases: 'Versões', obsidian: 'Obsidian' },
+  cta: { title: 'Pronto para construir sua wiki?', subtitle: 'Código aberto. Movido pela comunidade. Só Obsidian.', button: 'Adicionar ao Obsidian' },
+  faq: {
+    label: 'FAQ',
+    title: 'Perguntas frequentes',
+    subtitle: 'Tudo que você precisa saber para começar.',
+    items: [
+      {
+        q: 'Por que vejo páginas duplicadas com nomes similares?',
+        a: 'Versões mais antigas não tinham detecção de duplicatas com reconhecimento de alias. Execute <em>Lint Wiki</em> — se duplicatas forem encontradas, clique em <em>Merge Duplicates</em> para fusioná-las. A página fusionada preserva os aliases de ambas, evitando duplicatas futuras.',
+      },
+      {
+        q: 'Como acelerar a ingestão de arquivos fonte grandes?',
+        a: 'Em Configurações → Aceleração de ingestão, aumente <em>Page Generation Concurrency</em> para 3 (ou 5 para provedores com limite alto) para processar páginas em paralelo. Defina <em>Batch Delay</em> para 300ms. Use granularidade <em>Standard</em> ou <em>Coarse</em> para menos chamadas à API.',
+      },
+      {
+        q: 'O que o Smart Fix All faz?',
+        a: 'Executa correções em ordem causal: <em>Complete Aliases</em> → <em>Merge Duplicates</em> → <em>Fix Dead Links</em> → <em>Link Orphans</em> → <em>Expand Empty Pages</em>. Um clique, tudo resolvido.',
+      },
+      {
+        q: 'Como evitar custos inesperados com API?',
+        a: 'Auto-Maintenance vem <em>DESATIVADO</em> por padrão — não ative a menos que necessário. Smart Batch Skip evita reprocessar arquivos já ingeridos. Use granularidade <em>Standard</em> ou <em>Coarse</em> para reduzir chamadas à API. O relatório Lint mostra as quantidades antes de executar correções.',
+      },
+    ],
+  },
 };

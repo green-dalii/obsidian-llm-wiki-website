@@ -7,6 +7,7 @@ import WikiDemoIsland from '../components/WikiDemoIsland';
 import Footer from '../components/astro/Footer.astro';
 import Comparison from '../components/astro/Comparison.astro';
 import Features from '../components/astro/Features.astro';
+import FAQ from '../components/astro/FAQ.astro';
 import Install from '../components/astro/Install.astro';
 import Ecosystem from '../components/astro/Ecosystem.astro';
 import Providers from '../components/astro/Providers.astro';
@@ -71,6 +72,8 @@ const ogImage = siteUrl + 'og-image.webp';
     <link rel="alternate" hreflang="ko" href={siteUrl + 'ko/'} />
     <link rel="alternate" hreflang="de" href={siteUrl + 'de/'} />
     <link rel="alternate" hreflang="es" href={siteUrl + 'es/'} />
+    <link rel="alternate" hreflang="fr" href={siteUrl + 'fr/'} />
+    <link rel="alternate" hreflang="pt" href={siteUrl + 'pt/'} />
     <link rel="alternate" hreflang="x-default" href={Astro.site} />
 
     <!-- JSON-LD Structured Data -->
@@ -129,6 +132,7 @@ const ogImage = siteUrl + 'og-image.webp';
         <div class="h-px max-w-5xl mx-auto bg-gradient-to-r from-transparent via-obsidian-purple/20 to-transparent" />
         <Features locale="en" />
         <Install locale="en" />
+        <FAQ locale="en" />
         <Ecosystem locale="en" />
         <Providers locale="en" />
         <CTA locale="en" />
@@ -145,7 +149,7 @@ const ogImage = siteUrl + 'og-image.webp';
     try { if (sessionStorage.getItem('lang-routed')) return; } catch (e) {}
 
     var lang = (navigator.language || '').toLowerCase();
-    var map: Record<string, string> = { zh: '/zh/', ja: '/ja/', ko: '/ko/', de: '/de/', es: '/es/' };
+    var map: Record<string, string> = { zh: '/zh/', ja: '/ja/', ko: '/ko/', de: '/de/', es: '/es/', fr: '/fr/', pt: '/pt/' };
     var code = lang.split('-')[0];
     var target = map[code];
 

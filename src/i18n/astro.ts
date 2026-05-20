@@ -1,10 +1,10 @@
-import { en, zh, ja, ko, de, es } from './translations';
+import { en, zh, ja, ko, de, es, fr, pt } from './translations';
 import type { Translations } from './translations';
 
-export const translations = { en, zh, ja, ko, de, es };
+export const translations = { en, zh, ja, ko, de, es, fr, pt };
 
 export function getT(lang: string): Translations {
-  const map: Record<string, Translations> = { en, zh, ja, ko, de, es };
+  const map: Record<string, Translations> = { en, zh, ja, ko, de, es, fr, pt };
   return map[lang] || en;
 }
 
