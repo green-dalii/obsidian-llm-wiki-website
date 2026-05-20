@@ -332,22 +332,11 @@ export const en: Translations = {
     title: 'Common questions',
     subtitle: 'Everything you need to know to get started.',
     items: [
-      {
-        q: 'Why do I see duplicate pages with similar names?',
-        a: 'Older versions didn\'t have alias-aware duplicate detection. Run <em>Lint Wiki</em> — if duplicates are found, click <em>Merge Duplicates</em> to fuse them. The merged page preserves aliases from both, preventing future duplicates.',
-      },
-      {
-        q: 'How do I speed up ingestion for large source files?',
-        a: 'In Settings → Ingestion Acceleration, increase <em>Page Generation Concurrency</em> to 3 (or 5 for high-rate-limit providers) to process pages in parallel. Set <em>Batch Delay</em> to 300ms. Use <em>Standard</em> or <em>Coarse</em> extraction granularity for fewer API calls.',
-      },
-      {
-        q: 'What does Smart Fix All do?',
-        a: 'It runs fixes in causality order: <em>Complete Aliases</em> → <em>Merge Duplicates</em> → <em>Fix Dead Links</em> → <em>Link Orphans</em> → <em>Expand Empty Pages</em>. One click, all resolved.',
-      },
-      {
-        q: 'How do I avoid unexpected API costs?',
-        a: 'Auto-Maintenance is <em>OFF</em> by default — don\'t enable unless needed. Smart Batch Skip avoids re-processing ingested files. Use <em>Standard</em> or <em>Coarse</em> granularity to reduce API calls. The Lint report shows counts before you run fixes.',
-      },
+      { q: 'What does this plugin actually do?', a: 'Drop any note into your Obsidian vault. The AI extracts people, concepts, and theories, then auto-generates interlinked wiki pages with bidirectional links. Ask <em>"what did I write about X?"</em> — the answer comes from your own notes, not the internet.' },
+      { q: 'What are the minimum requirements?', a: 'Obsidian v1.6.6+ (desktop: Windows, macOS, Linux) and an LLM provider API key. Supported: DeepSeek, Gemini, Claude, GPT, Kimi, GLM, OpenRouter, or custom. No API key needed for Ollama (local models).' },
+      { q: 'Which model should I choose? How much will it cost?', a: 'Long-context models (1M tokens) recommended — they process your entire wiki in one pass. A single ingest costs <em>$0.05–$0.50</em>. All costs go to the LLM provider; the plugin itself is <em>free and open source</em>.' },
+      { q: 'Can I use local models via Ollama?', a: 'Yes. Install <em>Ollama</em>, pull a model (e.g. <em>qwen3.5</em>), select <em>Ollama (Local)</em>. No API key needed. Cloud providers recommended for ingestion (larger context); local models work well for query.' },
+      { q: 'How do I get help or report bugs?', a: 'Use <em>GitHub Issues</em> for bug reports, <em>GitHub Discussions</em> for questions. Also find the plugin on the <em>Obsidian Community Plugin</em> page and leave a review.' },
     ],
   },
 };
@@ -536,23 +525,12 @@ export const zh: Translations = {
     label: '常见问题',
     title: '你可能想了解的',
     subtitle: '上手前你需要知道的一切。',
-    items: [
-      {
-        q: '为什么我会看到名称相似的重复页面？',
-        a: '旧版本没有别名感知的重复检测。运行 <em>Lint Wiki</em> — 如果发现重复页面，点击 <em>Merge Duplicates</em> 进行合并。合并后的页面会保留双方的别名，防止将来再次出现重复。',
-      },
-      {
-        q: '如何加快大文件的收录速度？',
-        a: '在设置 → 收录加速中，将 <em>页面生成并发数</em> 提高到 3（对于高速率限制的提供商可设为 5）以并行处理页面。将 <em>批次延迟</em> 设为 300ms。使用 <em>Standard</em> 或 <em>Coarse</em> 提取粒度以减少 API 调用。',
-      },
-      {
-        q: 'Smart Fix All 做什么？',
-        a: '它按因果顺序运行修复：<em>Complete Aliases</em> → <em>Merge Duplicates</em> → <em>Fix Dead Links</em> → <em>Link Orphans</em> → <em>Expand Empty Pages</em>。一键搞定。',
-      },
-      {
-        q: '如何避免意外的 API 费用？',
-        a: 'Auto-Maintenance 默认 <em>关闭</em> — 除非需要否则不要启用。Smart Batch Skip 避免重新处理已收录的文件。使用 <em>Standard</em> 或 <em>Coarse</em> 粒度减少 API 调用。Lint 报告会在你运行修复前显示数量。',
-      },
+        items: [
+      { q: '这个插件到底是做什么的？', a: '把任何笔记丢进 Obsidian 知识库。AI 自动提取人物、概念和理论，生成互联的 Wiki 页面和双向链接。问 <em>"我写过关于 X 的什么？"</em>——答案来自你自己的笔记，而非互联网。' },
+      { q: '最低要求是什么？', a: 'Obsidian v1.6.6+（桌面：Windows、macOS、Linux）以及 LLM 提供商 API 密钥。支持：DeepSeek、Gemini、Claude、GPT、Kimi、GLM、OpenRouter、自定义。Ollama 本地模型无需 API 密钥。' },
+      { q: '应该选哪个模型？要花多少钱？', a: '强烈推荐长上下文模型（1M tokens）——它们能一次处理整个 Wiki。单次摄入通常花费 <em>$0.05–$0.50</em>。所有费用直接付给 LLM 提供商；插件本身 <em>免费且开源</em>。' },
+      { q: '能否通过 Ollama 使用本地模型？', a: '可以。安装 <em>Ollama</em>，拉取模型（如 <em>qwen3.5</em>），选择 <em>Ollama（本地）</em>作为提供商，无需 API 密钥。建议云提供商用于摄入（更大的上下文），本地模型适合查询。' },
+      { q: '如何获取帮助或报告 Bug？', a: 'Bug 报告使用 <em>GitHub Issues</em>，问题咨询使用 <em>GitHub Discussions</em>。也可以在 <em>Obsidian 社区插件</em>页面找到该插件并留下评价。' },
     ],
   },
 };
@@ -705,23 +683,12 @@ export const ja: Translations = {
     label: 'FAQ',
     title: 'よくある質問',
     subtitle: 'はじめる前に知っておくべきこと。',
-    items: [
-      {
-        q: 'なぜ似た名前の重複ページが表示されるのですか？',
-        a: '古いバージョンにはエイリアスを考慮した重複検出がありませんでした。<em>Lint Wiki</em> を実行し、重複が見つかった場合は <em>Merge Duplicates</em> をクリックして統合してください。統合されたページは両方のエイリアスを保持し、将来の重複を防ぎます。',
-      },
-      {
-        q: '大きなソースファイルの取り込みを高速化するには？',
-        a: '設定 → 取り込みアクセラレーションで、<em>ページ生成の並列数</em> を 3（高速レート制限のプロバイダーの場合は 5）に増やしてページを並列処理します。<em>バッチ遅延</em> を 300ms に設定。API 呼び出しを減らすには <em>Standard</em> または <em>Coarse</em> 抽出粒度を使用してください。',
-      },
-      {
-        q: 'Smart Fix All とは何ですか？',
-        a: '因果順に修復を実行します: <em>Complete Aliases</em> → <em>Merge Duplicates</em> → <em>Fix Dead Links</em> → <em>Link Orphans</em> → <em>Expand Empty Pages</em>。ワンクリックですべて解決。',
-      },
-      {
-        q: '予期しない API コストを避けるには？',
-        a: 'Auto-Maintenance はデフォルトで <em>OFF</em> です — 必要でない限り有効にしないでください。Smart Batch Skip は既に取り込み済みのファイルの再処理を回避します。<em>Standard</em> または <em>Coarse</em> 粒度を使用して API 呼び出しを削減。Lint レポートは修復実行前にカウントを表示します。',
-      },
+        items: [
+      { q: 'このプラグインの目的は？', a: 'ノートを Obsidian に置くだけで、AI が人物・概念・理論を抽出し、相互リンクされた Wiki ページを自動生成します。<em>「X について何か書いた？」</em>と質問すれば、インターネットではなく自分のノートから回答を得られます。' },
+      { q: '最低要件は？', a: 'Obsidian v1.6.6+（デスクトップ：Windows、macOS、Linux）と LLM プロバイダーの API キーが必要です。対応：DeepSeek、Gemini、Claude、GPT、Kimi、GLM、OpenRouter、カスタム。Ollama（ローカルモデル）は API キー不要。' },
+      { q: 'どのモデルを選ぶべき？費用は？', a: '長コンテキストモデル（1M tokens）推奨 — Wiki 全体を1回で処理できます。1回の取り込みは約 <em>$0.05–$0.50</em>。費用はすべて LLM プロバイダーに。プラグイン自体は <em>無料のオープンソース</em>。' },
+      { q: 'Ollama でローカルモデルは使える？', a: 'はい。<em>Ollama</em> をインストールし、モデルをプル（例：<em>qwen3.5</em>）、<em>Ollama（ローカル）</em> を選択。API キー不要。クラウドは取り込みに、ローカルはクエリにおすすめ。' },
+      { q: 'ヘルプやバグ報告は？', a: 'バグ報告は <em>GitHub Issues</em>、質問は <em>GitHub Discussions</em> へ。<em>Obsidian Community Plugin</em> ページでも見つけられます。' },
     ],
   },
 };
@@ -874,23 +841,12 @@ export const ko: Translations = {
     label: 'FAQ',
     title: '자주 묻는 질문',
     subtitle: '시작하기 전에 알아야 할 모든 것.',
-    items: [
-      {
-        q: '비슷한 이름의 중복 페이지가 왜 생기나요?',
-        a: '이전 버전에는 별칭 인식 중복 감지가 없었습니다. <em>Lint Wiki</em> 를 실행하고 중복이 발견되면 <em>Merge Duplicates</em> 를 클릭하여 통합하세요. 통합된 페이지는 양쪽 별칭을 보존하여 향후 중복을 방지합니다.',
-      },
-      {
-        q: '대용량 소스 파일 수집 속도를 높이는 방법은?',
-        a: '설정 → 수집 가속화에서 <em>페이지 생성 동시성</em> 을 3(고속 제한 프로바이더의 경우 5)으로 늘려 페이지를 병렬 처리하세요. <em>배치 지연</em> 을 300ms로 설정. API 호출을 줄이려면 <em>Standard</em> 또는 <em>Coarse</em> 추출 입자를 사용하세요.',
-      },
-      {
-        q: 'Smart Fix All 은 무엇을 하나요?',
-        a: '인과 관계 순서로 수정을 실행합니다: <em>Complete Aliases</em> → <em>Merge Duplicates</em> → <em>Fix Dead Links</em> → <em>Link Orphans</em> → <em>Expand Empty Pages</em>. 한 번의 클릭으로 모두 해결.',
-      },
-      {
-        q: '예상치 못한 API 비용을 피하는 방법은?',
-        a: 'Auto-Maintenance 는 기본적으로 <em>끄기</em> 상태입니다 — 필요하지 않으면 활성화하지 마세요. Smart Batch Skip 은 이미 수집된 파일의 재처리를 피합니다. <em>Standard</em> 또는 <em>Coarse</em> 입자를 사용하여 API 호출을 줄이세요. Lint 보고서는 수정 실행 전 카운트를 보여줍니다.',
-      },
+        items: [
+      { q: '이 플러그인은 실제로 무엇을 하나요?', a: '노트를 Obsidian에 넣으면 AI가 사람, 개념, 이론을 추출하고 상호 연결된 Wiki 페이지와 양방향 링크를 자동 생성합니다. <em>"X에 대해 뭐라고 썼지?"</em>라고 물어보면 인터넷이 아닌 자신의 노트에서 답을 얻습니다.' },
+      { q: '최소 요구 사항은?', a: 'Obsidian v1.6.6+ (데스크톱: Windows, macOS, Linux)와 LLM 제공업체 API 키 필요. 지원: DeepSeek, Gemini, Claude, GPT, Kimi, GLM, OpenRouter, 커스텀. Ollama(로컬 모델)는 API 키 불필요.' },
+      { q: '어떤 모델을 선택해야 하나요? 비용은?', a: '긴 컨텍스트 모델(1M tokens) 권장 — Wiki 전체를 한 번에 처리. 1회 수집 비용 약 <em>$0.05–$0.50</em>. 모든 비용은 LLM 제공업체에. 플러그인은 <em>무료 오픈 소스</em>.' },
+      { q: 'Ollama로 로컬 모델을 사용할 수 있나요?', a: '네. <em>Ollama</em> 설치, 모델 pull(예: <em>qwen3.5</em>), <em>Ollama(로컬)</em> 선택. API 키 불필요. 클라우드는 수집에, 로컬은 질의에 적합.' },
+      { q: '도움말이나 버그 신고는?', a: '버그 신고는 <em>GitHub Issues</em>, 질문은 <em>GitHub Discussions</em> 이용. <em>Obsidian Community Plugin</em> 페이지에서도 찾을 수 있습니다.' },
     ],
   },
 };
@@ -918,23 +874,12 @@ export const de: Translations = {
     label: 'FAQ',
     title: 'Häufige Fragen',
     subtitle: 'Alles, was du für den Einstieg wissen musst.',
-    items: [
-      {
-        q: 'Warum sehe ich doppelte Seiten mit ähnlichen Namen?',
-        a: 'Ältere Versionen hatten keine alias-bew Duplicate-Erkennung. Führe <em>Lint Wiki</em> aus — wenn Duplikate gefunden werden, klicke auf <em>Merge Duplicates</em>, um sie zu fusionieren. Die fusionierte Seite behält Aliase von beiden und verhindert zukünftige Duplikate.',
-      },
-      {
-        q: 'Wie beschleunige ich die Erfassung großer Quelldateien?',
-        a: 'In Einstellungen → Erfassungsbeschleunigung erhöhe <em>Parallelität der Seitengenerierung</em> auf 3 (oder 5 für Provider mit hohem Rate-Limit), um Seiten parallel zu verarbeiten. Setze <em>Batch Delay</em> auf 300ms. Verwende <em>Standard</em> oder <em>Coarse</em> Extraktionsgranularität für weniger API-Aufrufe.',
-      },
-      {
-        q: 'Was macht Smart Fix All?',
-        a: 'Es führt Reparaturen in Kausalitätsreihenfolge aus: <em>Complete Aliases</em> → <em>Merge Duplicates</em> → <em>Fix Dead Links</em> → <em>Link Orphans</em> → <em>Expand Empty Pages</em>. Ein Klick, alles gelöst.',
-      },
-      {
-        q: 'Wie vermeide ich unerwartete API-Kosten?',
-        a: 'Auto-Maintenance ist standardmäßig <em>AUS</em> — aktivieren, nur wenn nötig. Smart Batch Skip vermeidet die Neuverarbeitung bereits erfasster Dateien. Verwende <em>Standard</em> oder <em>Coarse</em> Granularität, um API-Aufrufe zu reduzieren. Der Lint-Bericht zeigt die Anzahl, bevor du Reparaturen ausführst.',
-      },
+        items: [
+      { q: 'Was macht dieses Plugin eigentlich?', a: 'Lege eine Notiz in dein Obsidian-Vault. Die KI extrahiert Personen, Konzepte und Theorien und generiert automatisch vernetzte Wiki-Seiten mit bidirektionalen Links. Frage <em>„Was habe ich über X geschrieben?"</em> — die Antwort kommt aus deinen eigenen Notizen.' },
+      { q: 'Was sind die Mindestanforderungen?', a: 'Obsidian v1.6.6+ (Desktop: Windows, macOS, Linux) und ein LLM-API-Key. Unterstützt: DeepSeek, Gemini, Claude, GPT, Kimi, GLM, OpenRouter, benutzerdefiniert. Kein API-Key für Ollama (lokale Modelle).' },
+      { q: 'Welches Modell soll ich wählen? Was kostet es?', a: 'Langkontext-Modelle (1M Tokens) empfohlen — sie verarbeiten dein gesamtes Wiki in einem Durchlauf. Ein Ingest kostet <em>$0.05–$0.50</em>. Kosten gehen an den LLM-Anbieter; das Plugin ist <em>kostenlos und Open Source</em>.' },
+      { q: 'Kann ich lokale Modelle via Ollama nutzen?', a: 'Ja. Installiere <em>Ollama</em>, pull ein Modell (z.B. <em>qwen3.5</em>), wähle <em>Ollama (Lokal)</em>. Kein API-Key nötig. Cloud für Ingest empfohlen; lokale Modelle für Abfragen.' },
+      { q: 'Wie bekomme ich Hilfe oder melde Fehler?', a: 'Nutze <em>GitHub Issues</em> für Fehlermeldungen, <em>GitHub Discussions</em> für Fragen. Auch auf der <em>Obsidian Community Plugin</em>-Seite.' },
     ],
   },
 };
@@ -962,23 +907,12 @@ export const es: Translations = {
     label: 'FAQ',
     title: 'Preguntas frecuentes',
     subtitle: 'Todo lo que necesitas saber para empezar.',
-    items: [
-      {
-        q: '¿Por qué veo páginas duplicadas con nombres similares?',
-        a: 'Las versiones antiguas no tenían detección de duplicados consciente de alias. Ejecuta <em>Lint Wiki</em> — si se encuentran duplicados, haz clic en <em>Merge Duplicates</em> para fusionarlos. La página fusionada conserva los alias de ambas, evitando futuros duplicados.',
-      },
-      {
-        q: '¿Cómo acelero la ingestión de archivos fuente grandes?',
-        a: 'En Ajustes → Aceleración de ingestión, aumenta <em>Page Generation Concurrency</em> a 3 (o 5 para proveedores con límite alto) para procesar páginas en paralelo. Configura <em>Batch Delay</em> en 300ms. Usa granularidad <em>Standard</em> o <em>Coarse</em> para menos llamadas API.',
-      },
-      {
-        q: '¿Qué hace Smart Fix All?',
-        a: 'Ejecuta reparaciones en orden de causalidad: <em>Complete Aliases</em> → <em>Merge Duplicates</em> → <em>Fix Dead Links</em> → <em>Link Orphans</em> → <em>Expand Empty Pages</em>. Un clic, todo resuelto.',
-      },
-      {
-        q: '¿Cómo evito costos API inesperados?',
-        a: 'Auto-Maintenance está <em>DESACTIVADO</em> por defecto — no actives a menos que sea necesario. Smart Batch Skip evita reprocesar archivos ya ingestados. Usa granularidad <em>Standard</em> o <em>Coarse</em> para reducir llamadas API. El informe Lint muestra las cantidades antes de ejecutar reparaciones.',
-      },
+        items: [
+      { q: '¿Qué hace este plugin realmente?', a: 'Coloca cualquier nota en tu bóveda de Obsidian. La IA extrae personas, conceptos y teorías, y genera páginas wiki interconectadas con enlaces bidireccionales. Pregunta <em>"¿qué escribí sobre X?"</em> — la respuesta viene de tus notas.' },
+      { q: '¿Cuáles son los requisitos mínimos?', a: 'Obsidian v1.6.6+ (escritorio: Windows, macOS, Linux) y una clave API de LLM. Compatible: DeepSeek, Gemini, Claude, GPT, Kimi, GLM, OpenRouter o personalizado. Sin clave para Ollama (modelos locales).' },
+      { q: '¿Qué modelo elegir? ¿Cuánto cuesta?', a: 'Modelos de contexto largo (1M tokens) recomendados — procesan toda tu wiki en una pasada. Una ingesta cuesta <em>$0.05–$0.50</em>. Los costos van al proveedor LLM; el plugin es <em>gratuito y open source</em>.' },
+      { q: '¿Puedo usar modelos locales con Ollama?', a: 'Sí. Instala <em>Ollama</em>, descarga un modelo (ej. <em>qwen3.5</em>), selecciona <em>Ollama (Local)</em>. Sin clave API. Nube recomendada para ingestas; modelos locales para consultas.' },
+      { q: '¿Cómo obtener ayuda o reportar errores?', a: 'Usa <em>GitHub Issues</em> para errores, <em>GitHub Discussions</em> para preguntas. También en la página de <em>Obsidian Community Plugin</em>.' },
     ],
   },
 };
@@ -1003,32 +937,21 @@ export const fr: Translations = {
   footer: { emailUser: "hi", emailDomain: "greenerai.top", emailLabel: "Contact :", github: "GitHub", discussions: "Retours", releases: "Versions", obsidian: "Obsidian" },
   cta: { title: "Prêt à construire votre wiki ?", subtitle: "Open source. Porté par la communauté. Juste Obsidian.", button: "Ajouter à Obsidian" },
   faq: {
-    label: "FAQ",
-    title: "Questions fréquentes",
-    subtitle: "Tout ce que vous devez savoir pour commencer.",
+    label: 'FAQ',
+    title: 'Questions fréquentes',
+    subtitle: 'Tout ce que vous devez savoir pour commencer.',
     items: [
-      {
-        q: "Pourquoi vois-je des pages dupliquées avec des noms similaires ?",
-        a: "Les anciennes versions n'avaient pas de détection des doublons prenant en compte les alias. Lancez <em>Lint Wiki</em> — si des doublons sont trouvés, cliquez sur <em>Merge Duplicates</em> pour les fusionner. La page fusionnée conserve les alias des deux pages, empêchant les futurs doublons.",
-      },
-      {
-        q: "Comment accélérer l'ingestion de gros fichiers source ?",
-        a: "Dans Paramètres → Accélération de l'ingestion, augmentez <em>Page Generation Concurrency</em> à 3 (ou 5 pour les fournisseurs à taux élevé) pour traiter les pages en parallèle. Réglez <em>Batch Delay</em> à 300ms. Utilisez la granularité <em>Standard</em> ou <em>Coarse</em> pour moins d'appels API.",
-      },
-      {
-        q: "Que fait Smart Fix All ?",
-        a: "Il exécute les réparations dans l'ordre causal : <em>Complete Aliases</em> → <em>Merge Duplicates</em> → <em>Fix Dead Links</em> → <em>Link Orphans</em> → <em>Expand Empty Pages</em>. Un clic, tout est résolu.",
-      },
-      {
-        q: "Comment éviter les coûts API imprévus ?",
-        a: "Auto-Maintenance est <em>DÉSACTIVÉ</em> par défaut — n'activez que si nécessaire. Smart Batch Skip évite de retraiter les fichiers déjà ingérés. Utilisez la granularité <em>Standard</em> ou <em>Coarse</em> pour réduire les appels API. Le rapport Lint affiche les comptages avant l'exécution des réparations.",
-      },
+      { q: 'Que fait ce plugin exactement ?', a: 'Déposez n\'importe quelle note dans votre coffre Obsidian. L\'IA extrait les personnes, concepts et théories, puis génère des pages wiki interconnectées avec des liens bidirectionnels. Demandez <em>« qu\'ai-je écrit sur X ? »</em> — la réponse vient de vos notes, pas d\'Internet.' },
+      { q: 'Quels sont les prérequis ?', a: 'Obsidian v1.6.6+ (bureau: Windows, macOS, Linux) et une clé API LLM. Providers supportés: DeepSeek, Gemini, Claude, GPT, Kimi, GLM, OpenRouter ou personnalisé. Aucune clé nécessaire pour Ollama (modèles locaux).' },
+      { q: 'Quel modèle choisir ? Combien ça coûte ?', a: 'Modèles à long contexte (1M tokens) recommandés — ils traitent tout votre wiki en une fois. Une ingestion coûte <em>0,05–0,50 \$</em>. Les coûts vont au fournisseur LLM ; le plugin est <em>gratuit et open source</em>.' },
+      { q: 'Puis-je utiliser des modèles locaux via Ollama ?', a: 'Oui. Installez <em>Ollama</em>, récupérez un modèle (ex. <em>qwen3.5</em>), sélectionnez <em>Ollama (Local)</em> comme fournisseur. Aucune clé requise. Cloud recommandé pour l\'ingestion ; modèles locaux pour les requêtes.' },
+      { q: 'Comment obtenir de l\'aide ou signaler un bug ?', a: 'Utilisez <em>GitHub Issues</em> pour les bugs, <em>GitHub Discussions</em> pour les questions. Retrouvez aussi le plugin sur la page <em>Obsidian Community Plugin</em>.' },
     ],
   },
 };
 
 export const pt: Translations = {
-  nav: { howItWorks: 'Como funciona', comparison: 'Por que importa', features: 'Recursos', ecosystem: 'Ecossistema', providers: 'Código aberto', install: 'Instalar', download: 'Adicionar ao Obsidian' },
+  nav: { howItWorks: 'Como funciona', comparison: 'Por que importa', features: 'Recursos', ecosystem: 'Ecossistema', providers: 'Código aberto', install: 'Instalar', download: 'Adicionar ao Obsidian', faq: 'FAQ' },
   hero: { badge: 'Conceito LLM Wiki de Andrej Karpathy', title1: 'Suas notas.', title2: 'Uma wiki viva.', subtitle: 'Escreva no Obsidian. Cada nota se conecta a uma rede que não para de crescer.', ctaInstall: 'Baixar o plugin', ctaObsidian: 'Baixar Obsidian', obsidianHint: 'Requer Obsidian.', ctaRead: 'Leia o conceito original', legendSources: 'sources/', legendEntities: 'entities/', legendConcepts: 'concepts/', scrollHint: 'Rolar' },
   wikiDemo: { label: 'Como funciona', title: 'De nota a wiki', subtitle: 'Uma nota. Um mundo de conexões.', step1Title: 'Jogue aqui', step1Desc: 'Artigos, papers, ideias. Coloque em sources/. O plugin lê cada palavra.', step2Title: 'Veja o que importa', step2Desc: 'Pessoas, lugares, temas. A IA lê o panorama completo e destaca o que importa.', step3Title: 'Páginas surgem', step3Desc: 'Cada conceito ganha seu espaço. Conteúdo, significado, conexões — tudo pronto para você.', step4Title: 'Veja as conexões', step4Desc: 'As páginas se ligam umas às outras. Abra o Graph View e veja seu conhecimento tomar forma.', step5Title: 'É só perguntar', step5Desc: 'Pergunte naturalmente. Sua wiki responde com fontes que você pode verificar — e salvar como novas páginas.', next: 'Próximo', prev: 'Anterior', restart: 'Recomeçar', sourceNote: 'Fonte', extracted: 'Encontrado', generated: 'Criado', linked: 'Conectado', ask: 'Perguntar', answer: 'Resposta' },
   comparison: { label: 'Por que importa', title: 'Nada do que você lê deveria ser desperdiçado.', subtitle: 'Perder ou fazer crescer?', beforeLabel: 'Antes', afterLabel: 'Depois', items: [{ category: 'Salvar', before: 'Salva um artigo. Esquece onde. Pesquisa depois. Nada.', after: 'Coloca em sources/. Ideias encontradas, páginas construídas, resumo pronto. Em segundos.' }, { category: 'Conectar', before: 'Liga duas notas à mão. Uma muda. A outra fica desatualizada. O link morre.', after: 'Os links se mantêm vivos. Quando novas informações contradizem as antigas, todas as páginas relacionadas se atualizam.' }, { category: 'Crescer', before: 'Um ano de notas. Só arquivos. Todo projeto começa do zero. Mesmas leituras. Mesmas conclusões.', after: 'Um ano constrói uma wiki. Cada nova pergunta se baseia em tudo que você coletou. Seu conhecimento cresce.' }] },
@@ -1051,22 +974,11 @@ export const pt: Translations = {
     title: 'Perguntas frequentes',
     subtitle: 'Tudo que você precisa saber para começar.',
     items: [
-      {
-        q: 'Por que vejo páginas duplicadas com nomes similares?',
-        a: 'Versões mais antigas não tinham detecção de duplicatas com reconhecimento de alias. Execute <em>Lint Wiki</em> — se duplicatas forem encontradas, clique em <em>Merge Duplicates</em> para fusioná-las. A página fusionada preserva os aliases de ambas, evitando duplicatas futuras.',
-      },
-      {
-        q: 'Como acelerar a ingestão de arquivos fonte grandes?',
-        a: 'Em Configurações → Aceleração de ingestão, aumente <em>Page Generation Concurrency</em> para 3 (ou 5 para provedores com limite alto) para processar páginas em paralelo. Defina <em>Batch Delay</em> para 300ms. Use granularidade <em>Standard</em> ou <em>Coarse</em> para menos chamadas à API.',
-      },
-      {
-        q: 'O que o Smart Fix All faz?',
-        a: 'Executa correções em ordem causal: <em>Complete Aliases</em> → <em>Merge Duplicates</em> → <em>Fix Dead Links</em> → <em>Link Orphans</em> → <em>Expand Empty Pages</em>. Um clique, tudo resolvido.',
-      },
-      {
-        q: 'Como evitar custos inesperados com API?',
-        a: 'Auto-Maintenance vem <em>DESATIVADO</em> por padrão — não ative a menos que necessário. Smart Batch Skip evita reprocessar arquivos já ingeridos. Use granularidade <em>Standard</em> ou <em>Coarse</em> para reduzir chamadas à API. O relatório Lint mostra as quantidades antes de executar correções.',
-      },
+      { q: 'O que este plugin realmente faz?', a: 'Coloque qualquer nota no seu vault do Obsidian. A IA extrai pessoas, conceitos e teorias e gera páginas wiki interligadas com links bidirecionais. Pergunte <em>"o que escrevi sobre X?"</em> — a resposta vem das suas próprias notas.' },
+      { q: 'Quais são os requisitos mínimos?', a: 'Obsidian v1.6.6+ (desktop: Windows, macOS, Linux) e uma chave de API LLM. Provedores: DeepSeek, Gemini, Claude, GPT, Kimi, GLM, OpenRouter ou personalizado. Sem chave para Ollama (modelos locais).' },
+      { q: 'Qual modelo devo escolher? Quanto custa?', a: 'Modelos de contexto longo (1M tokens) recomendados — processam toda sua wiki em uma passada. Uma ingestão custa <em>$0,05–$0,50</em>. Custos vão para o provedor LLM; o plugin é <em>gratuito e open source</em>.' },
+      { q: 'Posso usar modelos locais via Ollama?', a: 'Sim. Instale o <em>Ollama</em>, baixe um modelo (ex. <em>qwen3.5</em>), selecione <em>Ollama (Local)</em>. Sem chave API. Nuvem recomendada para ingestão; modelos locais para consultas.' },
+      { q: 'Como obter ajuda ou relatar bugs?', a: 'Use <em>GitHub Issues</em> para bugs, <em>GitHub Discussions</em> para perguntas. Encontre também na página do <em>Obsidian Community Plugin</em>.' },
     ],
   },
 };
