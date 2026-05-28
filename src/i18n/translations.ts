@@ -8,6 +8,8 @@ export interface Translations {
     install: string;
     download: string;
     faq: string;
+    blog: string;
+    home: string;
   };
   hero: {
     badge: string;
@@ -157,6 +159,8 @@ export const en: Translations = {
     install: 'Install',
     download: 'Add to Obsidian',
     faq: 'FAQ',
+    blog: 'Blog',
+    home: 'Home',
   },
   hero: {
     badge: 'Andrej Karpathy\'s LLM Wiki concept',
@@ -351,6 +355,8 @@ export const zh: Translations = {
     install: '快速开始',
     download: '添加到 Obsidian',
     faq: 'FAQ',
+    blog: '博客',
+    home: '首页',
   },
   hero: {
     badge: 'Andrej Karpathy 的 LLM Wiki 理念',
@@ -545,6 +551,8 @@ export const ja: Translations = {
     install: 'インストール',
     download: 'Obsidianに追加',
     faq: 'FAQ',
+    blog: 'ブログ',
+    home: 'ホーム',
   },
   hero: {
     badge: 'Andrej KarpathyのLLM Wikiコンセプト',
@@ -703,6 +711,8 @@ export const ko: Translations = {
     install: '설치',
     download: 'Obsidian에 추가',
     faq: 'FAQ',
+    blog: '블로그',
+    home: '홈',
   },
   hero: {
     badge: '안드레이 카파시의 LLM Wiki 컨셉',
@@ -852,7 +862,7 @@ export const ko: Translations = {
 };
 
 export const de: Translations = {
-  nav: { howItWorks: "So funktioniert's", comparison: 'Warum es wichtig ist', features: 'Funktionen', ecosystem: 'Ökosystem', providers: 'Open Source', install: 'Installation', download: 'Zu Obsidian hinzufügen', faq: 'FAQ' },
+  nav: { howItWorks: "So funktioniert's", comparison: 'Warum es wichtig ist', features: 'Funktionen', ecosystem: 'Ökosystem', providers: 'Open Source', install: 'Installation', download: 'Zu Obsidian hinzufügen', faq: 'FAQ', blog: 'Blog', home: 'Startseite' },
   hero: { badge: 'Andrej Karpathys LLM-Wiki-Konzept', title1: 'Deine Notizen.', title2: 'Ein lebendiges Wiki.', subtitle: 'Schreibe in Obsidian. Jede Notiz verbindet sich mit einem Netzwerk, das ständig wächst.', ctaInstall: 'Plugin holen', ctaObsidian: 'Obsidian holen', obsidianHint: 'Obsidian erforderlich.', ctaRead: 'Das Original-Konzept lesen', legendSources: 'sources/', legendEntities: 'entities/', legendConcepts: 'concepts/', scrollHint: 'Scrollen' },
   wikiDemo: { label: "So funktioniert's", title: 'Von der Notiz zum Wiki', subtitle: 'Eine Notiz. Eine Welt voller Verbindungen.', step1Title: 'Einfach hineinlegen', step1Desc: 'Artikel, Papers, Ideen. Lege sie in sources/. Das Plugin liest jedes Wort.', step2Title: 'Das Wesentliche erkennen', step2Desc: 'Personen, Orte, Themen. Die KI erfasst das Gesamtbild und hebt hervor, was zählt.', step3Title: 'Seiten entstehen', step3Desc: 'Jedes Konzept erhält seinen eigenen Raum. Inhalt, Bedeutung, Verbindungen — alles bereit für dich.', step4Title: 'Verbindungen beobachten', step4Desc: 'Seiten verknüpfen sich automatisch. Öffne die Graph-Ansicht und sieh, wie dein Wissen Gestalt annimmt.', step5Title: 'Einfach fragen', step5Desc: 'Frag ganz natürlich. Dein Wiki antwortet mit Quellen, die du überprüfen kannst — und speichert als neue Seiten.', next: 'Weiter', prev: 'Zurück', restart: 'Neustart', sourceNote: 'Quelle', extracted: 'Gefunden', generated: 'Erstellt', linked: 'Verknüpft', ask: 'Frage', answer: 'Antwort' },
   comparison: { label: 'Warum es wichtig ist', title: 'Nichts, was du liest, sollte verloren gehen.', subtitle: 'Verlieren oder wachsen?', beforeLabel: 'Vorher', afterLabel: 'Nachher', items: [{ category: 'Speichern', before: 'Artikel speichern. Ort vergessen. Später suchen. Nichts gefunden.', after: 'In sources/ ablegen. Ideen gefunden, Seiten erstellt, Zusammenfassung bereit. In Sekunden.' }, { category: 'Verknüpfen', before: 'Zwei Notizen manuell verlinken. Eine ändert sich. Die andere bleibt alt. Der Link stirbt.', after: 'Links bleiben lebendig. Wenn neue Informationen alte widersprechen, bleiben alle verbundenen Seiten aktuell.' }, { category: 'Wachsen', before: 'Ein Jahr Notizen. Nur Dateien. Jedes Projekt beginnt von vorn. Gleiches Lesen. Gleiche Schlussfolgerungen.', after: 'Ein Jahr baut ein Wiki. Jede neue Frage schöpft aus allem, was du gesammelt hast. Dein Wissen wächst.' }] },
@@ -885,7 +895,7 @@ export const de: Translations = {
 };
 
 export const es: Translations = {
-  nav: { howItWorks: 'Cómo funciona', comparison: 'Por qué importa', features: 'Funciones', ecosystem: 'Ecosistema', providers: 'Código abierto', install: 'Instalar', download: 'Añadir a Obsidian', faq: 'FAQ' },
+  nav: { howItWorks: 'Cómo funciona', comparison: 'Por qué importa', features: 'Funciones', ecosystem: 'Ecosistema', providers: 'Código abierto', install: 'Instalar', download: 'Añadir a Obsidian', faq: 'FAQ', blog: 'Blog', home: 'Inicio' },
   hero: { badge: 'El concepto LLM Wiki de Andrej Karpathy', title1: 'Tus notas.', title2: 'Una wiki viva.', subtitle: 'Escribe en Obsidian. Cada nota se conecta a una red que no deja de crecer.', ctaInstall: 'Obtener el plugin', ctaObsidian: 'Obtener Obsidian', obsidianHint: 'Requiere Obsidian.', ctaRead: 'Leer el concepto original', legendSources: 'sources/', legendEntities: 'entities/', legendConcepts: 'concepts/', scrollHint: 'Desplazar' },
   wikiDemo: { label: 'Cómo funciona', title: 'De nota a wiki', subtitle: 'Una nota. Un mundo de conexiones.', step1Title: 'Déjalo ahí', step1Desc: 'Artículos, papers, ideas. Ponlos en sources/. El plugin lee cada palabra.', step2Title: 'Ve lo que importa', step2Desc: 'Personas, lugares, temas. La IA lee el panorama completo y resalta lo que importa.', step3Title: 'Aparecen páginas', step3Desc: 'Cada concepto tiene su espacio. Contenido, significado, conexiones — todo listo para ti.', step4Title: 'Mira cómo conecta', step4Desc: 'Las páginas se enlazan entre sí. Abre Vista de gráfico y mira tu conocimiento tomar forma.', step5Title: 'Solo pregunta', step5Desc: 'Pregunta con naturalidad. Tu wiki responde con fuentes que puedes verificar — y guardar como nuevas páginas.', next: 'Siguiente', prev: 'Anterior', restart: 'Reiniciar', sourceNote: 'Fuente', extracted: 'Encontrado', generated: 'Creado', linked: 'Conectado', ask: 'Preguntar', answer: 'Respuesta' },
   comparison: { label: 'Por qué importa', title: 'Nada de lo que leas debería perderse.', subtitle: '¿Perderlo o hacerlo crecer?', beforeLabel: 'Antes', afterLabel: 'Después', items: [{ category: 'Guardar', before: 'Guardas un artículo. Olvidas dónde. Buscas después. Nada.', after: 'Lo dejas en sources/. Las ideas se encuentran, las páginas se construyen, el resumen está listo. En segundos.' }, { category: 'Conectar', before: 'Enlazas dos notas a mano. Una cambia. La otra se queda vieja. El enlace muere.', after: 'Los enlaces se mantienen vivos. Cuando nueva información contradice la anterior, cada página relacionada se mantiene actualizada.' }, { category: 'Crecer', before: 'Un año de notas. Solo archivos. Cada proyecto empieza de cero. Misma lectura. Mismas conclusiones.', after: 'Un año construye una wiki. Cada nueva pregunta aprovecha todo lo que has recopilado. Tu conocimiento crece.' }] },
@@ -918,7 +928,7 @@ export const es: Translations = {
 };
 
 export const fr: Translations = {
-  nav: { howItWorks: "Comment ça marche", comparison: "Pourquoi c'est important", features: "Fonctionnalités", ecosystem: "Écosystème", providers: "Open source", install: "Installation", download: "Ajouter à Obsidian", faq: "FAQ" },
+  nav: { howItWorks: "Comment ça marche", comparison: "Pourquoi c'est important", features: "Fonctionnalités", ecosystem: "Écosystème", providers: "Open source", install: "Installation", download: "Ajouter à Obsidian", faq: "FAQ", blog: "Blog", home: "Accueil" },
   hero: { badge: "Le concept LLM Wiki d'Andrej Karpathy", title1: "Vos notes.", title2: "Un wiki vivant.", subtitle: "Écrivez dans Obsidian. Chaque note se connecte à un réseau qui ne cesse de grandir.", ctaInstall: "Obtenir le plugin", ctaObsidian: "Obtenir Obsidian", obsidianHint: "Obsidian requis.", ctaRead: "Lire le concept original", legendSources: "sources/", legendEntities: "entities/", legendConcepts: "concepts/", scrollHint: "Faire défiler" },
   wikiDemo: { label: "Comment ça marche", title: "De la note au wiki", subtitle: "Une note. Un monde de connexions.", step1Title: "Déposez-le", step1Desc: "Articles, papiers, idées. Placez-les dans sources/. Le plugin lit chaque mot.", step2Title: "Voyez l'essentiel", step2Desc: "Personnes, lieux, thèmes. L'IA lit l'ensemble et fait émerger ce qui compte.", step3Title: "Les pages apparaissent", step3Desc: "Chaque concept a son propre espace. Contenu, sens, connexions — tout est prêt pour vous.", step4Title: "Regardez les liens se tisser", step4Desc: "Les pages se lient entre elles. Ouvrez la Vue du graphe et voyez votre savoir prendre forme.", step5Title: "Posez vos questions", step5Desc: "Demandez naturellement. Votre wiki répond avec des sources vérifiables — et les sauve en nouvelles pages.", next: "Suivant", prev: "Précédent", restart: "Recommencer", sourceNote: "Source", extracted: "Trouvé", generated: "Créé", linked: "Connecté", ask: "Question", answer: "Réponse" },
   comparison: { label: "Pourquoi c'est important", title: "Rien de ce que vous lisez ne devrait être perdu.", subtitle: "Le perdre ou le cultiver ?", beforeLabel: "Avant", afterLabel: "Après", items: [{ category: "Sauvegarder", before: "Vous sauvegardez un article. Oubliez où. Cherchez plus tard. Rien.", after: "Déposez-le dans sources/. Les idées trouvées, les pages construites, le résumé prêt. En quelques secondes." }, { category: "Connecter", before: "Deux notes liées à la main. L'une change. L'autre reste ancienne. Le lien meurt.", after: "Les liens restent vivants. Quand une nouvelle information contredit l'ancienne, chaque page concernée reste à jour." }, { category: "Grandir", before: "Un an de notes. Juste des fichiers. Chaque projet recommence. Mêmes lectures. Mêmes conclusions.", after: "Un an construit un wiki. Chaque nouvelle question puise dans tout ce que vous avez collecté. Votre savoir grandit." }] },
@@ -951,7 +961,7 @@ export const fr: Translations = {
 };
 
 export const pt: Translations = {
-  nav: { howItWorks: 'Como funciona', comparison: 'Por que importa', features: 'Recursos', ecosystem: 'Ecossistema', providers: 'Código aberto', install: 'Instalar', download: 'Adicionar ao Obsidian', faq: 'FAQ' },
+  nav: { howItWorks: 'Como funciona', comparison: 'Por que importa', features: 'Recursos', ecosystem: 'Ecossistema', providers: 'Código aberto', install: 'Instalar', download: 'Adicionar ao Obsidian', faq: 'FAQ', blog: 'Blog' },
   hero: { badge: 'Conceito LLM Wiki de Andrej Karpathy', title1: 'Suas notas.', title2: 'Uma wiki viva.', subtitle: 'Escreva no Obsidian. Cada nota se conecta a uma rede que não para de crescer.', ctaInstall: 'Baixar o plugin', ctaObsidian: 'Baixar Obsidian', obsidianHint: 'Requer Obsidian.', ctaRead: 'Leia o conceito original', legendSources: 'sources/', legendEntities: 'entities/', legendConcepts: 'concepts/', scrollHint: 'Rolar' },
   wikiDemo: { label: 'Como funciona', title: 'De nota a wiki', subtitle: 'Uma nota. Um mundo de conexões.', step1Title: 'Jogue aqui', step1Desc: 'Artigos, papers, ideias. Coloque em sources/. O plugin lê cada palavra.', step2Title: 'Veja o que importa', step2Desc: 'Pessoas, lugares, temas. A IA lê o panorama completo e destaca o que importa.', step3Title: 'Páginas surgem', step3Desc: 'Cada conceito ganha seu espaço. Conteúdo, significado, conexões — tudo pronto para você.', step4Title: 'Veja as conexões', step4Desc: 'As páginas se ligam umas às outras. Abra o Graph View e veja seu conhecimento tomar forma.', step5Title: 'É só perguntar', step5Desc: 'Pergunte naturalmente. Sua wiki responde com fontes que você pode verificar — e salvar como novas páginas.', next: 'Próximo', prev: 'Anterior', restart: 'Recomeçar', sourceNote: 'Fonte', extracted: 'Encontrado', generated: 'Criado', linked: 'Conectado', ask: 'Perguntar', answer: 'Resposta' },
   comparison: { label: 'Por que importa', title: 'Nada do que você lê deveria ser desperdiçado.', subtitle: 'Perder ou fazer crescer?', beforeLabel: 'Antes', afterLabel: 'Depois', items: [{ category: 'Salvar', before: 'Salva um artigo. Esquece onde. Pesquisa depois. Nada.', after: 'Coloca em sources/. Ideias encontradas, páginas construídas, resumo pronto. Em segundos.' }, { category: 'Conectar', before: 'Liga duas notas à mão. Uma muda. A outra fica desatualizada. O link morre.', after: 'Os links se mantêm vivos. Quando novas informações contradizem as antigas, todas as páginas relacionadas se atualizam.' }, { category: 'Crescer', before: 'Um ano de notas. Só arquivos. Todo projeto começa do zero. Mesmas leituras. Mesmas conclusões.', after: 'Um ano constrói uma wiki. Cada nova pergunta se baseia em tudo que você coletou. Seu conhecimento cresce.' }] },

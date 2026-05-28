@@ -13,16 +13,6 @@ const LANGUAGES = [
   { code: 'pt', label: 'Português', path: '/pt/' },
 ];
 
-const NAV_ITEMS = [
-  { key: 'comparison', labelKey: 'comparison' as const, target: '#comparison' },
-  { key: 'how-it-works', labelKey: 'howItWorks' as const, target: '#how-it-works' },
-  { key: 'features', labelKey: 'features' as const, target: '#features' },
-  { key: 'install', labelKey: 'install' as const, target: '#install' },
-  { key: 'faq', labelKey: 'faq' as const, target: '#faq' },
-  { key: 'ecosystem', labelKey: 'ecosystem' as const, target: '#ecosystem' },
-  { key: 'providers', labelKey: 'providers' as const, target: '#providers' },
-];
-
 function formatStars(n: number): string {
   if (n >= 1000) return (n / 1000).toFixed(1).replace(/\.0$/, '') + 'k';
   return String(n);
@@ -30,9 +20,10 @@ function formatStars(n: number): string {
 
 interface Props {
   currentLocale?: string;
+  isBlog?: boolean;
 }
 
-export default function Header({ currentLocale = 'en' }: Props) {
+export default function Header({ currentLocale = 'en', isBlog = false }: Props) {
   const t = (translations as Record<string, any>)[currentLocale] || translations.en;
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
@@ -59,6 +50,33 @@ export default function Header({ currentLocale = 'en' }: Props) {
     if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
   };
 
+  type AnchorItem = { key: string; label: string; href: string };
+  type NavEntry = { key: string; label: string; target: string };
+
+  const anchorItems: NavEntry[] = [
+    { key: 'comparison', label: t.nav.comparison, target: '#comparison' },
+    { key: 'how-it-works', label: t.nav.howItWorks, target: '#how-it-works' },
+    { key: 'features', label: t.nav.features, target: '#features' },
+    { key: 'install', label: t.nav.install, target: '#install' },
+    { key: 'faq', label: t.nav.faq, target: '#faq' },
+    { key: 'ecosystem', label: t.nav.ecosystem, target: '#ecosystem' },
+    { key: 'providers', label: t.nav.providers, target: '#providers' },
+  ];
+
+  // On blog pages, anchor items become absolute links to home page
+  const blogAnchorItems: NavEntry[] = anchorItems.map(item => ({
+    ...item,
+    href: '/' + item.target,
+  }));
+
+  const linkItems: NavEntry[] = [
+    { key: 'blog', label: t.nav.blog, href: '/blog/' },
+  ];
+
+  const allItems: (AnchorItem | NavEntry)[] = isBlog
+    ? [{ key: 'home', label: t.nav.home, href: '/' }, ...blogAnchorItems, ...linkItems]
+    : [...anchorItems, ...linkItems];
+
   return (
     <header className={`fixed top-0 left-0 right-0 z-40 border-b transition-all duration-500 ${
       scrolled
@@ -66,17 +84,24 @@ export default function Header({ currentLocale = 'en' }: Props) {
         : 'bg-[#1f1f1f]/0 border-transparent'
     }`}>
       <div className="max-w-6xl mx-auto px-4 sm:px-6 flex items-center justify-between h-14">
-        <button onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })} className="flex items-center gap-2 group" aria-label="Scroll to top">
+        <a href="/" className="flex items-center gap-2 group" aria-label="Home">
           <img src="/favicon.svg" alt="" className="w-7 h-7 rounded-lg" aria-hidden="true" />
-          <span className="text-sm font-semibold text-[#e5e5e5] tracking-tight">LLM Wiki for Obsidian</span>
-        </button>
+          <span className="text-sm font-semibold text-[#e5e5e5] tracking-tight group-hover:text-white transition-colors">LLM Wiki for Obsidian</span>
+        </a>
 
         <nav className="hidden md:flex items-center gap-0.5">
-          {NAV_ITEMS.map((item) => (
-            <button key={item.key} onClick={() => handleNav(item.target)}
-              className="px-2.5 py-1.5 text-xs text-obsidian-muted hover:text-[#e5e5e5] transition-colors duration-200 rounded-md hover:bg-white/[0.12]">
-              {t.nav[item.labelKey]}
-            </button>
+          {allItems.map((item) => (
+            'href' in item ? (
+              <a key={item.key} href={item.href}
+                className="px-2.5 py-1.5 text-xs text-obsidian-muted hover:text-[#e5e5e5] transition-colors duration-200 rounded-md hover:bg-white/12">
+                {item.label}
+              </a>
+            ) : (
+              <button key={item.key} onClick={() => handleNav(item.target)}
+                className="px-2.5 py-1.5 text-xs text-obsidian-muted hover:text-[#e5e5e5] transition-colors duration-200 rounded-md hover:bg-white/12">
+                {item.label}
+              </button>
+            )
           ))}
           <div className="w-px h-4 bg-obsidian-border mx-1.5" />
           <div className="relative">
@@ -89,10 +114,10 @@ export default function Header({ currentLocale = 'en' }: Props) {
               <svg className="w-3 h-3 opacity-50" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="m6 9 6 6 6-6"/></svg>
             </button>
             {langOpen && (
-              <div className="absolute right-0 top-full mt-1 bg-obsidian-surface border border-obsidian-border rounded-md shadow-lg z-50 min-w-[120px] py-1">
+              <div className="absolute right-0 top-full mt-1 bg-obsidian-surface border border-obsidian-border rounded-md shadow-lg z-50 min-w-30 py-1">
                 {LANGUAGES.map(lang => (
                   <a key={lang.code} href={lang.path}
-                    className={`block px-3 py-1.5 text-xs hover:bg-white/[0.08] transition-colors ${lang.code === currentLocale ? 'text-obsidian-purple-light' : 'text-obsidian-muted'}`}
+                    className={`block px-3 py-1.5 text-xs hover:bg-white/8 transition-colors ${lang.code === currentLocale ? 'text-obsidian-purple-light bg-obsidian-purple/10' : 'text-obsidian-muted'}`}
                   >
                     {lang.label}
                   </a>
@@ -125,17 +150,24 @@ export default function Header({ currentLocale = 'en' }: Props) {
 
       {mobileOpen && (
         <div className="md:hidden bg-obsidian-bg/95 backdrop-blur-md border-b border-obsidian-border px-4 sm:px-6 pb-4">
-          {NAV_ITEMS.map((item) => (
-            <button key={item.key} onClick={() => handleNav(item.target)}
-              className="block w-full text-left py-2.5 text-sm text-obsidian-muted hover:text-[#e5e5e5] transition-colors">
-              {t.nav[item.labelKey]}
-            </button>
+          {allItems.map((item) => (
+            'href' in item ? (
+              <a key={item.key} href={item.href}
+                className="block w-full text-left py-2.5 text-sm text-obsidian-muted hover:text-[#e5e5e5] transition-colors">
+                {item.label}
+              </a>
+            ) : (
+              <button key={item.key} onClick={() => handleNav(item.target)}
+                className="block w-full text-left py-2.5 text-sm text-obsidian-muted hover:text-[#e5e5e5] transition-colors">
+                {item.label}
+              </button>
+            )
           ))}
           <div className="flex flex-col gap-3 mt-3 pt-3 border-t border-obsidian-border">
             <div className="flex flex-row gap-1.5 flex-wrap">
               {LANGUAGES.map(lang => (
                 <a key={lang.code} href={lang.path}
-                  className={`px-2 py-1 text-xs rounded-md transition-colors ${lang.code === currentLocale ? 'text-obsidian-purple-light bg-obsidian-purple/10' : 'text-obsidian-muted hover:bg-white/[0.06]'}`}
+                  className={`px-2 py-1 text-xs rounded-md transition-colors ${lang.code === currentLocale ? 'text-obsidian-purple-light bg-obsidian-purple/10' : 'text-obsidian-muted hover:bg-white/6'}`}
                 >
                   {lang.label}
                 </a>

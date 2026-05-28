@@ -12,59 +12,26 @@ import Install from '../../components/astro/Install.astro';
 import Ecosystem from '../../components/astro/Ecosystem.astro';
 import Providers from '../../components/astro/Providers.astro';
 import CTA from '../../components/astro/CTA.astro';
+import BaseLayout from '../../layouts/BaseLayout.astro';
 
-const siteUrl = Astro.site;
 const title = 'LLM Wiki for Obsidian — AI 기반 자기 조직화 지식 베이스';
-const description = 'Karpathy LLM Wiki의 Obsidian 구현 — AI가 노트를 읽고 엔티티/개념 페이지, 양방향 링크, 대화형 쿼리를 갖춘 연결된 Wiki를 생성합니다.';
-const ogImage = siteUrl + 'og-image.webp';
-const pageUrl = siteUrl + 'ko/';
+const description = "Karpathy LLM Wiki의 Obsidian 구현 — AI가 노트를 읽고 엔티티/개념 페이지, 양방향 링크, 대화형 쿼리를 갖춘 연결된 Wiki를 생성합니다.";
+const keywords = "Obsidian 플러그인, LLM Wiki, AI 지식 관리, 지식 그래프, 양방향 링크, AI 노트, 자기 조직화 Wiki, Andrej Karpathy, Obsidian AI, 스마트 수정, 중복 감지, 다국어 Wiki";
+const siteUrl = Astro.site;
 ---
 
-<!doctype html>
-<html lang="ko">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>{title}</title>
-    <meta name="description" content={description} />
-    <meta name="keywords" content="Obsidian 플러그인, LLM Wiki, AI 지식 관리, 지식 그래프, 양방향 링크, AI 노트, 자기 조직화 Wiki, Andrej Karpathy, Obsidian AI, 스마트 수정, 중복 감지, 다국어 Wiki" />
-    <meta name="author" content="Greener-Dalii" />
-    <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large" />
-    <meta name="theme-color" content="#1a1a1a" />
-    <meta name="application-name" content="LLM Wiki for Obsidian" />
-    <meta name="apple-mobile-web-app-title" content="LLM Wiki for Obsidian" />
-    <meta name="msapplication-TileColor" content="#1a1a1a" />
-
-    <!-- Favicon -->
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <link rel="apple-touch-icon" href="/favicon.svg" />
-
-    <!-- Font preload -->
-    <link rel="preload" href="/fonts/outfit.woff2" as="font" type="font/woff2" crossorigin />
-    <link rel="preload" href="/fonts/jetbrains-mono.woff2" as="font" type="font/woff2" crossorigin />
-
-    <!-- Open Graph -->
-    <meta property="og:type" content="website" />
-    <meta property="og:site_name" content="LLM Wiki for Obsidian" />
-    <meta property="og:url" content={pageUrl} />
-    <meta property="og:title" content={title} />
-    <meta property="og:description" content={description} />
-    <meta property="og:image" content={ogImage} />
-    <meta property="og:image:alt" content="LLM Wiki for Obsidian — plugin banner" />
-    <meta property="og:image:type" content="image/webp" />
-    <meta property="og:image:width" content="1200" />
-    <meta property="og:image:height" content="630" />
-    <meta property="og:locale" content="ko_KR" />
-
-    <!-- Twitter -->
-    <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:site" content="@GreenerDalii" />
-    <meta name="twitter:creator" content="@GreenerDalii" />
-    <meta name="twitter:title" content="LLM Wiki for Obsidian" />
-    <meta name="twitter:description" content={description} />
-    <meta name="twitter:image" content={ogImage} />
-
-    <!-- JSON-LD Structured Data -->
+<BaseLayout title={title} description={description} keywords={keywords} locale="ko" ogLocale="ko_KR">
+  <Fragment slot="head">
+    <link rel="canonical" href={siteUrl + 'ko/'} />
+    <link rel="alternate" hreflang="en" href={siteUrl} />
+    <link rel="alternate" hreflang="zh" href={siteUrl + 'zh/'} />
+    <link rel="alternate" hreflang="ja" href={siteUrl + 'ja/'} />
+    <link rel="alternate" hreflang="ko" href={siteUrl + 'ko/'} />
+    <link rel="alternate" hreflang="de" href={siteUrl + 'de/'} />
+    <link rel="alternate" hreflang="es" href={siteUrl + 'es/'} />
+    <link rel="alternate" hreflang="fr" href={siteUrl + 'fr/'} />
+    <link rel="alternate" hreflang="pt" href={siteUrl + 'pt/'} />
+    <link rel="alternate" hreflang="x-default" href={siteUrl} />
     <script type="application/ld+json" set:html={JSON.stringify({
       "@context": "https://schema.org",
       "@graph": [
@@ -72,7 +39,7 @@ const pageUrl = siteUrl + 'ko/';
           "@type": "WebSite",
           "@id": siteUrl + "ko/#website",
           "name": "LLM Wiki for Obsidian",
-          "url": pageUrl,
+          "url": siteUrl,
           "description": description,
           "publisher": { "@type": "Person", "name": "Greener-Dalii" }
         },
@@ -87,57 +54,38 @@ const pageUrl = siteUrl + 'ko/';
           "author": { "@type": "Person", "name": "Greener-Dalii", "url": "https://github.com/green-dalii" },
           "codeRepository": "https://github.com/green-dalii/obsidian-llm-wiki",
           "downloadUrl": "https://community.obsidian.md/plugins/karpathywiki",
-          "softwareVersion": "1.8.1",
+          "softwareVersion": "1.12.1",
           "aggregateRating": { "@type": "AggregateRating", "ratingValue": "5", "ratingCount": "1" },
           "featureList": [
             "AI-powered entity and concept extraction from notes",
             "Bidirectional wiki-links between knowledge pages",
             "Conversational query with streaming Markdown and citations",
-            "Auto-maintenance with file watcher and periodic lint",
+            "Smart Fix All — one-click causality-ordered batch fix",
+            "Cross-language duplicate detection and intelligent merge",
             "8-language Wiki output independent from UI language",
-            "Cross-language duplicate detection and intelligent merge"
+            "Parallel page generation with configurable concurrency",
+            "Auto-maintenance with file watcher and periodic lint"
           ]
         },
         {
           "@type": "BreadcrumbList",
           "itemListElement": [
-            { "@type": "ListItem", "position": 1, "name": "Home", "item": pageUrl }
+            { "@type": "ListItem", "position": 1, "name": "Home", "item": siteUrl }
           ]
         }
       ]
     })} />
+  </Fragment>
 
-    <!-- Canonical -->
-    <link rel="canonical" href={pageUrl} />
-    <link rel="alternate" hreflang="en" href={Astro.site} />
-    <link rel="alternate" hreflang="zh" href={siteUrl + 'zh/'} />
-    <link rel="alternate" hreflang="ja" href={siteUrl + 'ja/'} />
-    <link rel="alternate" hreflang="ko" href={pageUrl} />
-    <link rel="alternate" hreflang="de" href={siteUrl + 'de/'} />
-    <link rel="alternate" hreflang="es" href={siteUrl + 'es/'} />
-        <link rel="alternate" hreflang="fr" href={siteUrl + 'fr/'} />
-    <link rel="alternate" hreflang="pt" href={siteUrl + 'pt/'} />
-    <link rel="alternate" hreflang="x-default" href={Astro.site} />
-  </head>
-  <body>
-    <div class="relative bg-obsidian-bg text-obsidian-text">
-      <ProgressBar client:only="react" />
-      <HeaderIsland client:only="react" currentLocale="ko" />
-      <main class="pt-14">
-        <Hero locale="ko" />
-        <Comparison locale="ko" />
-        <WikiDemoIsland client:visible locale="ko" />
-        <div class="h-px max-w-5xl mx-auto bg-gradient-to-r from-transparent via-obsidian-purple/20 to-transparent" />
-        <Features locale="ko" />
-        <Install locale="ko" />
-        <FAQ locale="ko" />
-        <Ecosystem locale="ko" />
-        <Providers locale="ko" />
-        <CTA locale="ko" />
-      </main>
-      <Footer locale="ko" />
-    </div>
-  </body>
-</html>
+  <Hero locale="ko" />
+  <Comparison locale="ko" />
+  <WikiDemoIsland client:visible locale="ko" />
+  <div class="h-px max-w-5xl mx-auto bg-gradient-to-r from-transparent via-obsidian-purple/20 to-transparent" />
+  <Features locale="ko" />
+  <Install locale="ko" />
+  <FAQ locale="ko" />
+  <Ecosystem locale="ko" />
+  <Providers locale="ko" />
+  <CTA locale="ko" />
+</BaseLayout>
 
-<script src="../../scripts/scroll-reveal.ts"></script>

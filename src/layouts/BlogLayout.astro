@@ -1,0 +1,51 @@
+---
+import HeaderIsland from '../components/HeaderIsland';
+import Footer from '../components/astro/Footer.astro';
+import ProgressBar from '../components/ProgressBar';
+import '../index.css';
+
+interface Props {
+  title: string;
+  description?: string;
+}
+const { title, description = '' } = Astro.props;
+const siteUrl = Astro.site;
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <meta name="author" content="Greener-Dalii" />
+    <meta name="robots" content="index, follow" />
+    <meta name="theme-color" content="#1a1a1a" />
+    <meta name="application-name" content="LLM Wiki for Obsidian" />
+    <meta name="apple-mobile-web-app-title" content="LLM Wiki for Obsidian" />
+    <meta name="msapplication-TileColor" content="#1a1a1a" />
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="apple-touch-icon" href="/favicon.svg" />
+
+    <!-- Font preload -->
+    <link rel="preload" href="/fonts/outfit.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href="/fonts/jetbrains-mono.woff2" as="font" type="font/woff2" crossorigin />
+
+    <slot name="head" />
+  </head>
+  <body>
+    <div class="relative bg-obsidian-bg text-obsidian-text">
+      <ProgressBar client:only="react" />
+      <HeaderIsland client:only="react" currentLocale="en" isBlog />
+      <main class="pt-14">
+        <slot />
+      </main>
+      <Footer locale="en" />
+    </div>
+  </body>
+</html>
+
+<script src="../scripts/scroll-reveal.ts"></script>
