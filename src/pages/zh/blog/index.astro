@@ -1,0 +1,47 @@
+---
+import BlogLayout from '../../../layouts/BlogLayout.astro';
+
+const posts = [
+  { slug: 'faster-ingestion', title: "提取速度提升 80%：重新设计提取提示词", description: "v1.12.0 重构了提取提示词——移除了 20 万字符的 Wiki 页面列表，使提取速度不再受 Wiki 规模影响。", date: new Date('2026-05-27'), tags: ['性能', '架构'] },
+  { slug: 'choosing-models', title: "如何选择合适的模型：实用指南", description: "推荐长上下文模型？没错——但该选哪个、什么时候用、为什么？一份关于成本、速度和质量平衡的实操指南。", date: new Date('2026-05-15'), tags: ['指南', '模型', '成本'] },
+  { slug: 'eight-languages', title: "8 种语言：全面国际化发布", description: "v1.8.0 将插件界面从 2 种语言扩展到 8 种，269 个字段逐一翻译，采用地道的本地化表达。", date: new Date('2026-05-17'), tags: ['国际化', '社区'] },
+  { slug: 'smart-fix-all', title: "一键智能修复：知识质量自动化", description: "Smart Fix All 如何按因果顺序修复——别名补全、重复合并、死链修复、孤立页面和空页面——只需一键。", date: new Date('2026-05-14'), tags: ['智能修复', '维护'] },
+  { slug: 'first-100-pages', title: "从零到百页 Wiki：新手入门指南", description: "从零开始构建一个活的知识库。手把手教你设置第一批来源、运行提取，看着知识成形。", date: new Date('2026-05-08'), tags: ['教程', '入门'] },
+  { slug: 'multilingual-wiki', title: "多语言 Wiki：用英文写，用日文读", description: "v1.6.5 引入了 Wiki 输出语言——8 种语言可选，完全独立于界面语言。", date: new Date('2026-05-03'), tags: ['国际化', '多语言'] },
+  { slug: 'modular-architecture', title: "模块化架构与对话式查询", description: "我们如何将 main.ts 从 3000 行精简到 300 行，并加入了类 ChatGPT 的流式查询界面。", date: new Date('2026-04-27'), tags: ['架构', '查询'] },
+  { slug: 'introducing-llm-wiki', title: "Karpathy LLM Wiki 发布", description: "一个 Obsidian 插件，实现了 Andrej Karpathy 的 LLM Wiki 理念——AI 读取你的笔记，构建带双向链接的结构化知识库。", date: new Date('2026-04-26'), tags: ['发布', 'Karpathy'] },
+];
+---
+
+<BlogLayout title="博客" description="关于 Karpathy LLM Wiki 的更新、教程和深度解析。" locale="zh">
+  <section class="relative w-full py-28 sm:py-36 reveal">
+    <div class="max-w-3xl mx-auto px-4 sm:px-6">
+      <div class="mb-14 reveal text-center">
+        <span class="text-[11px] font-mono text-obsidian-purple tracking-[0.15em] uppercase">Blog</span>
+        <h2 class="text-[clamp(1.6rem,4vw,2.8rem)] font-semibold mt-3 mb-3 text-obsidian-heading reveal" data-delay="1">最新动态</h2>
+        <p class="text-obsidian-muted max-w-lg mx-auto text-sm">关于插件和 Karpathy LLM Wiki 理念的更新、教程与深度解析。</p>
+      </div>
+
+      <div class="flex flex-col gap-3">
+        {posts.map((post, i) => (
+          <a href={`/zh/blog/posts/${post.slug}/`}>
+            <article class="card card-hover reveal p-5 sm:p-6" data-delay={i * 2}>
+              <div class="flex items-center gap-2 mb-2">
+                <time class="text-[11px] font-mono text-obsidian-dim">
+                  {post.date.toLocaleDateString('zh-CN', { year: 'numeric', month: 'long', day: 'numeric' })}
+                </time>
+              </div>
+              <h3 class="text-base font-semibold text-obsidian-heading mb-1.5">{post.title}</h3>
+              <p class="text-sm text-obsidian-muted leading-relaxed mb-3">{post.description}</p>
+              <div class="flex flex-wrap gap-1.5">
+                {post.tags.map(tag => (
+                  <span class="text-[10px] px-2 py-0.5 rounded-full bg-obsidian-purple/10 border border-obsidian-purple/20 text-obsidian-purple-light">{tag}</span>
+                ))}
+              </div>
+            </article>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+</BlogLayout>

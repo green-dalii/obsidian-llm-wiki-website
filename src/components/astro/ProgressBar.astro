@@ -1,0 +1,20 @@
+---
+---
+
+<div class="fixed top-0 left-0 right-0 h-[2px] z-50 bg-transparent" id="progress-bar-wrap">
+  <div class="h-full bg-obsidian-purple transition-[width] duration-75 ease-linear" id="progress-bar" style="width:0%"></div>
+</div>
+
+<script is:inline>
+  (function () {
+    var bar = document.getElementById('progress-bar');
+    if (!bar) return;
+    function onScroll() {
+      var scrollTop = window.scrollY;
+      var docHeight = document.documentElement.scrollHeight - window.innerHeight;
+      var progress = docHeight > 0 ? scrollTop / docHeight : 0;
+      bar.style.width = (progress * 100) + '%';
+    }
+    window.addEventListener('scroll', onScroll, { passive: true });
+  })();
+</script>

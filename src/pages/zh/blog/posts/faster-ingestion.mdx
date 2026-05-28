@@ -1,0 +1,43 @@
+---
+title: "提取速度提升 80%：重新设计提取提示词"
+description: "v1.12.0 重构了提取提示词——移除了 20 万字符的 Wiki 页面列表，使提取速度不再受 Wiki 规模影响。"
+date: 2026-05-27
+tags: ["性能", "架构", "工程"]
+---
+import BlogPostLayout from '../../../../layouts/BlogPostLayout.astro';
+
+<BlogPostLayout title={frontmatter.title} description={frontmatter.description} date={frontmatter.date} tags={frontmatter.tags} locale="zh">
+
+
+## 随 Wiki 增长而变慢的瓶颈
+
+几个月来，提取速度随着 Wiki 的壮大而持续下降。500 页的 Wiki 处理文件很快，10000 页的 Wiki 则慢得令人痛苦。原因在于：提取提示词包含了**完整的现有 Wiki 页面列表**——长达 20 万字符。
+
+这是一个根本性的架构问题。每一次提取调用都背负着整个 Wiki 的重量。
+
+## 解决方案：确定性匹配
+
+v1.12.0 中，我们从提取提示词中移除了页面列表。提取完成后，由一个**程序化匹配器**（零 LLM 成本）通过 slug 和别名匹配将提取结果与现有 Wiki 页面对应。
+
+| 指标 | 之前 | 之后 | 改善幅度 |
+|------|------|------|----------|
+| 提示词大小 | ~20 万字符 | ~1 万字符 | **减少 95%** |
+| 提取速度 | 30-90 秒 | 5-15 秒 | **快约 80%** |
+| 万页 Wiki | 5-10 分钟 | 5-15 秒 | **与 Wiki 规模无关** |
+
+## 额外优化
+
+- **动态批处理限制** — 短文档 2-5 批，长文档 8-15 批
+- **短内容自动降级** — 低于 2 万字符的文档设置上限，避免过度挖掘
+- **收敛检测** — 当批次表现不佳时提前终止提取
+- **静默 slug 操作** — 消除了约 3 万行调试输出
+
+## 更深远的意义
+
+这一变化意味着插件已经准备好应对**生产级 Wiki**。一个 10000 页的 Wiki 处理每个文件的速度，与 500 页的 Wiki 完全相同。
+
+[在 GitHub 上查看](https://github.com/green-dalii/obsidian-llm-wiki)
+
+
+
+</BlogPostLayout>

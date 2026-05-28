@@ -1,0 +1,48 @@
+---
+title: "如何选择合适的模型：实用指南"
+description: "推荐长上下文模型？没错——但该选哪个、什么时候用、为什么？一份关于成本、速度和质量平衡的实操指南。"
+date: 2026-05-15
+tags: ["指南", "模型", "成本"]
+---
+
+import BlogPostLayout from '../../../../layouts/BlogPostLayout.astro';
+
+<BlogPostLayout title={frontmatter.title} description={frontmatter.description} date={frontmatter.date} tags={frontmatter.tags} locale="zh">
+
+## 每个人都会问的问题
+
+"我该用哪个模型？"
+
+这是"怎么安装"之后最常被问到的问题。答案是：**取决于你要做什么。**
+
+## 提取场景：速度和上下文
+
+提取是 Token 消耗最大的操作。两个因素最关键：
+
+1. **上下文窗口** — 你的整个 Wiki 需要放得下
+2. **每 Token 成本** — 你会频繁运行提取
+
+**推荐：**
+- **DeepSeek V4-Flash** — 每百万 Token 仅 $0.14，性价比最高。适合批量提取。
+- **Gemini-3.5-Flash** — 输出速度比 GPT-5.5 快 4 倍。
+
+## 查询场景：质量优于速度
+
+查询操作的 Token 消耗较少。回答质量比速度更重要。
+
+**推荐：**
+- **Claude Sonnet 4.6** — 质量与成本的最佳平衡。
+- **Claude Opus 4.7** — 顶级质量，适合对回答要求极高的场景。
+
+## 实用技巧
+
+**提取用 DeepSeek，查询用 Claude。** 两全其美。
+
+**Ollama 适合查询，不适合提取。** 本地模型的上下文窗口较小（8K–128K），查询没问题，但处理长文档时力不从心。
+
+**注意速率限制。** 遇到 HTTP 429 错误时，将并发数降到 1–2，批处理延迟提高到 500–800ms。
+
+[在 GitHub 上查看](https://github.com/green-dalii/obsidian-llm-wiki)
+
+
+</BlogPostLayout>

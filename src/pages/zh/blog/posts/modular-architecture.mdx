@@ -1,0 +1,45 @@
+---
+title: "模块化架构与对话式查询"
+description: "我们如何将 main.ts 从 3000 行精简到 300 行，并加入了类 ChatGPT 的流式查询界面。"
+date: 2026-04-27
+tags: ["架构", "查询", "工程"]
+---
+import BlogPostLayout from '../../../../layouts/BlogPostLayout.astro';
+
+<BlogPostLayout title={frontmatter.title} description={frontmatter.description} date={frontmatter.date} tags={frontmatter.tags} locale="zh">
+
+
+## 挑战
+
+v1.0.0 发布时，整个插件的逻辑都写在一个 `main.ts` 文件里，将近 3000 行。它确实能用——多页面生成、结构化 JSON 提示词、双向链接、Lint 系统，一应俱全。但这是一个单体架构。每加一个新功能，都要在几千行交织的逻辑中摸索。
+
+## 重构：9 个专注模块
+
+v1.2.0 将代码库拆分为 **9 个专注模块**。结果是：`main.ts` 缩减到仅 305 行——减少了 90%。
+
+- **提取引擎** — 从源笔记中提取实体和概念
+- **查询引擎** — 流式 ChatGPT 风格对话，支持 Markdown 渲染
+- **Lint 系统** — 检测重复、死链、孤立页面、空页面
+- **自动维护** — 文件监听、定期 Lint、启动健康检查
+- **设置界面** — 分步配置引导
+- **页面工厂** — 生成实体、概念和摘要页面
+- **LLM 客户端** — 统一适配 Anthropic、OpenAI、Gemini 等多家服务商
+
+**为什么这很重要：** 每个模块职责单一、接口清晰、可独立测试。v1.7.x 的快速迭代节奏之所以成为可能，正是因为基础足够扎实。
+
+## 对话式查询界面
+
+**对话式查询界面**让你能就自己的知识提问：
+
+- **流式响应**，支持 Markdown 渲染
+- **多轮对话**，保留上下文
+- 答案中嵌入 **Wiki 链接**，如同知识面包屑
+- **保存到 Wiki** — 有价值的对话可以转化为 Wiki 页面
+
+这让插件从一个知识*整理器*变成了一个知识*伙伴*。
+
+[在 GitHub 上查看](https://github.com/green-dalii/obsidian-llm-wiki)
+
+
+
+</BlogPostLayout>

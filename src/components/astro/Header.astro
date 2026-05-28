@@ -1,0 +1,217 @@
+---
+import { translations } from '../../i18n/astro';
+
+interface Props {
+  currentLocale?: string;
+  isBlog?: boolean;
+}
+
+const { currentLocale = 'en', isBlog = false } = Astro.props;
+const t = translations[currentLocale as keyof typeof translations] || translations.en;
+
+const LANGUAGES = [
+  { code: 'en', label: 'English', path: '/' },
+  { code: 'zh', label: '中文', path: '/zh/' },
+  { code: 'ja', label: '日本語', path: '/ja/' },
+  { code: 'ko', label: '한국어', path: '/ko/' },
+  { code: 'de', label: 'Deutsch', path: '/de/' },
+  { code: 'es', label: 'Español', path: '/es/' },
+  { code: 'fr', label: 'Français', path: '/fr/' },
+  { code: 'pt', label: 'Português', path: '/pt/' },
+];
+
+interface NavItem { key: string; label: string; href?: string; target?: string }
+
+const anchorItems: NavItem[] = [
+  { key: 'comparison', label: t.nav.comparison, target: '#comparison' },
+  { key: 'how-it-works', label: t.nav.howItWorks, target: '#how-it-works' },
+  { key: 'features', label: t.nav.features, target: '#features' },
+  { key: 'install', label: t.nav.install, target: '#install' },
+  { key: 'faq', label: t.nav.faq, target: '#faq' },
+  { key: 'ecosystem', label: t.nav.ecosystem, target: '#ecosystem' },
+  { key: 'providers', label: t.nav.providers, target: '#providers' },
+];
+
+const blogPath = currentLocale === 'zh' ? '/zh/blog/' : '/blog/';
+
+const navItems: NavItem[] = isBlog
+  ? [...anchorItems.map(item => ({ ...item, href: '/' + item.target })), { key: 'blog', label: t.nav.blog, href: blogPath }]
+  : [...anchorItems, { key: 'blog', label: t.nav.blog, href: blogPath }];
+---
+
+<header id="site-header" class="fixed top-0 left-0 right-0 z-40 border-b border-transparent transition-all duration-500">
+  <div class="max-w-6xl mx-auto px-4 sm:px-6 flex items-center justify-between h-14">
+    <a href="/" class="flex items-center gap-2 group" aria-label="Home">
+      <img src="/favicon.svg" alt="" class="w-7 h-7 rounded-lg" aria-hidden="true" />
+      <span class="text-sm font-semibold text-[#e5e5e5] tracking-tight group-hover:text-white transition-colors">Karpathy LLM Wiki</span>
+    </a>
+
+    <nav class="hidden md:flex items-center gap-0.5">
+      {navItems.map((item) => (
+        'href' in item ? (
+          <a href={item.href} class="px-2.5 py-1.5 text-xs text-obsidian-muted hover:text-[#e5e5e5] transition-colors duration-200 rounded-md hover:bg-white/12">
+            {item.label}
+          </a>
+        ) : (
+          <button data-scroll-to={item.target} class="px-2.5 py-1.5 text-xs text-obsidian-muted hover:text-[#e5e5e5] transition-colors duration-200 rounded-md hover:bg-white/12">
+            {item.label}
+          </button>
+        )
+      ))}
+      <div class="w-px h-4 bg-obsidian-border mx-1.5"></div>
+
+      <!-- Language switcher -->
+      <div class="relative" id="lang-dropdown">
+        <button id="lang-btn" class="px-2 py-1.5 text-xs font-mono text-obsidian-dim hover:text-obsidian-heading border border-obsidian-border rounded-md hover:border-obsidian-purple/40 transition-all inline-flex items-center gap-1">
+          {LANGUAGES.find(l => l.code === currentLocale)?.label || 'English'}
+          <svg class="w-3 h-3 opacity-50" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m6 9 6 6 6-6"/></svg>
+        </button>
+        <div id="lang-menu" class="hidden absolute right-0 top-full mt-1 bg-obsidian-surface border border-obsidian-border rounded-md shadow-lg z-50 min-w-30 py-1">
+          {LANGUAGES.map(lang => (
+            <a href={lang.path} class={`block px-3 py-1.5 text-xs hover:bg-white/8 transition-colors ${lang.code === currentLocale ? 'text-obsidian-purple-light bg-obsidian-purple/10' : 'text-obsidian-muted'}`}>
+              {lang.label}
+            </a>
+          ))}
+        </div>
+      </div>
+
+      <a href="https://github.com/green-dalii/obsidian-llm-wiki" target="_blank" rel="noopener noreferrer"
+        class="ml-1.5 px-2.5 py-1.5 text-xs font-medium text-obsidian-muted hover:text-[#e5e5e5] border border-obsidian-border rounded-md hover:border-obsidian-purple/30 transition-all inline-flex items-center gap-1.5">
+        <svg class="w-3 h-3" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+        GitHub
+        <span id="gh-stars" class="text-obsidian-dim">...</span>
+      </a>
+      <a href="https://community.obsidian.md/plugins/karpathywiki" target="_blank" rel="noopener noreferrer"
+        class="ml-1 px-3 py-1.5 text-xs font-medium text-white bg-obsidian-purple-dark rounded-md hover:bg-obsidian-purple transition-colors inline-flex items-center gap-1.5">
+        <svg class="w-3 h-3" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" x2="12" y1="15" y2="3"/></svg>
+        {t.nav.download}
+      </a>
+    </nav>
+
+    <!-- Mobile hamburger -->
+    <button id="mobile-btn" class="md:hidden p-2 text-obsidian-muted" aria-label="Open menu" aria-expanded="false">
+      <svg id="icon-menu" class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="4" x2="20" y1="12" y2="12"/><line x1="4" x2="20" y1="6" y2="6"/><line x1="4" x2="20" y1="18" y2="18"/></svg>
+      <svg id="icon-close" class="w-5 h-5 hidden" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
+    </button>
+  </div>
+
+  <!-- Mobile menu -->
+  <div id="mobile-menu" class="hidden md:hidden bg-obsidian-bg/95 backdrop-blur-md border-b border-obsidian-border px-4 sm:px-6 pb-4">
+    {navItems.map((item) => (
+      'href' in item ? (
+        <a href={item.href} class="block w-full text-left py-2.5 text-sm text-obsidian-muted hover:text-[#e5e5e5] transition-colors">
+          {item.label}
+        </a>
+      ) : (
+        <button data-scroll-to={item.target} class="block w-full text-left py-2.5 text-sm text-obsidian-muted hover:text-[#e5e5e5] transition-colors">
+          {item.label}
+        </button>
+      )
+    ))}
+    <div class="flex flex-col gap-3 mt-3 pt-3 border-t border-obsidian-border">
+      <div class="flex flex-row gap-1.5 flex-wrap">
+        {LANGUAGES.map(lang => (
+          <a href={lang.path} class={`px-2 py-1 text-xs rounded-md transition-colors ${lang.code === currentLocale ? 'text-obsidian-purple-light bg-obsidian-purple/10' : 'text-obsidian-muted hover:bg-white/6'}`}>
+            {lang.label}
+          </a>
+        ))}
+      </div>
+      <div class="flex items-center gap-3">
+        <a href="https://github.com/green-dalii/obsidian-llm-wiki" target="_blank" rel="noopener noreferrer"
+          class="px-2.5 py-1.5 text-xs font-medium text-obsidian-muted border border-obsidian-border rounded-md inline-flex items-center gap-1.5">
+          <svg class="w-3 h-3" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          GitHub
+          <span class="gh-stars-mobile text-obsidian-dim">...</span>
+        </a>
+        <a href="https://community.obsidian.md/plugins/karpathywiki" target="_blank" rel="noopener noreferrer"
+          class="px-3.5 py-1.5 text-xs font-medium text-[#1e1e1e] bg-obsidian-purple rounded-md inline-flex items-center gap-1.5">
+          <svg class="w-3 h-3" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" x2="12" y1="15" y2="3"/></svg>
+          {t.nav.download}
+        </a>
+      </div>
+    </div>
+  </div>
+</header>
+
+<script is:inline>
+(function () {
+  var header = document.getElementById('site-header');
+  if (!header) return;
+
+  // Scroll → header background
+  function onScroll() {
+    header.classList.toggle('header-scrolled', window.scrollY > 60);
+  }
+  window.addEventListener('scroll', onScroll, { passive: true });
+
+  // Smooth scroll for anchor buttons
+  document.querySelectorAll('[data-scroll-to]').forEach(function (btn) {
+    btn.addEventListener('click', function () {
+      var target = btn.getAttribute('data-scroll-to');
+      var el = document.querySelector(target);
+      if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      // Close mobile menu
+      document.getElementById('mobile-menu').classList.add('hidden');
+      document.getElementById('icon-menu').classList.remove('hidden');
+      document.getElementById('icon-close').classList.add('hidden');
+    });
+  });
+
+  // Mobile menu toggle
+  var mobileBtn = document.getElementById('mobile-btn');
+  var mobileMenu = document.getElementById('mobile-menu');
+  var iconMenu = document.getElementById('icon-menu');
+  var iconClose = document.getElementById('icon-close');
+  mobileBtn.addEventListener('click', function () {
+    var open = mobileMenu.classList.toggle('hidden');
+    iconMenu.classList.toggle('hidden', !open);
+    iconClose.classList.toggle('hidden', open);
+    mobileBtn.setAttribute('aria-expanded', String(!open));
+  });
+
+  // Language dropdown
+  var langBtn = document.getElementById('lang-btn');
+  var langMenu = document.getElementById('lang-menu');
+  langBtn.addEventListener('click', function (e) {
+    e.stopPropagation();
+    langMenu.classList.toggle('hidden');
+  });
+  document.addEventListener('click', function () {
+    langMenu.classList.add('hidden');
+  });
+
+  // GitHub stars with 24h cache
+  var cached = null;
+  try { cached = JSON.parse(localStorage.getItem('gh-stars')); } catch (e) {}
+  if (cached && Date.now() - cached.ts < 86400000) {
+    setStars(cached.value);
+  } else {
+    fetch('https://api.github.com/repos/green-dalii/obsidian-llm-wiki')
+      .then(function (r) { return r.json(); })
+      .then(function (d) {
+        if (d.stargazers_count) {
+          var v = d.stargazers_count >= 1000
+            ? (d.stargazers_count / 1000).toFixed(1).replace(/\.0$/, '') + 'k'
+            : String(d.stargazers_count);
+          setStars(v);
+          try { localStorage.setItem('gh-stars', JSON.stringify({ value: v, ts: Date.now() })); } catch (e) {}
+        }
+      })
+      .catch(function () {});
+  }
+
+  function setStars(v) {
+    document.getElementById('gh-stars').textContent = v;
+    document.querySelectorAll('.gh-stars-mobile').forEach(function (el) { el.textContent = v; });
+  }
+})();
+</script>
+
+<style>
+.header-scrolled {
+  background: color-mix(in srgb, var(--color-obsidian-bg) 85%, transparent);
+  backdrop-filter: blur(24px);
+  border-color: color-mix(in srgb, var(--color-obsidian-border) 50%, transparent);
+  box-shadow: 0 1px 0 rgba(255,255,255,0.03);
+}
+</style>

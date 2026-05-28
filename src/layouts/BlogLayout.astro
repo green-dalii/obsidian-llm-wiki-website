@@ -1,19 +1,20 @@
 ---
-import HeaderIsland from '../components/HeaderIsland';
+import Header from '../components/astro/Header.astro';
 import Footer from '../components/astro/Footer.astro';
-import ProgressBar from '../components/ProgressBar';
+import ProgressBar from '../components/astro/ProgressBar.astro';
 import '../index.css';
 
 interface Props {
   title: string;
   description?: string;
+  locale?: string;
 }
-const { title, description = '' } = Astro.props;
+const { title, description = '', locale = 'en' } = Astro.props;
 const siteUrl = Astro.site;
 ---
 
 <!doctype html>
-<html lang="en">
+<html lang={locale}>
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -38,12 +39,12 @@ const siteUrl = Astro.site;
   </head>
   <body>
     <div class="relative bg-obsidian-bg text-obsidian-text">
-      <ProgressBar client:only="react" />
-      <HeaderIsland client:only="react" currentLocale="en" isBlog />
+      <ProgressBar />
+      <Header currentLocale={locale} isBlog />
       <main class="pt-14">
         <slot />
       </main>
-      <Footer locale="en" />
+      <Footer locale={locale} />
     </div>
   </body>
 </html>

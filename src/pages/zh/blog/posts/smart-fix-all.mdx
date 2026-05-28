@@ -1,0 +1,43 @@
+---
+title: "一键智能修复：知识质量自动化"
+description: "Smart Fix All 如何按因果顺序修复——别名补全、重复合并、死链修复、孤立页面和空页面——只需一键。"
+date: 2026-05-14
+tags: ["智能修复", "维护", "质量"]
+---
+import BlogPostLayout from '../../../../layouts/BlogPostLayout.astro';
+
+<BlogPostLayout title={frontmatter.title} description={frontmatter.description} date={frontmatter.date} tags={frontmatter.tags} locale="zh">
+
+
+## 知识质量的难题
+
+随着 Wiki 的壮大，问题开始浮现。页面重复了。链接指向不存在的页面。孤立的页面没有任何引用。空页面没有内容。缺失的别名阻碍了跨语言去重。
+
+在 v1.7.11 之前，修复这些问题意味着逐个运行 Lint、逐个点击修复。对于大型 Wiki，这是一项枯燥的苦差。
+
+## Smart Fix All 登场
+
+Smart Fix All 按**因果顺序**执行修复，最大限度地减少新问题的产生：
+
+1. **阶段 -1：修复污染页面** — 清除文件夹前缀污染
+2. **阶段 0：补全别名** — 填写缺失的别名，为重复检测做好准备
+3. **阶段 1：合并重复** — 融合重复页面（许多死链的根源）
+4. **阶段 2：修复死链** — 修复失效的 `[[wiki-links]]`
+5. **阶段 3：链接孤立页面** — 为没有引用的页面添加引用
+6. **阶段 4：扩充空页面** — 用 LLM 生成内容填充存根页面
+
+**为什么顺序很重要：** 如果在合并重复之前修复死链，你会修复指向即将被删除的页面的链接。Smart Fix All 避免了这个问题。
+
+## 技术细节
+
+- **并行批处理** — 重复验证以 100 为一批并行进行
+- **错误隔离** — 单批失败不影响其他批次
+- **速率限制检测** — HTTP 429 错误触发可操作的建议
+
+最终效果：一个拥有 1000 个以上页面的 Wiki，在一键之间完成清理，并附带详细报告。
+
+[在 GitHub 上查看](https://github.com/green-dalii/obsidian-llm-wiki)
+
+
+
+</BlogPostLayout>
