@@ -1,82 +1,21 @@
 ---
-import '../../index.css';
-import ProgressBar from '../../components/ProgressBar';
-import HeaderIsland from '../../components/HeaderIsland';
+import BaseLayout from '../../layouts/BaseLayout.astro';
 import Hero from '../../components/astro/Hero.astro';
-import WikiDemoIsland from '../../components/WikiDemoIsland';
-import Footer from '../../components/astro/Footer.astro';
 import Comparison from '../../components/astro/Comparison.astro';
+import WikiDemoIsland from '../../components/WikiDemoIsland';
 import Features from '../../components/astro/Features.astro';
-import FAQ from '../../components/astro/FAQ.astro';
 import Install from '../../components/astro/Install.astro';
+import FAQ from '../../components/astro/FAQ.astro';
 import Ecosystem from '../../components/astro/Ecosystem.astro';
 import Providers from '../../components/astro/Providers.astro';
 import CTA from '../../components/astro/CTA.astro';
-import BaseLayout from '../../layouts/BaseLayout.astro';
 
-const title = 'LLM Wiki for Obsidian — AI 기반 자기 조직화 지식 베이스';
-const description = "Karpathy LLM Wiki의 Obsidian 구현 — AI가 노트를 읽고 엔티티/개념 페이지, 양방향 링크, 대화형 쿼리를 갖춘 연결된 Wiki를 생성합니다.";
-const keywords = "Obsidian 플러그인, LLM Wiki, AI 지식 관리, 지식 그래프, 양방향 링크, AI 노트, 자기 조직화 Wiki, Andrej Karpathy, Obsidian AI, 스마트 수정, 중복 감지, 다국어 Wiki";
-const siteUrl = Astro.site;
+const title = 'Karpathy LLM Wiki — AI 기반 자기 조직화 지식 베이스';
+const description = "Karpathy의 LLM Wiki Obsidian 구현——AI가 노트를 읽고 엔티티/개념 페이지, 양방향 링크, 대화형 쿼리가 포함된 위키를 자동 생성합니다.";
+const keywords = 'Obsidian 플러그인, LLM Wiki, AI 지식 관리, 지식 그래프, 양방향 링크, 노트 필기, AI 위키, 자기 조직화 노트, Karpathy, Obsidian AI, 마크다운 위키';
 ---
 
 <BaseLayout title={title} description={description} keywords={keywords} locale="ko" ogLocale="ko_KR">
-  <Fragment slot="head">
-    <link rel="canonical" href={siteUrl + 'ko/'} />
-    <link rel="alternate" hreflang="en" href={siteUrl} />
-    <link rel="alternate" hreflang="zh" href={siteUrl + 'zh/'} />
-    <link rel="alternate" hreflang="ja" href={siteUrl + 'ja/'} />
-    <link rel="alternate" hreflang="ko" href={siteUrl + 'ko/'} />
-    <link rel="alternate" hreflang="de" href={siteUrl + 'de/'} />
-    <link rel="alternate" hreflang="es" href={siteUrl + 'es/'} />
-    <link rel="alternate" hreflang="fr" href={siteUrl + 'fr/'} />
-    <link rel="alternate" hreflang="pt" href={siteUrl + 'pt/'} />
-    <link rel="alternate" hreflang="x-default" href={siteUrl} />
-    <script type="application/ld+json" set:html={JSON.stringify({
-      "@context": "https://schema.org",
-      "@graph": [
-        {
-          "@type": "WebSite",
-          "@id": siteUrl + "ko/#website",
-          "name": "LLM Wiki for Obsidian",
-          "url": siteUrl,
-          "description": description,
-          "publisher": { "@type": "Person", "name": "Greener-Dalii" }
-        },
-        {
-          "@type": "SoftwareApplication",
-          "@id": siteUrl + "ko/#software",
-          "name": "LLM Wiki for Obsidian",
-          "applicationCategory": "DeveloperApplication",
-          "operatingSystem": "Cross-platform",
-          "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
-          "license": "https://opensource.org/licenses/MIT",
-          "author": { "@type": "Person", "name": "Greener-Dalii", "url": "https://github.com/green-dalii" },
-          "codeRepository": "https://github.com/green-dalii/obsidian-llm-wiki",
-          "downloadUrl": "https://community.obsidian.md/plugins/karpathywiki",
-          "softwareVersion": "1.12.1",
-          "aggregateRating": { "@type": "AggregateRating", "ratingValue": "5", "ratingCount": "1" },
-          "featureList": [
-            "AI-powered entity and concept extraction from notes",
-            "Bidirectional wiki-links between knowledge pages",
-            "Conversational query with streaming Markdown and citations",
-            "Smart Fix All — one-click causality-ordered batch fix",
-            "Cross-language duplicate detection and intelligent merge",
-            "8-language Wiki output independent from UI language",
-            "Parallel page generation with configurable concurrency",
-            "Auto-maintenance with file watcher and periodic lint"
-          ]
-        },
-        {
-          "@type": "BreadcrumbList",
-          "itemListElement": [
-            { "@type": "ListItem", "position": 1, "name": "Home", "item": siteUrl }
-          ]
-        }
-      ]
-    })} />
-  </Fragment>
-
   <Hero locale="ko" />
   <Comparison locale="ko" />
   <WikiDemoIsland client:visible locale="ko" />
@@ -88,4 +27,3 @@ const siteUrl = Astro.site;
   <Providers locale="ko" />
   <CTA locale="ko" />
 </BaseLayout>
-

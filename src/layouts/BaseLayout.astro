@@ -13,6 +13,56 @@ interface Props {
 }
 
 const { title, description = '', keywords = '', locale = 'en', ogLocale = 'en_US' } = Astro.props;
+const siteUrl = Astro.site;
+
+const ALL_LOCALES = ['en', 'zh', 'ja', 'ko', 'de', 'es', 'fr', 'pt'] as const;
+const canonicalPath = locale === 'en' ? '' : `${locale}/`;
+const canonical = siteUrl + canonicalPath;
+const localePrefix = (code: string) => code === 'en' ? '' : `${code}/`;
+
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebSite",
+      "@id": canonical + "#website",
+      "name": "Karpathy LLM Wiki",
+      "url": siteUrl,
+      "description": description,
+      "publisher": { "@type": "Person", "name": "Greener-Dalii" }
+    },
+    {
+      "@type": "SoftwareApplication",
+      "@id": canonical + "#software",
+      "name": "Karpathy LLM Wiki",
+      "applicationCategory": "DeveloperApplication",
+      "operatingSystem": "Cross-platform",
+      "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+      "license": "https://opensource.org/licenses/MIT",
+      "author": { "@type": "Person", "name": "Greener-Dalii", "url": "https://github.com/green-dalii" },
+      "codeRepository": "https://github.com/green-dalii/obsidian-llm-wiki",
+      "downloadUrl": "https://community.obsidian.md/plugins/karpathywiki",
+      "softwareVersion": "1.12.4",
+      "aggregateRating": { "@type": "AggregateRating", "ratingValue": "5", "ratingCount": "1" },
+      "featureList": [
+        "AI-powered entity and concept extraction from notes",
+        "Bidirectional wiki-links between knowledge pages",
+        "Conversational query with streaming Markdown and citations",
+        "Smart Fix All — one-click causality-ordered batch fix",
+        "Cross-language duplicate detection and intelligent merge",
+        "8-language Wiki output independent from UI language",
+        "Parallel page generation with configurable concurrency",
+        "Auto-maintenance with file watcher and periodic lint"
+      ]
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        { "@type": "ListItem", "position": 1, "name": "Home", "item": siteUrl }
+      ]
+    }
+  ]
+};
 ---
 
 <!doctype html>
@@ -26,8 +76,8 @@ const { title, description = '', keywords = '', locale = 'en', ogLocale = 'en_US
     <meta name="author" content="Greener-Dalii" />
     <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large" />
     <meta name="theme-color" content="#1a1a1a" />
-    <meta name="application-name" content="LLM Wiki for Obsidian" />
-    <meta name="apple-mobile-web-app-title" content="LLM Wiki for Obsidian" />
+    <meta name="application-name" content="Karpathy LLM Wiki" />
+    <meta name="apple-mobile-web-app-title" content="Karpathy LLM Wiki" />
     <meta name="msapplication-TileColor" content="#1a1a1a" />
 
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
@@ -36,13 +86,19 @@ const { title, description = '', keywords = '', locale = 'en', ogLocale = 'en_US
     <link rel="preload" href="/fonts/outfit.woff2" as="font" type="font/woff2" crossorigin />
     <link rel="preload" href="/fonts/jetbrains-mono.woff2" as="font" type="font/woff2" crossorigin />
 
+    <link rel="canonical" href={canonical} />
+    {ALL_LOCALES.map(code => (
+      <link rel="alternate" hreflang={code} href={siteUrl + localePrefix(code)} />
+    ))}
+    <link rel="alternate" hreflang="x-default" href={siteUrl} />
+
     <!-- Open Graph -->
     <meta property="og:type" content="website" />
-    <meta property="og:site_name" content="LLM Wiki for Obsidian" />
+    <meta property="og:site_name" content="Karpathy LLM Wiki" />
     <meta property="og:url" content={Astro.url} />
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
-    <meta property="og:image" content={Astro.site + 'og-image.webp'} />
+    <meta property="og:image" content={siteUrl + 'og-image.webp'} />
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="630" />
     <meta property="og:locale" content={ogLocale} />
@@ -53,7 +109,9 @@ const { title, description = '', keywords = '', locale = 'en', ogLocale = 'en_US
     <meta name="twitter:creator" content="@GreenerDalii" />
     <meta name="twitter:title" content={title} />
     <meta name="twitter:description" content={description} />
-    <meta name="twitter:image" content={Astro.site + 'og-image.webp'} />
+    <meta name="twitter:image" content={siteUrl + 'og-image.webp'} />
+
+    <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} is:inline />
 
     <!-- Additional head content -->
     <slot name="head" />
@@ -69,3 +127,5 @@ const { title, description = '', keywords = '', locale = 'en', ogLocale = 'en_US
     </div>
   </body>
 </html>
+
+<script src="../scripts/scroll-reveal.ts"></script>

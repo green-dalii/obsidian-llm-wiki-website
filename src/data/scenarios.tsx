@@ -1,4 +1,5 @@
 import { Heart, BookOpen, Scissors, Mic, Microscope, TrendingUp } from "lucide-react";
+import BoldLink from "../components/BoldLink";
 
 export type ScenarioId = 'daily-life' | 'reading' | 'inspiration' | 'creation' | 'academic' | 'business';
 
@@ -25,10 +26,6 @@ export interface ScenarioData {
   chatAnswerDetailZh: React.ReactNode;
   chatSource: string;
   chatSourceZh: string;
-}
-
-export function BoldLink({ children }: { children: string }) {
-  return <span className="font-semibold text-obsidian-purple-light">{children}</span>;
 }
 
 export const SCENARIOS: ScenarioData[] = [
@@ -145,8 +142,8 @@ Sleep is the single most effective thing we can do to reset our brain and body.
     sourceNoteContextZh: '卡尼曼经典著作的个人阅读笔记——不是摘要，而是真正改变了我对决策的理解的那些洞见。那种读完一本书后，觉得自己的思维模型被刷新了而写下的笔记。',
     sourceNote: `# Thinking, Fast and Slow — Reading Notes
 
-Kahneman\'s dual-process model of cognition. The thesis: we think we\'re rational,
-but we\'re governed by an intuitive System 1 that makes systematic errors.
+Kahneman's dual-process model of cognition. The thesis: we think we're rational,
+but we're governed by an intuitive System 1 that makes systematic errors.
 
 ## System 1 vs System 2
 - System 1: fast, automatic, effortless. Recognizes faces, detects hostility in a
@@ -154,7 +151,7 @@ but we\'re governed by an intuitive System 1 that makes systematic errors.
 - System 2: slow, deliberate, effortful. Multiplies 17×24, fills out a tax form,
   checks the validity of a logical argument. Lazily defaults to System 1.
 
-The core problem: System 2 is lazy. It endorses System 1\'s snap judgments without
+The core problem: System 2 is lazy. It endorses System 1's snap judgments without
 checking them. This is the source of most cognitive biases.
 
 ## Key Heuristics and Biases
@@ -187,8 +184,8 @@ colleague got $2,000 feels like a loss.
 - Personal finance: automate decisions (System 1) to protect savings from impulsive
   spending. Set it and forget it.
 
-## Questions I\'m Still Thinking About
-- Can System 1 be trained? Chess grandmasters\' pattern recognition suggests yes.
+## Questions I'm Still Thinking About
+- Can System 1 be trained? Chess grandmasters' pattern recognition suggests yes.
 - Are there domains where System 1 outperforms System 2? (Blink vs. deliberation?)
 - How does this interact with LLM reasoning? Are LLMs pure System 2, or can they
   simulate System 1 intuition?`,
@@ -293,16 +290,16 @@ books or conversations.
 ## On Facts and Beliefs
 > Clipped from James Clear
 "Humans need a reasonably accurate view of the world in order to navigate it. But
-\'accurate\' is not the only thing our minds prioritize. If a brain anticipates a
-reward for adopting a particular belief, it\'s perfectly happy to do so. The result
+'accurate' is not the only thing our minds prioritize. If a brain anticipates a
+reward for adopting a particular belief, it's perfectly happy to do so. The result
 is that false beliefs can be held not because they are true, but because they serve
 a social purpose — they help us bond with our tribe."
 
 ## How to Think for Yourself
 > Clipped from Paul Graham
-"There are some kinds of work that you can\'t do well unless you think differently
+"There are some kinds of work that you can't do well unless you think differently
 from your peers. The difficulty is that people are often mistaken about where they
-fall on the spectrum. The most conventional-minded people are confident that they\'re
+fall on the spectrum. The most conventional-minded people are confident that they're
 independent-minded, while the genuinely independent-minded worry they might not be
 independent-minded enough."
 
@@ -317,7 +314,7 @@ first-order negative but second-order positive."
 > Clipped from Farnam Street
 "The core premise of inversion is that you should not approach difficult problems
 from only one direction. Instead, examine them both forward and backward. Charlie
-Munger: \'All I want to know is where I\'m going to die, so I\'ll never go there.\'"
+Munger: 'All I want to know is where I'm going to die, so I'll never go there.'"
 
 ## On Forecasting
 > Clipped from Morgan Housel
@@ -328,7 +325,7 @@ and fewer successes."
 ## What I Want To Connect
 - Facts vs beliefs → social bonding mechanism?
 - Second-order thinking + inversion → both reward depth over breadth
-- Graham\'s spectrum → how do I know where I actually fall?`,
+- Graham's spectrum → how do I know where I actually fall?`,
     sourceNoteZh: `# 思考碎片 · 剪藏文集
 
 写在一个杂乱笔记里的各种想法和观察。遇到第三个"跟这个有关"的瞬间就会更新进来。
@@ -429,27 +426,27 @@ Topic: "Tools for Thought and the Future of Reading"
 - Worked at Apple on early iPad education initiatives
 - Now runs independent research lab studying tools for thought
 - Known for: "Evergreen notes" methodology, "Working in public" research practice
-- His essay "Why books don\'t work" sparked major debate in PKM community
+- His essay "Why books don't work" sparked major debate in PKM community
 
 ## Core Questions
-1. You wrote that "books don\'t work" — most people forget 90% of what they read.
+1. You wrote that "books don't work" — most people forget 90% of what they read.
    What would a "working" medium for knowledge transfer look like?
 2. Your "evergreen notes" system emphasizes atomicity and progressive summarization.
    How does this differ from traditional note-taking?
-3. You\'ve been vocal about the gap between tools-for-thought research and mainstream
-   adoption. What\'s the biggest blocker?
-4. With LLMs now able to answer questions about any book instantly, what\'s the role
+3. You've been vocal about the gap between tools-for-thought research and mainstream
+   adoption. What's the biggest blocker?
+4. With LLMs now able to answer questions about any book instantly, what's the role
    of human reading in 2026?
 5. Your research practice is radically open — you publish half-finished thoughts daily.
-   Doesn\'t this create noise? How do you balance depth with speed?
+   Doesn't this create noise? How do you balance depth with speed?
 
 ## Key References to Mention
-- Matuschak, A. (2019). "Why books don\'t work"
+- Matuschak, A. (2019). "Why books don't work"
 - Nielsen, M. (2018). "Augmenting human intellect"
 - Engelbart, D. (1962). "Augmenting Human Intellect" — the mother of all demos
 
 ## Open Questions for Post-Interview
-- Should I read Andy\'s full "Evergreen notes" essay before recording?
+- Should I read Andy's full "Evergreen notes" essay before recording?
 - Do I need a second guest for counterpoint?
 - Recording logistics: async voice memo or live video?`,
     sourceNoteZh: `# 「纸上谈兵」第 24 期节目策划
@@ -548,7 +545,7 @@ the results. Each head specializes in something different.
 scaling factor, gradients explode at high dimensions.
 
 ## Positional Encoding
-Since there\'s no recurrence, the model has no idea about word order. The fix:
+Since there's no recurrence, the model has no idea about word order. The fix:
 add sine/cosine waves of different frequencies to input embeddings. This gives
 the model position information without adding parameters.
 

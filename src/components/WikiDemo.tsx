@@ -36,7 +36,7 @@ interface Props {
 }
 
 export default function WikiDemo({ locale = 'en' }: Props) {
-  const tMap: Record<string, any> = translations; const t = tMap[locale] || translations.en;
+  const tMap: Record<string, Translations> = translations; const t = tMap[locale] || translations.en;
   const sectionRef = useRef<HTMLElement>(null);
   const [step, setStep] = useState(0);
   const [autoPlay, setAutoPlay] = useState(true);

@@ -114,6 +114,7 @@ export function useGraphPhysics(
   const mouseRef = useRef<MouseState>({ x: -9999, y: -9999, active: false, clickPulse: 0 });
   const frameRef = useRef(0);
   const cbRef = useRef<RenderCallback>(renderCallback);
+  // eslint-disable-next-line react-hooks/refs -- latest value ref for animation loop
   cbRef.current = renderCallback;
 
   useEffect(() => {
@@ -411,6 +412,7 @@ export function useGraphPhysics(
       container.removeEventListener('mouseleave', handleMouseLeave);
       container.removeEventListener('click', handleClick);
     };
+    // eslint-disable-next-line react-hooks/exhaustive-deps -- physics loop reads refs, not state
   }, [autoConnect, immediate, nodeHomes.length, homesVersion]);
 
   return { nodesRef, edgesRef, mouseRef };

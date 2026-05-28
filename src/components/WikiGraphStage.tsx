@@ -117,20 +117,22 @@ export default function WikiGraphStage({ layout, links, pageLabels }: WikiGraphS
 
   // Raw nodes in viewBox space
   const rawNodes = useRef(flattenNodes(layout));
+  // eslint-disable-next-line react-hooks/refs -- latest value ref for canvas rendering
   rawNodes.current = flattenNodes(layout);
 
   const rawEdges = useRef(buildEdges(layout, links));
+  // eslint-disable-next-line react-hooks/refs -- latest value ref for canvas rendering
   rawEdges.current = buildEdges(layout, links);
 
   // Node homes in CSS pixel space (recomputed when scale changes)
   const nodeHomes = viewScale > 0
-    ? rawNodes.current.map(n => {
+    ? rawNodes.current.map(n => { // eslint-disable-line react-hooks/refs
         const p = toPixel(n.x, n.y);
         return { x: p.x, y: p.y, cluster: n.cluster, radius: n.radius };
       })
     : [];
 
-  const edges = rawEdges.current;
+  const edges = rawEdges.current; // eslint-disable-line react-hooks/refs
 
   const render = useCallback(
     (nodes: PhysicsNodeState[], physicsEdges: PhysicsEdgeState[], mouse: MouseState) => {

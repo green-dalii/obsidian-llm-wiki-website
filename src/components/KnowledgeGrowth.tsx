@@ -25,6 +25,7 @@ export default function KnowledgeGrowth() {
   const containerRef = useRef<HTMLDivElement>(null);
   const [nodeHomes, setNodeHomes] = useState<ReturnType<typeof generateHeroNodeHomes>>([]);
   const homesRef = useRef(nodeHomes);
+  // eslint-disable-next-line react-hooks/refs -- latest value ref for animation loop
   homesRef.current = nodeHomes;
 
   useEffect(() => {

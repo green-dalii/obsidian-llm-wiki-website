@@ -24,7 +24,7 @@ interface Props {
 }
 
 export default function Header({ currentLocale = 'en', isBlog = false }: Props) {
-  const t = (translations as Record<string, any>)[currentLocale] || translations.en;
+  const t: Translations = translations[currentLocale as keyof typeof translations] || translations.en;
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
   const [stars, setStars] = useState<string | null>(null);
@@ -86,7 +86,7 @@ export default function Header({ currentLocale = 'en', isBlog = false }: Props) 
       <div className="max-w-6xl mx-auto px-4 sm:px-6 flex items-center justify-between h-14">
         <a href="/" className="flex items-center gap-2 group" aria-label="Home">
           <img src="/favicon.svg" alt="" className="w-7 h-7 rounded-lg" aria-hidden="true" />
-          <span className="text-sm font-semibold text-[#e5e5e5] tracking-tight group-hover:text-white transition-colors">LLM Wiki for Obsidian</span>
+          <span className="text-sm font-semibold text-[#e5e5e5] tracking-tight group-hover:text-white transition-colors">Karpathy LLM Wiki</span>
         </a>
 
         <nav className="hidden md:flex items-center gap-0.5">

@@ -1,82 +1,21 @@
 ---
-import '../index.css';
-import ProgressBar from '../components/ProgressBar';
-import HeaderIsland from '../components/HeaderIsland';
+import BaseLayout from '../layouts/BaseLayout.astro';
 import Hero from '../components/astro/Hero.astro';
-import WikiDemoIsland from '../components/WikiDemoIsland';
-import Footer from '../components/astro/Footer.astro';
 import Comparison from '../components/astro/Comparison.astro';
+import WikiDemoIsland from '../components/WikiDemoIsland';
 import Features from '../components/astro/Features.astro';
-import FAQ from '../components/astro/FAQ.astro';
 import Install from '../components/astro/Install.astro';
+import FAQ from '../components/astro/FAQ.astro';
 import Ecosystem from '../components/astro/Ecosystem.astro';
 import Providers from '../components/astro/Providers.astro';
 import CTA from '../components/astro/CTA.astro';
-import BaseLayout from '../layouts/BaseLayout.astro';
 
-const title = 'LLM Wiki for Obsidian — AI-Powered Self-Organizing Knowledge';
+const title = 'Karpathy LLM Wiki — AI-Powered Self-Organizing Knowledge';
 const description = "Karpathy's LLM Wiki implementation for Obsidian — AI ingests your notes and generates a connected wiki with entity/concept pages, bidirectional links, and conversational query.";
 const keywords = 'Obsidian plugin, LLM Wiki, AI knowledge management, knowledge graph, bidirectional links, note-taking, AI-powered wiki, self-organizing notes, Andrej Karpathy, Obsidian AI, markdown wiki';
-const siteUrl = Astro.site;
 ---
 
 <BaseLayout title={title} description={description} keywords={keywords} locale="en" ogLocale="en_US">
-  <Fragment slot="head">
-    <link rel="canonical" href={siteUrl} />
-    <link rel="alternate" hreflang="en" href={siteUrl} />
-    <link rel="alternate" hreflang="zh" href={siteUrl + 'zh/'} />
-    <link rel="alternate" hreflang="ja" href={siteUrl + 'ja/'} />
-    <link rel="alternate" hreflang="ko" href={siteUrl + 'ko/'} />
-    <link rel="alternate" hreflang="de" href={siteUrl + 'de/'} />
-    <link rel="alternate" hreflang="es" href={siteUrl + 'es/'} />
-    <link rel="alternate" hreflang="fr" href={siteUrl + 'fr/'} />
-    <link rel="alternate" hreflang="pt" href={siteUrl + 'pt/'} />
-    <link rel="alternate" hreflang="x-default" href={siteUrl} />
-    <script type="application/ld+json" set:html={JSON.stringify({
-      "@context": "https://schema.org",
-      "@graph": [
-        {
-          "@type": "WebSite",
-          "@id": siteUrl + "#website",
-          "name": "LLM Wiki for Obsidian",
-          "url": siteUrl,
-          "description": description,
-          "publisher": { "@type": "Person", "name": "Greener-Dalii" }
-        },
-        {
-          "@type": "SoftwareApplication",
-          "@id": siteUrl + "#software",
-          "name": "LLM Wiki for Obsidian",
-          "applicationCategory": "DeveloperApplication",
-          "operatingSystem": "Cross-platform",
-          "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
-          "license": "https://opensource.org/licenses/MIT",
-          "author": { "@type": "Person", "name": "Greener-Dalii", "url": "https://github.com/green-dalii" },
-          "codeRepository": "https://github.com/green-dalii/obsidian-llm-wiki",
-          "downloadUrl": "https://community.obsidian.md/plugins/karpathywiki",
-          "softwareVersion": "1.12.1",
-          "aggregateRating": { "@type": "AggregateRating", "ratingValue": "5", "ratingCount": "1" },
-          "featureList": [
-            "AI-powered entity and concept extraction from notes",
-            "Bidirectional wiki-links between knowledge pages",
-            "Conversational query with streaming Markdown and citations",
-            "Smart Fix All — one-click causality-ordered batch fix",
-            "Cross-language duplicate detection and intelligent merge",
-            "8-language Wiki output independent from UI language",
-            "Parallel page generation with configurable concurrency",
-            "Auto-maintenance with file watcher and periodic lint"
-          ]
-        },
-        {
-          "@type": "BreadcrumbList",
-          "itemListElement": [
-            { "@type": "ListItem", "position": 1, "name": "Home", "item": siteUrl }
-          ]
-        }
-      ]
-    })} />
-  </Fragment>
-
   <Hero locale="en" />
   <Comparison locale="en" />
   <WikiDemoIsland client:visible locale="en" />
@@ -89,7 +28,7 @@ const siteUrl = Astro.site;
   <CTA locale="en" />
 </BaseLayout>
 
-<script>
+<script is:inline>
   // Auto-redirect to localized page based on browser language
   (function () {
     if (window.location.pathname !== '/') return;
