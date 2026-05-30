@@ -24,13 +24,35 @@ Astro-based landing page for Karpathy LLM Wiki plugin, migrated from React to As
 
 ### Current Architecture
 
+**Blog: Content Collections (Astro 6 official pattern)**
+
+```
+src/content.config.ts                — Collection config: glob loader + zod schema (NOT type: 'content')
+src/content/blog/*.md                — EN blog posts (8, pure Markdown, no layout wrapper)
+src/content/blog-zh/*.md             — ZH blog posts (8, pure Markdown, no layout wrapper)
+src/pages/blog/posts/[...slug].astro — EN dynamic route (getCollection + render)
+src/pages/zh/blog/posts/[...slug].astro — ZH dynamic route
+src/pages/blog/index.astro           — EN blog index (getCollection + client JS tag filter)
+src/pages/zh/blog/index.astro        — ZH blog index (getCollection + client JS tag filter)
+```
+
+**Key rules for Content Collections:**
+- Config at `src/content.config.ts` (not `src/content/config.ts`), uses `glob` loader from `astro/loaders`
+- Content at `src/content/` (standard location), `.md` files (not `.mdx` — no JSX needed)
+- Imports: `defineCollection, z` from `astro:content`; `glob` from `astro/loaders`
+- Dynamic routes use `getCollection()` + `getStaticPaths()` + `render()` + `<Content />`
+- No hardcoded post arrays — everything via `getCollection()`
+- All frontmatter must have closing `---` delimiter and `related` field
+- Run `npx astro sync` after content changes to regenerate `.astro/content.d.ts` types
+- tsconfig.app.json must include `".astro"` in its `include` array for IDE type resolution
+
 **Static Pages (Astro):**
 - `/` — English homepage
 - `/zh/`, `/ja/`, `/ko/`, `/de/`, `/es/`, `/fr/`, `/pt/` — Localized homepages
 - `/blog/` — English blog index
-- `/blog/posts/*.mdx` — English blog posts (8 articles)
+- `/blog/posts/[slug]/` — English blog posts (dynamic)
 - `/zh/blog/` — Chinese blog index
-- `/zh/blog/posts/*.mdx` — Chinese blog posts (8 articles, translated)
+- `/zh/blog/posts/[slug]/` — Chinese blog posts (dynamic)
 
 **Astro Components (zero JS):**
 - `components/astro/Header.astro` — Full navigation with vanilla JS interactivity
@@ -54,9 +76,9 @@ Astro-based landing page for Karpathy LLM Wiki plugin, migrated from React to As
 - `BoldLink.tsx` — Presentational (consumed by scenarios.tsx data)
 
 **Layouts:**
-- `BaseLayout.astro` — Shared layout for all homepage variants (auto-generates canonical, hreflang, JSON-LD)
-- `BlogLayout.astro` — Blog index layout with locale support
-- `BlogPostLayout.astro` — Blog post layout with @tailwindcss/typography prose styling
+- `BaseLayout.astro` — Shared layout for ALL pages (auto-generates canonical, hreflang, JSON-LD). Accepts optional `isBlog` prop for Header nav behavior.
+- `BlogLayout.astro` — Blog index, reuses BaseLayout with `isBlog` prop
+- `BlogPostLayout.astro` — Blog post, reuses BaseLayout. Three-column layout: sticky TOC (left, hidden mobile) + content (center) + related reading (right, hidden mobile, shown at bottom). Tags are clickable links. TOC scroll highlight via client JS.
 
 ### Key Principles
 
@@ -66,6 +88,15 @@ Astro-based landing page for Karpathy LLM Wiki plugin, migrated from React to As
 - Header and ProgressBar are pure Astro + vanilla JS (no React dependency)
 - `BaseLayout` auto-generates canonical URL, hreflang links, and JSON-LD from locale prop
 - Non-ZH languages navigate to English blog; only ZH has a separate blog
+- **All layouts MUST reuse BaseLayout** — no HTML shell duplication
+- Header Logo link and anchor nav links are locale-aware
+
+### Blog Features
+- **Three-column layout** (desktop): TOC | Content | Related Reading
+- **Sticky sidebars**: TOC and related reading don't scroll with content
+- **TOC scroll tracking**: Active heading highlighted via IntersectionObserver-like JS
+- **Tag filtering**: Client-side JS reads URL `?tag=` param, filters post cards, updates browser history
+- **Related reading**: `related` frontmatter field → dynamic route resolves slugs to titles via `postsMap`
 
 ### i18n
 

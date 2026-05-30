@@ -33,15 +33,16 @@ const anchorItems: NavItem[] = [
 ];
 
 const blogPath = currentLocale === 'zh' ? '/zh/blog/' : '/blog/';
+const homePath = LANGUAGES.find(l => l.code === currentLocale)?.path || '/';
 
 const navItems: NavItem[] = isBlog
-  ? [...anchorItems.map(item => ({ ...item, href: '/' + item.target })), { key: 'blog', label: t.nav.blog, href: blogPath }]
+  ? [...anchorItems.map(item => ({ ...item, href: homePath + item.target })), { key: 'blog', label: t.nav.blog, href: blogPath }]
   : [...anchorItems, { key: 'blog', label: t.nav.blog, href: blogPath }];
 ---
 
 <header id="site-header" class="fixed top-0 left-0 right-0 z-40 border-b border-transparent transition-all duration-500">
   <div class="max-w-6xl mx-auto px-4 sm:px-6 flex items-center justify-between h-14">
-    <a href="/" class="flex items-center gap-2 group" aria-label="Home">
+    <a href={homePath} class="flex items-center gap-2 group" aria-label="Home">
       <img src="/favicon.svg" alt="" class="w-7 h-7 rounded-lg" aria-hidden="true" />
       <span class="text-sm font-semibold text-[#e5e5e5] tracking-tight group-hover:text-white transition-colors">Karpathy LLM Wiki</span>
     </a>

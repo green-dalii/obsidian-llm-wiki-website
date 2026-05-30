@@ -3,11 +3,8 @@ title: "如何选择合适的模型：实用指南"
 description: "推荐长上下文模型？没错——但该选哪个、什么时候用、为什么？一份关于成本、速度和质量平衡的实操指南。"
 date: 2026-05-15
 tags: ["指南", "模型", "成本"]
+related: ["faster-ingestion", "first-100-pages"]
 ---
-
-import BlogPostLayout from '../../../../layouts/BlogPostLayout.astro';
-
-<BlogPostLayout title={frontmatter.title} description={frontmatter.description} date={frontmatter.date} tags={frontmatter.tags} locale="zh">
 
 ## 每个人都会问的问题
 
@@ -43,6 +40,3 @@ import BlogPostLayout from '../../../../layouts/BlogPostLayout.astro';
 **注意速率限制。** 遇到 HTTP 429 错误时，将并发数降到 1–2，批处理延迟提高到 500–800ms。
 
 [在 GitHub 上查看](https://github.com/green-dalii/obsidian-llm-wiki)
-
-
-</BlogPostLayout>

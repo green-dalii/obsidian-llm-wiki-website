@@ -3,11 +3,8 @@ title: "Getting Your First 100 Pages: A Beginner's Walkthrough"
 description: "From zero to a living wiki. A step-by-step walkthrough of setting up your first sources, running ingestion, and watching your knowledge take shape."
 date: 2026-05-08
 tags: ["tutorial", "beginner", "walkthrough"]
+related: ["choosing-models", "introducing-llm-wiki"]
 ---
-import BlogPostLayout from '../../../layouts/BlogPostLayout.astro';
-
-<BlogPostLayout title={frontmatter.title} description={frontmatter.description} date={frontmatter.date} tags={frontmatter.tags}>
-
 
 ## Start Small
 
@@ -49,7 +46,3 @@ Open the `wiki/` folder. You'll see `entities/`, `concepts/`, `sources/`, `index
 **Don't ignore the log.** `wiki/log.md` records every operation.
 
 [View on GitHub](https://github.com/green-dalii/obsidian-llm-wiki)
-
-
-
-</BlogPostLayout>

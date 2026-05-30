@@ -3,11 +3,8 @@ title: "8 Languages: The Full Internationalization Release"
 description: "v1.8.0 extended the plugin UI from 2 languages to 8, with 269+ fields translated in each language using natural local expressions."
 date: 2026-05-17
 tags: ["i18n", "community", "release"]
+related: ["multilingual-wiki"]
 ---
-import BlogPostLayout from '../../../layouts/BlogPostLayout.astro';
-
-<BlogPostLayout title={frontmatter.title} description={frontmatter.description} date={frontmatter.date} tags={frontmatter.tags}>
-
 
 ## From 2 to 8 Languages
 
@@ -34,7 +31,3 @@ Every button, every label, every notification — all translated. Not with autom
 The full UI internationalization was the last major piece. Focus shifted to performance and reliability — culminating in the extraction prompt rearchitecture of v1.12.0.
 
 [View on GitHub](https://github.com/green-dalii/obsidian-llm-wiki)
-
-
-
-</BlogPostLayout>

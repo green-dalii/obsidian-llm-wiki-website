@@ -1,16 +1,10 @@
 ---
+import { getCollection } from 'astro:content';
 import BlogLayout from '../../layouts/BlogLayout.astro';
 
-const posts = [
-  { slug: 'faster-ingestion', title: "80% Faster Ingestion: Rethinking the Extraction Prompt", description: "v1.12.0 rearchitected the extraction prompt — removing 200K characters of wiki page list, making ingestion speed independent of wiki size.", date: new Date('2026-05-27'), tags: ['performance', 'architecture'] },
-  { slug: 'choosing-models', title: "Choosing the Right Model: A Practical Guide", description: "Long-context models recommended? Yes — but which one, when, and why. A hands-on guide to balancing cost, speed, and quality.", date: new Date('2026-05-15'), tags: ['guide', 'models', 'cost'] },
-  { slug: 'eight-languages', title: "8 Languages: The Full Internationalization Release", description: "v1.8.0 extended the plugin UI from 2 languages to 8, with 269+ fields translated in each language using natural local expressions.", date: new Date('2026-05-17'), tags: ['i18n', 'community'] },
-  { slug: 'smart-fix-all', title: "Smart Fix All: One-Click Knowledge Quality", description: "How Smart Fix All runs causality-ordered repairs — aliases, duplicates, dead links, orphans, and empty pages — in a single click.", date: new Date('2026-05-14'), tags: ['smart-fix', 'maintenance'] },
-  { slug: 'first-100-pages', title: "Getting Your First 100 Pages: A Beginner's Walkthrough", description: "From zero to a living wiki. A step-by-step walkthrough of setting up your first sources, running ingestion, and watching your knowledge take shape.", date: new Date('2026-05-08'), tags: ['tutorial', 'beginner'] },
-  { slug: 'multilingual-wiki', title: "Multi-Language Wiki Content: Write in English, Read in Japanese", description: "v1.6.5 introduced Wiki Output Language — 8 languages for your Wiki content, completely independent from the UI language.", date: new Date('2026-05-03'), tags: ['i18n', 'multilingual'] },
-  { slug: 'modular-architecture', title: "Modular Architecture and the Query Interface", description: "How we reduced main.ts from 3000 lines to 300 and added a ChatGPT-style query interface with streaming responses.", date: new Date('2026-04-27'), tags: ['architecture', 'query'] },
-  { slug: 'introducing-llm-wiki', title: "Introducing Karpathy LLM Wiki", description: "An Obsidian plugin that implements Andrej Karpathy's LLM Wiki concept — AI reads your notes and builds a structured wiki with bidirectional links.", date: new Date('2026-04-26'), tags: ['release', 'karpathy'] },
-];
+const allPosts = await getCollection('blog');
+const posts = allPosts.sort((a, b) => b.data.date.getTime() - a.data.date.getTime());
+const allTags = [...new Set(posts.flatMap(p => p.data.tags || []))].sort();
 ---
 
 <BlogLayout title="Blog" description="Updates, guides, and deep dives about Karpathy LLM Wiki.">
@@ -22,17 +16,26 @@ const posts = [
         <p class="text-obsidian-muted max-w-lg mx-auto text-sm">Updates, guides, and deep dives about the plugin and the Karpathy LLM Wiki concept.</p>
       </div>
 
-      <div class="flex flex-col gap-3">
+      {allTags.length > 0 && (
+        <div class="mb-10 flex flex-wrap gap-2 justify-center" id="tag-filters">
+          <button data-tag="" class="tag-btn text-[11px] px-3 py-1 rounded-full bg-obsidian-purple/15 text-obsidian-purple-light border border-obsidian-purple/30 transition-colors">All</button>
+          {allTags.map(tag => (
+            <button data-tag={tag} class="tag-btn text-[11px] px-3 py-1 rounded-full bg-obsidian-surface text-obsidian-muted border border-obsidian-border hover:border-obsidian-purple/30 hover:text-obsidian-heading transition-colors">{tag}</button>
+          ))}
+        </div>
+      )}
+
+      <p class="text-sm text-obsidian-muted text-center mb-6 hidden" id="filter-count"></p>
+
+      <div class="flex flex-col gap-3" id="post-list">
         {posts.map((post, i) => (
-          <a href={`/blog/posts/${post.slug}/`}>
+          <a href={`/blog/posts/${post.id}/`} data-tags={JSON.stringify(post.data.tags || [])} class="post-card">
             <article class="card card-hover reveal p-5 sm:p-6" data-delay={i * 2}>
-              <div class="flex items-center gap-2 mb-2">
-                <time class="text-[10px] font-mono text-obsidian-dim" datetime={post.date.toISOString()}>{post.date.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}</time>
-              </div>
-              <h3 class="text-lg font-semibold text-obsidian-heading mb-1.5">{post.title}</h3>
-              <p class="text-sm text-obsidian-muted leading-relaxed mb-2">{post.description}</p>
+              <time class="text-[10px] font-mono text-obsidian-dim block mb-2">{post.data.date.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}</time>
+              <h3 class="text-lg font-semibold text-obsidian-heading mb-1.5">{post.data.title}</h3>
+              <p class="text-sm text-obsidian-muted leading-relaxed mb-2">{post.data.description}</p>
               <div class="flex flex-wrap gap-1.5">
-                {post.tags.map(tag => (
+                {(post.data.tags || []).map(tag => (
                   <span class="text-[10px] px-2 py-0.5 rounded-full bg-obsidian-purple/10 border border-obsidian-purple/20 text-obsidian-purple-light">{tag}</span>
                 ))}
               </div>
@@ -43,3 +46,57 @@ const posts = [
     </div>
   </section>
 </BlogLayout>
+
+<script is:inline>
+(function() {
+  var btns = document.querySelectorAll('.tag-btn');
+  var cards = document.querySelectorAll('.post-card');
+  var count = document.getElementById('filter-count');
+
+  function filter(tag) {
+    var active = 0;
+    btns.forEach(function(b) {
+      var isActive = b.dataset.tag === tag;
+      b.classList.toggle('bg-obsidian-purple/15', isActive);
+      b.classList.toggle('text-obsidian-purple-light', isActive);
+      b.classList.toggle('border-obsidian-purple/30', isActive);
+      b.classList.toggle('bg-obsidian-surface', !isActive);
+      b.classList.toggle('text-obsidian-muted', !isActive);
+      b.classList.toggle('border-obsidian-border', !isActive);
+    });
+    cards.forEach(function(c) {
+      try {
+        var tags = JSON.parse(c.dataset.tags || '[]');
+        var show = !tag || tags.indexOf(tag) >= 0;
+        c.style.display = show ? '' : 'none';
+        if (show) active++;
+      } catch(e) {}
+    });
+    if (tag) {
+      count.classList.remove('hidden');
+      count.textContent = active + ' post' + (active !== 1 ? 's' : '') + ' tagged "' + tag + '"';
+    } else {
+      count.classList.add('hidden');
+    }
+  }
+
+  // Init from URL
+  var params = new URLSearchParams(window.location.search);
+  var t = params.get('tag') || '';
+  filter(t);
+
+  btns.forEach(function(b) {
+    b.addEventListener('click', function() {
+      var tag = b.dataset.tag;
+      var url = tag ? '/blog/?tag=' + encodeURIComponent(tag) : '/blog/';
+      history.pushState(null, '', url);
+      filter(tag);
+    });
+  });
+
+  window.addEventListener('popstate', function() {
+    var p = new URLSearchParams(window.location.search);
+    filter(p.get('tag') || '');
+  });
+})();
+</script>

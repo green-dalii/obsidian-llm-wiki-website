@@ -3,11 +3,8 @@ title: "Choosing the Right Model: A Practical Guide"
 description: "Long-context models recommended? Yes — but which one, when, and why. A hands-on guide to balancing cost, speed, and quality."
 date: 2026-05-15
 tags: ["guide", "models", "cost", "tips"]
+related: ["faster-ingestion", "first-100-pages"]
 ---
-
-import BlogPostLayout from '../../../layouts/BlogPostLayout.astro';
-
-<BlogPostLayout title={frontmatter.title} description={frontmatter.description} date={frontmatter.date} tags={frontmatter.tags}>
 
 ## The Question Everyone Asks
 
@@ -43,6 +40,3 @@ Query operations are less token-intensive. Answer quality matters more than spee
 **Watch for rate limits.** HTTP 429 errors → lower concurrency to 1–2, increase batch delay to 500–800ms.
 
 [View on GitHub](https://github.com/green-dalii/obsidian-llm-wiki)
-
-
-</BlogPostLayout>

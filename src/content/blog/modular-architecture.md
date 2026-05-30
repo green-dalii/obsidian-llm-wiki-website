@@ -3,11 +3,8 @@ title: "Modular Architecture and the Query Interface"
 description: "How we reduced main.ts from 3000 lines to 300 and added a ChatGPT-style query interface with streaming responses."
 date: 2026-04-27
 tags: ["architecture", "query", "engineering"]
+related: ["introducing-llm-wiki"]
 ---
-import BlogPostLayout from '../../../layouts/BlogPostLayout.astro';
-
-<BlogPostLayout title={frontmatter.title} description={frontmatter.description} date={frontmatter.date} tags={frontmatter.tags}>
-
 
 ## The Challenge
 
@@ -39,7 +36,3 @@ The **Conversational Query Interface** lets you ask questions about your own kno
 This transformed the plugin from a knowledge *organizer* into a knowledge *partner*.
 
 [View on GitHub](https://github.com/green-dalii/obsidian-llm-wiki)
-
-
-
-</BlogPostLayout>

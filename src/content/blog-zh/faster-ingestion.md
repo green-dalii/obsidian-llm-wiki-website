@@ -3,11 +3,8 @@ title: "提取速度提升 80%：重新设计提取提示词"
 description: "v1.12.0 重构了提取提示词——移除了 20 万字符的 Wiki 页面列表，使提取速度不再受 Wiki 规模影响。"
 date: 2026-05-27
 tags: ["性能", "架构", "工程"]
+related: ["choosing-models", "smart-fix-all"]
 ---
-import BlogPostLayout from '../../../../layouts/BlogPostLayout.astro';
-
-<BlogPostLayout title={frontmatter.title} description={frontmatter.description} date={frontmatter.date} tags={frontmatter.tags} locale="zh">
-
 
 ## 随 Wiki 增长而变慢的瓶颈
 
@@ -37,7 +34,3 @@ v1.12.0 中，我们从提取提示词中移除了页面列表。提取完成后
 这一变化意味着插件已经准备好应对**生产级 Wiki**。一个 10000 页的 Wiki 处理每个文件的速度，与 500 页的 Wiki 完全相同。
 
 [在 GitHub 上查看](https://github.com/green-dalii/obsidian-llm-wiki)
-
-
-
-</BlogPostLayout>

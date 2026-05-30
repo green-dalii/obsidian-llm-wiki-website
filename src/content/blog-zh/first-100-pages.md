@@ -3,11 +3,8 @@ title: "从零到百页 Wiki：新手入门指南"
 description: "从零开始构建一个活的知识库。手把手教你设置第一批来源、运行提取，看着知识成形。"
 date: 2026-05-08
 tags: ["教程", "入门", "指南"]
+related: ["choosing-models", "introducing-llm-wiki"]
 ---
-import BlogPostLayout from '../../../../layouts/BlogPostLayout.astro';
-
-<BlogPostLayout title={frontmatter.title} description={frontmatter.description} date={frontmatter.date} tags={frontmatter.tags} locale="zh">
-
 
 ## 循序渐进
 
@@ -49,7 +46,3 @@ import BlogPostLayout from '../../../../layouts/BlogPostLayout.astro';
 **不要忽略日志。** `wiki/log.md` 记录了每一次操作。
 
 [在 GitHub 上查看](https://github.com/green-dalii/obsidian-llm-wiki)
-
-
-
-</BlogPostLayout>

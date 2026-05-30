@@ -3,11 +3,8 @@ title: "80% Faster Ingestion: Rethinking the Extraction Prompt"
 description: "v1.12.0 rearchitected the extraction prompt — removing 200K characters of wiki page list from the prompt, making ingestion speed independent of wiki size."
 date: 2026-05-27
 tags: ["performance", "architecture", "engineering"]
+related: ["choosing-models", "smart-fix-all"]
 ---
-import BlogPostLayout from '../../../layouts/BlogPostLayout.astro';
-
-<BlogPostLayout title={frontmatter.title} description={frontmatter.description} date={frontmatter.date} tags={frontmatter.tags}>
-
 
 ## The Bottleneck That Grows With Your Wiki
 
@@ -37,7 +34,3 @@ In v1.12.0, we removed the page list from the extraction prompt. After extractio
 This change means the plugin is now ready for **production-scale wikis**. A 10,000-page wiki processes each file at the same speed as a 500-page wiki.
 
 [View on GitHub](https://github.com/green-dalii/obsidian-llm-wiki)
-
-
-
-</BlogPostLayout>

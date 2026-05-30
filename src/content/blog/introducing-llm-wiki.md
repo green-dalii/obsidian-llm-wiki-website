@@ -3,11 +3,8 @@ title: "Introducing Karpathy LLM Wiki"
 description: "An Obsidian plugin that implements Andrej Karpathy's LLM Wiki concept — AI reads your notes and builds a structured wiki with bidirectional links."
 date: 2026-04-26
 tags: ["release", "karpathy", "ai"]
+related: ["first-100-pages"]
 ---
-
-import BlogPostLayout from '../../../layouts/BlogPostLayout.astro';
-
-<BlogPostLayout title={frontmatter.title} description={frontmatter.description} date={frontmatter.date} tags={frontmatter.tags}>
 
 ## The Problem: Notes That Don't Talk to Each Other
 
@@ -34,6 +31,3 @@ In 2024, Andrej Karpathy [wrote about a radical idea](https://gist.github.com/ka
 This plugin is MIT-licensed and open source. Your data never leaves your Obsidian vault — only sent to your chosen LLM provider during ingest or query. Local models via Ollama keep everything offline.
 
 [View on GitHub](https://github.com/green-dalii/obsidian-llm-wiki)
-
-
-</BlogPostLayout>

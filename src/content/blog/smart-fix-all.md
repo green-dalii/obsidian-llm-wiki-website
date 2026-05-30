@@ -3,11 +3,8 @@ title: "Smart Fix All: One-Click Knowledge Quality"
 description: "How Smart Fix All runs causality-ordered repairs — aliases, duplicates, dead links, orphans, and empty pages — in a single click."
 date: 2026-05-14
 tags: ["smart-fix", "maintenance", "quality"]
+related: ["first-100-pages"]
 ---
-import BlogPostLayout from '../../../layouts/BlogPostLayout.astro';
-
-<BlogPostLayout title={frontmatter.title} description={frontmatter.description} date={frontmatter.date} tags={frontmatter.tags}>
-
 
 ## The Knowledge Quality Problem
 
@@ -37,7 +34,3 @@ Smart Fix All runs fixes in **causality order** to minimize creating new problem
 The result: a Wiki with 1,000+ pages cleaned up in a single click, with a detailed report.
 
 [View on GitHub](https://github.com/green-dalii/obsidian-llm-wiki)
-
-
-
-</BlogPostLayout>

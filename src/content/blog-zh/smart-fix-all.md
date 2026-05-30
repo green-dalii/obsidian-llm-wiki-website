@@ -3,11 +3,8 @@ title: "一键智能修复：知识质量自动化"
 description: "Smart Fix All 如何按因果顺序修复——别名补全、重复合并、死链修复、孤立页面和空页面——只需一键。"
 date: 2026-05-14
 tags: ["智能修复", "维护", "质量"]
+related: ["first-100-pages"]
 ---
-import BlogPostLayout from '../../../../layouts/BlogPostLayout.astro';
-
-<BlogPostLayout title={frontmatter.title} description={frontmatter.description} date={frontmatter.date} tags={frontmatter.tags} locale="zh">
-
 
 ## 知识质量的难题
 
@@ -37,7 +34,3 @@ Smart Fix All 按**因果顺序**执行修复，最大限度地减少新问题�
 最终效果：一个拥有 1000 个以上页面的 Wiki，在一键之间完成清理，并附带详细报告。
 
 [在 GitHub 上查看](https://github.com/green-dalii/obsidian-llm-wiki)
-
-
-
-</BlogPostLayout>

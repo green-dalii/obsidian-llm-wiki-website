@@ -3,11 +3,8 @@ title: "模块化架构与对话式查询"
 description: "我们如何将 main.ts 从 3000 行精简到 300 行，并加入了类 ChatGPT 的流式查询界面。"
 date: 2026-04-27
 tags: ["架构", "查询", "工程"]
+related: ["introducing-llm-wiki"]
 ---
-import BlogPostLayout from '../../../../layouts/BlogPostLayout.astro';
-
-<BlogPostLayout title={frontmatter.title} description={frontmatter.description} date={frontmatter.date} tags={frontmatter.tags} locale="zh">
-
 
 ## 挑战
 
@@ -39,7 +36,3 @@ v1.2.0 将代码库拆分为 **9 个专注模块**。结果是：`main.ts` 缩�
 这让插件从一个知识*整理器*变成了一个知识*伙伴*。
 
 [在 GitHub 上查看](https://github.com/green-dalii/obsidian-llm-wiki)
-
-
-
-</BlogPostLayout>

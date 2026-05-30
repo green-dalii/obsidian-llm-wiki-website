@@ -3,11 +3,8 @@ title: "Karpathy LLM Wiki 发布"
 description: "一个 Obsidian 插件，实现了 Andrej Karpathy 的 LLM Wiki 理念——AI 读取你的笔记，构建带双向链接的结构化知识库。"
 date: 2026-04-26
 tags: ["发布", "Karpathy", "AI"]
+related: ["first-100-pages"]
 ---
-
-import BlogPostLayout from '../../../../layouts/BlogPostLayout.astro';
-
-<BlogPostLayout title={frontmatter.title} description={frontmatter.description} date={frontmatter.date} tags={frontmatter.tags} locale="zh">
 
 ## 困境：笔记之间互不相通
 
@@ -34,6 +31,3 @@ import BlogPostLayout from '../../../../layouts/BlogPostLayout.astro';
 本插件采用 MIT 许可证，完全开源。你的数据永远不会离开 Obsidian 知识库——只在提取或查询时发送给你选择的 LLM 服务商。通过 Ollama 使用本地模型可以完全离线运行。
 
 [在 GitHub 上查看](https://github.com/green-dalii/obsidian-llm-wiki)
-
-
-</BlogPostLayout>

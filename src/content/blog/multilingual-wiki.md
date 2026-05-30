@@ -3,11 +3,8 @@ title: "Multi-Language Wiki Content: Write in English, Read in Japanese"
 description: "v1.6.5 introduced Wiki Output Language — 8 languages for your Wiki content, completely independent from the UI language."
 date: 2026-05-03
 tags: ["i18n", "multilingual", "feature"]
+related: ["eight-languages"]
 ---
-import BlogPostLayout from '../../../layouts/BlogPostLayout.astro';
-
-<BlogPostLayout title={frontmatter.title} description={frontmatter.description} date={frontmatter.date} tags={frontmatter.tags}>
-
 
 ## The Problem: Your Language, Your Choice
 
@@ -39,7 +36,3 @@ All LLM-facing prompts are written in English. The Wiki Output Language setting 
 The multi-language Wiki was step one. The next step was bringing the same 8-language support to the plugin's own UI — which happened in v1.8.0.
 
 [View on GitHub](https://github.com/green-dalii/obsidian-llm-wiki)
-
-
-
-</BlogPostLayout>

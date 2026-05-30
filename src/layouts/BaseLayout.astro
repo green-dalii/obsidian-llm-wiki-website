@@ -10,9 +10,10 @@ interface Props {
   keywords?: string;
   locale?: string;
   ogLocale?: string;
+  isBlog?: boolean;
 }
 
-const { title, description = '', keywords = '', locale = 'en', ogLocale = 'en_US' } = Astro.props;
+const { title, description = '', keywords = '', locale = 'en', ogLocale = 'en_US', isBlog = false } = Astro.props;
 const siteUrl = Astro.site;
 
 const ALL_LOCALES = ['en', 'zh', 'ja', 'ko', 'de', 'es', 'fr', 'pt'] as const;
@@ -119,7 +120,7 @@ const jsonLd = {
   <body>
     <div class="relative bg-obsidian-bg text-obsidian-text">
       <ProgressBar />
-      <Header currentLocale={locale} />
+      <Header currentLocale={locale} isBlog={isBlog} />
       <main class="pt-14">
         <slot />
       </main>

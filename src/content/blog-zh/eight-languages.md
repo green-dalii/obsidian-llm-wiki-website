@@ -3,11 +3,8 @@ title: "8 种语言：全面国际化发布"
 description: "v1.8.0 将插件界面从 2 种语言扩展到 8 种，269 个字段逐一翻译，采用地道的本地化表达。"
 date: 2026-05-17
 tags: ["国际化", "社区", "发布"]
+related: ["multilingual-wiki"]
 ---
-import BlogPostLayout from '../../../../layouts/BlogPostLayout.astro';
-
-<BlogPostLayout title={frontmatter.title} description={frontmatter.description} date={frontmatter.date} tags={frontmatter.tags} locale="zh">
-
 
 ## 从 2 到 8 种语言
 
@@ -34,7 +31,3 @@ import BlogPostLayout from '../../../../layouts/BlogPostLayout.astro';
 完整的 UI 国际化是最后一个重大里程碑。之后的重点转向性能和可靠性——最终在 v1.12.0 中完成了提取提示词的架构重构。
 
 [在 GitHub 上查看](https://github.com/green-dalii/obsidian-llm-wiki)
-
-
-
-</BlogPostLayout>
