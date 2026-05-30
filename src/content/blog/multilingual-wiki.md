@@ -1,9 +1,10 @@
 ---
-title: "Multi-Language Wiki Content: Write in English, Read in Japanese"
+title: "Write in English, Read in Japanese"
 description: "v1.6.5 introduced Wiki Output Language — 8 languages for your Wiki content, completely independent from the UI language."
-date: 2026-05-03
+date: 2026-05-09
 tags: ["i18n", "multilingual", "feature"]
-related: ["eight-languages"]
+related: ["eight-languages", "research-papers-workflow"]
+series: "maintenance"
 ---
 
 ## The Problem: Your Language, Your Choice

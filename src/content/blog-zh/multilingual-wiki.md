@@ -1,9 +1,10 @@
 ---
-title: "多语言 Wiki：用英文写，用日文读"
+title: "日常维护（一）：多语言 Wiki 怎么做"
 description: "v1.6.5 引入了 Wiki 输出语言——8 种语言可选，完全独立于界面语言。"
-date: 2026-05-03
+date: 2026-05-09
 tags: ["国际化", "多语言", "功能"]
-related: ["eight-languages"]
+related: ["eight-languages", "research-papers-workflow"]
+series: "maintenance"
 ---
 
 ## 问题：你的语言，你做主

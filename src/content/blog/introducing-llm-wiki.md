@@ -1,9 +1,10 @@
 ---
-title: "Introducing Karpathy LLM Wiki"
+title: "Meet Karpathy LLM Wiki"
 description: "An Obsidian plugin that implements Andrej Karpathy's LLM Wiki concept — AI reads your notes and builds a structured wiki with bidirectional links."
-date: 2026-04-26
+date: 2026-04-27
 tags: ["release", "karpathy", "ai"]
 related: ["first-100-pages"]
+series: "getting-started"
 ---
 
 ## The Problem: Notes That Don't Talk to Each Other

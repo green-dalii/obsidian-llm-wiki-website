@@ -33,7 +33,7 @@ const tf = locale === 'zh' ? '/zh/blog/' : '/blog/';
               <h4 class="text-xs font-semibold text-obsidian-heading uppercase tracking-wider mb-3">{tocLabel}</h4>
               <nav class="text-sm space-y-1.5" id="toc-nav">
                 {headings.map(h => (
-                  <a href={'#' + h.slug} class={'block text-obsidian-muted hover:text-obsidian-heading py-0.5 text-[13px] leading-snug toc-link ' + (h.depth === 2 ? 'pl-0' : 'pl-3')} data-target={h.slug}>{h.text}</a>
+                  <a href={'#' + h.slug} class={'block text-obsidian-muted hover:text-obsidian-heading py-0.5 text-[13px] leading-snug toc-link ' + (h.depth === 2 ? 'pl-0' : 'pl-3')}>{h.text}</a>
                 ))}
               </nav>
             </div>
@@ -94,8 +94,12 @@ const tf = locale === 'zh' ? '/zh/blog/' : '/blog/';
   </main>
 
   <Fragment slot="head">
+    <style is:global>
+      .prose h2, .prose h3, .prose h4 { scroll-margin-top: 80px; }
+      .toc-link.active { color: #a78bfa; font-weight: 500; }
+    </style>
     <script is:inline>
-    (function(){var a=document.querySelectorAll('.toc-link');if(!a.length)return;var b=[];a.forEach(function(l){var e=document.getElementById(l.dataset.target);if(e)b.push(e)});window.addEventListener('scroll',function(){var p=window.scrollY+120,active=-1;b.forEach(function(e,i){if(e.offsetTop<=p)active=i});a.forEach(function(l,i){l.classList.toggle('text-obsidian-purple-light',i===active);l.classList.toggle('font-medium',i===active)})},{passive:true});a.forEach(function(l){l.addEventListener('click',function(e){e.preventDefault();var t=document.getElementById(l.dataset.target);if(t){t.scrollIntoView({behavior:'smooth',block:'start'});history.replaceState(null,'','#'+l.dataset.target)}})})})();
+    document.addEventListener('DOMContentLoaded',function(){var l=document.querySelectorAll('.toc-link');if(!l.length)return;var h=[];l.forEach(function(a){var e=document.querySelector(a.getAttribute('href'));if(e)h.push(e)});if(!h.length)return;var o=new IntersectionObserver(function(e){e.forEach(function(e){if(e.isIntersecting){var n=e.target.getAttribute('id');l.forEach(function(e){e.classList.toggle('active',e.getAttribute('href')==='#'+n)})}})},{rootMargin:'-80px 0px -70% 0px'});h.forEach(function(e){o.observe(e)})})();
     </script>
   </Fragment>
 </BaseLayout>
@@ -109,4 +113,5 @@ const tf = locale === 'zh' ? '/zh/blog/' : '/blog/';
 .prose pre code { background: none; padding: 0; }
 .prose blockquote { border-left-width: 3px; font-style: normal; }
 .prose img { border-radius: 8px; }
+html { scroll-behavior: smooth; }
 </style>

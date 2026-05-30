@@ -1,9 +1,10 @@
 ---
-title: "Modular Architecture and the Query Interface"
+title: "Inside the Code: Modular Architecture"
 description: "How we reduced main.ts from 3000 lines to 300 and added a ChatGPT-style query interface with streaming responses."
-date: 2026-04-27
+date: 2026-05-20
 tags: ["architecture", "query", "engineering"]
-related: ["introducing-llm-wiki"]
+related: ["introducing-llm-wiki", "schema-layer-deep-dive"]
+series: "inside-the-system"
 ---
 
 ## The Challenge

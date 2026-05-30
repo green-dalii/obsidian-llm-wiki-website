@@ -1,9 +1,10 @@
 ---
-title: "8 种语言：全面国际化发布"
+title: "日常维护（二）：8 种语言 UI"
 description: "v1.8.0 将插件界面从 2 种语言扩展到 8 种，269 个字段逐一翻译，采用地道的本地化表达。"
-date: 2026-05-17
+date: 2026-05-10
 tags: ["国际化", "社区", "发布"]
 related: ["multilingual-wiki"]
+series: "maintenance"
 ---
 
 ## 从 2 到 8 种语言

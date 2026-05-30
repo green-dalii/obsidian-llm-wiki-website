@@ -1,9 +1,10 @@
 ---
-title: "Choosing the Right Model: A Practical Guide"
+title: "Which Model Should You Pick?"
 description: "Long-context models recommended? Yes — but which one, when, and why. A hands-on guide to balancing cost, speed, and quality."
-date: 2026-05-15
+date: 2026-05-21
 tags: ["guide", "models", "cost", "tips"]
 related: ["faster-ingestion", "first-100-pages"]
+series: "inside-the-system"
 ---
 
 ## The Question Everyone Asks
