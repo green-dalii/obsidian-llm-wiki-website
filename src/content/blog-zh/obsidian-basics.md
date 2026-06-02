@@ -2,7 +2,7 @@
 title: "从这里开始（一）：Obsidian 零基础入门"
 description: "面向从未用过 Obsidian 的完全新手。什么是 Vault、Markdown 如何工作、双向链接为何改变一切、如何安装你的第一个知识库。"
 date: 2026-04-25
-tags: ["入门", "Obsidian", "介绍"]
+tags: ["入门必读"]
 series: "getting-started"
 related: ["why-llm-wiki-for-obsidian-users", "introducing-llm-wiki"]
 ---

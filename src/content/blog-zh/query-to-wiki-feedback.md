@@ -2,7 +2,7 @@
 title: "动手实践（一）：保存每一次查询"
 description: "与大模型的对话式查询能创造新知识。把查询结果一键存为 Wiki 页面——让你的知识库除了摄入源文档之外，获得第二条增长路径。"
 date: 2026-05-25
-tags: ["查询", "工作流", "知识增长"]
+tags: ["实践指南"]
 series: "workflow-guides"
 related: ["daily-knowledge-loop", "canvas-llm-wiki"]
 ---

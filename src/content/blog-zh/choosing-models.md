@@ -2,7 +2,7 @@
 title: "深入原理（二）：哪个模型适合你"
 description: "推荐长上下文模型？没错——但该选哪个、什么时候用、为什么？一份关于成本、速度和质量平衡的实操指南。"
 date: 2026-05-21
-tags: ["指南", "模型", "成本"]
+tags: ["深入解析"]
 related: ["faster-ingestion", "first-100-pages"]
 series: "inside-the-system"
 ---

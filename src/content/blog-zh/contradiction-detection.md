@@ -2,7 +2,7 @@
 title: "深入原理（三）：当你的来源各执一词"
 description: "多个来源的知识有时会相互冲突。插件如何检测矛盾以及解决策略。"
 date: 2026-05-23
-tags: ["质量", "矛盾", "维护"]
+tags: ["深入解析"]
 series: "inside-the-system"
 related: ["smart-fix-all", "schema-layer-deep-dive"]
 ---

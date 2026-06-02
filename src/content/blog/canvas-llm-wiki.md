@@ -2,7 +2,7 @@
 title: "Map Your Wiki on Canvas"
 description: "Map your Wiki pages onto Obsidian Canvas to create spatial knowledge layouts. How Canvas reveals structure the Graph View can't show."
 date: 2026-05-29
-tags: ["Canvas", "visualization", "workflow"]
+tags: ["guides"]
 series: "workflow-guides"
 related: ["daily-knowledge-loop", "query-to-wiki-feedback"]
 ---

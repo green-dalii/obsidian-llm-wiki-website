@@ -2,7 +2,7 @@
 title: "Let Your Wiki Maintain Itself"
 description: "File Watcher, Periodic Lint, and Startup Health Check — three automation layers that keep your Wiki healthy without manual intervention."
 date: 2026-05-11
-tags: ["maintenance", "automation", "lint"]
+tags: ["guides"]
 series: "maintenance"
 related: ["smart-fix-all", "faster-ingestion"]
 ---

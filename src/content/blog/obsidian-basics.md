@@ -2,7 +2,7 @@
 title: "Obsidian Basics: Where Every Beginner Starts"
 description: "Obsidian explained for absolute beginners. What a Vault is, how Markdown works, why bidirectional links change everything, and how to install your first knowledge base."
 date: 2026-04-25
-tags: ["beginner", "Obsidian", "intro"]
+tags: ["getting-started"]
 series: "getting-started"
 related: ["why-llm-wiki-for-obsidian-users", "introducing-llm-wiki"]
 ---

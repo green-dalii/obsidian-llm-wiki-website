@@ -2,7 +2,7 @@
 title: "Save Your Best Queries"
 description: "Conversational queries create new knowledge. Save query results as Wiki pages — the second path for your Wiki to grow beyond source ingestion."
 date: 2026-05-25
-tags: ["query", "workflow", "knowledge-growth"]
+tags: ["guides"]
 series: "workflow-guides"
 related: ["daily-knowledge-loop", "canvas-llm-wiki"]
 ---

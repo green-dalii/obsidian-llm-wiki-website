@@ -2,7 +2,7 @@
 title: "When Your Sources Disagree"
 description: "Knowledge from multiple sources sometimes conflicts. How the plugin detects contradictions and strategies for resolution."
 date: 2026-05-23
-tags: ["quality", "contradiction", "maintenance"]
+tags: ["internals"]
 series: "inside-the-system"
 related: ["smart-fix-all", "schema-layer-deep-dive"]
 ---

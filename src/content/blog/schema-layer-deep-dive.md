@@ -2,7 +2,7 @@
 title: "Taking Control With Schemas"
 description: "The schema/ folder defines how LLM Wiki extracts knowledge — entity types, property schemas, alias rules, extraction templates."
 date: 2026-05-24
-tags: ["schema", "configuration", "advanced"]
+tags: ["internals"]
 series: "inside-the-system"
 related: ["first-100-pages", "research-papers-workflow"]
 ---

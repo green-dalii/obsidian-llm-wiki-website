@@ -2,7 +2,7 @@
 title: "动手实践（五）：在 Canvas 上绘制知识地图"
 description: "把 Wiki 页面映射到 Obsidian Canvas 上，创建空间化的知识布局。Canvas 能揭示 Graph View 展现不了的知识结构。"
 date: 2026-05-29
-tags: ["Canvas", "可视化", "工作流"]
+tags: ["实践指南"]
 series: "workflow-guides"
 related: ["daily-knowledge-loop", "query-to-wiki-feedback"]
 ---

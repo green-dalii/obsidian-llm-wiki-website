@@ -2,7 +2,7 @@
 title: "从这里开始（四）：从零到百页 Wiki"
 description: "从零开始构建一个活的知识库。手把手教你设置第一批来源、运行提取，看着知识成形。"
 date: 2026-04-28
-tags: ["教程", "入门", "指南"]
+tags: ["入门必读"]
 related: ["daily-knowledge-loop", "web-clipper-workflow", "choosing-models"]
 series: "getting-started"
 ---

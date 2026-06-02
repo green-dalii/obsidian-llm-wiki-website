@@ -2,7 +2,7 @@
 title: "日常维护（四）：一键修复所有问题"
 description: "Smart Fix All 如何按因果顺序修复——别名补全、重复合并、死链修复、孤立页面和空页面——只需一键。"
 date: 2026-05-12
-tags: ["智能修复", "维护", "质量"]
+tags: ["实践指南"]
 related: ["auto-maintenance", "contradiction-detection"]
 series: "maintenance"
 ---

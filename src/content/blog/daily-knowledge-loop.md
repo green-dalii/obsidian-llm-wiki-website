@@ -2,7 +2,7 @@
 title: "The Daily Knowledge Loop"
 description: "A complete daily workflow for continuous knowledge growth. From morning reading to evening review, using Karpathy LLM Wiki with Obsidian's native features."
 date: 2026-05-26
-tags: ["tutorial", "workflow", "daily"]
+tags: ["guides"]
 series: "workflow-guides"
 related: ["canvas-llm-wiki", "auto-maintenance"]
 ---

@@ -2,7 +2,7 @@
 title: "Your First 100 Wiki Pages"
 description: "From zero to a living wiki. A step-by-step walkthrough of setting up your first sources, running ingestion, and watching your knowledge take shape."
 date: 2026-04-28
-tags: ["tutorial", "beginner", "walkthrough"]
+tags: ["getting-started"]
 related: ["daily-knowledge-loop", "web-clipper-workflow", "choosing-models"]
 series: "getting-started"
 ---

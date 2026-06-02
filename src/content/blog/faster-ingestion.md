@@ -2,7 +2,7 @@
 title: "How We Made Ingestion 80% Faster"
 description: "v1.12.0 rearchitected the extraction prompt — removing 200K characters of wiki page list from the prompt, making ingestion speed independent of wiki size."
 date: 2026-05-22
-tags: ["performance", "architecture", "engineering"]
+tags: ["internals"]
 related: ["query-to-wiki-feedback", "auto-maintenance"]
 series: "inside-the-system"
 ---

@@ -2,7 +2,7 @@
 title: "动手实践（六）：打通 Zotero 到 Wiki"
 description: "从 Zotero 到 Obsidian 再到 LLM Wiki——学术文献的完整自动化链路。导出格式、笔记优化和研究 Wiki 的价值。"
 date: 2026-05-30
-tags: ["Zotero", "学术", "工作流"]
+tags: ["实践指南"]
 series: "workflow-guides"
 related: ["research-papers-workflow", "schema-layer-deep-dive"]
 ---

@@ -2,7 +2,7 @@
 title: "从这里开始（二）：为什么你的笔记需要 LLM Wiki"
 description: "随着 Vault 增长的瓶颈。手动 Wiki 维护——创建页面、写链接、保持更新——变得不可持续。LLM Wiki 自动化这三件事。"
 date: 2026-04-26
-tags: ["Obsidian", "LLM", "工作流"]
+tags: ["入门必读"]
 series: "getting-started"
 related: ["introducing-llm-wiki", "first-100-pages"]
 ---

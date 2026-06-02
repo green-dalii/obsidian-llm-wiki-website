@@ -2,7 +2,7 @@
 title: "日常维护（三）：让 Wiki 自己维护自己"
 description: "File Watcher、Periodic Lint、Startup Health Check——三个自动化层次，无需手动干预就能保持 Wiki 健康。"
 date: 2026-05-11
-tags: ["维护", "自动化", "lint"]
+tags: ["实践指南"]
 series: "maintenance"
 related: ["smart-fix-all", "faster-ingestion"]
 ---

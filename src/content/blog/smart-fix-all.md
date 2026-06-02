@@ -2,7 +2,7 @@
 title: "Fix Everything With One Click"
 description: "How Smart Fix All runs causality-ordered repairs — aliases, duplicates, dead links, orphans, and empty pages — in a single click."
 date: 2026-05-12
-tags: ["smart-fix", "maintenance", "quality"]
+tags: ["guides"]
 related: ["auto-maintenance", "contradiction-detection"]
 series: "maintenance"
 ---

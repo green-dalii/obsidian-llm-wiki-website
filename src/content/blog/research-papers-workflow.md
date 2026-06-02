@@ -2,7 +2,7 @@
 title: "From Papers to Knowledge"
 description: "How to transform academic papers into a structured research wiki with cross-referenced entities, concepts, and theories."
 date: 2026-05-28
-tags: ["tutorial", "research", "academic"]
+tags: ["guides"]
 series: "workflow-guides"
 related: ["zotero-pdf-integration", "schema-layer-deep-dive"]
 ---

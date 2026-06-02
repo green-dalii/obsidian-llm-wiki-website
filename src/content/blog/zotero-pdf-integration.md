@@ -2,7 +2,7 @@
 title: "Connect Zotero to Your Wiki"
 description: "From Zotero to Obsidian to LLM Wiki — a complete automation chain for academic literature. Export formats, note optimization, and research Wiki value."
 date: 2026-05-30
-tags: ["Zotero", "academic", "workflow"]
+tags: ["guides"]
 series: "workflow-guides"
 related: ["research-papers-workflow", "schema-layer-deep-dive"]
 ---

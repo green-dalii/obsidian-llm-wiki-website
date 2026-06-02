@@ -2,7 +2,7 @@
 title: "动手实践（四）：从论文到知识图谱"
 description: "如何把学术论文转化成结构化的研究 Wiki，自带交叉引用的实体、概念和理论。"
 date: 2026-05-28
-tags: ["教程", "学术", "研究"]
+tags: ["实践指南"]
 series: "workflow-guides"
 related: ["zotero-pdf-integration", "schema-layer-deep-dive"]
 ---

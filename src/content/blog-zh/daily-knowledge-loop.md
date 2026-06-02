@@ -2,7 +2,7 @@
 title: "动手实践（二）：日常知识循环——从阅读到内化"
 description: "一套完整的日常知识增长工作流。从早上阅读到晚上回顾，用 Karpathy LLM Wiki 结合 Obsidian 原生功能，让知识每天自动累积。"
 date: 2026-05-26
-tags: ["教程", "工作流", "日常"]
+tags: ["实践指南"]
 series: "workflow-guides"
 related: ["canvas-llm-wiki", "auto-maintenance"]
 ---

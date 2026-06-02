@@ -97,6 +97,22 @@ src/pages/zh/blog/index.astro        — ZH blog index (getCollection + client J
 - **TOC scroll tracking**: Active heading highlighted via IntersectionObserver-like JS
 - **Tag filtering**: Client-side JS reads URL `?tag=` param, filters post cards, updates browser history
 - **Related reading**: `related` frontmatter field → dynamic route resolves slugs to titles via `postsMap`
+- **Article footer links**: Every blog post ends with a Links section — Obsidian plugin marketplace (primary CTA), GitHub repo, Discussions, Issues. Locale-aware labels.
+
+### Blog Tag Taxonomy (3 categories, user-centric)
+
+Tags are consolidated into 3 user-centric categories (not technical/functional ones):
+
+| EN Tag | ZH Tag | User mindset | Typical content |
+|--------|--------|--------------|-----------------|
+| `getting-started` | `入门必读` | *"I haven't installed it yet / just installed"* | Basics, intro, first steps, multilingual support (product feature discovery) |
+| `guides` | `实践指南` | *"I have it, how do I use it better?"* | Workflows, productivity tips, maintenance, specific feature guides |
+| `internals` | `深入解析` | *"Why is it designed this way?"* | Architecture, design philosophy, technical deep-dives |
+
+**Rules:**
+- Multilingual/i18n content does **not** get its own category — it belongs in `getting-started`/`入门必读` because language support is a core product feature new users need to discover.
+- Maintenance articles (auto-maintenance, smart-fix) go in `guides`/`实践指南` because they are usage skills, not onboarding content.
+- No more than 3 tags per post; tags must be chosen from the table above.
 
 ### i18n
 

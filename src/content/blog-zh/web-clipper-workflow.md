@@ -2,7 +2,7 @@
 title: "动手实践（三）：用 Web Clipper 搭建阅读管道"
 description: "把任意网页剪藏到 Obsidian，然后看着它自动变成互联的 Wiki 页面。这是一个把 Web Clipper 和 Karpathy LLM Wiki 结合起来的实用工作流。"
 date: 2026-05-27
-tags: ["教程", "工作流", "web-clipper"]
+tags: ["实践指南"]
 series: "workflow-guides"
 related: ["daily-knowledge-loop", "zotero-pdf-integration"]
 ---

@@ -2,7 +2,7 @@
 title: "Why Your Notes Need a Wiki"
 description: "The bottleneck that grows with your Vault. Manual Wiki maintenance — creating pages, writing links, keeping updates — becomes unsustainable. LLM Wiki automates all three."
 date: 2026-04-26
-tags: ["Obsidian", "LLM", "workflow"]
+tags: ["getting-started"]
 series: "getting-started"
 related: ["introducing-llm-wiki", "first-100-pages"]
 ---
