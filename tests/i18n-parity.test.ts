@@ -25,39 +25,12 @@ const EN = translations.en;
 const LOCALES = Object.keys(translations) as Array<keyof typeof translations>;
 
 /**
- * Known gaps — paths where EN has content but other locales have not yet
- * been updated for v2.2.0. Format: dot-joined path with array index for
- * arrays. A gap is "covered" if a KNOWN_GAPS entry equals it or is a
- * strict prefix (so `features.moreCapabilities` covers
- * `features.moreCapabilities[7]`).
+ * Known gaps registry. Empty by design once every locale has caught up
+ * with EN — any difference then becomes a hard failure. Add entries here
+ * temporarily when EN is intentionally ahead while other locales are
+ * being translated, and remove them once translations land.
  */
-const KNOWN_GAPS: Array<{ path: string; reason: string }> = [
-  // Trust section (new in v2.2.0) — only EN translated.
-  { path: 'trust', reason: 'New Trust section — pending ZH/JA/KO/DE/ES/FR/PT translation' },
-  // Nav 'Trust' anchor (new in v2.2.0).
-  { path: 'nav.trust', reason: 'Header nav "Trust" anchor — pending translation' },
-  // Providers pillar fields (reframed in v2.2.0).
-  { path: 'providers.noLockInTitle', reason: 'Providers pillar — No lock-in' },
-  { path: 'providers.noLockInDesc', reason: 'Providers pillar — No lock-in desc' },
-  { path: 'providers.privacyTitle', reason: 'Providers pillar — Privacy first' },
-  { path: 'providers.privacyDesc', reason: 'Providers pillar — Privacy first desc' },
-  { path: 'providers.affordableTitle', reason: 'Providers pillar — Almost free' },
-  { path: 'providers.affordableDesc', reason: 'Providers pillar — Almost free desc' },
-  { path: 'providers.localBadge', reason: 'Providers wall — Local badge' },
-  // Providers wall text reframed in v2.2.0.
-  { path: 'providers.label', reason: 'Providers label — refactored to "Bring Your Own AI"' },
-  { path: 'providers.title', reason: 'Providers title — refactored to "Your AI. Your rules."' },
-  { path: 'providers.subtitle', reason: 'Providers subtitle — refactored' },
-  { path: 'providers.cardLabel', reason: 'Providers card label — refactored' },
-  { path: 'providers.cardSubtitle', reason: 'Providers card subtitle — refactored' },
-  { path: 'providers.contextNote', reason: 'Providers context note — refactored' },
-  // Features moreCapabilities reframed in v2.2.0: EN has 8 items.
-  { path: 'features.moreCapabilities', reason: 'Features moreCapabilities array — reframed to 8 user-friendly items' },
-  // Conversational card desc tweaked in v2.2.0 ("Watch it reason").
-  { path: 'features.conversationalDesc', reason: 'Features conversationalDesc — tweaked to mention "Watch it reason"' },
-  // FAQ tweaked in v2.2.0.
-  { path: 'faq.items', reason: 'FAQ items — reworked in v2.2.0 (Obsidian 1.11.0+, providers, offline angle)' },
-];
+const KNOWN_GAPS: Array<{ path: string; reason: string }> = [];
 
 /** True when a gap path is covered (equal to or nested under) a known gap. */
 function isGapCovered(gapPath: string): boolean {
@@ -152,8 +125,8 @@ describe('Strict bidirectional parity vs EN (known-gap aware)', () => {
     ).toEqual([]);
   });
 
-  it('KNOWN_GAPS is finite and well-formed (sanity check)', () => {
-    expect(KNOWN_GAPS.length).toBeGreaterThan(0);
+  it('KNOWN_GAPS registry exists (empty = all locales are fully translated)', () => {
+    expect(Array.isArray(KNOWN_GAPS)).toBe(true);
     for (const gap of KNOWN_GAPS) {
       expect(gap.path).toBeTruthy();
       expect(gap.reason).toBeTruthy();
@@ -215,8 +188,8 @@ describe('getTranslations() / getText() API', () => {
     expect(t.nav.howItWorks).toBe(translations.zh.nav.howItWorks);
   });
 
-  it('fills missing optional fields from EN (trust, nav.trust, providers new fields)', () => {
-    const t = getTranslations('zh');
+  it('falls back to EN for unknown locales and missing optional fields', () => {
+    const t = getTranslations('xx');
     expect(t.trust).toBeDefined();
     expect(t.trust?.title).toBe(EN.trust?.title);
     expect(t.nav.trust).toBe(EN.nav.trust);
