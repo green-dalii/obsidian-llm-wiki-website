@@ -10,6 +10,7 @@ export interface Translations {
     faq: string;
     blog: string;
     home: string;
+    trust?: string;
   };
   hero: {
     badge: string;
@@ -115,6 +116,24 @@ export interface Translations {
     cardSubtitle: string;
     contextNote: string;
     bestValue: string;
+    // Reframed "Bring your own AI" pillars (optional — fall back to en)
+    noLockInTitle?: string;
+    noLockInDesc?: string;
+    privacyTitle?: string;
+    privacyDesc?: string;
+    affordableTitle?: string;
+    affordableDesc?: string;
+    localBadge?: string;
+  };
+  trust?: {
+    label: string;
+    title: string;
+    subtitle: string;
+    items: Array<{
+      title: string;
+      desc: string;
+      icon: string;
+    }>;
   };
   ecosystem: {
     label: string;
@@ -154,13 +173,14 @@ export const en: Translations = {
     howItWorks: 'How It Works',
     comparison: 'Why It Matters',
     features: 'Features',
-    providers: 'Open Source',
+    providers: 'Your AI',
     ecosystem: 'Ecosystem',
     install: 'Install',
     download: 'Add to Obsidian',
     faq: 'FAQ',
     blog: 'Blog',
     home: 'Home',
+    trust: 'Trust',
   },
   hero: {
     badge: 'Andrej Karpathy\'s LLM Wiki concept',
@@ -235,7 +255,7 @@ export const en: Translations = {
     bidirectionalDesc: 'Every page joins your Obsidian graph. Open Graph View — and watch your knowledge grow.',
     bidirectionalTag: 'Connected',
     conversationalTitle: 'Just talk',
-    conversationalDesc: 'Ask like you would a friend. Your wiki answers with sources you can see and trust.',
+    conversationalDesc: 'Ask like you would a friend. Watch it reason, then answer with sources you can open and trust.',
     conversationalTag: 'Natural',
     autoMaintenanceTitle: 'Stays current',
     autoMaintenanceDesc: 'New files? Auto-ingested. Contradictions? Found. Health? Checked. On your terms.',
@@ -247,7 +267,7 @@ export const en: Translations = {
     granularityDesc: 'Control extraction depth per source. Standard for daily use, Fine for research, Coarse for quick overviews.',
     granularityTag: 'Granularity',
         moreLabel: 'And more:',
-    moreCapabilities: ['8-Language Wiki Output', 'Duplicate Detection & Merge', 'Page Aliases', 'Parallel Generation', 'Contradiction Detection', '5xx Auto-Retry', 'Smart Batch Skip'],
+    moreCapabilities: ['9-language output', 'See it reason', 'Traceable citations', 'Your own tags', 'Catches contradictions', 'Finds duplicates', 'Recovers from hiccups', 'Skips what\'s done'],
   },
   install: {
     label: 'Get Started',
@@ -263,21 +283,50 @@ export const en: Translations = {
     cta: 'Get it on Obsidian',
   },
   providers: {
-    label: 'Open Source',
-    title: 'Built in the open',
-    subtitle: 'Open source. Your data stays yours.',
-    openSourceTitle: 'Open Source',
-    openSourceDesc: 'MIT license. Full source on GitHub. Fork it, extend it, make it yours.',
+    label: 'Bring Your Own AI',
+    title: 'Your AI. Your rules.',
+    subtitle: 'Twelve providers, cloud or local. Switch anytime — lock into nothing.',
+    openSourceTitle: 'Open source',
+    openSourceDesc: 'MIT licensed, every line on GitHub. Fork it, audit it, make it yours.',
     communityTitle: 'Community',
     communityDesc: 'GitHub Discussions for ideas and help. Contributions welcome.',
     vendorTitle: 'Privacy First',
     vendorDesc: 'No storage. No backend. No data collection. Your notes stay in your Obsidian—only sent to your LLM during ingest or query. Local models keep everything offline.',
     obsidianTitle: 'Pure Obsidian',
     obsidianDesc: 'No extra apps. Lives entirely in your Obsidian.',
-    cardLabel: 'Your LLM, your choice',
-    cardSubtitle: 'Works with any provider. No lock-in.',
-    contextNote: 'Long-context models (256K+) recommended. Your whole wiki in one call, complete understanding.',
+    cardLabel: 'Twelve providers, ready to go',
+    cardSubtitle: 'Cloud or local — use the one you trust.',
+    contextNote: 'Long-context models read your whole wiki in a single pass — the complete picture, not fragmented snippets.',
     bestValue: 'Best value',
+    noLockInTitle: 'No lock-in',
+    noLockInDesc: 'Twelve providers, one dropdown apart. Outgrow one, switch to the next — your wiki never notices.',
+    privacyTitle: 'Privacy first',
+    privacyDesc: 'No backend. No tracking. Nothing stored. Your notes only travel to the AI you choose — or stay fully offline with a local model.',
+    affordableTitle: 'Almost free',
+    affordableDesc: 'A full ingest runs $0.05–$0.50. Pick a value model and you\'ll barely notice the cost.',
+    localBadge: 'Local',
+  },
+  trust: {
+    label: 'Trust',
+    title: 'Knowledge you can trust.',
+    subtitle: 'AI you can leave in charge of a year\'s worth of thinking.',
+    items: [
+      {
+        title: 'Every answer, traceable',
+        desc: 'Each response links straight back to your own notes. No invented facts — just what you wrote, with the receipts.',
+        icon: 'quote',
+      },
+      {
+        title: 'What you finalize, stays',
+        desc: 'Mark a page reviewed and the AI never rewrites it. Your words are yours — it only ever adds, never overwrites.',
+        icon: 'lock',
+      },
+      {
+        title: 'Contradictions surface',
+        desc: 'When two sources disagree, it flags the conflict instead of quietly papering over it. You decide what\'s true.',
+        icon: 'git-compare',
+      },
+    ],
   },
   ecosystem: {
     label: 'Ecosystem',
@@ -337,9 +386,9 @@ export const en: Translations = {
     subtitle: 'Everything you need to know to get started.',
     items: [
       { q: 'What does this plugin actually do?', a: 'Drop any note into your Obsidian vault. The AI extracts people, concepts, and theories, then auto-generates interlinked wiki pages with bidirectional links. Ask <em>"what did I write about X?"</em> — the answer comes from your own notes, not the internet.' },
-      { q: 'What are the minimum requirements?', a: 'Obsidian v1.6.6+ (desktop: Windows, macOS, Linux) and an LLM provider API key. Supported: DeepSeek, Gemini, Claude, GPT, Kimi, GLM, OpenRouter, or custom. No API key needed for Ollama (local models).' },
-      { q: 'Which model should I choose? How much will it cost?', a: 'Long-context models (1M tokens) recommended — they process your entire wiki in one pass. A single ingest costs <em>$0.05–$0.50</em>. All costs go to the LLM provider; the plugin itself is <em>free and open source</em>.' },
-      { q: 'Can I use local models via Ollama?', a: 'Yes. Install <em>Ollama</em>, pull a model (e.g. <em>qwen3.5</em>), select <em>Ollama (Local)</em>. No API key needed. Cloud providers recommended for ingestion (larger context); local models work well for query.' },
+      { q: 'What are the minimum requirements?', a: 'Obsidian v1.11.0+ (desktop: Windows, macOS, Linux) and an LLM provider API key. Supported: DeepSeek, Gemini, Claude, GPT, Kimi, GLM, MiniMax, OpenRouter, or any custom endpoint. No API key needed for local models via Ollama or LM Studio.' },
+      { q: 'Which model should I choose? How much will it cost?', a: 'Long-context models recommended — they process your entire wiki in one pass. A single ingest costs <em>$0.05–$0.50</em>. All costs go to the LLM provider; the plugin itself is <em>free and open source</em>.' },
+      { q: 'Can I run it fully offline with local models?', a: 'Yes. Install <em>Ollama</em> or <em>LM Studio</em>, pull a model, select it as your provider — no API key, nothing leaves your machine. Cloud providers are better for heavy ingestion (larger context); local models work great for everyday query.' },
       { q: 'How do I get help or report bugs?', a: 'Use <em>GitHub Issues</em> for bug reports, <em>GitHub Discussions</em> for questions. Also find the plugin on the <em>Obsidian Community Plugin</em> page and leave a review.' },
     ],
   },

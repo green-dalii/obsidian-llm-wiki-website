@@ -7,107 +7,97 @@ interface Props {
 }
 const { locale = 'en' } = Astro.props;
 const tMap: Record<string, any> = translations; const t = tMap[locale] || translations.en;
+// New keys fall back to English until other locales are translated.
+const tp = { ...translations.en.providers, ...t.providers };
 
+// Twelve providers — cloud and local. Context windows are intentionally
+// de-emphasized; the story is choice and freedom, not a spec sheet.
 const PROVIDERS = [
-  { name: 'DeepSeek', model: 'DeepSeek V4', context: '1M', status: 'Cloud', badge: 'bestValue' },
-  { name: 'Google', model: 'Gemini Pro', context: '1M', status: 'Cloud' },
-  { name: 'Anthropic', model: 'Claude', context: '1M', status: 'Cloud' },
-  { name: 'OpenAI', model: 'GPT', context: '1M', status: 'Cloud' },
-  { name: 'Moonshot', model: 'Kimi', context: '256K', status: 'Cloud' },
-  { name: 'GLM', model: 'GLM-5', context: '200K', status: 'Cloud' },
-  { name: 'OpenRouter', model: 'Universal API', context: 'Varies', status: 'Cloud' },
-  { name: 'Ollama', model: 'Any local model', context: 'Varies', status: 'Local' },
+  { name: 'DeepSeek', tagline: 'Best value', badge: 'bestValue' },
+  { name: 'Anthropic', tagline: 'Claude' },
+  { name: 'Google', tagline: 'Gemini' },
+  { name: 'OpenAI', tagline: 'GPT' },
+  { name: 'Kimi', tagline: 'Moonshot' },
+  { name: 'GLM', tagline: 'Zhipu AI' },
+  { name: 'MiniMax', tagline: 'Cloud' },
+  { name: 'OpenRouter', tagline: 'Any model' },
+  { name: 'Ollama', tagline: 'Local', local: true },
+  { name: 'LM Studio', tagline: 'Local', local: true },
+  { name: 'Anthropic API', tagline: 'Compatible' },
+  { name: 'Custom', tagline: 'Any endpoint' },
 ];
 
+// "Bring your own AI" pillars — benefit-first, not feature-first.
 const PILLARS = [
-  { key: 'openSource', icon: 'code-2', link: 'https://github.com/green-dalii/obsidian-llm-wiki' },
-  { key: 'community', icon: 'users', link: 'https://github.com/green-dalii/obsidian-llm-wiki/discussions' },
-  { key: 'obsidian', icon: 'book-open', link: null },
-  { key: 'vendor', icon: 'plug', link: null },
+  { titleKey: 'noLockInTitle', descKey: 'noLockInDesc', icon: 'refresh-cw', link: null },
+  { titleKey: 'privacyTitle', descKey: 'privacyDesc', icon: 'lock', link: null },
+  { titleKey: 'affordableTitle', descKey: 'affordableDesc', icon: 'wallet', link: null },
+  { titleKey: 'openSourceTitle', descKey: 'openSourceDesc', icon: 'code-2', link: 'https://github.com/green-dalii/obsidian-llm-wiki' },
 ];
 ---
 
 <section id="providers" class="relative w-full py-20 sm:py-28 reveal">
   <div class="max-w-5xl mx-auto px-4 sm:px-6">
-    <div class="text-center mb-10 reveal">
-      <span class="text-[11px] font-mono text-obsidian-purple tracking-[0.15em] uppercase">{t.providers.label}</span>
-      <h2 class="text-[clamp(1.6rem,4vw,2.8rem)] font-semibold mt-3 mb-3 text-obsidian-heading reveal" data-delay="1">{t.providers.title}</h2>
-      <p class="text-obsidian-muted text-sm max-w-lg mx-auto">{t.providers.subtitle}</p>
+    <div class="text-center mb-12 reveal">
+      <span class="text-[11px] font-mono text-obsidian-purple tracking-[0.15em] uppercase">{tp.label}</span>
+      <h2 class="text-[clamp(1.6rem,4vw,2.8rem)] font-semibold mt-3 mb-3 text-obsidian-heading reveal" data-delay="1">{tp.title}</h2>
+      <p class="text-obsidian-muted text-sm max-w-lg mx-auto">{tp.subtitle}</p>
     </div>
 
-    <!-- Three pillars -->
-    <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 mb-10">
+    <!-- Bring-your-own-AI pillars -->
+    <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 mb-12">
       {PILLARS.map((p) => (
         <div class="reveal" data-delay={2}>
           {p.link ? (
             <a href={p.link} target="_blank" rel="noopener noreferrer" class="block h-full">
               <div class="pillar-card group p-4 rounded-xl card card-hover h-full flex flex-col cursor-pointer">
-
-
-
-
-
-
                 <div class="w-8 h-8 rounded-lg bg-obsidian-purple/10 border border-obsidian-purple/20 flex items-center justify-center mb-3 group-hover:bg-obsidian-purple/20 transition-colors">
                   <Icon name={p.icon} class="w-4 h-4 text-obsidian-purple-light" />
                 </div>
-                <h3 class="text-base font-semibold text-[#e5e5e5] mb-1">{t.providers[`${p.key}Title` as keyof typeof t.providers]}</h3>
-                <p class="text-xs text-obsidian-muted leading-relaxed flex-1">{t.providers[`${p.key}Desc` as keyof typeof t.providers]}</p>
+                <h3 class="text-base font-semibold text-[#e5e5e5] mb-1">{tp[p.titleKey]}</h3>
+                <p class="text-xs text-obsidian-muted leading-relaxed flex-1">{tp[p.descKey]}</p>
                 <span class="inline-block mt-2 text-[10px] font-mono text-obsidian-purple-light opacity-0 group-hover:opacity-100 transition-opacity">→ GitHub</span>
               </div>
             </a>
           ) : (
             <div class="pillar-card group p-4 rounded-xl card card-hover h-full flex flex-col">
-
-
-
-
-
-
               <div class="w-8 h-8 rounded-lg bg-obsidian-purple/10 border border-obsidian-purple/20 flex items-center justify-center mb-3">
                 <Icon name={p.icon} class="w-4 h-4 text-obsidian-purple-light" />
               </div>
-              <h3 class="text-base font-semibold text-[#e5e5e5] mb-1">{t.providers[`${p.key}Title` as keyof typeof t.providers]}</h3>
-              <p class="text-xs text-obsidian-muted leading-relaxed flex-1">{t.providers[`${p.key}Desc` as keyof typeof t.providers]}</p>
+              <h3 class="text-base font-semibold text-[#e5e5e5] mb-1">{tp[p.titleKey]}</h3>
+              <p class="text-xs text-obsidian-muted leading-relaxed flex-1">{tp[p.descKey]}</p>
             </div>
           )}
         </div>
       ))}
     </div>
 
-    <div class="mb-6 flex items-start gap-2.5 p-3 rounded-lg border border-obsidian-purple/20 bg-obsidian-purple/[0.04] reveal" data-delay="10">
-      <Icon name="lightbulb" class="w-4 h-4 text-obsidian-purple-light flex-shrink-0 mt-0.5" />
-      <p class="text-xs text-obsidian-muted leading-relaxed">{t.providers.contextNote}</p>
+    <!-- Provider wall subsection -->
+    <div class="mb-4 text-center reveal" data-delay="10">
+      <span class="text-[11px] font-mono text-obsidian-dim tracking-[0.1em] uppercase">{tp.cardLabel}</span>
+      <p class="text-xs text-obsidian-muted mt-0.5">{tp.cardSubtitle}</p>
     </div>
 
-    <!-- Provider cards subsection -->
-    <div class="mb-4 reveal" data-delay="12">
-      <span class="text-[11px] font-mono text-obsidian-dim tracking-[0.1em] uppercase">{t.providers.cardLabel}</span>
-      <p class="text-xs text-obsidian-muted mt-0.5">{t.providers.cardSubtitle}</p>
-    </div>
-
-    <div class="grid grid-cols-2 sm:grid-cols-4 gap-2.5">
+    <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-2.5">
       {PROVIDERS.map((p, i) => (
-        <div class="provider-card group p-3.5 rounded-lg card card-hover reveal" data-delay={13 + i}>
-          <div class="flex items-center justify-between mb-0.5">
-            <span class="text-sm font-medium text-[#e5e5e5]">{p.name}</span>
-            {p.badge === 'bestValue' && (
-              <span class="text-[9px] font-mono px-1.5 py-0.5 rounded bg-obsidian-purple/15 text-obsidian-purple-light border border-obsidian-purple/25">{t.providers.bestValue}</span>
-            )}
+        <div class="provider-card group p-3.5 rounded-lg card card-hover reveal flex items-center justify-between gap-2" data-delay={11 + i}>
+          <div class="min-w-0">
+            <div class="text-sm font-medium text-[#e5e5e5] truncate">{p.name}</div>
+            <div class="text-[10px] font-mono text-obsidian-dim leading-tight truncate">{p.tagline}</div>
           </div>
-          <div class="text-[10px] font-mono text-obsidian-dim leading-tight">{p.model}</div>
-          <div class="mt-2 flex items-center gap-1.5">
-            <span class="text-[9px] font-mono px-1.5 py-0.5 rounded border" class:list={[
-              p.badge === 'bestValue'
-                ? 'bg-obsidian-purple/15 text-obsidian-purple-light border-obsidian-purple/25'
-                : p.context === '1M'
-                ? 'bg-obsidian-purple/15 text-obsidian-purple-light border-obsidian-purple/25'
-                : 'bg-obsidian-bg text-obsidian-dim border-obsidian-border'
-            ]}>{p.context}</span>
-            <span class="text-[9px] font-mono text-obsidian-dim">{p.status}</span>
-          </div>
+          {p.badge === 'bestValue' && (
+            <span class="flex-shrink-0 text-[9px] font-mono px-1.5 py-0.5 rounded bg-obsidian-purple/15 text-obsidian-purple-light border border-obsidian-purple/25">{tp.bestValue}</span>
+          )}
+          {p.local && (
+            <span class="flex-shrink-0 text-[9px] font-mono px-1.5 py-0.5 rounded bg-obsidian-bg text-obsidian-dim border border-obsidian-border">{tp.localBadge}</span>
+          )}
         </div>
       ))}
+    </div>
+
+    <div class="mt-6 flex items-start gap-2.5 p-3 rounded-lg border border-obsidian-purple/20 bg-obsidian-purple/[0.04] reveal" data-delay="24">
+      <Icon name="lightbulb" class="w-4 h-4 text-obsidian-purple-light flex-shrink-0 mt-0.5" />
+      <p class="text-xs text-obsidian-muted leading-relaxed">{tp.contextNote}</p>
     </div>
   </div>
 </section>
