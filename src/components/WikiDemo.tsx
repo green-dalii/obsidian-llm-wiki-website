@@ -3,7 +3,7 @@ import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { Sparkles } from 'lucide-react';
 import { translations } from '../i18n/astro';
-import type { Translations } from '../i18n/translations';
+import type { Translations } from '../i18n/locales/types';
 import WikiGraphStage from './WikiGraphStage';
 import MacWindow from './MacWindow';
 import type { ScenarioId } from '../data/scenarios';

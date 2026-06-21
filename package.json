@@ -8,6 +8,8 @@
     "build": "astro build",
     "preview": "astro preview",
     "lint": "eslint .",
+    "test": "vitest",
+    "test:run": "vitest run",
     "astro": "astro"
   },
   "dependencies": {
@@ -34,6 +36,7 @@
     "tailwindcss": "^4.3.0",
     "typescript": "~5.9.3",
     "typescript-eslint": "^8.46.4",
-    "vite": "^7.2.4"
+    "vite": "^7.2.4",
+    "vitest": "^2.1.9"
   }
 }
