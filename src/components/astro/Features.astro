@@ -98,9 +98,9 @@ const moreCaps = t.features.moreCapabilities || [];
     {moreCaps.length > 0 && (
       <div class="mt-10 text-center reveal" data-delay="12">
         <span class="text-sm text-obsidian-dim">{t.features.moreLabel}</span>
-        <div class="flex flex-wrap gap-2.5 justify-center mt-3">
+        <div class="flex flex-wrap gap-2.5 sm:gap-3 justify-center mt-3 max-w-2xl mx-auto">
           {moreCaps.map((cap: string) => (
-            <span class="text-xs px-3 py-1.5 rounded-full bg-obsidian-purple/10 border border-obsidian-purple/20 text-obsidian-purple-light">{cap}</span>
+            <span class="text-xs sm:text-sm px-3 py-1.5 sm:px-5 sm:py-2.5 rounded-full bg-obsidian-purple/10 border border-obsidian-purple/20 text-obsidian-purple-light">{cap}</span>
           ))}
         </div>
       </div>
