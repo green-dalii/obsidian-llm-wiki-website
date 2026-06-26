@@ -17,7 +17,7 @@ const relatedLabel = locale === 'zh' ? '接下来读什么' : 'What to Read Next
 const tf = locale === 'zh' ? '/zh/blog/' : '/blog/';
 ---
 
-<BaseLayout title={title} description={description} locale={locale} ogLocale={locale === 'zh' ? 'zh_CN' : 'en_US'}>
+<BaseLayout title={title} description={description} locale={locale} ogLocale={locale === 'zh' ? 'zh_CN' : 'en_US'} isBlog>
   <main class="pt-14">
     <article class="relative w-full py-16 sm:py-24">
       <div class="max-w-7xl mx-auto px-4 sm:px-6">
