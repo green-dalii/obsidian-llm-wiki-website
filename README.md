@@ -1,253 +1,211 @@
-# LLM Wiki for Obsidian — Landing Page
+# Karpathy LLM Wiki — Landing Page
 
-Marketing website for the [Obsidian LLM Wiki plugin](https://github.com/green-dalii/obsidian-llm-wiki), an AI-powered self-organizing knowledge base.
+Marketing website for the [Karpathy LLM Wiki plugin](https://github.com/green-dalii/obsidian-llm-wiki) — an Obsidian plugin that implements Andrej Karpathy's LLM Wiki concept: AI reads your notes and weaves them into a structured, bidirectional-linked wiki.
 
-## Tech Stack
+**Live site**: https://llmwiki.greenerai.top/
 
-- **Astro 6.2** — Static site generation with Islands architecture
-- **React 19** — Interactive components (client-side hydration)
-- **Tailwind CSS 4.3** — CSS-first utility styling with @theme directive
-- **IntersectionObserver** — Scroll-triggered animations for static sections
-- **Canvas 2D** — Organic "Knowledge Growth" animation for hero background
-- **lucide-react** — Consistent icon system
-- **i18n routing** — Static pages per language (EN: `/`, ZH: `/zh/`, JA: `/ja/`, KO: `/ko/`, DE: `/de/`, ES: `/es/`, FR: `/fr/`, PT: `/pt/`)
+## What's in this repo
 
-## Brand Consistency
+A static site built with **Astro 6.2 + React 19 + Tailwind CSS 4.3**. The site has three surfaces:
 
-**Official Obsidian Colors (as of 2026-04-30):**
-- Background: **#0f0f0f** (deeper, matches Obsidian app)
-- Surface/Card: **#1f1f1f** (gray background for panels)
-- Primary Purple: **#7c3aed** (Obsidian's brand purple)
-- Primary Light: **#8b5cf6** (hover/active states)
-- Primary Dark: **#6d28d9** (buttons with white text)
+1. **Marketing landing page** — Hero, WikiDemo, Features, Trust, Comparison, Providers, Ecosystem, Install, FAQ, CTA
+2. **Blog** — Content Collections with EN/ZH posts, tag filtering, three-column post layout with sticky TOC and related-reading
+3. **11-locale i18n** — `en` (default), `zh`, `zh-tw`, `ja`, `ko`, `de`, `es`, `fr`, `pt`, `it`, `ru`. Each locale has its own home page; ZH also has a full blog.
 
-All purple values in Canvas animations, SVGs, and CSS have been unified to official Obsidian palette.
+## Tech stack
 
-## Architecture
+| Layer | Tools |
+|-------|-------|
+| Framework | Astro 6.2 (static output, Islands architecture) |
+| UI | React 19 (truly interactive components only) |
+| Styling | Tailwind CSS 4.3 (CSS-first with `@theme`), `@tailwindcss/typography` (blog) |
+| Animation | CSS transitions + `IntersectionObserver` (in `scroll-reveal.ts`) |
+| Canvas | Custom 2D physics (`KnowledgeGrowth.tsx` for hero, `WikiGraphStage.tsx` for WikiDemo graph) |
+| Content | Astro Content Collections (`src/content.config.ts`, `glob` loader) |
+| i18n | Per-locale modules in `src/i18n/locales/`, scenarios mirrored in `src/i18n/locales/scenarios/` |
+| Icons | `lucide-react` (React islands), inline SVG (Astro components) |
 
-### Islands Architecture
+## Project structure
 
-**Static Sections (Zero JS):**
-- Comparison (Astro)
-- Features (Astro)
-- Install (Astro)
-- Ecosystem (Astro)
-- Providers (Astro)
+```
+src/
+├── pages/                       # 11 homepages + blog routes
+│   ├── index.astro              # EN landing (auto-redirects by browser language)
+│   ├── zh/                      # Chinese landing + blog
+│   ├── blog/                    # EN blog index + posts
+│   └── blog/posts/[...slug].astro  # EN blog post (Content Collections render)
+├── components/
+│   ├── astro/                   # Static Astro components (zero JS)
+│   │   ├── Header.astro         # Nav, language switcher, GitHub stars
+│   │   ├── Footer.astro
+│   │   ├── ProgressBar.astro    # Top scroll progress bar (2px, fixed)
+│   │   ├── Hero.astro
+│   │   ├── Comparison.astro
+│   │   ├── Features.astro       # 6 feature cards + 8 capability tags
+│   │   ├── Trust.astro          # Traceability + finalization + contradiction surfacing
+│   │   ├── Providers.astro      # 12-provider LLM grid + BYOAI pillars
+│   │   ├── Ecosystem.astro      # Graph View, Web Clipper, Dataview, Git, Marp, Canvas
+│   │   ├── Install.astro
+│   │   ├── FAQ.astro
+│   │   ├── CTA.astro
+│   │   └── Icon.astro
+│   ├── WikiDemoIsland.tsx        # React island wrapper
+│   ├── WikiDemo.tsx             # Multi-step interactive demo (state machine)
+│   ├── HeroBackgroundIsland.tsx # React island wrapper
+│   ├── KnowledgeGrowth.tsx      # Canvas 2D organic growth animation
+│   ├── WikiGraphStage.tsx       # Canvas graph for WikiDemo Step 4
+│   ├── MacWindow.tsx            # Reusable macOS-style window chrome
+│   └── BoldLink.tsx             # Bold inline link used in scenario chat
+├── data/
+│   └── graphLayouts.ts           # WikiDemo scenario graph layouts (positions)
+├── hooks/
+│   └── useGraphPhysics.ts        # Graph physics hook for WikiGraphStage
+├── layouts/
+│   ├── BaseLayout.astro          # All pages — auto canonical/hreflang/JSON-LD
+│   ├── BlogLayout.astro          # Blog index — wraps BaseLayout with isBlog
+│   └── BlogPostLayout.astro      # Blog post — three-column (TOC | content | related)
+├── content.config.ts             # Content Collections: blog + blog-zh schemas
+├── content/
+│   ├── blog/                     # 20 EN posts
+│   └── blog-zh/                  # 20 ZH posts
+├── i18n/
+│   ├── astro.ts                  # exports translations + getT() helpers
+│   └── locales/
+│       ├── types.ts              # Translations interface (single source of truth)
+│       ├── index.ts              # Barrel
+│       ├── {en,zh,zh-hant,ja,ko,de,es,fr,pt,it,ru}.ts
+│       └── scenarios/            # WikiDemo scenario data, mirrored across locales
+│           ├── types.ts          # Scenario interface (ScenarioId, chatAnswerLead as `[[token]]` text)
+│           ├── index.ts          # Barrel
+│           └── {en,zh,zh-tw,ja,ko,de,es,fr,pt,it,ru}.ts
+├── scripts/
+│   └── scroll-reveal.ts          # Shared IntersectionObserver-based reveal animations
+└── index.css                     # Tailwind v4 entry, global tokens, animations
+```
 
-**Interactive Islands (React):**
-- HeaderIsland — Navigation, language toggle, GitHub stars
-- HeroBackgroundIsland — KnowledgeGrowth Canvas animation (client:load)
-- WikiDemoIsland — Interactive 5-step demo (client:visible)
-- ProgressBar — Scroll progress indicator
+## Internationalization
 
-### Key Benefits
+11 locales with bidirectional parity enforced by both TypeScript (compile-time) and Vitest parity tests (run-time).
 
-- **HTML-first rendering:** 88KB static HTML vs empty React div
-- **SEO perfect:** 100/100 Lighthouse score
-- **Zero layout shift:** CLS = 0
-- **Selective hydration:** Only interactive components load JS
-- **Performance:** Reduced JS bundle from 130KB to ~40KB effective
+| Locale | URL | UI | Plugin parity | Notes |
+|---|---|---|---|---|
+| `en` | `/` | ✅ | ✅ | Default |
+| `zh` | `/zh/` | ✅ | ✅ | Full ZH blog (20 posts) |
+| `zh-tw` | `/zh-tw/` | ✅ | ✅ | Traditional Chinese (Karpathy / Taiwan variant) |
+| `ja` | `/ja/` | ✅ | ✅ | |
+| `ko` | `/ko/` | ✅ | ✅ | Coupang-adapted business scenario |
+| `de` | `/de/` | ✅ | ✅ | |
+| `es` | `/es/` | ✅ | ✅ | |
+| `fr` | `/fr/` | ✅ | ✅ | |
+| `pt` | `/pt/` | ✅ | ✅ | Brazilian Portuguese |
+| `it` | `/it/` | ✅ | ✅ | |
+| `ru` | `/ru/` | ✅ | ⚠️ preview | Russian is a website preview; plugin-side support planned |
+
+### How locales work
+
+- Each homepage is a fully static page: `src/pages/{locale}/index.astro`
+- `BaseLayout` accepts `locale` and `ogLocale` props and auto-generates canonical URL, `hreflang` link tags (one per locale + `x-default`), and JSON-LD
+- Translations live in `src/i18n/locales/{locale}.ts`; the `Translations` interface (`types.ts`) is the contract that all locales must satisfy
+- Parity test: `tests/i18n-parity.test.ts` enforces (a) every locale covers every required top-level EN key, (b) no empty strings, (c) strict bidirectional parity vs EN with a known-gap registry for in-flight translations
+
+### Scenarios (WikiDemo data)
+
+The interactive 5-step WikiDemo uses scenario data that lives in its own i18n layer: `src/i18n/locales/scenarios/`. This decouples business content from React. Each scenario has:
+
+- 6 locales × 6 scenarios = 66 fully-translated scenario files
+- `chatAnswerLead.text` uses `[[token]]` markers that the component layer parses and renders as bold wiki-style links
+- Scenarios are referenced by `ScenarioId` (`daily-life`, `reading`, `inspiration`, `creation`, `academic`, `business`); `graphLayouts.ts` provides canvas positions keyed by id
+
+## Blog
+
+20 EN + 20 ZH posts organized by 3 user-centric tags (no `i18n` tag — multilingual content is a product feature under `getting-started`).
+
+| Tag (EN) | Tag (ZH) | User mindset |
+|----------|----------|--------------|
+| `getting-started` | `入门必读` | "I haven't installed it / just installed" |
+| `guides` | `实践指南` | "I have it, how do I use it better?" |
+| `internals` | `深入解析` | "Why is it designed this way?" |
+
+Each blog post has three-column desktop layout: sticky TOC (left) → content (center) → related reading (right). Tag filtering on the blog index reads `?tag=` from the URL.
+
+Content lives at `src/content/blog/` (EN) and `src/content/blog-zh/` (ZH) as plain Markdown. Schema is defined in `src/content.config.ts` using the `glob` loader from `astro/loaders`.
+
+## Brand colors
+
+| Token | Value | Use |
+|-------|-------|-----|
+| Background | `#0f0f0f` | Page background |
+| Surface | `#1f1f1f` | Cards, panels |
+| Purple (primary) | `#7c3aed` | Buttons, links, accents |
+| Purple (light) | `#8b5cf6` | Hover/active |
+| Purple (dark) | `#6d28d9` | Buttons with white text |
+
+All purple values across Canvas animations, SVGs, and CSS use the official Obsidian palette.
 
 ## Development
 
 ```bash
 npm install
-npm run dev       # Start Astro dev server at localhost:3000
+npm run dev       # Start Astro dev server at http://localhost:3000
 npm run build     # Production build → dist/
-npm run preview   # Preview production build at localhost:3000
+npm run preview   # Preview production build
 npm run lint      # ESLint
+npx vitest run    # i18n parity tests (currently 48/48 passing)
 ```
 
-## Project Structure
-
-```
-src/
-  pages/
-    index.astro           English landing page (static HTML)
-    zh/index.astro        Chinese landing page (static HTML)
-  components/
-    astro/                Static Astro components (zero JS, SSR)
-      Comparison.astro    Before/after comparison grid
-      Features.astro      Feature cards with code snippets
-      Install.astro       Installation guide
-      Ecosystem.astro     Obsidian ecosystem integration
-      Providers.astro     LLM provider grid
-      Hero.astro          Hero section with CSS animations
-      Footer.astro        Contact email + links
-      Icon.astro          SVG icon component
-    HeaderIsland.tsx      Navigation with language toggle
-    WikiDemoIsland.tsx    Interactive 5-step demo
-    ProgressBar.tsx       Scroll progress
-    HeroBackgroundIsland.tsx  KnowledgeGrowth Canvas animation
-    KnowledgeGrowth.tsx   Canvas 2D organic growth animation
-  i18n/
-    astro.ts              Translation strings for both languages
-  index.css               Global styles, Tailwind layers, reveal animations
-  scripts/
-    scroll-reveal.ts      IntersectionObserver scroll animations
-dist/                     Built static site (HTML + assets)
-```
+**Before considering work complete:**
+1. `npx tsc --noEmit` — 0 errors
+2. `npx vitest run` — all parity tests pass (48/48)
+3. `npx astro build` — completes, no errors
+4. Open the dev server in a browser, click through each locale's landing page and at least one blog post; check console for JS errors
 
 ## Deployment
 
-### Cloudflare Pages (Recommended)
+### Cloudflare Pages (production)
 
-**Why Cloudflare Pages:**
-- ✅ China access faster (Hong Kong CDN nodes)
-- ✅ No base path configuration needed
-- ✅ Preview URLs for each commit
-- ✅ Unlimited bandwidth and builds
-- ✅ Automatic HTTPS and CDN
+- Auto-deploys on push to `main`
+- Custom domain: `llmwiki.greenerai.top`
+- Build: `npm run build` → `dist/`
+- HK CDN edge nodes — fast access from mainland China
 
-**Deploy steps:**
-1. Push to GitHub: `git@github.com:green-dalii/obsidian-llm-wiki-website.git`
-2. Cloudflare Dashboard → Pages → Connect GitHub repo
-3. Build command: `npm run build`, Output: `dist`
-4. Auto-deploy on push to main branch
-5. Get URL: `https://llm-wiki.pages.dev/`
+### Adding a new locale
 
-**See detailed guide:** [docs/cloudflare-pages-deployment.md](docs/cloudflare-pages-deployment.md)
+1. Create `src/i18n/locales/{locale}.ts` conforming to `Translations`
+2. Create `src/i18n/locales/scenarios/{locale}.ts` with all 6 scenarios + `Scenario[]`
+3. Register both in their respective `index.ts` barrels
+4. Add the locale code to `src/components/astro/Header.astro`'s `LANGUAGES` array
+5. Add to `src/layouts/BaseLayout.astro`'s `ALL_LOCALES` const
+6. Create `src/pages/{locale}/index.astro` (copy any existing locale homepage)
+7. Update `astro.config.mjs` — both `i18n.locales` array and `sitemap.i18n.locales` object
+8. Run `npx vitest run` — parity test enforces coverage
 
-### GitHub Pages (Alternative)
+## Optimization history
 
-Add base path in `astro.config.mjs`:
-```js
-base: '/obsidian-llm-wiki/'
-```
+Selected highlights; full version history lives in git log.
 
-Deploy via GitHub Actions. **Not recommended** for China users (slow access due to GFW).
+### v3.0.0 (2026-06) — current
+- **3 new locales**: Italian (`it`), Russian (`ru`, preview), Traditional Chinese (`zh-tw`)
+- **Scenarios migrated to i18n** — was a hardcoded EN+ZH `.tsx` file; now 11 per-locale files under `src/i18n/locales/scenarios/`
+- **WikiDemo refactored** — removed all `locale === 'zh'` binary checks; reads from typed scenarios object directly. Replaced `React.ReactNode` with `[[token]]` string markers in chatAnswerLead
+- **i18n parity tests expanded** — 9 new scenarios parity tests, 48/48 total passing
+- **Blog content revisions** — Session-level clipping philosophy for chat history post; locale-specific product examples
 
-## Performance Metrics
+### v2.2.0 (2026-04)
+- Content Collections migration for blog (Astro 6 official pattern, `glob` loader)
+- Trust section + reframed Providers with BYOAI pillars
 
-**Lighthouse Scores:**
-- SEO: **100/100** ✅
-- Best Practices: **96/100** ✅
-- Accessibility: **85/100** (improved with ARIA labels, contrast fixes, touch targets)
-- Performance: **79/100** (英文), **63/100** (中文首次加载)
+### v2.0.0 (2026)
+- React-to-Astro migration
+- Chinese blog (20 posts)
+- i18n routing with static pages per language
 
-**Core Web Vitals:**
-- CLS: **0** ✅ (零布局偏移)
-- FCP: 1.6s (英文), 5.1s (中文首次加载)
-
-**Bundle Size:**
-- HTML: 68KB (EN), 69KB (ZH) — full static content with SEO meta
-- JavaScript: ~405KB total (React runtime + islands + Canvas graph physics)
-- CSS: 38KB (Tailwind v4 CSS-first, JIT tree-shaken)
-- Fonts: 94KB (Outfit + JetBrains Mono self-hosted woff2)
-
-## Accessibility Improvements (2026-04-30)
-
-**Completed:**
-- ✅ Font weight optimization (removed 300, 700, 800 for Outfit; removed 600 for JetBrains Mono)
-- ✅ Color contrast improvements (dim text #6b6b6b → #8a8a8a, purple buttons use #7c3aed with white text)
-- ✅ Touch target fixes (WikiDemo step indicators: 6px → 24px clickable area)
-- ✅ ARIA labels (Header menu buttons, WikiDemo play/pause, step indicators with aria-current)
-- ✅ Favicon redesigned (BookOpen icon + Obsidian purple border, matches official branding)
-
-## Optimization History
-
-### v1.9.0 (2026-05-20) ✅
-- **FAQ section** — 4 essential Q&A items (duplicate pages, ingestion speed, Smart Fix All, API costs), accordion-style UI
-- **French & Portuguese i18n** — 107 translated strings each, landing pages at /fr/ and /pt/
-- **8-language support** — EN/ZH/JA/KO/DE/ES/FR/PT, fully aligned with plugin's Wiki output languages
-- **Nav FAQ entry** — Added to header navigation across all 8 languages
-- **Auto-redirect expanded** — Browser language detection now covers all 8 locales
-
-### v1.8.0 (2026-05-18) ✅
-- **Features section expanded** — From 4 to 6 hero cards (Smart Fix All + Extraction Granularity), 3×2 grid with new icons (zap, sliders)
-- **Capability tag row** — Compact pill tags below hero cards showing 7 additional features (Duplicate Detection, 8-Language Wiki Output, Page Aliases, etc.), i18n-aware labels
-- **Install Step 3 command palette** — Expanded from 3 to 5 commands matching plugin README (Ingest single source, Ingest from folder, Query wiki, Lint wiki, Regenerate index), each with description
-- **Obsidian-accurate command palette UI** — "Select a command to add..." placeholder with blinking cursor, proper vertical alignment
-- **moreLabel i18n** — "And more:" translated across all 6 languages
-
-### v1.7.0 (2026-05-15) ✅
-- **German & Spanish i18n** — 107 translated strings per language, landing pages at /de/ and /es/
-- **Japanese & Korean i18n** — 107 translated strings per language, landing pages at /ja/ and /ko/
-- **6-language support** — EN, ZH, JA, KO, DE, ES with full hreflang cross-references
-- **Language switcher** — Button-triggered dropdown in desktop, horizontal row in mobile, supports all 6 locales
-- **WikiDemo scenario labels** — Translated scenario selector buttons in all 6 languages via SCENARIO_LABELS lookup
-- **Component i18n refactor** — All locale props widened to `string`, dynamic translation lookup via getT()
-
-### v1.6.0 (2026-05-15) ✅
-- **Japanese & Korean i18n** — 107 translated strings per language, full JA/KO landing pages at /ja/ and /ko/
-- **Language switcher redesign** — Button-triggered dropdown replacing EN↔ZH toggle, supports 4 languages
-- **Component i18n refactor** — All locale props widened to `string`, dynamic translation lookup via `getT()`
-- **hreflang expanded** — All 4 pages cross-reference each other for SEO
-
-### v1.5.0 (2026-05-15) ✅
-- **Install section redesigned** — 3 steps (not 4) reflecting community plugin market availability. New SVG illustration showing Obsidian's plugin browser with search and Install button
-- **CTA links migrated** — Header, Hero, and footer CTA now point to `community.obsidian.md/plugins/karpathywiki` instead of GitHub releases
-- **Button text unified** — "Add to Obsidian" across Header, CTA section, and install plugin page button
-- **Install descriptions updated** — Both EN and ZH now mention plugin page as alternative install method
-- **Nav label refresh** — "Download" → "Add to Obsidian" to reflect community plugin availability
-
-### v1.4.0 (2026-05-11) ✅
-- **SEO overhaul** — Correct domain migration (llmwiki.greenerai.top), sitemap with both locales, hreflang x-default, robots.txt fix, JSON-LD for ZH page
-- **Meta description rewrite** — Aligned with GitHub repo description and README philosophy
-- **Contact email in footer** — JS-based anti-spam obfuscation (hi@greenerai.top)
-- **Font self-hosting** — Outfit + JetBrains Mono as local woff2, no external font requests (LCP +150-250ms)
-- **Hero SSR** — Static content (badge, title, CTA) rendered in HTML, instant LCP. GSAP replaced with CSS animations
-- **WikiDemo lazy load** — Changed to `client:visible`, 122KB JS deferred
-- **HeroBackgroundIsland** — Canvas animation uses `client:load` for immediate hydrate
-- **og-image refresh** — Replaced generic screenshot with plugin banner (llm_wiki_banner.jpg → 47KB WebP)
-- **Scroll-reveal shared module** — Extracted duplicated 70-line inline scripts to shared file
-- **Tailwind 4.0 → 4.3** — Build performance improvements
-- **Code cleanup** — Removed 7 unused React-to-Astro migration files, 7 unused devDependencies
-
-### v1.3.1 (2026-05-08) ✅
-- Apple-standard copywriting polish — Iterative EN/ZH translation refinement across 3 rounds
-- Removed personification (pages don't "know" or "breathe", software doesn't "栖息")
-- Fixed `organizeTag: ' effortless'` bug (English string with space in ZH locale)
-- Natural Chinese nav labels — conversational, benefit-oriented, synced with section labels
-- Unified tone: confident simplicity, active verbs, everyday language, emotional resonance
-
-### v1.3.0 (2026-05-07) ✅
-- Hero UI enhancement — Obsidian install guidance, Karpathy concept link, layout optimization
-- Install section improvements — Step 1 dual-download buttons, Step 2 SVG icons using standard Lucide paths with vertical centering
-- WikiDemo Step 3 visual refinement — Darker file tree panel (#161616), proper Obsidian color hierarchy
-- KnowledgeGrowth animation — Particle count reduced 20% (47 → 38) for cleaner visual
-- Footer expansion — Added Obsidian.md official link
-- CTA animation sync — Added reveal class for consistent scroll-triggered fade-in
-- WikiDemo scenario buttons — Increased height for better touch targets
-
-### v1.2.0 (2026-05-07) ✅
-- WikiDemo content redesign — 6 new scenarios with real-world examples (Daily Life, Deep Reading, Inspiration, Content Creation, Academic Research, Business Decision)
-- Obsidian-style split layout for WikiDemo Step 2 (file tree + Markdown preview)
-- Unified hover effects across all cards (CSS class hierarchy: .card → .card-hover → .card-purple)
-- New CTA section after Providers with i18n support
-- Graph physics optimization (reduced node clumping, satellite nodes)
-- Border styling unification (WikiDemo components now use consistent border-obsidian-border)
-- MacWindow component extraction (reusable macOS mock window)
-- Scenario content research via subagents (James Clear, Paul Graham, Farnam Street, 晚点LatePost, 人物, 知识分子)
-
-### Completed ✅
-- Astro migration from React SPA
-- Static HTML rendering for SEO
-- IntersectionObserver scroll animations
-- i18n routing with static pages
-- KnowledgeGrowth organic animation
-- Tailwind v4 migration (@tailwindcss/vite, CSS-first config)
-- Obsidian official color palette unification
-- Accessibility improvements (ARIA, contrast, touch targets)
-- Font weight optimization
-- Favicon redesign
-- WikiDemo layout fixes (Step 3 padding, prevent indicator occlusion)
-## i18n
-
-- **English:** `/` (default)
-- **Chinese:** `/zh/`
-- **Japanese:** `/ja/`
-- **Korean:** `/ko/`
-- **German:** `/de/`
-- **Spanish:** `/es/`
-
-Static HTML per language, no client-side language switching.Hreflang tags configured for SEO.
+Earlier v1.x versions (v1.0 → v1.9): initial landing page, FAQ section, FR/PT/JA/KO/DE/ES i18n expansion, KnowledgeGrowth animation, Tailwind v4 migration. Full commit history in `git log`.
 
 ## Documentation
 
-- **Project instructions:** [CLAUDE.md](CLAUDE.md)
-- **Deployment guide:** [docs/cloudflare-pages-deployment.md](docs/cloudflare-pages-deployment.md)
-- **Migration plan:** [docs/astro-migration-plan.md](docs/astro-migration-plan.md)
+- **Project instructions**: [CLAUDE.md](CLAUDE.md)
+- **Deployment guide**: [docs/cloudflare-pages-deployment.md](docs/cloudflare-pages-deployment.md)
+- **Astro migration plan**: [docs/astro-migration-plan.md](docs/astro-migration-plan.md)
 
 ## License
 
