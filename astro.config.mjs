@@ -14,7 +14,7 @@ export default defineConfig({
     sitemap({
       i18n: {
         defaultLocale: 'en',
-        locales: { en: 'en', zh: 'zh', ja: 'ja', ko: 'ko', de: 'de', es: 'es', fr: 'fr', pt: 'pt' },
+        locales: { en: 'en', zh: 'zh', ja: 'ja', ko: 'ko', de: 'de', es: 'es', fr: 'fr', pt: 'pt', it: 'it', ru: 'ru', 'zh-tw': 'zh-TW' },
       },
     }),
   ],
@@ -23,7 +23,7 @@ export default defineConfig({
   },
   i18n: {
     defaultLocale: 'en',
-    locales: ['en', 'zh', 'ja', 'ko', 'de', 'es', 'fr', 'pt'],
+    locales: ['en', 'zh', 'ja', 'ko', 'de', 'es', 'fr', 'pt', 'it', 'ru', 'zh-tw'],
     routing: {
       prefixDefaultLocale: false, // EN: /, ZH: /zh/
     },

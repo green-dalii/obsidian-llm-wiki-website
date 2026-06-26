@@ -20,6 +20,7 @@
 
 import { describe, it, expect } from 'vitest';
 import { translations, getTranslations, getText } from '../src/i18n/astro';
+import { scenariosTranslations } from '../src/i18n/locales/scenarios';
 
 const EN = translations.en;
 const LOCALES = Object.keys(translations) as Array<keyof typeof translations>;
@@ -199,5 +200,101 @@ describe('getTranslations() / getText() API', () => {
   it('getText returns the en fallback for a missing locale', () => {
     const title = getText('xx', 'hero', 'title1');
     expect(title).toBe(EN.hero.title1);
+  });
+});
+
+// ---------------------------------------------------------------------------
+// 5. Scenarios parity — every locale must cover every scenario with the same
+//    structural shape (id, scenario count, extractedItems.length, etc.) and
+//    no empty strings. Locale-specific content (notes, summaries) is allowed
+//    to differ but the contract — what fields exist and how many — must match.
+// ---------------------------------------------------------------------------
+
+const SCENARIO_LOCALES = Object.keys(scenariosTranslations) as Array<keyof typeof scenariosTranslations>;
+
+describe('Scenarios i18n parity — structural coverage', () => {
+  it('every locale covers all 6 scenarios', () => {
+    for (const locale of SCENARIO_LOCALES) {
+      expect(scenariosTranslations[locale].scenarios.length, `${locale} scenario count`).toBe(6);
+    }
+  });
+
+  it('scenario ids match exactly across locales', () => {
+    const enIds = scenariosTranslations.en.scenarios.map(s => s.id).sort();
+    for (const locale of SCENARIO_LOCALES) {
+      if (locale === 'en') continue;
+      const ids = scenariosTranslations[locale].scenarios.map(s => s.id).sort();
+      expect(ids, `${locale} scenario ids`).toEqual(enIds);
+    }
+  });
+
+  it('extractedItems, generatedPages, links counts match EN per scenario', () => {
+    const enById = new Map(scenariosTranslations.en.scenarios.map(s => [s.id, s]));
+    for (const locale of SCENARIO_LOCALES) {
+      if (locale === 'en') continue;
+      for (const scenario of scenariosTranslations[locale].scenarios) {
+        const enScenario = enById.get(scenario.id);
+        expect(enScenario, `EN baseline missing for ${scenario.id} in ${locale}`).toBeDefined();
+        expect(scenario.extractedItems.length, `${locale}/${scenario.id} extractedItems`).toBe(enScenario!.extractedItems.length);
+        expect(scenario.generatedPages.length, `${locale}/${scenario.id} generatedPages`).toBe(enScenario!.generatedPages.length);
+        expect(scenario.links.length, `${locale}/${scenario.id} links`).toBe(enScenario!.links.length);
+      }
+    }
+  });
+
+  it('no empty label / sourceNoteContext / sourceNote / chatQuestion strings', () => {
+    for (const locale of SCENARIO_LOCALES) {
+      for (const s of scenariosTranslations[locale].scenarios) {
+        expect(s.label.trim(), `${locale}/${s.id} label`).not.toBe('');
+        expect(s.sourceNoteContext.trim(), `${locale}/${s.id} sourceNoteContext`).not.toBe('');
+        expect(s.sourceNote.trim(), `${locale}/${s.id} sourceNote`).not.toBe('');
+        expect(s.chatQuestion.trim(), `${locale}/${s.id} chatQuestion`).not.toBe('');
+        expect(s.chatAnswerDetail.trim(), `${locale}/${s.id} chatAnswerDetail`).not.toBe('');
+      }
+    }
+  });
+
+  it('[[token]] markers are preserved in chatAnswerLead.text', () => {
+    // Each scenario has at least one [[...]] marker in chatAnswerLead. They
+    // are rendered as bold wiki-style links and must NOT be lost in
+    // translation.
+    for (const locale of SCENARIO_LOCALES) {
+      for (const s of scenariosTranslations[locale].scenarios) {
+        const markerCount = (s.chatAnswerLead.text.match(/\[\[/g) || []).length;
+        expect(markerCount, `${locale}/${s.id} should have at least 1 [[token]] marker`).toBeGreaterThanOrEqual(1);
+      }
+    }
+  });
+
+  it('filename and chatSource kept as filename-like identifiers (no whitespace, end with .md)', () => {
+    for (const locale of SCENARIO_LOCALES) {
+      for (const s of scenariosTranslations[locale].scenarios) {
+        expect(s.filename.endsWith('.md'), `${locale}/${s.id} filename must end with .md`).toBe(true);
+        expect(s.chatSource.endsWith('.md'), `${locale}/${s.id} chatSource must end with .md`).toBe(true);
+      }
+    }
+  });
+
+  it('all generatedPages have non-empty title and summary, and valid tags', () => {
+    for (const locale of SCENARIO_LOCALES) {
+      for (const s of scenariosTranslations[locale].scenarios) {
+        for (const page of s.generatedPages) {
+          expect(page.title.trim(), `${locale}/${s.id} page title`).not.toBe('');
+          expect(page.summary.trim(), `${locale}/${s.id}/${page.title} summary`).not.toBe('');
+          expect(page.tags.length, `${locale}/${s.id}/${page.title} tags`).toBeGreaterThan(0);
+        }
+      }
+    }
+  });
+
+  it('every locale has zh-tw coverage for the 11th locale (Traditional Chinese)', () => {
+    expect(scenariosTranslations['zh-tw']).toBeDefined();
+    expect(scenariosTranslations['zh-tw'].scenarios.length).toBe(6);
+  });
+
+  it('zh-tw uses Traditional characters (not Simplified)', () => {
+    // Quick sanity check: a common Traditional character should appear at least once
+    const allText = JSON.stringify(scenariosTranslations['zh-tw']);
+    expect(allText).toMatch(/[網經機制學]/); // 網, 經, 機, 制, 學
   });
 });

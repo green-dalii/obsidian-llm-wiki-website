@@ -1,26 +1,30 @@
-import { useRef, useEffect, useState, useCallback } from 'react';
+import { useRef, useEffect, useState, useCallback, type ReactNode } from 'react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { Sparkles } from 'lucide-react';
 import { translations } from '../i18n/astro';
 import type { Translations } from '../i18n/locales/types';
+import { scenariosTranslations } from '../i18n/locales/scenarios';
+import type { Scenario, ScenarioId, ScenariosTranslation } from '../i18n/locales/scenarios/types';
 import WikiGraphStage from './WikiGraphStage';
 import MacWindow from './MacWindow';
-import type { ScenarioId } from '../data/scenarios';
-import { SCENARIOS } from '../data/scenarios';
 import { getGraphLayout } from '../data/graphLayouts';
 
 gsap.registerPlugin(ScrollTrigger);
 
 type WikiDemoKey = keyof Translations['wikiDemo'];
 
-const SCENARIO_LABELS: Record<string, Record<ScenarioId, string>> = {
-  en: { 'daily-life': 'Daily Life', 'reading': 'Deep Reading', 'inspiration': 'Inspiration', 'creation': 'Content Creation', 'academic': 'Academic Research', 'business': 'Business' },
-  zh: { 'daily-life': '日常生活', 'reading': '深度阅读', 'inspiration': '灵感捕捉', 'creation': '内容创作', 'academic': '学术研究', 'business': '商业决策' },
-  ja: { 'daily-life': '日常生活', 'reading': '深い読書', 'inspiration': 'ひらめき', 'creation': 'コンテンツ作成', 'academic': '学術研究', 'business': 'ビジネス' },
-  ko: { 'daily-life': '일상', 'reading': '깊은 읽기', 'inspiration': '영감', 'creation': '콘텐츠 제작', 'academic': '학술 연구', 'business': '비즈니스' },
-  de: { 'daily-life': 'Alltag', 'reading': 'Tiefes Lesen', 'inspiration': 'Inspiration', 'creation': 'Inhalte erstellen', 'academic': 'Akademische Forschung', 'business': 'Business' },
-  es: { 'daily-life': 'Vida diaria', 'reading': 'Lectura profunda', 'inspiration': 'Inspiración', 'creation': 'Creación de contenido', 'academic': 'Investigación académica', 'business': 'Negocios' },
+// Scenario icon library — keep icon name as a string and resolve the actual
+// React component locally. This keeps the i18n layer free of React deps.
+import { Heart, BookOpen, Scissors, Mic, Microscope, TrendingUp } from 'lucide-react';
+
+const SCENARIO_ICON_MAP: Record<string, React.ComponentType<{ className?: string }>> = {
+  heart: Heart,
+  'book-open': BookOpen,
+  scissors: Scissors,
+  mic: Mic,
+  microscope: Microscope,
+  'trending-up': TrendingUp,
 };
 
 const STEPS: Array<{ id: number; titleKey: WikiDemoKey; descKey: WikiDemoKey }> = [
@@ -36,21 +40,30 @@ interface Props {
 }
 
 export default function WikiDemo({ locale = 'en' }: Props) {
-  const tMap: Record<string, Translations> = translations; const t = tMap[locale] || translations.en;
+  const tMap: Record<string, Translations> = translations;
+  const t = tMap[locale] || translations.en;
+
+  // Scenarios — read from the i18n scenarios layer, fall back to EN.
+  const sMap: Record<string, ScenariosTranslation> = scenariosTranslations;
+  const scenarios = (sMap[locale] || sMap.en).scenarios;
+  const SCENARIO_LABELS: Record<ScenarioId, string> = Object.fromEntries(
+    scenarios.map(s => [s.id, s.label])
+  ) as Record<ScenarioId, string>;
+
   const sectionRef = useRef<HTMLElement>(null);
   const [step, setStep] = useState(0);
   const [autoPlay, setAutoPlay] = useState(true);
   const [activeScenario, setActiveScenario] = useState<ScenarioId>('daily-life');
   const [selectedPageIdx, setSelectedPageIdx] = useState(0);
 
-  const scenario = SCENARIOS.find(s => s.id === activeScenario)!;
-  const sourceText = locale === 'zh' ? scenario.sourceNoteZh : scenario.sourceNote;
-  const extractedItems = locale === 'zh' ? scenario.extractedItemsZh : scenario.extractedItems;
-  const generatedPages = locale === 'zh' ? scenario.generatedPagesZh : scenario.generatedPages;
-  const chatQuestion = locale === 'zh' ? scenario.chatQuestionZh : scenario.chatQuestion;
-  const chatAnswerLead = locale === 'zh' ? scenario.chatAnswerLeadZh : scenario.chatAnswerLead;
-  const chatAnswerDetail = locale === 'zh' ? scenario.chatAnswerDetailZh : scenario.chatAnswerDetail;
-  const chatSource = locale === 'zh' ? scenario.chatSourceZh : scenario.chatSource;
+  const scenario: Scenario = scenarios.find(s => s.id === activeScenario)!;
+  const sourceText = scenario.sourceNote;
+  const extractedItems = scenario.extractedItems;
+  const generatedPages = scenario.generatedPages;
+  const chatQuestion = scenario.chatQuestion;
+  const chatAnswerLeadText = scenario.chatAnswerLead.text;
+  const chatAnswerDetail = scenario.chatAnswerDetail;
+  const chatSource = scenario.chatSource;
   const lines = sourceText.split('\n');
 
   const switchScenario = useCallback((id: ScenarioId) => {
@@ -83,9 +96,29 @@ export default function WikiDemo({ locale = 'en' }: Props) {
     return <span>{line}</span>;
   };
 
+  /**
+   * Render chatAnswerLead text where `[[token]]` markers are highlighted as
+   * bold wiki-style links. The translation layer preserves these markers
+   * exactly; this renderer is the only place that interprets them.
+   */
+  const renderChatAnswerLead = (text: string): ReactNode => {
+    const parts = text.split(/(\[\[[^\]]+\]\])/g);
+    return parts.map((part, i) => {
+      const match = part.match(/^\[\[([^\]]+)\]\]$/);
+      if (match) {
+        return (
+          <span key={i} className="font-semibold text-obsidian-purple-light">{match[1]}</span>
+        );
+      }
+      return <span key={i}>{part}</span>;
+    });
+  };
+
   const wordCount = sourceText.split(/\s+/).filter(Boolean).length;
   const sectionCount = (sourceText.match(/^## /gm) || []).length + 1;
   const lineCount = lines.length;
+
+  const ScenarioIcon = SCENARIO_ICON_MAP[scenario.icon] ?? Heart;
 
   return (
     <section ref={sectionRef} id="how-it-works" className="relative w-full py-28 sm:py-36">
@@ -98,20 +131,23 @@ export default function WikiDemo({ locale = 'en' }: Props) {
 
         {/* Scenario Selector */}
         <div className="grid grid-cols-2 sm:flex sm:flex-nowrap gap-2 mb-6">
-          {SCENARIOS.map((s) => (
-            <button
-              key={s.id}
-              onClick={() => switchScenario(s.id)}
-              className={`flex sm:flex-1 items-center justify-center gap-1.5 sm:gap-2 px-2.5 py-3 sm:px-4 sm:py-3.5 rounded-lg border text-xs sm:text-sm font-medium transition-all duration-200 ${
-                activeScenario === s.id
-                  ? 'border-obsidian-purple/40 bg-obsidian-purple/5 text-obsidian-heading'
-                  : 'border-obsidian-border text-obsidian-muted hover:border-obsidian-border-light hover:text-obsidian-text'
-              }`}
-            >
-              <s.Icon className="w-3.5 h-3.5 flex-shrink-0" />
-              {SCENARIO_LABELS[locale]?.[s.id] || s.label}
-            </button>
-          ))}
+          {scenarios.map((s) => {
+            const Icon = SCENARIO_ICON_MAP[s.icon] ?? Heart;
+            return (
+              <button
+                key={s.id}
+                onClick={() => switchScenario(s.id)}
+                className={`flex sm:flex-1 items-center justify-center gap-1.5 sm:gap-2 px-2.5 py-3 sm:px-4 sm:py-3.5 rounded-lg border text-xs sm:text-sm font-medium transition-all duration-200 ${
+                  activeScenario === s.id
+                    ? 'border-obsidian-purple/40 bg-obsidian-purple/5 text-obsidian-heading'
+                    : 'border-obsidian-border text-obsidian-muted hover:border-obsidian-border-light hover:text-obsidian-text'
+                }`}
+              >
+                <Icon className="w-3.5 h-3.5 flex-shrink-0" />
+                {SCENARIO_LABELS[s.id]}
+              </button>
+            );
+          })}
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-5 gap-4 sm:gap-6">
@@ -130,16 +166,13 @@ export default function WikiDemo({ locale = 'en' }: Props) {
                   <span className={`text-sm font-medium ${i === step ? 'text-[#e5e5e5]' : 'text-obsidian-muted'}`}>{t.wikiDemo[s.titleKey]}</span>
                 </div>
                 <p className={`text-xs leading-relaxed pl-7 ${i === step ? 'text-obsidian-muted' : 'text-obsidian-dim'}`}>
-                  {i === 0
-                    ? (locale === 'zh' ? scenario.sourceNoteContextZh : scenario.sourceNoteContext)
-                    : t.wikiDemo[s.descKey]
-                  }
+                  {i === 0 ? scenario.sourceNoteContext : t.wikiDemo[s.descKey]}
                 </p>
               </button>
             ))}
             <div className="flex items-center gap-2 pt-1">
               <button onClick={() => setStep(Math.min(4, step + 1))} disabled={step === 4} className="px-3 py-1.5 text-xs font-mono text-white bg-obsidian-purple-dark rounded-md hover:bg-obsidian-purple disabled:opacity-30 transition-all">{t.wikiDemo.next}</button>
-              <button onClick={() => { setStep(0); setAutoPlay(!autoPlay); }} aria-label={autoPlay ? (locale === 'zh' ? '暂停' : 'Pause') : (locale === 'zh' ? '播放' : 'Play')} className={`px-3 py-1.5 text-xs font-mono border rounded-md transition-all ${autoPlay ? 'border-obsidian-purple/40 text-obsidian-purple' : 'border-obsidian-border text-obsidian-muted hover:border-obsidian-border-light'}`}>{autoPlay ? '⏸' : '▶'}</button>
+              <button onClick={() => { setStep(0); setAutoPlay(!autoPlay); }} aria-label={autoPlay ? t.wikiDemo.ask : t.wikiDemo.restart} className={`px-3 py-1.5 text-xs font-mono border rounded-md transition-all ${autoPlay ? 'border-obsidian-purple/40 text-obsidian-purple' : 'border-obsidian-border text-obsidian-muted hover:border-obsidian-border-light'}`}>{autoPlay ? '⏸' : '▶'}</button>
               <button onClick={() => { setStep(0); setAutoPlay(false); }} className="px-3 py-1.5 text-xs font-mono text-obsidian-dim border border-obsidian-border rounded-md hover:border-obsidian-border-light transition-all">{t.wikiDemo.restart}</button>
             </div>
           </div>
@@ -264,7 +297,7 @@ export default function WikiDemo({ locale = 'en' }: Props) {
 
                 const selPage = generatedPages[selectedPageIdx] ?? generatedPages[0];
 
-                const renderWikiTree = (nodes: WikiNode[], depth: number): React.ReactNode =>
+                const renderWikiTree = (nodes: WikiNode[], depth: number): ReactNode =>
                   nodes.map(n => {
                     const indent = depth * 14 + 4;
                     if (n.isDir) {
@@ -385,7 +418,7 @@ export default function WikiDemo({ locale = 'en' }: Props) {
                           <Sparkles className="w-3.5 h-3.5 text-obsidian-purple-light" />
                         </div>
                         <div className="rounded-lg border border-obsidian-purple/20 bg-obsidian-purple/5 px-4 py-3 text-sm text-obsidian-text leading-relaxed space-y-1.5 max-w-[85%]">
-                          <p>{chatAnswerLead}</p>
+                          <p>{renderChatAnswerLead(chatAnswerLeadText)}</p>
                           <p className="text-obsidian-muted">{chatAnswerDetail}</p>
                           <div className="flex items-center gap-1.5 pt-1">
                             <span className="text-xs font-mono text-obsidian-dim">Sources:</span>
@@ -404,7 +437,7 @@ export default function WikiDemo({ locale = 'en' }: Props) {
                   <button
                     key={i}
                     onClick={() => { setStep(i); setAutoPlay(false); }}
-                    aria-label={`${locale === 'zh' ? '步骤' : 'Step'} ${i + 1}`}
+                    aria-label={`${t.wikiDemo.ask} ${i + 1}`}
                     aria-current={i === step ? 'step' : undefined}
                     className="min-w-6 min-h-6 flex items-center justify-center rounded-full"
                   >

@@ -12,12 +12,15 @@ const t = translations[currentLocale as keyof typeof translations] || translatio
 const LANGUAGES = [
   { code: 'en', label: 'English', path: '/' },
   { code: 'zh', label: '中文', path: '/zh/' },
+  { code: 'zh-tw', label: '繁體中文', path: '/zh-tw/' },
   { code: 'ja', label: '日本語', path: '/ja/' },
   { code: 'ko', label: '한국어', path: '/ko/' },
   { code: 'de', label: 'Deutsch', path: '/de/' },
   { code: 'es', label: 'Español', path: '/es/' },
   { code: 'fr', label: 'Français', path: '/fr/' },
   { code: 'pt', label: 'Português', path: '/pt/' },
+  { code: 'it', label: 'Italiano', path: '/it/' },
+  { code: 'ru', label: 'Русский', path: '/ru/' },
 ];
 
 interface NavItem { key: string; label: string; href?: string; target?: string }

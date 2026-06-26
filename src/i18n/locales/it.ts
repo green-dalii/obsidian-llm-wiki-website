@@ -1,0 +1,61 @@
+import type { Translations } from './types';
+
+export const it: Translations = {
+  nav: { howItWorks: 'Come funziona', comparison: 'Perché conta', features: 'Funzionalità', ecosystem: 'Ecosistema', providers: 'La tua IA', install: 'Installa', download: 'Aggiungi a Obsidian', faq: 'FAQ', blog: 'Blog', home: 'Home', trust: 'Fiducia' },
+  hero: { badge: 'Il concetto LLM Wiki di Andrej Karpathy', title1: 'I tuoi appunti.', title2: 'Una wiki vivente.', subtitle: 'Scrivi in Obsidian. Ogni nota si collega a una rete che non smette di crescere.', ctaInstall: 'Ottieni il plugin', ctaObsidian: 'Ottieni Obsidian', obsidianHint: 'Richiede Obsidian.', ctaRead: 'Leggi il concetto originale', legendSources: 'sources/', legendEntities: 'entities/', legendConcepts: 'concepts/', scrollHint: 'Scorri' },
+  wikiDemo: { label: 'Come funziona', title: 'Da nota a wiki', subtitle: 'Una nota. Un mondo di connessioni.', step1Title: 'Mettilo dentro', step1Desc: 'Articoli, paper, idee. Mettili in sources/. Il plugin legge ogni parola.', step2Title: 'Vedi ciò che conta', step2Desc: 'Persone, luoghi, temi. L\'IA legge il quadro completo e mette in evidenza ciò che conta.', step3Title: 'Compaiono le pagine', step3Desc: 'Ogni concetto ha il suo spazio. Contenuto, significato, connessioni — tutto pronto per te.', step4Title: 'Guarda come si collega', step4Desc: 'Le pagine si collegano tra loro. Apri Graph View e guarda il tuo sapere prendere forma.', step5Title: 'Basta chiedere', step5Desc: 'Chiedi in modo naturale. La tua wiki risponde con fonti verificabili — e le salva come nuove pagine.', next: 'Avanti', prev: 'Indietro', restart: 'Ricomincia', sourceNote: 'Fonte', extracted: 'Trovato', generated: 'Creato', linked: 'Collegato', ask: 'Chiedi', answer: 'Risposta' },
+  comparison: { label: 'Perché conta', title: 'Niente di ciò che leggi dovrebbe andare sprecato.', subtitle: 'Perderlo o farlo crescere?', beforeLabel: 'Prima', afterLabel: 'Dopo', items: [{ category: 'Salvare', before: 'Salvi un articolo. Dimentichi dove. Cerchi dopo. Niente.', after: 'Lo metti in sources/. Idee trovate, pagine costruite, riassunto pronto. In pochi secondi.' }, { category: 'Collegare', before: 'Colleghi due note a mano. Una cambia. L\'altra resta vecchia. Il link muore.', after: 'I link restano vivi. Quando nuove informazioni contraddicono le vecchie, ogni pagina correlata si mantiene attuale.' }, { category: 'Crescere', before: 'Un anno di note. Solo file. Ogni progetto ricomincia da zero. Stesse letture. Stesse conclusioni.', after: 'Un anno costruisce una wiki. Ogni nuova domanda attinge a tutto ciò che hai raccolto. Il tuo sapere cresce.' }] },
+  features: { label: 'Funzionalità', title: 'Cosa cambia', subtitle: 'Non funzionalità. Un nuovo rapporto con tutto ciò che leggi.', organizeTitle: 'Succede da solo', organizeDesc: 'Mettilo in sources/. L\'IA legge, estrae, costruisce. Niente cartelle. Niente tag. Niente fatica.', organizeTag: 'Zero sforzo', bidirectionalTitle: 'Link vivi', bidirectionalDesc: 'Ogni pagina si unisce al tuo grafo di Obsidian. Apri Graph View — e guarda crescere il tuo sapere.', bidirectionalTag: 'Connesso', conversationalTitle: 'Parla e basta', conversationalDesc: 'Chiedi come a un amico. Guardala ragionare, poi risponde con fonti che puoi aprire e di cui fidarti.', conversationalTag: 'Naturale', autoMaintenanceTitle: 'Resta attuale', autoMaintenanceDesc: 'Nuovi file? Ingeriti. Contraddizioni? Trovate. Salute? Controllata. Alle tue condizioni.', autoMaintenanceTag: 'Alle tue condizioni',
+    smartFixTitle: 'Un clic risolve tutto',
+    smartFixDesc: 'Correzione in lotti ordinata causalmente: alias → duplicati → link rotti → orfani → pagine vuote. Cinque fasi in sequenza con elaborazione parallela.',
+    smartFixTag: 'Smart Fix All',
+    granularityTitle: 'Dal fine al grossolano. Decidi tu.',
+    granularityDesc: 'Controlla la profondità di estrazione per fonte. Standard per l\'uso quotidiano, Fine per la ricerca, Grossolano per le panoramiche rapide.',
+    granularityTag: 'Granularità',
+    moreLabel: 'E altro ancora:',
+    moreCapabilities: ['Output in 9 lingue', 'Guardalo ragionare', 'Citazioni verificabili', 'I tuoi tag', 'Coglie le contraddizioni', 'Trova i duplicati', 'Si riprende dagli intoppi', 'Salta ciò che è già fatto'],
+  },
+  install: { label: 'Inizia ora', title: 'Pronto in pochi minuti', subtitle: 'Basta Obsidian.', step1Title: 'Installa', step1Desc: 'In Obsidian: Impostazioni → Plugin della community → Sfoglia, cerca <em>Karpathy LLM Wiki</em>, clicca <em>Installa</em> e poi <em>Attiva</em>.', step2Title: 'Configura', step2Desc: 'Impostazioni → <em>Karpathy LLM Wiki</em>. Scegli il tuo LLM, inserisci la chiave, testa, salva.', step3Title: 'Usa', step3Desc: '<em>Cmd+P</em> (o <em>Ctrl+P</em>). Digita <em>Ingest</em> per aggiungere fonti. Digita <em>Query</em> per chiedere.', pluginPageButton: 'Apri la pagina del plugin', cta: 'Ottienilo su Obsidian' },
+  providers: { label: 'Porta la tua IA', title: 'La tua IA. Le tue regole.', subtitle: 'Dodici provider, cloud o locale. Cambia quando vuoi — senza vincoli.', openSourceTitle: 'Open source', openSourceDesc: 'Licenza MIT. Ogni riga di codice su GitHub. Fai fork, verifica, rendilo tuo.', communityTitle: 'Community', communityDesc: 'GitHub Discussions per idee e supporto. I contributi sono i benvenuti.', vendorTitle: 'Privacy prima di tutto', vendorDesc: 'Nessun archiviazione. Nessun backend. Nessuna raccolta dati. I tuoi appunti restano nel tuo Obsidian — inviati al tuo LLM solo durante l\'ingest o la query. I modelli locali mantengono tutto offline.', obsidianTitle: 'Obsidian puro', obsidianDesc: 'Niente app extra. Vive interamente dentro il tuo Obsidian.', cardLabel: 'Dodici provider, pronti all\'uso', cardSubtitle: 'Cloud o locale — usa quello di cui ti fidi.', contextNote: 'I modelli a contesto lungo leggono l\'intera wiki in un solo passaggio — il quadro completo, non frammenti.', bestValue: 'Miglior rapporto qualità/prezzo',
+    noLockInTitle: 'Nessun vincolo', noLockInDesc: 'Dodici provider a un menu di distanza. Uno non ti basta, passa al prossimo — la tua wiki non se ne accorge.',
+    privacyTitle: 'Prima la privacy', privacyDesc: 'Nessun backend. Nessun tracciamento. Niente archiviazione. I tuoi appunti viaggiano solo verso l\'IA che scegli — o restano del tutto offline con un modello locale.',
+    affordableTitle: 'Quasi gratis', affordableDesc: 'Un ingest completo costa $0,05–$0,50. Con un modello economico, il costo si nota a malapena.',
+    localBadge: 'Locale' },
+  ecosystem: { label: 'Ecosistema', title: 'Ogni plugin, amplificato', subtitle: 'Non un\'isola. Ogni strumento che ami, ora ancora meglio.', items: [{ name: 'Graph View', standalone: 'Vedi i link', amplified: 'La wiki dà significato al tuo grafo. Pagine hub, cluster, orfani. Esplorazione, non decorazione.' }, { name: 'Web Clipper', standalone: 'Salva articoli', amplified: 'Mettili in sources/. L\'IA estrae, collega, aggiorna. Un clip diventa 10+ pagine wiki.' }, { name: 'Dataview', standalone: 'Interroga i dati', amplified: 'L\'IA aggiunge struttura. Tag, date, categorie. Le tabelle vuote diventano dashboard viventi.' }, { name: 'Git', standalone: 'Traccia le versioni', amplified: 'Guarda evolvere il tuo sapere. Ogni commit racconta la storia di come sei cresciuto.' }, { name: 'Marp', standalone: 'Crea slide', amplified: 'Chiedi: "Riassumi la mia ricerca per un talk di 10 minuti." La wiki costruisce le slide dal tuo sapere.' }, { name: 'Canvas', standalone: 'Canvas visuale', amplified: 'L\'IA costruisce mappe concettuali, linee temporali, alberi decisionali dal tuo sapere. Basta canvas vuoti.' }], cta: 'Solo l\'inizio. Quando il tuo sapere ha struttura, ogni plugin diventa più potente.' },
+  footer: { emailUser: 'hi', emailDomain: 'greenerai.top', emailLabel: 'Contatto:', github: 'GitHub', discussions: 'Feedback', releases: 'Release', obsidian: 'Obsidian' },
+  cta: { title: 'Pronto a costruire la tua wiki?', subtitle: 'Open source. Guidato dalla community. Solo Obsidian.', button: 'Aggiungi a Obsidian' },
+  trust: {
+    label: 'Fiducia',
+    title: 'Un sapere di cui fidarti.',
+    subtitle: 'Un\'IA a cui puoi affidare un anno di pensiero.',
+    items: [
+      {
+        title: 'Ogni risposta, rintracciabile',
+        desc: 'Ogni risposta rimanda direttamente ai tuoi appunti. Nessun fatto inventato — solo ciò che hai scritto, con le fonti.',
+        icon: 'quote',
+      },
+      {
+        title: 'Ciò che finalizzi, resta',
+        desc: 'Segna una pagina come revisionata e l\'IA non la riscrive mai. Le tue parole sono tue — aggiunge soltanto, non sovrascrive.',
+        icon: 'lock',
+      },
+      {
+        title: 'Le contraddizioni emergono',
+        desc: 'Quando due fonti sono in disaccordo, segnala il conflitto invece di mascherarlo. Decidi tu cosa è vero.',
+        icon: 'git-compare',
+      },
+    ],
+  },
+  faq: {
+    label: 'FAQ',
+    title: 'Domande frequenti',
+    subtitle: 'Tutto ciò che ti serve per iniziare.',
+    items: [
+      { q: 'Cosa fa davvero questo plugin?', a: 'Metti qualsiasi nota nel tuo vault di Obsidian. L\'IA estrae persone, concetti e teorie, poi genera automaticamente pagine wiki collegate con link bidirezionali. Chiedi <em>"cosa ho scritto su X?"</em> — la risposta viene dai tuoi appunti, non da internet.' },
+      { q: 'Quali sono i requisiti minimi?', a: 'Obsidian v1.11.0+ (desktop: Windows, macOS, Linux) e una chiave API di un provider LLM. Supportati: DeepSeek, Gemini, Claude, GPT, Kimi, GLM, MiniMax, OpenRouter o qualsiasi endpoint personalizzato. Nessuna chiave API necessaria per i modelli locali via Ollama o LM Studio.' },
+      { q: 'Quale modello scegliere? Quanto costa?', a: 'Modelli a contesto lungo consigliati — elaborano l\'intera wiki in un solo passaggio. Un singolo ingest costa <em>$0,05–$0,50</em>. Tutti i costi vanno al provider LLM; il plugin è <em>gratuito e open source</em>.' },
+      { q: 'Posso eseguirlo completamente offline con modelli locali?', a: 'Sì. Installa <em>Ollama</em> o <em>LM Studio</em>, scarica un modello, selezionalo come provider — nessuna chiave API, nulla esce dalla tua macchina. I provider cloud sono migliori per ingest pesanti (contesto più ampio); i modelli locali funzionano benissimo per le query quotidiane.' },
+      { q: 'Come ottengo aiuto o segnalo bug?', a: 'Usa <em>GitHub Issues</em> per le segnalazioni di bug, <em>GitHub Discussions</em> per le domande. Trovi anche il plugin nella pagina <em>Obsidian Community Plugin</em> e puoi lasciare una recensione.' },
+    ],
+  },
+};

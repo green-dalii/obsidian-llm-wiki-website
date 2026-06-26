@@ -12,9 +12,24 @@ import { de } from './de';
 import { es } from './es';
 import { fr } from './fr';
 import { pt } from './pt';
+import { it } from './it';
+import { ru } from './ru';
+import { zhHant } from './zh-hant';
 
 import type { Translations } from './types';
 
-export const translations: Record<string, Translations> = { en, zh, ja, ko, de, es, fr, pt };
+export const translations: Record<string, Translations> = {
+  en,
+  zh,
+  ja,
+  ko,
+  de,
+  es,
+  fr,
+  pt,
+  it,
+  ru,
+  'zh-tw': zhHant,
+};
 
 export type { Translations };

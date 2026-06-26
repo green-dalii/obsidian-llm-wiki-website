@@ -1,0 +1,31 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Hero from '../../components/astro/Hero.astro';
+import Comparison from '../../components/astro/Comparison.astro';
+import WikiDemoIsland from '../../components/WikiDemoIsland';
+import Features from '../../components/astro/Features.astro';
+import Trust from '../../components/astro/Trust.astro';
+import Install from '../../components/astro/Install.astro';
+import FAQ from '../../components/astro/FAQ.astro';
+import Ecosystem from '../../components/astro/Ecosystem.astro';
+import Providers from '../../components/astro/Providers.astro';
+import CTA from '../../components/astro/CTA.astro';
+
+const title = 'Karpathy LLM Wiki — AI 驅動的活知識庫';
+const description = "在 Obsidian 中實現 Karpathy 的 LLM Wiki 概念——AI 讀取你的筆記，自動產生帶有實體/概念頁面、雙向連結與對話式查詢的互聯知識庫。";
+const keywords = 'Obsidian 插件, LLM Wiki, AI 知識管理, 知識圖譜, 雙向連結, 筆記工具, AI 知識庫, 自組織筆記, Karpathy, Obsidian AI, Markdown 知識庫';
+---
+
+<BaseLayout title={title} description={description} keywords={keywords} locale="zh-tw" ogLocale="zh_TW">
+  <Hero locale="zh-tw" />
+  <Comparison locale="zh-tw" />
+  <WikiDemoIsland client:visible locale="zh-tw" />
+  <div class="h-px max-w-5xl mx-auto bg-gradient-to-r from-transparent via-obsidian-purple/20 to-transparent" />
+  <Features locale="zh-tw" />
+  <Trust locale="zh-tw" />
+  <Install locale="zh-tw" />
+  <FAQ locale="zh-tw" />
+  <Ecosystem locale="zh-tw" />
+  <Providers locale="zh-tw" />
+  <CTA locale="zh-tw" />
+</BaseLayout>

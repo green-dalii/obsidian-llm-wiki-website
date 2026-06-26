@@ -1,0 +1,31 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Hero from '../../components/astro/Hero.astro';
+import Comparison from '../../components/astro/Comparison.astro';
+import WikiDemoIsland from '../../components/WikiDemoIsland';
+import Features from '../../components/astro/Features.astro';
+import Trust from '../../components/astro/Trust.astro';
+import Install from '../../components/astro/Install.astro';
+import FAQ from '../../components/astro/FAQ.astro';
+import Ecosystem from '../../components/astro/Ecosystem.astro';
+import Providers from '../../components/astro/Providers.astro';
+import CTA from '../../components/astro/CTA.astro';
+
+const title = 'Karpathy LLM Wiki — Wiki vivente basata sull\'IA';
+const description = "Implementazione Obsidian del concept LLM Wiki di Karpathy — l'IA legge i tuoi appunti e genera un wiki interconnesso con pagine entità/concetto, link bidirezionali e query conversazionale.";
+const keywords = 'plugin Obsidian, LLM Wiki, gestione conoscenza IA, grafo conoscenza, link bidirezionali, strumento appunti, base conoscenza IA, appunti auto-organizzanti, Karpathy, Obsidian AI, wiki Markdown';
+---
+
+<BaseLayout title={title} description={description} keywords={keywords} locale="it" ogLocale="it_IT">
+  <Hero locale="it" />
+  <Comparison locale="it" />
+  <WikiDemoIsland client:visible locale="it" />
+  <div class="h-px max-w-5xl mx-auto bg-gradient-to-r from-transparent via-obsidian-purple/20 to-transparent" />
+  <Features locale="it" />
+  <Trust locale="it" />
+  <Install locale="it" />
+  <FAQ locale="it" />
+  <Ecosystem locale="it" />
+  <Providers locale="it" />
+  <CTA locale="it" />
+</BaseLayout>

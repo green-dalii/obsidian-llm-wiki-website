@@ -1,0 +1,31 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Hero from '../../components/astro/Hero.astro';
+import Comparison from '../../components/astro/Comparison.astro';
+import WikiDemoIsland from '../../components/WikiDemoIsland';
+import Features from '../../components/astro/Features.astro';
+import Trust from '../../components/astro/Trust.astro';
+import Install from '../../components/astro/Install.astro';
+import FAQ from '../../components/astro/FAQ.astro';
+import Ecosystem from '../../components/astro/Ecosystem.astro';
+import Providers from '../../components/astro/Providers.astro';
+import CTA from '../../components/astro/CTA.astro';
+
+const title = 'Karpathy LLM Wiki — живая вики на основе ИИ';
+const description = "Реализация концепции LLM Wiki Карпатого для Obsidian — ИИ читает ваши заметки и создаёт взаимосвязанную вики со страницами сущностей/концепций, двусторонними ссылками и разговорным поиском.";
+const keywords = 'плагин Obsidian, LLM Wiki, управление знаниями ИИ, граф знаний, двусторонние ссылки, инструмент заметок, база знаний ИИ, самоорганизующиеся заметки, Карпатый, Obsidian ИИ, вики Markdown';
+---
+
+<BaseLayout title={title} description={description} keywords={keywords} locale="ru" ogLocale="ru_RU">
+  <Hero locale="ru" />
+  <Comparison locale="ru" />
+  <WikiDemoIsland client:visible locale="ru" />
+  <div class="h-px max-w-5xl mx-auto bg-gradient-to-r from-transparent via-obsidian-purple/20 to-transparent" />
+  <Features locale="ru" />
+  <Trust locale="ru" />
+  <Install locale="ru" />
+  <FAQ locale="ru" />
+  <Ecosystem locale="ru" />
+  <Providers locale="ru" />
+  <CTA locale="ru" />
+</BaseLayout>

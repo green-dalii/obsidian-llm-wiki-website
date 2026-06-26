@@ -25,9 +25,11 @@ const keywords = 'Obsidian plugin, LLM Wiki, AI knowledge management, knowledge 
         try { if (sessionStorage.getItem('lang-routed')) return; } catch (e) {}
 
         var lang = (navigator.language || '').toLowerCase();
-        var map = { zh: '/zh/', ja: '/ja/', ko: '/ko/', de: '/de/', es: '/es/', fr: '/fr/', pt: '/pt/' };
+        var map = { zh: '/zh/', ja: '/ja/', ko: '/ko/', de: '/de/', es: '/es/', fr: '/fr/', pt: '/pt/', it: '/it/', ru: '/ru/' };
+        // zh-tw / zh-hk / zh-mo -> Traditional Chinese variant page
+        var isTraditional = /^zh-(tw|hk|hk|mo)\b/i.test(lang);
         var code = lang.split('-')[0];
-        var target = map[code];
+        var target = isTraditional ? '/zh-tw/' : map[code];
 
         if (target && code !== 'en') {
           try { sessionStorage.setItem('lang-routed', '1'); } catch (e) {}

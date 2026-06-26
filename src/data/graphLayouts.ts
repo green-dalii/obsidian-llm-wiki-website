@@ -1,4 +1,4 @@
-import type { ScenarioId } from './scenarios';
+import type { ScenarioId } from '../i18n/locales/scenarios/types';
 
 export interface GraphLayout {
   mainNodes: Array<{ x: number; y: number }>;

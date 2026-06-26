@@ -16,7 +16,7 @@ interface Props {
 const { title, description = '', keywords = '', locale = 'en', ogLocale = 'en_US', isBlog = false } = Astro.props;
 const siteUrl = Astro.site;
 
-const ALL_LOCALES = ['en', 'zh', 'ja', 'ko', 'de', 'es', 'fr', 'pt'] as const;
+const ALL_LOCALES = ['en', 'zh', 'ja', 'ko', 'de', 'es', 'fr', 'pt', 'it', 'ru', 'zh-tw'] as const;
 const canonicalPath = locale === 'en' ? '' : `${locale}/`;
 const canonical = siteUrl + canonicalPath;
 const localePrefix = (code: string) => code === 'en' ? '' : `${code}/`;
