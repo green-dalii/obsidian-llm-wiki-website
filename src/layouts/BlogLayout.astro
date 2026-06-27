@@ -1,10 +1,18 @@
 ---
 import BaseLayout from './BaseLayout.astro';
 
-const { title, description = '', locale = 'en' } = Astro.props;
+const { title, description = '', locale = 'en', hreflangAlternates, breadcrumbs } = Astro.props;
 ---
 
-<BaseLayout title={title} description={description} locale={locale} ogLocale={locale === 'zh' ? 'zh_CN' : 'en_US'} isBlog>
+<BaseLayout
+  title={title}
+  description={description}
+  locale={locale}
+  ogLocale={locale === 'zh' ? 'zh_CN' : 'en_US'}
+  isBlog
+  hreflangAlternates={hreflangAlternates}
+  breadcrumbs={breadcrumbs}
+>
   <slot />
 </BaseLayout>
 

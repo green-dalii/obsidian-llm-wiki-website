@@ -7,12 +7,18 @@ const posts = allPosts.sort((a, b) => b.data.date.getTime() - a.data.date.getTim
 const allTags = [...new Set(posts.flatMap(p => p.data.tags || []))].sort();
 ---
 
-<BlogLayout title="博客" description="关于 Karpathy LLM Wiki 的更新、教程和深度解析。" locale="zh">
+<BlogLayout
+  title="博客 — Karpathy LLM Wiki"
+  description="关于 Karpathy LLM Wiki 的更新、教程和深度解析。"
+  locale="zh"
+  hreflangAlternates={[{ code: 'en', path: '/blog/' }, { code: 'zh', path: '/zh/blog/' }]}
+  breadcrumbs={[{ name: '首页', path: '/zh/' }, { name: '博客', path: '/zh/blog/' }]}
+>
   <section class="relative w-full py-28 sm:py-36 reveal">
     <div class="max-w-6xl mx-auto px-4 sm:px-6">
       <div class="mb-14 reveal text-center">
         <span class="text-[11px] font-mono text-obsidian-purple tracking-[0.15em] uppercase">Blog</span>
-        <h2 class="text-[clamp(1.6rem,4vw,2.8rem)] font-semibold mt-3 mb-3 text-obsidian-heading reveal" data-delay="1">最新动态</h2>
+        <h1 class="text-[clamp(1.6rem,4vw,2.8rem)] font-semibold mt-3 mb-3 text-obsidian-heading reveal" data-delay="1">最新动态</h1>
         <p class="text-obsidian-muted max-w-lg mx-auto text-sm">关于插件和 Karpathy LLM Wiki 理念的更新、教程与深度解析。</p>
       </div>
 
@@ -32,7 +38,7 @@ const allTags = [...new Set(posts.flatMap(p => p.data.tags || []))].sort();
           <a href={`/zh/blog/posts/${post.id}/`} data-tags={JSON.stringify(post.data.tags || [])} class="post-card flex">
             <article class="card card-hover reveal p-5 sm:p-6 w-full flex flex-col" data-delay={i * 2}>
               <time class="text-[11px] font-mono text-obsidian-dim block mb-2">{post.data.date.toLocaleDateString('zh-CN', { year: 'numeric', month: 'long', day: 'numeric' })}</time>
-              <h3 class="text-base font-semibold text-obsidian-heading mb-1.5">{post.data.title}</h3>
+              <h2 class="text-base font-semibold text-obsidian-heading mb-1.5">{post.data.title}</h2>
               <p class="text-sm text-obsidian-muted leading-relaxed mb-3 line-clamp-3 flex-1">{post.data.description}</p>
               <div class="flex flex-wrap gap-1.5 mt-auto">
                 {(post.data.tags || []).map(tag => (

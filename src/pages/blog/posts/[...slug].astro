@@ -11,6 +11,13 @@ const { post } = Astro.props;
 const allPosts = await getCollection('blog');
 const postsMap = new Map(allPosts.map(p => [p.id, p.data.title]));
 const { Content, headings } = await render(post);
+
+// hreflang: link EN ↔ ZH versions of this post (same slug), only when the translation exists
+const zhPosts = await getCollection('blog-zh');
+const hreflang = [{ code: 'en', path: `/blog/posts/${post.id}/` }];
+if (zhPosts.some(p => p.id === post.id)) {
+  hreflang.push({ code: 'zh', path: `/zh/blog/posts/${post.id}/` });
+}
 ---
 
 <BlogPostLayout
@@ -20,6 +27,7 @@ const { Content, headings } = await render(post);
   tags={post.data.tags || []}
   locale="en"
   headings={headings}
+  hreflang={hreflang}
   relatedPosts={(post.data.related || []).map((slug: string) => ({ slug, title: postsMap.get(slug) || slug }))}
 >
   <Content />

@@ -15,9 +15,31 @@ const blogPath = locale === 'zh' ? '/zh/blog/' : '/blog/';
 const tocLabel = locale === 'zh' ? '目录' : 'Contents';
 const relatedLabel = locale === 'zh' ? '接下来读什么' : 'What to Read Next';
 const tf = locale === 'zh' ? '/zh/blog/' : '/blog/';
+
+// SEO: article structured data + breadcrumb trail + hreflang (passed from the route)
+const hreflangAlternates = (Astro.props.hreflang || []) as { code: string; path: string }[];
+const articleMeta = { datePublished: dt.toISOString(), tags };
+const homePath = locale === 'zh' ? '/zh/' : '/';
+const homeLabel = locale === 'zh' ? '首页' : 'Home';
+const blogLabel = locale === 'zh' ? '博客' : 'Blog';
+const breadcrumbs = [
+  { name: homeLabel, path: homePath },
+  { name: blogLabel, path: blogPath },
+  { name: title, path: Astro.url.pathname },
+];
 ---
 
-<BaseLayout title={title} description={description} locale={locale} ogLocale={locale === 'zh' ? 'zh_CN' : 'en_US'} isBlog>
+<BaseLayout
+  title={title}
+  description={description}
+  locale={locale}
+  ogLocale={locale === 'zh' ? 'zh_CN' : 'en_US'}
+  isBlog
+  pageType="article"
+  articleMeta={articleMeta}
+  hreflangAlternates={hreflangAlternates}
+  breadcrumbs={breadcrumbs}
+>
   <main class="pt-14">
     <article class="relative w-full py-16 sm:py-24">
       <div class="max-w-7xl mx-auto px-4 sm:px-6">
