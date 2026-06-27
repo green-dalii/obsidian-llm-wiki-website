@@ -183,7 +183,19 @@ npx vitest run    # i18n parity tests (currently 48/48 passing)
 
 Selected highlights; full version history lives in git log.
 
-### v3.0.0 (2026-06) — current
+### v3.1.0 (2026-06) — current
+- **Trust demoted into Features** — removed standalone Trust section; its three claims live as `features.finalized` (What you finalize, stays) and `features.history` (Every change, traceable) cards, with the third absorbed into the existing `citations` card
+- **Privacy reframed** — `providers.privacyTitle` rewritten as "Privacy first" / "隐私第一" across 11 locales (was "What you write, stays yours" — vague, read as a tagline)
+- **Providers re-titled** — "Your AI. Your rules." → "Your model. Your rules." (matches Nav chip "Models" / "AI 模型")
+- **Features 9+1 layout** — 9 main cards (organize, conversational, bidirectional, autoMaintenance, smartFix, finalized, citations, tags, granularity) + 1 always-chip (history). Responsive: 4 cards on mobile, 6 on tablet, 9 on desktop. Demoted titles collapse into the existing "more capabilities" pill row (no separate chip section)
+- **Features cleanup** — removed redundant ASCII micro-code snippets from every card
+- **Nav slimmed** — 8 → 5 items; removed `nav.providers` and `nav.trust` from the i18n contract; FAQ section still exists with `#faq` anchor
+- **Icon library** — added `history` icon (lucide clock + arrow)
+- **Pre-delivery Gate** — `npm run gate` runs `tsc --noEmit` → `eslint --max-warnings 0` → `vitest run` → `astro build` in sequence. Any non-zero exit stops the chain. Documented in CLAUDE.md as the contract for "done"
+- **WikiDemo cleanup** — removed unused `ScenarioIcon` declaration
+- **All 11 locales** synced (en, zh, zh-hant, ja, ko, de, es, fr, pt, it, ru)
+
+### v3.0.0 (2026-06)
 - **3 new locales**: Italian (`it`), Russian (`ru`, preview), Traditional Chinese (`zh-tw`)
 - **Scenarios migrated to i18n** — was a hardcoded EN+ZH `.tsx` file; now 11 per-locale files under `src/i18n/locales/scenarios/`
 - **WikiDemo refactored** — removed all `locale === 'zh'` binary checks; reads from typed scenarios object directly. Replaced `React.ReactNode` with `[[token]]` string markers in chatAnswerLead
