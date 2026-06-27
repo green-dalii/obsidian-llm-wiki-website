@@ -1,7 +1,7 @@
 {
   "name": "obsidian-llm-wiki-website",
   "private": true,
-  "version": "2.2.0",
+  "version": "3.1.0",
   "type": "module",
   "scripts": {
     "dev": "astro dev",
@@ -10,6 +10,8 @@
     "lint": "eslint .",
     "test": "vitest",
     "test:run": "vitest run",
+    "typecheck": "tsc --noEmit",
+    "gate": "bash scripts/gate.sh",
     "astro": "astro"
   },
   "dependencies": {

@@ -224,13 +224,31 @@ Tags are consolidated into 3 user-centric categories (not technical/functional o
 - `BlogPostLayout.astro` MUST pass `isBlog` to `BaseLayout` — without it, Header renders anchor items as `<button data-scroll-to="#xxx">` which silently fails on blog post pages (no `#features`, `#faq`, etc. exist there)
 - `BlogLayout.astro` does this correctly (line 7); `BlogPostLayout.astro` had the same pattern but missed the prop before v3.0.0
 
-## Verification (run before claiming done)
+## Pre-delivery Gate (run before claiming done)
+
+A single command runs the full gate. Every check MUST exit 0 — 0 error, 0 warning, no exceptions.
 
 ```bash
-npx tsc --noEmit                 # 0 errors expected
-npx vitest run                   # 48/48 i18n parity tests pass
-npx astro build                  # clean build, ~53 pages
+npm run gate                     # runs scripts/gate.sh
 ```
+
+The gate executes four checks in order and stops on first failure:
+
+| # | Check | Command | What it catches |
+|---|---|---|---|
+| 1 | TypeScript | `tsc --noEmit` | type drift, missing fields, missing imports |
+| 2 | ESLint | `eslint . --max-warnings 0` | unused vars, react-hooks rules, dead code |
+| 3 | Vitest | `vitest run` | i18n parity (48/48), structural regressions |
+| 4 | Astro Build | `astro build` | static-site generation, all 53 pages, broken imports |
+
+**Never claim a task complete unless the gate passes cleanly.** IDE diagnostics may show
+stale errors during partial edits — the gate is the single source of truth. The script
+lives at `scripts/gate.sh` and is wired into `package.json` as `npm run gate`. Extend
+the script (don't bypass it) when adding new check types.
+
+If a check fails, fix the underlying issue — do not add `--no-verify` / `--max-warnings
+999` / `.skip` to make the gate pass. Tolerated temporary gaps go in the
+`KNOWN_GAPS` registry in `tests/i18n-parity.test.ts` with a `reason`.
 
 Then in browser:
 - `/` (English landing) — all sections render, WikiDemo steps + scenarios work
