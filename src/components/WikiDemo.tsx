@@ -118,8 +118,6 @@ export default function WikiDemo({ locale = 'en' }: Props) {
   const sectionCount = (sourceText.match(/^## /gm) || []).length + 1;
   const lineCount = lines.length;
 
-  const ScenarioIcon = SCENARIO_ICON_MAP[scenario.icon] ?? Heart;
-
   return (
     <section ref={sectionRef} id="how-it-works" className="relative w-full py-28 sm:py-36">
       <div className="max-w-5xl mx-auto px-4 sm:px-6">
