@@ -11,13 +11,11 @@ export interface Translations {
     comparison: string;
     features: string;
     ecosystem: string;
-    providers: string;
     install: string;
     download: string;
     faq: string;
     blog: string;
     home: string;
-    trust?: string;
   };
   hero: {
     badge: string;
@@ -91,6 +89,18 @@ export interface Translations {
     granularityTitle: string;
     granularityDesc: string;
     granularityTag: string;
+    citationsTitle: string;
+    citationsDesc: string;
+    citationsTag: string;
+    tagsTitle: string;
+    tagsDesc: string;
+    tagsTag: string;
+    finalizedTitle: string;
+    finalizedDesc: string;
+    finalizedTag: string;
+    historyTitle: string;
+    historyDesc: string;
+    historyTag: string;
     moreCapabilities: string[];
     moreLabel: string;
   };
@@ -132,16 +142,6 @@ export interface Translations {
     affordableTitle?: string;
     affordableDesc?: string;
     localBadge?: string;
-  };
-  trust?: {
-    label: string;
-    title: string;
-    subtitle: string;
-    items: Array<{
-      title: string;
-      desc: string;
-      icon: string;
-    }>;
   };
   ecosystem: {
     label: string;

@@ -191,10 +191,10 @@ describe('getTranslations() / getText() API', () => {
 
   it('falls back to EN for unknown locales and missing optional fields', () => {
     const t = getTranslations('xx');
-    expect(t.trust).toBeDefined();
-    expect(t.trust?.title).toBe(EN.trust?.title);
-    expect(t.nav.trust).toBe(EN.nav.trust);
     expect(t.providers.noLockInTitle).toBe(EN.providers.noLockInTitle);
+    expect(t.providers.privacyTitle).toBe(EN.providers.privacyTitle);
+    expect(t.providers.affordableTitle).toBe(EN.providers.affordableTitle);
+    expect(t.providers.finalizedTitle).toBe(EN.providers.finalizedTitle);
   });
 
   it('getText returns the en fallback for a missing locale', () => {
