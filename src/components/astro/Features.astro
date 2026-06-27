@@ -8,16 +8,47 @@ interface Props {
 const { locale = 'en' } = Astro.props;
 const tMap: Record<string, any> = translations; const t = tMap[locale] || translations.en;
 
+// Features grid — 9 cards total. By device:
+//   mobile  (< sm): priority 1-4  (4 cards, 1 col)
+//   tablet  (sm):   priority 1-6  (6 cards, 2 cols × 3 rows)
+//   desktop (md+):  priority 1-9  (9 cards, 3 cols × 3 rows)
+// Card #10 (history) is always demoted to the chip row.
+// Cards demoted at each breakpoint are surfaced as chips in the row below,
+// styled identically to the "more capabilities" pills.
 const features = [
-  { title: t.features.organizeTitle, tag: t.features.organizeTag, desc: t.features.organizeDesc, icon: 'layers' },
-  { title: t.features.bidirectionalTitle, tag: t.features.bidirectionalTag, desc: t.features.bidirectionalDesc, icon: 'link-2' },
-  { title: t.features.conversationalTitle, tag: t.features.conversationalTag, desc: t.features.conversationalDesc, icon: 'message-square' },
-  { title: t.features.autoMaintenanceTitle, tag: t.features.autoMaintenanceTag, desc: t.features.autoMaintenanceDesc, icon: 'refresh-cw' },
-  { title: t.features.smartFixTitle, tag: t.features.smartFixTag, desc: t.features.smartFixDesc, icon: 'zap' },
-  { title: t.features.granularityTitle, tag: t.features.granularityTag, desc: t.features.granularityDesc, icon: 'sliders' },
+  { title: t.features.organizeTitle, tag: t.features.organizeTag, desc: t.features.organizeDesc, icon: 'layers', priority: 1 },
+  { title: t.features.conversationalTitle, tag: t.features.conversationalTag, desc: t.features.conversationalDesc, icon: 'message-square', priority: 2 },
+  { title: t.features.bidirectionalTitle, tag: t.features.bidirectionalTag, desc: t.features.bidirectionalDesc, icon: 'link-2', priority: 3 },
+  { title: t.features.autoMaintenanceTitle, tag: t.features.autoMaintenanceTag, desc: t.features.autoMaintenanceDesc, icon: 'refresh-cw', priority: 4 },
+  { title: t.features.smartFixTitle, tag: t.features.smartFixTag, desc: t.features.smartFixDesc, icon: 'zap', priority: 5 },
+  { title: t.features.finalizedTitle, tag: t.features.finalizedTag, desc: t.features.finalizedDesc, icon: 'lock', priority: 6 },
+  { title: t.features.citationsTitle, tag: t.features.citationsTag, desc: t.features.citationsDesc, icon: 'quote', priority: 7 },
+  { title: t.features.tagsTitle, tag: t.features.tagsTag, desc: t.features.tagsDesc, icon: 'tag', priority: 8 },
+  { title: t.features.granularityTitle, tag: t.features.granularityTag, desc: t.features.granularityDesc, icon: 'sliders', priority: 9 },
 ];
 
+// History is always a chip (priority 10, never a card).
+const historyChip = {
+  title: t.features.historyTitle,
+  tag: t.features.historyTag,
+};
+
 const moreCaps = t.features.moreCapabilities || [];
+
+// Map priority → card visibility class
+const visFor = (p: number): string => {
+  if (p <= 4) return '';
+  if (p <= 6) return 'hidden sm:block';
+  return 'hidden md:block';
+};
+// Chip visibility is the INVERSE of card visibility — a title is rendered as
+// a chip only on breakpoints where its card variant is hidden. This guarantees
+// a single visual instance per breakpoint (no "card + same-name chip" overlap).
+const chipVisFor = (p: number): string => {
+  if (p <= 4) return 'hidden';              // always card → never chip
+  if (p <= 6) return 'sm:hidden';           // card from sm → chip on mobile only
+  return 'md:hidden';                       // card from md → chip on mobile + tablet
+};
 ---
 
 <section id="features" class="relative w-full py-28 sm:py-36 reveal">
@@ -28,9 +59,9 @@ const moreCaps = t.features.moreCapabilities || [];
       <p class="text-obsidian-muted max-w-lg mx-auto text-sm">{t.features.subtitle}</p>
     </div>
 
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-      {features.map((f, i) => (
-        <div class="feature-card group rounded-xl overflow-hidden card card-hover reveal" data-delay={i * 2}>
+    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
+      {features.map((f) => (
+        <div class={`feature-card group rounded-xl overflow-hidden card card-hover reveal ${visFor(f.priority)}`} data-delay={f.priority * 2}>
           <div class="p-5 sm:p-6">
             <div class="flex items-center gap-2.5 mb-3">
               <div class="w-8 h-8 rounded-lg bg-obsidian-purple/15 border border-obsidian-purple/25 flex items-center justify-center">
@@ -39,57 +70,7 @@ const moreCaps = t.features.moreCapabilities || [];
               <span class="text-[10px] font-mono text-obsidian-purple tracking-wider uppercase">{f.tag}</span>
             </div>
             <h3 class="text-base font-semibold text-obsidian-heading mb-2">{f.title}</h3>
-            <p class="text-sm text-obsidian-muted leading-relaxed mb-3">{f.desc}</p>
-
-            <!-- Micro code snippet -->
-            <div class="rounded-md bg-obsidian-bg border border-obsidian-border px-3 py-2 font-mono text-xs text-obsidian-dim">
-              {i === 0 && (
-                <div>
-                  <span class="text-obsidian-amber">sources/</span>article.md<br/>
-                  <span class="text-obsidian-muted">  ↓ (auto)</span><br/>
-                  <span class="text-obsidian-purple">wiki/</span>entities/...<br/>
-                  <span class="text-obsidian-purple">wiki/</span>concepts/...
-                </div>
-              )}
-              {i === 1 && (
-                <div>
-                  <span class="text-obsidian-purple font-semibold">Page A</span> ↔ <span class="text-obsidian-purple font-semibold">Page B</span><br/>
-                  <span class="text-obsidian-muted">  auto-linked</span><br/>
-                  <span class="text-obsidian-muted">  graph grows</span>
-                </div>
-              )}
-              {i === 2 && (
-                <div>
-                  <span class="text-obsidian-muted">Ask:</span> "How does X relate to Y?"<br/>
-                  <span class="text-obsidian-purple font-semibold">  → X</span> + <span class="text-obsidian-purple font-semibold">Y</span> cited<br/>
-                  <span class="text-obsidian-muted">  → saved as wiki page</span>
-                </div>
-              )}
-              {i === 3 && (
-                <div>
-                  <span class="text-obsidian-muted">file watcher</span>: ON<br/>
-                  <span class="text-obsidian-muted">lint</span>: weekly<br/>
-                  <span class="text-obsidian-muted">health check</span>: startup<br/>
-                  <span class="text-obsidian-muted">  (default: OFF)</span>
-                </div>
-              )}
-              {i === 4 && (
-                <div>
-                  <span class="text-obsidian-purple font-semibold">Lint Report</span><br/>
-                  <span class="text-obsidian-muted">  3 duplicates</span> · <span class="text-obsidian-muted">2 dead links</span><br/>
-                  <span class="text-obsidian-purple font-semibold">→ Smart Fix All</span><br/>
-                  <span class="text-obsidian-muted">  one click, all resolved</span>
-                </div>
-              )}
-              {i === 5 && (
-                <div>
-                  <span class="text-obsidian-muted">Granularity:</span><br/>
-                  <span class="text-obsidian-purple">Fine</span> <span class="text-obsidian-dim">deep extraction</span><br/>
-                  <span class="text-obsidian-purple">Standard</span> <span class="text-obsidian-dim">balanced</span><br/>
-                  <span class="text-obsidian-purple">Coarse</span> <span class="text-obsidian-dim">quick overview</span>
-                </div>
-              )}
-            </div>
+            <p class="text-sm text-obsidian-muted leading-relaxed">{f.desc}</p>
           </div>
         </div>
       ))}
@@ -99,6 +80,17 @@ const moreCaps = t.features.moreCapabilities || [];
       <div class="mt-10 text-center reveal" data-delay="12">
         <span class="text-sm text-obsidian-dim">{t.features.moreLabel}</span>
         <div class="flex flex-wrap gap-2.5 sm:gap-3 justify-center mt-3 max-w-2xl mx-auto">
+          {/* History: always a chip */}
+          <span class="text-xs sm:text-sm px-3 py-1.5 sm:px-5 sm:py-2.5 rounded-full bg-obsidian-purple/10 border border-obsidian-purple/20 text-obsidian-purple-light">
+            {historyChip.title}
+          </span>
+          {/* Demoted feature titles: chip on smaller breakpoints, card on larger */}
+          {features.filter((f) => f.priority >= 5).map((f) => (
+            <span class={`${chipVisFor(f.priority)} text-xs sm:text-sm px-3 py-1.5 sm:px-5 sm:py-2.5 rounded-full bg-obsidian-purple/10 border border-obsidian-purple/20 text-obsidian-purple-light`}>
+              {f.title}
+            </span>
+          ))}
+          {/* More capabilities chips */}
           {moreCaps.map((cap: string) => (
             <span class="text-xs sm:text-sm px-3 py-1.5 sm:px-5 sm:py-2.5 rounded-full bg-obsidian-purple/10 border border-obsidian-purple/20 text-obsidian-purple-light">{cap}</span>
           ))}
