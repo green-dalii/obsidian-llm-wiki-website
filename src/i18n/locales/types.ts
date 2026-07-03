@@ -92,6 +92,9 @@ export interface Translations {
     citationsTitle: string;
     citationsDesc: string;
     citationsTag: string;
+    multiFileTitle: string;
+    multiFileDesc: string;
+    multiFileTag: string;
     tagsTitle: string;
     tagsDesc: string;
     tagsTag: string;

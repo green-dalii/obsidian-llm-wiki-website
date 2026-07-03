@@ -12,13 +12,14 @@ const tMap: Record<string, any> = translations; const t = tMap[locale] || transl
 //   mobile  (< sm): priority 1-4  (4 cards, 1 col)
 //   tablet  (sm):   priority 1-6  (6 cards, 2 cols × 3 rows)
 //   desktop (md+):  priority 1-9  (9 cards, 3 cols × 3 rows)
-// Card #10 (history) is always demoted to the chip row.
 // Cards demoted at each breakpoint are surfaced as chips in the row below,
-// styled identically to the "more capabilities" pills.
+// styled identically to the "more capabilities" pills. Bidirectional links is
+// a chip on all sizes (always demoted from v1.23 onward — the live-link
+// behavior is now a transitive property of citations + multi-file + history).
 const features = [
   { title: t.features.organizeTitle, tag: t.features.organizeTag, desc: t.features.organizeDesc, icon: 'layers', priority: 1 },
   { title: t.features.conversationalTitle, tag: t.features.conversationalTag, desc: t.features.conversationalDesc, icon: 'message-square', priority: 2 },
-  { title: t.features.bidirectionalTitle, tag: t.features.bidirectionalTag, desc: t.features.bidirectionalDesc, icon: 'link-2', priority: 3 },
+  { title: t.features.multiFileTitle, tag: t.features.multiFileTag, desc: t.features.multiFileDesc, icon: 'plus-square', priority: 3 },
   { title: t.features.autoMaintenanceTitle, tag: t.features.autoMaintenanceTag, desc: t.features.autoMaintenanceDesc, icon: 'refresh-cw', priority: 4 },
   { title: t.features.smartFixTitle, tag: t.features.smartFixTag, desc: t.features.smartFixDesc, icon: 'zap', priority: 5 },
   { title: t.features.finalizedTitle, tag: t.features.finalizedTag, desc: t.features.finalizedDesc, icon: 'lock', priority: 6 },
@@ -27,11 +28,11 @@ const features = [
   { title: t.features.granularityTitle, tag: t.features.granularityTag, desc: t.features.granularityDesc, icon: 'sliders', priority: 9 },
 ];
 
-// History is always a chip (priority 10, never a card).
-const historyChip = {
-  title: t.features.historyTitle,
-  tag: t.features.historyTag,
-};
+// Bidirectional links + history: always chips (never a card).
+const alwaysChips: { title: string; tag: string }[] = [
+  { title: t.features.bidirectionalTitle, tag: t.features.bidirectionalTag },
+  { title: t.features.historyTitle, tag: t.features.historyTag },
+];
 
 const moreCaps = t.features.moreCapabilities || [];
 
@@ -80,10 +81,12 @@ const chipVisFor = (p: number): string => {
       <div class="mt-10 text-center reveal" data-delay="12">
         <span class="text-sm text-obsidian-dim">{t.features.moreLabel}</span>
         <div class="flex flex-wrap gap-2.5 sm:gap-3 justify-center mt-3 max-w-2xl mx-auto">
-          {/* History: always a chip */}
-          <span class="text-xs sm:text-sm px-3 py-1.5 sm:px-5 sm:py-2.5 rounded-full bg-obsidian-purple/10 border border-obsidian-purple/20 text-obsidian-purple-light">
-            {historyChip.title}
-          </span>
+          {/* Bidirectional + history: always chips */}
+          {alwaysChips.map((c) => (
+            <span class="text-xs sm:text-sm px-3 py-1.5 sm:px-5 sm:py-2.5 rounded-full bg-obsidian-purple/10 border border-obsidian-purple/20 text-obsidian-purple-light">
+              {c.title}
+            </span>
+          ))}
           {/* Demoted feature titles: chip on smaller breakpoints, card on larger */}
           {features.filter((f) => f.priority >= 5).map((f) => (
             <span class={`${chipVisFor(f.priority)} text-xs sm:text-sm px-3 py-1.5 sm:px-5 sm:py-2.5 rounded-full bg-obsidian-purple/10 border border-obsidian-purple/20 text-obsidian-purple-light`}>
