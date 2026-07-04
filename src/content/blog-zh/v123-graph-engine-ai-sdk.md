@@ -1,6 +1,6 @@
 ---
-title: "v1.23 发布：你 Wiki 里的链接，就是索引"
-description: "v1.23 把你的链接图变成真正的搜索索引。Query Wiki 用蒙特卡洛个性化 PageRank 走图，而不是靠标题猜。另外：每个供应商的真流式输出、多文件摄入、新 vault 欢迎页。"
+title: "公告：v1.23 — 链接图作为搜索索引"
+description: "Karpathy LLM Wiki 通过蒙特卡洛个性化 PageRank 遍历你的 Wiki [[link]] 图，找到你写过的主题。每个 LLM 提供商真正流式输出，新增多文件摄入与自动生成的 Welcome 笔记。"
 date: 2026-07-02
 tags: ["公告"]
 related: ["introducing-llm-wiki"]

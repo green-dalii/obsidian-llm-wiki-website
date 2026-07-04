@@ -1,6 +1,6 @@
 ---
-title: "Which Model Should You Pick?"
-description: "Long-context models recommended? Yes — but which one, when, and why. A hands-on guide to balancing cost, speed, and quality."
+title: "Inside the System: Picking an LLM for Your Wiki"
+description: "Long-context models handle wikis differently. Karpathy LLM Wiki runs against DeepSeek, Gemini, Claude, GPT, Ollama, LM Studio — here is when each makes sense and what you'll pay."
 date: 2026-05-21
 tags: ["internals"]
 related: ["faster-ingestion", "first-100-pages"]

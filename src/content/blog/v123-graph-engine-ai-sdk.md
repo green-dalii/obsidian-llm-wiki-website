@@ -1,6 +1,6 @@
 ---
-title: "v1.23: Your Wiki's Links Are Now an Index"
-description: "v1.23 makes your link graph a real search index. Query Wiki walks it via Monte Carlo Personalized PageRank instead of guessing by title match. Plus true streaming for every provider, multi-file ingest, and a welcome note for new vaults."
+title: "Announcement: v1.23 — Link Graphs as a Search Index"
+description: "Karpathy LLM Wiki walks your wiki's [[link]] graph via Monte Carlo Personalized PageRank to find what you wrote about. Plus streaming for every LLM provider, multi-file ingest, and an auto-generated Welcome note."
 date: 2026-07-02
 tags: ["announcement"]
 related: ["introducing-llm-wiki"]

@@ -1,6 +1,6 @@
 ---
-title: "Turn Your AI Chats Into a Knowledge Base"
-description: "Clip entire ChatGPT, Claude, and Gemini sessions to Obsidian via Web Clipper. LLM-Wiki automatically extracts entities and links them across sessions and platforms."
+title: "Workflow Guide: Clipping ChatGPT, Claude, and Gemini into Your Vault"
+description: "Web Clipper drops the entire AI session into sources/; Karpathy LLM Wiki extracts entities and links them across platforms into one Obsidian knowledge base."
 date: 2026-06-21
 tags: ["guides"]
 related: ["web-clipper-workflow", "daily-knowledge-loop", "query-to-wiki-feedback"]

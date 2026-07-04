@@ -1,6 +1,6 @@
 ---
-title: "The Daily Knowledge Loop"
-description: "A complete daily workflow for continuous knowledge growth. From morning reading to evening review, using Karpathy LLM Wiki with Obsidian's native features."
+title: "Workflow Guide: A Daily Routine for Continuous Wiki Growth"
+description: "Morning reading, mid-day capture, evening review. Karpathy LLM Wiki fits into an Obsidian routine so your knowledge base grows on its own, without dedicated \"wiki time\"."
 date: 2026-05-26
 tags: ["guides"]
 series: "workflow-guides"

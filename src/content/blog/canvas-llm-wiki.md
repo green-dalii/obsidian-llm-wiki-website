@@ -1,6 +1,6 @@
 ---
-title: "Map Your Wiki on Canvas"
-description: "Map your Wiki pages onto Obsidian Canvas to create spatial knowledge layouts. How Canvas reveals structure the Graph View can't show."
+title: "Workflow Guide: Mapping Your Wiki Pages onto Obsidian Canvas"
+description: "Canvas reveals structure the Graph View can't — clusters, hubs, and orphans. Here's how Karpathy LLM Wiki flows into Canvas so your wiki becomes a spatial map instead of a node cloud."
 date: 2026-05-29
 tags: ["guides"]
 series: "workflow-guides"

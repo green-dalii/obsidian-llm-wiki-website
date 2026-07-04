@@ -1,6 +1,6 @@
 ---
-title: "Build a Reading Pipeline"
-description: "Clip any web article into Obsidian and watch it transform into a connected wiki page. A practical workflow combining Web Clipper with Karpathy LLM Wiki."
+title: "Workflow Guide: A Reading-to-Knowledge Pipeline with Web Clipper"
+description: "Clip any web article into Obsidian, then watch Karpathy LLM Wiki turn it into a connected wiki page with bidirectional links to your existing notes."
 date: 2026-05-27
 tags: ["guides"]
 series: "workflow-guides"

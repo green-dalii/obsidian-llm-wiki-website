@@ -1,6 +1,6 @@
 ---
-title: "Connect Zotero to Your Wiki"
-description: "From Zotero to Obsidian to LLM Wiki — a complete automation chain for academic literature. Export formats, note optimization, and research Wiki value."
+title: "Workflow Guide: Zotero to Obsidian to Wiki, an Academic Literature Pipeline"
+description: "From citation manager to queryable research knowledge base. Karpathy LLM Wiki sits at the end of a Zotero-to-Obsidian automation chain for academic literature."
 date: 2026-05-30
 tags: ["guides"]
 series: "workflow-guides"

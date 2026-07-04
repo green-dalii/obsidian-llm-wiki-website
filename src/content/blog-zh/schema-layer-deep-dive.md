@@ -1,6 +1,6 @@
 ---
-title: "深入原理（五）：用 Schema 控制提取"
-description: "schema/ 文件夹定义了 LLM Wiki 如何提取知识——实体类型、属性定义、别名规则、提取模板，全在这一篇。"
+title: "深入解析：用自定义 Schema 掌控知识提取"
+description: "schema/ 文件夹定义 Karpathy LLM Wiki 如何提取知识——实体类型、属性、别名规则、提取模板。自定义你的 Obsidian 知识库的深度解读。"
 date: 2026-05-24
 tags: ["深入解析"]
 series: "inside-the-system"

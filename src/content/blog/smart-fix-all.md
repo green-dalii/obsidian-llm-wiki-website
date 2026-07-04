@@ -1,6 +1,6 @@
 ---
-title: "Fix Everything With One Click"
-description: "How Smart Fix All runs causality-ordered repairs — aliases, duplicates, dead links, orphans, and empty pages — in a single click."
+title: "Maintenance: Five-Phase Wiki Repair in One Click"
+description: "Aliases, duplicates, dead links, orphans, empty pages — Karpathy LLM Wiki's Smart Fix All runs them in causal order so each repair doesn't undo the previous one."
 date: 2026-05-12
 tags: ["guides"]
 related: ["auto-maintenance", "contradiction-detection"]

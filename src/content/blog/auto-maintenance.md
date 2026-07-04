@@ -1,6 +1,6 @@
 ---
-title: "Let Your Wiki Maintain Itself"
-description: "File Watcher, Periodic Lint, and Startup Health Check — three automation layers that keep your Wiki healthy without manual intervention."
+title: "Maintenance: File Watcher, Periodic Lint, and Startup Health Check"
+description: "Three automation layers keep your wiki current without manual upkeep. Karpathy LLM Wiki watches your Obsidian vault, runs lint on a schedule, and checks wiki health every time Obsidian starts."
 date: 2026-05-11
 tags: ["guides"]
 series: "maintenance"

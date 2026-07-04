@@ -1,6 +1,6 @@
 ---
-title: "你的 AI 聊天记录，别再吃灰了"
-description: "把 ChatGPT、Claude、DeepSeek、Kimi 等平台的完整 Session 一键剪藏到 Obsidian，LLM-Wiki 自动提取实体、跨平台关联，织成一张可搜索的知识网。"
+title: "实践指南：把 ChatGPT、Claude、Gemini 会话剪进 Vault"
+description: "Web Clipper 把整个 AI 会话放到 sources/；Karpathy LLM Wiki 自动提取实体，并把它们跨平台链接到同一个 Obsidian 知识库。"
 date: 2026-06-21
 tags: ["实践指南"]
 related: ["web-clipper-workflow", "daily-knowledge-loop", "query-to-wiki-feedback"]

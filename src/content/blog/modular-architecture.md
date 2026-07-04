@@ -1,6 +1,6 @@
 ---
-title: "Inside the Code: Modular Architecture"
-description: "How we reduced main.ts from 3000 lines to 300 and added a ChatGPT-style query interface with streaming responses."
+title: "Inside the System: From 3000 Lines to 300, Refactoring the Plugin Core"
+description: "How the codebase split a monolithic main.ts into a modular architecture — and added a streaming query interface on top without bloating the runtime."
 date: 2026-05-20
 tags: ["internals"]
 related: ["introducing-llm-wiki", "schema-layer-deep-dive"]

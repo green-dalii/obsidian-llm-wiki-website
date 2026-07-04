@@ -1,6 +1,6 @@
 ---
-title: "许可证变更：MIT → Apache 2.0，悄悄进行"
-description: "三个文件变了。你用的插件没变。插件照常发布、照常更新、照常支持之前的一切——它下面的法律框架移到了项目真实位置该有的样子。"
+title: "公告：许可证变更 — 从 MIT 到 Apache 2.0，悄无声息"
+description: "三个文件改动，你用的插件不变。Karpathy LLM Wiki 项目为何迁移到 Apache 2.0 + DCO——对用户、贡献者与下游 fork 意味着什么。"
 date: 2026-07-03
 tags: ["公告"]
 related: ["introducing-llm-wiki"]

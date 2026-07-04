@@ -1,6 +1,6 @@
 ---
-title: "深入原理（三）：提取速度提升 80%"
-description: "v1.12.0 重构了提取提示词——移除了 20 万字符的 Wiki 页面列表，使提取速度不再受 Wiki 规模影响。"
+title: "深入解析：砍掉 prompt 里 20 万字符，摄入延迟下降"
+description: "v1.12.0 重构提取 prompt，让 Obsidian 摄入速度不再随 Wiki 规模线性增长。改动的思路与如何衡量加速。"
 date: 2026-05-22
 tags: ["深入解析"]
 related: ["query-to-wiki-feedback", "auto-maintenance"]

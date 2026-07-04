@@ -1,6 +1,6 @@
 ---
-title: "Why Your Notes Need a Wiki"
-description: "The bottleneck that grows with your Vault. Manual Wiki maintenance — creating pages, writing links, keeping updates — becomes unsustainable. LLM Wiki automates all three."
+title: "Getting Started: Why Your Vault Needs a Wiki"
+description: "The accumulation paradox: more notes mean harder access. Manual wiki maintenance scales worse than the value it adds — Karpathy LLM Wiki automates page creation, link writing, and updates in your Obsidian vault."
 date: 2026-04-26
 tags: ["getting-started"]
 series: "getting-started"

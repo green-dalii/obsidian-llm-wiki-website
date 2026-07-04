@@ -1,6 +1,6 @@
 ---
-title: "Meet Karpathy LLM Wiki"
-description: "An Obsidian plugin that implements Andrej Karpathy's LLM Wiki concept — AI reads your notes and builds a structured wiki with bidirectional links."
+title: "Getting Started: Introducing Karpathy LLM Wiki"
+description: "The open-source Obsidian plugin that turns your notes into a self-organizing wiki. Karpathy LLM Wiki extracts entities, builds bidirectional links, and answers natural-language questions about your own knowledge."
 date: 2026-04-27
 tags: ["getting-started"]
 related: ["first-100-pages"]

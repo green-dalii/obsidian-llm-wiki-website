@@ -1,6 +1,6 @@
 ---
-title: "动手实践（五）：在 Canvas 上绘制知识地图"
-description: "把 Wiki 页面映射到 Obsidian Canvas 上，创建空间化的知识布局。Canvas 能揭示 Graph View 展现不了的知识结构。"
+title: "实践指南：把 Wiki 页面画到 Obsidian Canvas 上"
+description: "Canvas 能展示图谱视图看不到的结构——簇、枢纽、孤立页。Karpathy LLM Wiki 与 Canvas 联动，让你的 Wiki 从节点云变成空间地图。"
 date: 2026-05-29
 tags: ["实践指南"]
 series: "workflow-guides"

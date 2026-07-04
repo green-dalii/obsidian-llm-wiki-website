@@ -1,6 +1,6 @@
 ---
-title: "从这里开始（三）：Karpathy LLM Wiki 是什么"
-description: "一个 Obsidian 插件，实现了 Andrej Karpathy 的 LLM Wiki 理念——AI 读取你的笔记，构建带双向链接的结构化知识库。"
+title: "入门必读：介绍 Karpathy LLM Wiki"
+description: "这款开源 Obsidian 插件把你的笔记变成自组织 Wiki。Karpathy LLM Wiki 提取实体、构建双向链接、用自然语言回答关于你自己知识的问题。"
 date: 2026-04-27
 tags: ["入门必读"]
 related: ["first-100-pages"]

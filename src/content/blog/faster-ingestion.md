@@ -1,6 +1,6 @@
 ---
-title: "How We Made Ingestion 80% Faster"
-description: "v1.12.0 rearchitected the extraction prompt — removing 200K characters of wiki page list from the prompt, making ingestion speed independent of wiki size."
+title: "Inside the System: Cutting Ingestion Latency by Removing 200K Characters"
+description: "v1.12.0 rearchitected the extraction prompt so Obsidian ingestion speed no longer scales with wiki size. The reasoning behind the change and how the speedup was measured."
 date: 2026-05-22
 tags: ["internals"]
 related: ["query-to-wiki-feedback", "auto-maintenance"]

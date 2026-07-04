@@ -1,6 +1,6 @@
 ---
-title: "日常维护（一）：多语言 Wiki 怎么做"
-description: "v1.6.5 引入了 Wiki 输出语言——8 种语言可选，完全独立于界面语言。"
+title: "维护：用英语写，用日语读（再加 7 种语言）"
+description: "Wiki Output Language 把\"写作语言\"和\"阅读语言\"解耦。Karpathy LLM Wiki 用 8 种语言生成同一份内容，独立于 Obsidian UI 语言。"
 date: 2026-05-09
 tags: ["入门必读"]
 related: ["eight-languages", "research-papers-workflow"]

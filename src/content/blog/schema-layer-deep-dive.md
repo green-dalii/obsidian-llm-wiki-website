@@ -1,6 +1,6 @@
 ---
-title: "Taking Control With Schemas"
-description: "The schema/ folder defines how LLM Wiki extracts knowledge — entity types, property schemas, alias rules, extraction templates."
+title: "Inside the System: Taking Control of Extraction with Custom Schemas"
+description: "The schema/ folder defines how the plugin extracts knowledge — entity types, properties, alias rules, extraction templates. A deep dive into customizing your Obsidian knowledge base."
 date: 2026-05-24
 tags: ["internals"]
 series: "inside-the-system"

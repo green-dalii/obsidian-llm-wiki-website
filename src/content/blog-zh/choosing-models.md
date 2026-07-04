@@ -1,6 +1,6 @@
 ---
-title: "深入原理（二）：哪个模型适合你"
-description: "推荐长上下文模型？没错——但该选哪个、什么时候用、为什么？一份关于成本、速度和质量平衡的实操指南。"
+title: "深入解析：选哪个 LLM 处理你的 Wiki"
+description: "长上下文模型处理 Wiki 的方式各不相同。Karpathy LLM Wiki 跑在 DeepSeek、Gemini、Claude、GPT、Ollama、LM Studio 上——何时用谁、成本几何。"
 date: 2026-05-21
 tags: ["深入解析"]
 related: ["faster-ingestion", "first-100-pages"]

@@ -1,6 +1,6 @@
 ---
-title: "Write in English, Read in Japanese"
-description: "v1.6.5 introduced Wiki Output Language — 8 languages for your Wiki content, completely independent from the UI language."
+title: "Maintenance: Write in English, Read in Japanese (and 7 More Languages)"
+description: "Wiki Output Language decouples your writing language from your reading language. Karpathy LLM Wiki generates the same content in 8 languages, independent of your Obsidian UI."
 date: 2026-05-09
 tags: ["getting-started"]
 related: ["eight-languages", "research-papers-workflow"]

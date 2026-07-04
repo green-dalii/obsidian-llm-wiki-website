@@ -1,6 +1,6 @@
 ---
-title: "Your First 100 Wiki Pages"
-description: "From zero to a living wiki. A step-by-step walkthrough of setting up your first sources, running ingestion, and watching your knowledge take shape."
+title: "Getting Started: Your First 100 Wiki Pages, Step by Step"
+description: "From an empty Obsidian vault to a living 100-page knowledge graph. Setup, your first sources, your first ingest — a beginner's walkthrough of Karpathy LLM Wiki."
 date: 2026-04-28
 tags: ["getting-started"]
 related: ["daily-knowledge-loop", "web-clipper-workflow", "choosing-models"]

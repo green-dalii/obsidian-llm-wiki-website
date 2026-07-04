@@ -1,6 +1,6 @@
 ---
-title: "深入原理（三）：当你的来源各执一词"
-description: "多个来源的知识有时会相互冲突。插件如何检测矛盾以及解决策略。"
+title: "深入解析：当你的来源相互矛盾"
+description: "来自多个来源的知识有时会冲突。Karpathy LLM Wiki 标记矛盾、跟踪双方、在相关 Wiki 页面提示冲突——以及在 Obsidian 中化解冲突的实战策略。"
 date: 2026-05-23
 tags: ["深入解析"]
 series: "inside-the-system"

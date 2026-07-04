@@ -1,6 +1,6 @@
 ---
-title: "From Papers to Knowledge"
-description: "How to transform academic papers into a structured research wiki with cross-referenced entities, concepts, and theories."
+title: "Workflow Guide: From Papers to a Queryable Research Wiki"
+description: "How to turn academic PDFs into a structured research knowledge base in Obsidian. Cross-referenced entities, concepts, and theories that Karpathy LLM Wiki makes searchable."
 date: 2026-05-28
 tags: ["guides"]
 series: "workflow-guides"

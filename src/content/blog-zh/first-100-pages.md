@@ -1,6 +1,6 @@
 ---
-title: "从这里开始（四）：从零到百页 Wiki"
-description: "从零开始构建一个活的知识库。手把手教你设置第一批来源、运行提取，看着知识成形。"
+title: "入门必读：你的前 100 个 Wiki 页面，从零开始"
+description: "从空 Obsidian 库到 100 页活的知识图谱。配置、首批 sources、首次摄入——Karpathy LLM Wiki 新手完整 walkthrough。"
 date: 2026-04-28
 tags: ["入门必读"]
 related: ["daily-knowledge-loop", "web-clipper-workflow", "choosing-models"]

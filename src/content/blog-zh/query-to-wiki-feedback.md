@@ -1,6 +1,6 @@
 ---
-title: "动手实践（一）：保存每一次查询"
-description: "与大模型的对话式查询能创造新知识。把查询结果一键存为 Wiki 页面——让你的知识库除了摄入源文档之外，获得第二条增长路径。"
+title: "实践指南：把最有价值的查询结果存为 Wiki 页面"
+description: "对话式查询会创造新知识。Karpathy LLM Wiki 让你把查询结果存为 Wiki 页面——让你的知识库在 source 摄入之外沿第二条路径生长。"
 date: 2026-05-25
 tags: ["实践指南"]
 series: "workflow-guides"

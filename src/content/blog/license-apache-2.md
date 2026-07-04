@@ -1,6 +1,6 @@
 ---
-title: "License Change: MIT → Apache 2.0, Quietly"
-description: "Three files change. The plugin you use doesn't. The plugin still ships, still updates, still supports everything it did before — the legal framework underneath it shifts to match where the project actually is."
+title: "Announcement: License Change — MIT to Apache 2.0, Quietly"
+description: "Three files change. The Karpathy LLM Wiki plugin you use doesn't. Why the project is migrating to Apache 2.0 with DCO — and what it means for users, contributors, and forks."
 date: 2026-07-03
 tags: ["announcement"]
 related: ["introducing-llm-wiki"]

@@ -1,6 +1,6 @@
 ---
-title: "深入原理（一）：模块化架构背后"
-description: "我们如何将 main.ts 从 3000 行精简到 300 行，并加入了类 ChatGPT 的流式查询界面。"
+title: "深入解析：从 3000 行到 300 行，插件核心的重构"
+description: "代码库如何把单体 main.ts 拆成模块化架构——并在此之上加入流式查询界面而不增加运行时负担。"
 date: 2026-05-20
 tags: ["深入解析"]
 related: ["introducing-llm-wiki", "schema-layer-deep-dive"]

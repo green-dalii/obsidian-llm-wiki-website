@@ -1,6 +1,6 @@
 ---
-title: "动手实践（四）：从论文到知识图谱"
-description: "如何把学术论文转化成结构化的研究 Wiki，自带交叉引用的实体、概念和理论。"
+title: "实践指南：从论文到可查询的研究 Wiki"
+description: "如何把学术 PDF 变成 Obsidian 里结构化的研究知识库。Karpathy LLM Wiki 让交叉引用的实体、概念、理论变得可搜索。"
 date: 2026-05-28
 tags: ["实践指南"]
 series: "workflow-guides"
