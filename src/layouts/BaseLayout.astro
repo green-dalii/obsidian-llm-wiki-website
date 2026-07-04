@@ -236,7 +236,7 @@ const jsonLd = { "@context": "https://schema.org", "@graph": graph };
   <body>
     <div class="relative bg-obsidian-bg text-obsidian-text">
       <ProgressBar />
-      <Header currentLocale={locale} isBlog={isBlog} />
+      <Header currentLocale={locale} isBlog={isBlog || (breadcrumbs && breadcrumbs.length > 0)} />
       <main class="pt-14">
         <slot />
       </main>

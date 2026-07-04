@@ -34,9 +34,9 @@ const keywords = 'Karpathy LLM Wiki, Obsidian 插件, LLM Wiki 理念, Andrej Ka
           <a href="https://obsidian.md" target="_blank" rel="noopener noreferrer">Obsidian</a>
           打造的社区插件，实现了
           <a href="https://gist.github.com/karpathy/442a6bf555914893e9891c11519de94f" target="_blank" rel="noopener noreferrer">Andrej Karpathy 的 LLM Wiki 理念</a>。
-          它会读取你放进 <code>sources/</code> 文件夹的笔记，提取其中隐藏的人物、概念和理论，
-          生成互联的 Wiki 页面，并用双向 <code>[[链接]]</code> 把它们串起来。你可以用自然语言
-          向你的 Wiki 提问——每条回答都链回它源自的笔记。
+          你像平常一样在库中记笔记。插件读取笔记，提取其中隐藏的人物、概念和理论——
+          然后生成互联的 Wiki 页面，并用双向 <code>[[链接]]</code> 把它们串起来。
+          你可以用自然语言向 Wiki 提问，每条回答都链回它源自的笔记。
         </p>
         <p>
           插件本身<strong>免费、开源、本地优先</strong>，支持任何 Obsidian 兼容的 LLM 提供商——
@@ -47,30 +47,31 @@ const keywords = 'Karpathy LLM Wiki, Obsidian 插件, LLM Wiki 理念, Andrej Ka
       <section>
         <h2>背后的想法</h2>
         <p>
-          2023 年末，Andrej Karpathy 描绘了一个工作流：让一个本地 LLM 读你的笔记，并在笔记之上
-          持续写出一部不断生长的 Wiki——一个"思考伙伴"，把原始文字变成结构化的、互相连接的知识。
-          他在 gist 里提出的系统让每一条新笔记都自动被收录进一本活的索引。
+          2026 年 4 月，Andrej Karpathy 发布了一则
+          <a href="https://gist.github.com/karpathy/442a6bf555914893e9891c11519de94f" target="_blank" rel="noopener noreferrer">gist</a>，
+          设想一个工作流：让本地 LLM 读你的笔记，并在笔记之上持续写出一部不断生长的 Wiki——
+          一个自动把原始文字变成结构化、互相连接的知识的系统。每一条新笔记都被自动收录进一部活的索引，
+          无需手工操作。
         </p>
         <p>
-          Karpathy LLM Wiki 是首批把整套工作流端到端落地的插件之一。目标与 Karpathy 一致：
-          不再丢失你读过的内容。让每一篇论文、每一篇文章、每一个想法都可被找回——
-          让连接自己浮现，而不是寄望未来的自己记得写 <code>[[链接]]</code>。
+          Karpathy LLM Wiki 把整套工作流端到端落地。目标与 Karpathy 一致：不再丢失你读过的内容。
+          让每一篇论文、每一篇文章、每一个想法都可被找回——让连接自己浮现，而不是寄望未来的自己
+          记得写 <code>[[链接]]</code>。
         </p>
       </section>
 
       <section>
         <h2>它怎么工作</h2>
         <ol>
-          <li><strong>Sources 文件夹。</strong> 像平常一样写笔记，把它们放进 Obsidian 库的 <code>sources/</code>。</li>
-          <li><strong>提取。</strong> 插件读每一条笔记，请你的 LLM 提取实体、概念和理论。</li>
-          <li><strong>Wiki 生成。</strong> 在 <code>entities/</code> 和 <code>concepts/</code> 下生成新的 Wiki 页面，并和源笔记之间建立双向 <code>[[链接]]</code>。</li>
-          <li><strong>查询。</strong> 你可以用自然语言向你的 Wiki 提问；每条回答都链回它所依据的笔记。</li>
+          <li><strong>写笔记。</strong> 在 Obsidian 里照常写笔记。你的原始笔记永远不会被修改。</li>
+          <li><strong>摄入。</strong> 执行摄入命令——插件读取你选中的笔记，请你的 LLM 提取实体、概念和理论。一条 source 记录被创建在 <code>sources/</code> 目录下，frontmatter 指向你原始文件的位置。</li>
+          <li><strong>Wiki 生成。</strong> 在 <code>entities/</code> 和 <code>concepts/</code> 下生成新的 Wiki 页面，并在这些页面与 source 记录之间建立双向 <code>[[链接]]</code>。</li>
+          <li><strong>查询。</strong> 你可以用自然语言向 Wiki 提问；每条回答都链回它所依据的笔记。</li>
           <li><strong>维护。</strong> 新笔记自动被收录；矛盾被标记；已审阅的页面不会被改动。</li>
         </ol>
         <p>
           完整架构可参见
-          <a href="https://github.com/green-dalii/obsidian-llm-wiki/discussions" target="_blank" rel="noopener noreferrer">GitHub Discussions</a>
-          和插件内的文档。
+          <a href="https://github.com/green-dalii/obsidian-llm-wiki/discussions" target="_blank" rel="noopener noreferrer">GitHub Discussions</a>。
         </p>
       </section>
 
@@ -81,23 +82,33 @@ const keywords = 'Karpathy LLM Wiki, Obsidian 插件, LLM Wiki 理念, Andrej Ka
           <li><strong>不绑定服务商。</strong> 支持十二家 LLM 提供商——包括 Ollama、LM Studio，以及所有主流云端 API。</li>
           <li><strong>无遥测、无后端、无账号。</strong> 插件没有任何服务端基础设施。</li>
           <li><strong>已审阅页面神圣不可侵犯。</strong> 一旦你把页面标记为已审阅，AI 永远不会重写它。</li>
-          <li><strong>默认开放。</strong> v1.x 期间 MIT 许可；后续转向 Apache 2.0 + DCO；每一行代码都放在 GitHub 上。</li>
+          <li><strong>默认开放。</strong> 采用 Apache 2.0 许可（带 DCO）；每一行代码都放在 GitHub 上。</li>
         </ul>
       </section>
 
       <section>
         <h2>谁在做这件事</h2>
         <p>
-          维护者是
-          <a href="https://github.com/green-dalii" target="_blank" rel="noopener noreferrer">Greener-Dalii</a>。
-          社区贡献者——包括塑造了 v1.23 架构的
-          <a href="https://github.com/green-dalii/obsidian-llm-wiki/discussions/235" target="_blank" rel="noopener noreferrer">DocTpoint</a>
-          和 GioiaZheng——让这个项目成为可能。
+          由 <a href="https://github.com/green-dalii" target="_blank" rel="noopener noreferrer">Greener-Dalii</a> 维护和主导开发。
+          以下贡献者（按 GitHub 用户名首字母排序）作出了重要贡献：
+        </p>
+        <ul>
+          <li><a href="https://github.com/green-dalii" target="_blank" rel="noopener noreferrer">green-dalii</a> — 项目维护者和主要作者</li>
+          <li><a href="https://github.com/DocTpoint" target="_blank" rel="noopener noreferrer">DocTpoint</a> — hub-retirement 结晶信号、knn 基线、同儕链接质量分析、冷启动 A/B 评估</li>
+          <li><a href="https://github.com/dmarchevsky" target="_blank" rel="noopener noreferrer">dmarchevsky</a> — 代码贡献与评审反馈</li>
+          <li><a href="https://github.com/FrancoTampieri" target="_blank" rel="noopener noreferrer">FrancoTampieri</a> — 代码贡献</li>
+          <li><a href="https://github.com/Indexed-Apogrypha" target="_blank" rel="noopener noreferrer">Indexed-Apogrypha</a>（Matthew Harper）— source-slug 指纹、摄入前要求门控、Anthropic fallback 修复与 issue 报告</li>
+          <li><a href="https://github.com/YounianC" target="_blank" rel="noopener noreferrer">YounianC</a>（xiaochuanlu）— 摄入状态栏与 Query Wiki 侧面板</li>
+        </ul>
+        <p>
+          该列表维护在
+          <a href="https://github.com/green-dalii/obsidian-llm-wiki/blob/main/NOTICE" target="_blank" rel="noopener noreferrer">NOTICE</a>
+          文件中，依据 Apache 2.0 许可的署名要求。
         </p>
         <p>
-          如果想帮忙，可以从
+          如果想帮忙，可以查看
           <a href="https://github.com/green-dalii/obsidian-llm-wiki/issues" target="_blank" rel="noopener noreferrer">issue 列表</a>
-          开始，或直接进入
+          或加入
           <a href="https://github.com/green-dalii/obsidian-llm-wiki/discussions" target="_blank" rel="noopener noreferrer">Discussions</a>。
         </p>
       </section>
@@ -105,8 +116,12 @@ const keywords = 'Karpathy LLM Wiki, Obsidian 插件, LLM Wiki 理念, Andrej Ka
       <section>
         <h2>许可证</h2>
         <p>
-          v1.x 期间采用 MIT 许可；后续转向 Apache 2.0 + DCO。详见 GitHub 上的
-          <a href="https://github.com/green-dalii/obsidian-llm-wiki/blob/main/LICENSE" target="_blank" rel="noopener noreferrer">LICENSE 文件</a>。
+          采用 Apache 2.0 许可 + 开发者原创证明（DCO）。
+          详见 GitHub 上的
+          <a href="https://github.com/green-dalii/obsidian-llm-wiki/blob/main/LICENSE" target="_blank" rel="noopener noreferrer">LICENSE</a>
+          与
+          <a href="https://github.com/green-dalii/obsidian-llm-wiki/blob/main/NOTICE" target="_blank" rel="noopener noreferrer">NOTICE</a>
+          文件。
         </p>
       </section>
 

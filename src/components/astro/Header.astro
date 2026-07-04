@@ -34,11 +34,12 @@ const anchorItems: NavItem[] = [
 ];
 
 const blogPath = currentLocale === 'zh' ? '/zh/blog/' : '/blog/';
+const aboutPath = currentLocale === 'zh' ? '/zh/about/' : '/about/';
 const homePath = LANGUAGES.find(l => l.code === currentLocale)?.path || '/';
 
 const navItems: NavItem[] = isBlog
-  ? [...anchorItems.map(item => ({ ...item, href: homePath + item.target })), { key: 'blog', label: t.nav.blog, href: blogPath }]
-  : [...anchorItems, { key: 'blog', label: t.nav.blog, href: blogPath }];
+  ? [...anchorItems.map(item => ({ ...item, href: homePath + item.target })), { key: 'blog', label: t.nav.blog, href: blogPath }, { key: 'about', label: t.footer.about, href: aboutPath }]
+  : [...anchorItems, { key: 'blog', label: t.nav.blog, href: blogPath }, { key: 'about', label: t.footer.about, href: aboutPath }];
 ---
 
 <header id="site-header" class="fixed top-0 left-0 right-0 z-40 border-b border-transparent transition-all duration-500">
