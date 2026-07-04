@@ -16,6 +16,7 @@ export const zhHant: Translations = {
     badge: 'Andrej Karpathy 的 LLM Wiki 理念',
     title1: '你的筆記。',
     title2: '一部活的 Wiki。',
+    seoTitle: 'Karpathy LLM Wiki — Obsidian AI Wiki 外掛',
     subtitle: '在 Obsidian 隨手記錄。每一則筆記彼此相連，知識網絡自然生長。',
     ctaInstall: '取得外掛',
     ctaObsidian: '下載 Obsidian',

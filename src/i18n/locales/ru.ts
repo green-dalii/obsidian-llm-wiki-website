@@ -16,6 +16,7 @@ export const ru: Translations = {
     badge: 'Концепция LLM Wiki Андрея Карпатого',
     title1: 'Ваши заметки.',
     title2: 'Живая wiki.',
+    seoTitle: 'Karpathy LLM Wiki — Плагин AI Wiki для Obsidian',
     subtitle: 'Пишите в Obsidian. Каждая заметка соединяется с сетью, которая постоянно растёт.',
     ctaInstall: 'Получить плагин',
     ctaObsidian: 'Скачать Obsidian',

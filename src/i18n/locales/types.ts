@@ -21,6 +21,7 @@ export interface Translations {
     badge: string;
     title1: string;
     title2: string;
+    seoTitle: string;
     subtitle: string;
     ctaInstall: string;
     ctaObsidian: string;

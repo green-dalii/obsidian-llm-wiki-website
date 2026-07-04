@@ -16,6 +16,7 @@ export const ko: Translations = {
     badge: '안드레이 카파시의 LLM Wiki 컨셉',
     title1: '당신의 노트가',
     title2: '살아있는 위키가 됩니다.',
+    seoTitle: 'Karpathy LLM Wiki — Obsidian AI Wiki 플러그인',
     subtitle: 'Obsidian에서 작성하세요. 모든 노트가 계속 성장하는 네트워크에 연결됩니다.',
     ctaInstall: '플러그인 받기',
     ctaObsidian: 'Obsidian 받기',

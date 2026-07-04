@@ -16,6 +16,7 @@ export const ja: Translations = {
     badge: 'Andrej KarpathyのLLM Wikiコンセプト',
     title1: 'あなたのノートが、',
     title2: '生きたWikiになる。',
+    seoTitle: 'Karpathy LLM Wiki — Obsidian AI Wiki プラグイン',
     subtitle: 'Obsidianで書く。すべてのノートが、成長し続けるネットワークへ。',
     ctaInstall: 'プラグインを入手',
     ctaObsidian: 'Obsidianを入手',
