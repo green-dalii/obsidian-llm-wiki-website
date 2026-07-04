@@ -22,6 +22,8 @@ interface Props {
   breadcrumbs?: { name: string; path: string }[];
   /** Emit FAQPage schema from this locale's translations.faq.items (homepages only). */
   hasFaq?: boolean;
+  /** Emit HowTo schema from this locale's translations.install.step{1,2,3} (homepages only). */
+  hasHowTo?: boolean;
   /** Alt text for the social share image. */
   ogImageAlt?: string;
 }
@@ -38,6 +40,7 @@ const {
   hreflangAlternates,
   breadcrumbs,
   hasFaq = false,
+  hasHowTo = false,
   ogImageAlt = '',
 } = Astro.props;
 
@@ -133,6 +136,35 @@ if (hasFaq) {
       "name": it.q,
       "acceptedAnswer": { "@type": "Answer", "text": it.a }
     }))
+  });
+}
+
+// HowTo schema: surfaces the 3 install steps in Google search results
+// (rich result carousel) and helps AI engines extract actionable steps.
+if (hasHowTo) {
+  const tMap = translations as Record<string, any>;
+  const ti = (tMap[locale] || tMap.en).install as {
+    label: string;
+    title: string;
+    step1Title: string;
+    step1Desc: string;
+    step2Title: string;
+    step2Desc: string;
+    step3Title: string;
+    step3Desc: string;
+  };
+  graph.push({
+    "@type": "HowTo",
+    "@id": canonical + "#howto",
+    "name": ti.title,
+    "description": `How to install and start using Karpathy LLM Wiki in Obsidian — three steps from install to your first wiki query.`,
+    "totalTime": "PT3M",
+    "tool": { "@type": "HowToTool", "name": "Obsidian" },
+    "step": [
+      { "@type": "HowToStep", "position": 1, "name": ti.step1Title, "text": ti.step1Desc },
+      { "@type": "HowToStep", "position": 2, "name": ti.step2Title, "text": ti.step2Desc },
+      { "@type": "HowToStep", "position": 3, "name": ti.step3Title, "text": ti.step3Desc },
+    ]
   });
 }
 
