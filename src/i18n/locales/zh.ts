@@ -199,6 +199,7 @@ export const zh: Translations = {
     releases: '版本',
     obsidian: 'Obsidian',
     sponsorUs: '赞助我们',
+    about: '关于',
   },
   cta: {
     title: '开始构建你的 Wiki',

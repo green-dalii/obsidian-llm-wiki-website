@@ -1,0 +1,125 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+
+const title = '关于 — Karpathy LLM Wiki';
+const description = 'Karpathy LLM Wiki 是一款 Obsidian 插件，实现了 Andrej Karpathy 的 LLM Wiki 理念。了解它的工作原理、作者和参与方式。';
+const keywords = 'Karpathy LLM Wiki, Obsidian 插件, LLM Wiki 理念, Andrej Karpathy, 开源知识库, AI Wiki, Greener-Dalii';
+---
+
+<BaseLayout
+  title={title}
+  description={description}
+  keywords={keywords}
+  locale="zh"
+  ogLocale="zh_CN"
+  breadcrumbs={[{ name: '首页', path: '/zh/' }, { name: '关于', path: '/zh/about/' }]}
+>
+  <article class="relative w-full py-24 sm:py-32">
+    <div class="max-w-3xl mx-auto px-4 sm:px-6 prose prose-invert">
+      <header class="mb-12 not-prose">
+        <span class="text-[11px] font-mono text-obsidian-purple tracking-[0.15em] uppercase">关于</span>
+        <h1 class="text-[clamp(1.8rem,4vw,2.8rem)] font-semibold text-obsidian-heading mt-3 mb-4 leading-tight">
+          Karpathy LLM Wiki
+        </h1>
+        <p class="text-obsidian-muted text-base leading-relaxed">
+          一款开源 Obsidian 插件，把你的笔记变成一部自组织 Wiki——
+          本地优先的 AI，实现 Andrej Karpathy 的 LLM Wiki 理念。
+        </p>
+      </header>
+
+      <section>
+        <h2>Karpathy LLM Wiki 是什么？</h2>
+        <p>
+          Karpathy LLM Wiki 是一款为
+          <a href="https://obsidian.md" target="_blank" rel="noopener noreferrer">Obsidian</a>
+          打造的社区插件，实现了
+          <a href="https://gist.github.com/karpathy/442a6bf555914893e9891c11519de94f" target="_blank" rel="noopener noreferrer">Andrej Karpathy 的 LLM Wiki 理念</a>。
+          它会读取你放进 <code>sources/</code> 文件夹的笔记，提取其中隐藏的人物、概念和理论，
+          生成互联的 Wiki 页面，并用双向 <code>[[链接]]</code> 把它们串起来。你可以用自然语言
+          向你的 Wiki 提问——每条回答都链回它源自的笔记。
+        </p>
+        <p>
+          插件本身<strong>免费、开源、本地优先</strong>，支持任何 Obsidian 兼容的 LLM 提供商——
+          包括通过 Ollama 或 LM Studio 跑的本地模型。
+        </p>
+      </section>
+
+      <section>
+        <h2>背后的想法</h2>
+        <p>
+          2023 年末，Andrej Karpathy 描绘了一个工作流：让一个本地 LLM 读你的笔记，并在笔记之上
+          持续写出一部不断生长的 Wiki——一个"思考伙伴"，把原始文字变成结构化的、互相连接的知识。
+          他在 gist 里提出的系统让每一条新笔记都自动被收录进一本活的索引。
+        </p>
+        <p>
+          Karpathy LLM Wiki 是首批把整套工作流端到端落地的插件之一。目标与 Karpathy 一致：
+          不再丢失你读过的内容。让每一篇论文、每一篇文章、每一个想法都可被找回——
+          让连接自己浮现，而不是寄望未来的自己记得写 <code>[[链接]]</code>。
+        </p>
+      </section>
+
+      <section>
+        <h2>它怎么工作</h2>
+        <ol>
+          <li><strong>Sources 文件夹。</strong> 像平常一样写笔记，把它们放进 Obsidian 库的 <code>sources/</code>。</li>
+          <li><strong>提取。</strong> 插件读每一条笔记，请你的 LLM 提取实体、概念和理论。</li>
+          <li><strong>Wiki 生成。</strong> 在 <code>entities/</code> 和 <code>concepts/</code> 下生成新的 Wiki 页面，并和源笔记之间建立双向 <code>[[链接]]</code>。</li>
+          <li><strong>查询。</strong> 你可以用自然语言向你的 Wiki 提问；每条回答都链回它所依据的笔记。</li>
+          <li><strong>维护。</strong> 新笔记自动被收录；矛盾被标记；已审阅的页面不会被改动。</li>
+        </ol>
+        <p>
+          完整架构可参见
+          <a href="https://github.com/green-dalii/obsidian-llm-wiki/discussions" target="_blank" rel="noopener noreferrer">GitHub Discussions</a>
+          和插件内的文档。
+        </p>
+      </section>
+
+      <section>
+        <h2>项目原则</h2>
+        <ul>
+          <li><strong>本地优先。</strong> 除非你显式选择云提供商，否则笔记不会离开你的机器。</li>
+          <li><strong>不绑定服务商。</strong> 支持十二家 LLM 提供商——包括 Ollama、LM Studio，以及所有主流云端 API。</li>
+          <li><strong>无遥测、无后端、无账号。</strong> 插件没有任何服务端基础设施。</li>
+          <li><strong>已审阅页面神圣不可侵犯。</strong> 一旦你把页面标记为已审阅，AI 永远不会重写它。</li>
+          <li><strong>默认开放。</strong> v1.x 期间 MIT 许可；后续转向 Apache 2.0 + DCO；每一行代码都放在 GitHub 上。</li>
+        </ul>
+      </section>
+
+      <section>
+        <h2>谁在做这件事</h2>
+        <p>
+          维护者是
+          <a href="https://github.com/green-dalii" target="_blank" rel="noopener noreferrer">Greener-Dalii</a>。
+          社区贡献者——包括塑造了 v1.23 架构的
+          <a href="https://github.com/green-dalii/obsidian-llm-wiki/discussions/235" target="_blank" rel="noopener noreferrer">DocTpoint</a>
+          和 GioiaZheng——让这个项目成为可能。
+        </p>
+        <p>
+          如果想帮忙，可以从
+          <a href="https://github.com/green-dalii/obsidian-llm-wiki/issues" target="_blank" rel="noopener noreferrer">issue 列表</a>
+          开始，或直接进入
+          <a href="https://github.com/green-dalii/obsidian-llm-wiki/discussions" target="_blank" rel="noopener noreferrer">Discussions</a>。
+        </p>
+      </section>
+
+      <section>
+        <h2>许可证</h2>
+        <p>
+          v1.x 期间采用 MIT 许可；后续转向 Apache 2.0 + DCO。详见 GitHub 上的
+          <a href="https://github.com/green-dalii/obsidian-llm-wiki/blob/main/LICENSE" target="_blank" rel="noopener noreferrer">LICENSE 文件</a>。
+        </p>
+      </section>
+
+      <section class="not-prose mt-12 pt-8 border-t border-obsidian-border/50">
+        <h3 class="text-base font-semibold text-obsidian-heading mb-3">相关链接</h3>
+        <ul class="text-sm space-y-2">
+          <li><a href="https://community.obsidian.md/plugins/karpathywiki" target="_blank" rel="noopener noreferrer" class="text-obsidian-purple-light hover:text-obsidian-purple transition-colors">在 Obsidian 安装插件</a></li>
+          <li><a href="https://github.com/green-dalii/obsidian-llm-wiki" target="_blank" rel="noopener noreferrer" class="text-obsidian-purple-light hover:text-obsidian-purple transition-colors">GitHub 源码</a></li>
+          <li><a href="https://github.com/green-dalii/obsidian-llm-wiki/issues" target="_blank" rel="noopener noreferrer" class="text-obsidian-purple-light hover:text-obsidian-purple transition-colors">报告 Bug</a></li>
+          <li><a href="https://github.com/green-dalii/obsidian-llm-wiki/discussions" target="_blank" rel="noopener noreferrer" class="text-obsidian-purple-light hover:text-obsidian-purple transition-colors">参与讨论</a></li>
+          <li><a href="/zh/blog/" class="text-obsidian-purple-light hover:text-obsidian-purple transition-colors">阅读博客</a></li>
+        </ul>
+      </section>
+    </div>
+  </article>
+</BaseLayout>

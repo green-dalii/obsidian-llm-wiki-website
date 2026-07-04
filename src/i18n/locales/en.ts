@@ -199,6 +199,7 @@ export const en: Translations = {
     releases: 'Releases',
     obsidian: 'Obsidian',
     sponsorUs: 'Sponsor us',
+    about: 'About',
   },
   cta: {
     title: 'Ready to build your wiki?',

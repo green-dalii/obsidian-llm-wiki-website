@@ -163,6 +163,7 @@ export const ja: Translations = {
     releases: 'リリース',
     obsidian: 'Obsidian',
     sponsorUs: 'スポンサーになる',
+    about: 'について',
   },
   cta: {
     title: 'Wikiを構築する準備はできましたか？',

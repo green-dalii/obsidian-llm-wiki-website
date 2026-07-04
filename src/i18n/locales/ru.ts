@@ -199,6 +199,7 @@ export const ru: Translations = {
     releases: 'Релизы',
     obsidian: 'Obsidian',
     sponsorUs: 'Поддержать',
+    about: 'О проекте',
   },
   cta: {
     title: 'Готовы построить свою wiki?',

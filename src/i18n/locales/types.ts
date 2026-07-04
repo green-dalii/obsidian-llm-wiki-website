@@ -167,6 +167,7 @@ export interface Translations {
     releases: string;
     obsidian: string;
     sponsorUs: string;
+    about: string;
   };
   cta: {
     title: string;

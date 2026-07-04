@@ -21,6 +21,9 @@ const tMap: Record<string, any> = translations; const t = tMap[locale] || transl
         <a href="/blog/" class="text-xs text-obsidian-dim hover:text-[#e5e5e5] transition-colors">
           {t.nav.blog}
         </a>
+        <a href={locale === 'zh' ? '/zh/about/' : '/about/'} class="text-xs text-obsidian-dim hover:text-[#e5e5e5] transition-colors">
+          {t.footer.about}
+        </a>
         <a href="https://github.com/green-dalii/obsidian-llm-wiki" target="_blank" rel="noopener noreferrer" class="text-xs text-obsidian-dim hover:text-[#e5e5e5] transition-colors">
           {t.footer.github}
         </a>

@@ -163,6 +163,7 @@ export const ko: Translations = {
     releases: '릴리스',
     obsidian: 'Obsidian',
     sponsorUs: '후원하기',
+    about: '소개',
   },
   cta: {
     title: '위키를 만들 준비가 되셨나요?',
