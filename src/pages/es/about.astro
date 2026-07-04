@@ -1,0 +1,142 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+
+const title = 'Acerca de — Karpathy LLM Wiki';
+const description = 'Karpathy LLM Wiki es un plugin de Obsidian que implementa el concepto de LLM Wiki de Andrej Karpathy. Conoce cómo funciona, quién lo construyó y cómo participar.';
+const keywords = 'Karpathy LLM Wiki, plugin de Obsidian, concepto LLM Wiki, Andrej Karpathy, base de conocimiento de código abierto, wiki de IA, Greener-Dalii';
+---
+
+<BaseLayout
+  title={title}
+  description={description}
+  keywords={keywords}
+  locale="es"
+  ogLocale="es_ES"
+  breadcrumbs={[{ name: 'Inicio', path: '/es/' }, { name: 'Acerca de', path: '/es/about/' }]}
+>
+  <article class="relative w-full py-24 sm:py-32">
+    <div class="max-w-3xl mx-auto px-4 sm:px-6 prose prose-invert">
+      <header class="mb-12 not-prose">
+        <span class="text-[11px] font-mono text-obsidian-purple tracking-[0.15em] uppercase">Acerca de</span>
+        <h1 class="text-[clamp(1.8rem,4vw,2.8rem)] font-semibold text-obsidian-heading mt-3 mb-4 leading-tight">
+          Karpathy LLM Wiki
+        </h1>
+        <p class="text-obsidian-muted text-base leading-relaxed">
+          Un plugin de Obsidian de código abierto que convierte tus notas en una wiki autoorganizada —
+          implementando el concepto de LLM Wiki de Andrej Karpathy con IA local primero.
+        </p>
+      </header>
+
+      <section>
+        <h2>¿Qué es Karpathy LLM Wiki?</h2>
+        <p>
+          Karpathy LLM Wiki es un plugin comunitario para
+          <a href="https://obsidian.md" target="_blank" rel="noopener noreferrer">Obsidian</a>
+          que implementa
+          <a href="https://gist.github.com/karpathy/442a6bf555914893e9891c11519de94f" target="_blank" rel="noopener noreferrer">el concepto de LLM Wiki de Andrej Karpathy</a>.
+          Escribes notas en tu bóveda como siempre lo has hecho. El plugin lee esas notas, extrae
+          las personas, conceptos y teorías que contienen — y luego genera páginas wiki interconectadas
+          con <code>[[enlaces]]</code> bidireccionales. Puedes hacerle preguntas en lenguaje natural a tu wiki,
+          y cada respuesta enlaza de vuelta a las notas fuente de donde proviene.
+        </p>
+        <p>
+          El plugin es <strong>gratuito, de código abierto y local primero</strong>, y funciona con cualquier
+          proveedor de LLM compatible con Obsidian — incluyendo modelos locales a través de Ollama o LM Studio.
+        </p>
+      </section>
+
+      <section>
+        <h2>La idea detrás</h2>
+        <p>
+          En abril de 2026, Andrej Karpathy publicó
+          <a href="https://gist.github.com/karpathy/442a6bf555914893e9891c11519de94f" target="_blank" rel="noopener noreferrer">un gist</a>
+          esbozando un flujo de trabajo en el que un LLM personal lee tus notas y escribe una wiki en
+          continuo crecimiento sobre ellas — un sistema que convierte texto crudo en conocimiento
+          estructurado y enlazado de forma automática. Cada nota nueva se incorpora a un índice vivo
+          sin esfuerzo manual.
+        </p>
+        <p>
+          Karpathy LLM Wiki implementa ese flujo de trabajo de extremo a extremo. El objetivo es el mismo
+          que el de Karpathy: dejar de perder lo que lees. Que cada artículo, cada lectura y cada idea
+          sean recuperables — y que las conexiones afloren por sí solas, en lugar de depender de que
+          tu yo futuro se acuerde de escribir <code>[[enlaces]]</code>.
+        </p>
+      </section>
+
+      <section>
+        <h2>Cómo funciona</h2>
+        <ol>
+          <li><strong>Escribe tus notas.</strong> Sigue escribiendo en Obsidian como siempre. Tus notas originales nunca se modifican.</li>
+          <li><strong>Ingesta.</strong> Ejecuta un comando de ingesta — el plugin lee las notas que selecciones y le pide a tu LLM que extraiga entidades, conceptos y teorías. Se crea un registro source en <code>sources/</code> con frontmatter que apunta a tu archivo original.</li>
+          <li><strong>Generación de wiki.</strong> El plugin crea nuevas páginas wiki bajo <code>entities/</code> y <code>concepts/</code>, con <code>[[enlaces]]</code> bidireccionales entre ellas y los registros source.</li>
+          <li><strong>Consulta.</strong> Puedes hacerle preguntas en lenguaje natural a tu wiki; cada respuesta enlaza de vuelta a las notas que la fundamentaron.</li>
+          <li><strong>Mantenimiento.</strong> Las notas nuevas se ingieren automáticamente; las contradicciones se marcan; las páginas revisadas permanecen intactas.</li>
+        </ol>
+        <p>
+          Para ver la arquitectura completa, consulta las
+          <a href="https://github.com/green-dalii/obsidian-llm-wiki/discussions" target="_blank" rel="noopener noreferrer">Discussions de GitHub</a>.
+        </p>
+      </section>
+
+      <section>
+        <h2>Principios del proyecto</h2>
+        <ul>
+          <li><strong>Local primero.</strong> Tus notas nunca salen de tu máquina a menos que elijas explícitamente un proveedor en la nube.</li>
+          <li><strong>Agnóstico al proveedor.</strong> Doce proveedores de LLM compatibles — incluyendo Ollama, LM Studio y todas las principales API en la nube.</li>
+          <li><strong>Sin telemetría, sin backend, sin cuenta.</strong> El plugin no tiene ninguna infraestructura de servidor.</li>
+          <li><strong>Las páginas revisadas son sagradas.</strong> Una vez que marcas una página como revisada, la IA nunca la sobrescribe.</li>
+          <li><strong>Abierto por defecto.</strong> El código se publica bajo la licencia Apache 2.0 (con DCO); cada línea está en GitHub.</li>
+        </ul>
+      </section>
+
+      <section>
+        <h2>Quién lo construyó</h2>
+        <p>
+          <a href="https://github.com/green-dalii" target="_blank" rel="noopener noreferrer">Greener-Dalii</a>
+          es el mantenedor del proyecto y autor principal. Las siguientes personas contribuidoras (listadas en orden alfabético por su handle de GitHub) han realizado contribuciones significativas:
+        </p>
+        <ul>
+          <li><a href="https://github.com/green-dalii" target="_blank" rel="noopener noreferrer">green-dalii</a> — mantenedor del proyecto y autor principal</li>
+          <li><a href="https://github.com/DocTpoint" target="_blank" rel="noopener noreferrer">DocTpoint</a> — señal de cristalización por retiro de hubs, línea base knn, análisis de calidad de enlaces entre pares, evaluación A/B de arranque en frío</li>
+          <li><a href="https://github.com/dmarchevsky" target="_blank" rel="noopener noreferrer">dmarchevsky</a> — contribuciones de código y comentarios de revisión</li>
+          <li><a href="https://github.com/FrancoTampieri" target="_blank" rel="noopener noreferrer">FrancoTampieri</a> — contribuciones de código</li>
+          <li><a href="https://github.com/Indexed-Apogrypha" target="_blank" rel="noopener noreferrer">Indexed-Apogrypha</a> (Matthew Harper) — huella de slug de source, puerta de requisitos previa a la ingesta, correcciones del fallback de Anthropic y reportes de issues</li>
+          <li><a href="https://github.com/YounianC" target="_blank" rel="noopener noreferrer">YounianC</a> (xiaochuanlu) — barra de estado de ingesta y panel lateral de Query Wiki</li>
+        </ul>
+        <p>
+          Esta lista se mantiene en el archivo <a href="https://github.com/green-dalii/obsidian-llm-wiki/blob/main/NOTICE" target="_blank" rel="noopener noreferrer">NOTICE</a>
+          y está destinada a fines de atribución bajo la licencia Apache 2.0.
+        </p>
+        <p>
+          Si quieres ayudar, revisa el
+          <a href="https://github.com/green-dalii/obsidian-llm-wiki/issues" target="_blank" rel="noopener noreferrer">rastreador de issues</a>
+          o únete a las
+          <a href="https://github.com/green-dalii/obsidian-llm-wiki/discussions" target="_blank" rel="noopener noreferrer">Discussions</a>.
+        </p>
+      </section>
+
+      <section>
+        <h2>Licencia</h2>
+        <p>
+          Publicado bajo la licencia Apache 2.0 con el Certificado de Origen del Desarrollador (DCO).
+          Consulta los archivos
+          <a href="https://github.com/green-dalii/obsidian-llm-wiki/blob/main/LICENSE" target="_blank" rel="noopener noreferrer">LICENSE</a>
+          y
+          <a href="https://github.com/green-dalii/obsidian-llm-wiki/blob/main/NOTICE" target="_blank" rel="noopener noreferrer">NOTICE</a>
+          en GitHub para más detalles.
+        </p>
+      </section>
+
+      <section class="not-prose mt-12 pt-8 border-t border-obsidian-border/50">
+        <h3 class="text-base font-semibold text-obsidian-heading mb-3">Enlaces útiles</h3>
+        <ul class="text-sm space-y-2">
+          <li><a href="https://community.obsidian.md/plugins/karpathywiki" target="_blank" rel="noopener noreferrer" class="text-obsidian-purple-light hover:text-obsidian-purple transition-colors">Instalar en Obsidian</a></li>
+          <li><a href="https://github.com/green-dalii/obsidian-llm-wiki" target="_blank" rel="noopener noreferrer" class="text-obsidian-purple-light hover:text-obsidian-purple transition-colors">Código fuente en GitHub</a></li>
+          <li><a href="https://github.com/green-dalii/obsidian-llm-wiki/issues" target="_blank" rel="noopener noreferrer" class="text-obsidian-purple-light hover:text-obsidian-purple transition-colors">Reportar un bug</a></li>
+          <li><a href="https://github.com/green-dalii/obsidian-llm-wiki/discussions" target="_blank" rel="noopener noreferrer" class="text-obsidian-purple-light hover:text-obsidian-purple transition-colors">Unirse a una discusión</a></li>
+          <li><a href="/es/blog/" class="text-obsidian-purple-light hover:text-obsidian-purple transition-colors">Leer el blog</a></li>
+        </ul>
+      </section>
+    </div>
+  </article>
+</BaseLayout>

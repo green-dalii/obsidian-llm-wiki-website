@@ -1,10 +1,10 @@
 ---
-title: "Workflow Guide: A Reading-to-Knowledge Pipeline with Web Clipper"
+title: "Workflow Guide (3): A Reading-to-Knowledge Pipeline with Web Clipper"
 description: "Clip any web article into Obsidian, then watch Karpathy LLM Wiki turn it into a connected wiki page with bidirectional links to your existing notes."
 date: 2026-05-27
 tags: ["guides"]
 series: "workflow-guides"
-related: ["daily-knowledge-loop", "zotero-pdf-integration"]
+related: ["chat-history-knowledge-base", "daily-knowledge-loop", "research-papers-workflow"]
 ---
 
 ## The Accumulation Problem with Clipped Articles

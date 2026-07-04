@@ -1,10 +1,10 @@
 ---
-title: "Workflow Guide: Zotero to Obsidian to Wiki, an Academic Literature Pipeline"
+title: "Workflow Guide (6): Zotero to Obsidian to Wiki, an Academic Literature Pipeline"
 description: "From citation manager to queryable research knowledge base. Karpathy LLM Wiki sits at the end of a Zotero-to-Obsidian automation chain for academic literature."
 date: 2026-05-30
 tags: ["guides"]
 series: "workflow-guides"
-related: ["research-papers-workflow", "schema-layer-deep-dive"]
+related: ["research-papers-workflow", "web-clipper-workflow", "schema-layer-deep-dive"]
 ---
 
 ## The Academic Knowledge Gap

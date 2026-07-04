@@ -1,9 +1,9 @@
 ---
-title: "入门必读：你的前 100 个 Wiki 页面，从零开始"
+title: "入门必读（4）：你的前 100 个 Wiki 页面，从零开始"
 description: "从空 Obsidian 库到 100 页活的知识图谱。配置、首批 sources、首次摄入——Karpathy LLM Wiki 新手完整 walkthrough。"
 date: 2026-04-28
 tags: ["入门必读"]
-related: ["daily-knowledge-loop", "web-clipper-workflow", "choosing-models"]
+related: ["introducing-llm-wiki", "obsidian-basics", "schema-layer-deep-dive", "daily-knowledge-loop"]
 series: "getting-started"
 ---
 

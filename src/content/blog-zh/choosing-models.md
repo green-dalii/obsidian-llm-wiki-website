@@ -1,9 +1,9 @@
 ---
-title: "深入解析：选哪个 LLM 处理你的 Wiki"
+title: "深入解析（2）：选哪个 LLM 处理你的 Wiki"
 description: "长上下文模型处理 Wiki 的方式各不相同。Karpathy LLM Wiki 跑在 DeepSeek、Gemini、Claude、GPT、Ollama、LM Studio 上——何时用谁、成本几何。"
 date: 2026-05-21
 tags: ["深入解析"]
-related: ["faster-ingestion", "first-100-pages"]
+related: ["modular-architecture", "faster-ingestion", "first-100-pages"]
 series: "inside-the-system"
 ---
 

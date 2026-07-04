@@ -1,10 +1,10 @@
 ---
-title: "Getting Started: Why Your Vault Needs a Wiki"
+title: "Getting Started (2): Why Your Vault Needs a Wiki"
 description: "The accumulation paradox: more notes mean harder access. Manual wiki maintenance scales worse than the value it adds — Karpathy LLM Wiki automates page creation, link writing, and updates in your Obsidian vault."
 date: 2026-04-26
 tags: ["getting-started"]
 series: "getting-started"
-related: ["introducing-llm-wiki", "first-100-pages"]
+related: ["obsidian-basics", "introducing-llm-wiki", "first-100-pages"]
 ---
 
 ## The Accumulation Paradox

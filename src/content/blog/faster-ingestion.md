@@ -1,9 +1,9 @@
 ---
-title: "Inside the System: Cutting Ingestion Latency by Removing 200K Characters"
+title: "Inside the System (3): Cutting Ingestion Latency by Removing 200K Characters"
 description: "v1.12.0 rearchitected the extraction prompt so Obsidian ingestion speed no longer scales with wiki size. The reasoning behind the change and how the speedup was measured."
 date: 2026-05-22
 tags: ["internals"]
-related: ["query-to-wiki-feedback", "auto-maintenance"]
+related: ["modular-architecture", "choosing-models", "auto-maintenance", "v123-graph-engine-ai-sdk"]
 series: "inside-the-system"
 ---
 

@@ -1,9 +1,9 @@
 ---
-title: "入门必读：介绍 Karpathy LLM Wiki"
+title: "入门必读（3）：介绍 Karpathy LLM Wiki"
 description: "这款开源 Obsidian 插件把你的笔记变成自组织 Wiki。Karpathy LLM Wiki 提取实体、构建双向链接、用自然语言回答关于你自己知识的问题。"
 date: 2026-04-27
 tags: ["入门必读"]
-related: ["first-100-pages"]
+related: ["obsidian-basics", "first-100-pages", "why-llm-wiki-for-obsidian-users", "modular-architecture"]
 series: "getting-started"
 ---
 

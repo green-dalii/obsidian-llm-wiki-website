@@ -3,7 +3,7 @@ title: "Announcement: License Change — MIT to Apache 2.0, Quietly"
 description: "Three files change. The Karpathy LLM Wiki plugin you use doesn't. Why the project is migrating to Apache 2.0 with DCO — and what it means for users, contributors, and forks."
 date: 2026-07-03
 tags: ["announcement"]
-related: ["introducing-llm-wiki"]
+related: ["introducing-llm-wiki", "v123-graph-engine-ai-sdk"]
 series: "announcement"
 ---
 

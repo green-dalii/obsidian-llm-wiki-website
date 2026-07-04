@@ -1,10 +1,10 @@
 ---
-title: "实践指南：Zotero → Obsidian → Wiki，学术文献流水线"
+title: "实践指南（6）：Zotero → Obsidian → Wiki，学术文献流水线"
 description: "从文献管理器到可查询的研究知识库。Karpathy LLM Wiki 坐在 Zotero 到 Obsidian 自动化链路的末端。"
 date: 2026-05-30
 tags: ["实践指南"]
 series: "workflow-guides"
-related: ["research-papers-workflow", "schema-layer-deep-dive"]
+related: ["research-papers-workflow", "web-clipper-workflow", "schema-layer-deep-dive"]
 ---
 
 ## 学术知识的断层

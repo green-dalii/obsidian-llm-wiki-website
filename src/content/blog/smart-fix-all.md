@@ -1,9 +1,9 @@
 ---
-title: "Maintenance: Five-Phase Wiki Repair in One Click"
+title: "Maintenance (4): Five-Phase Wiki Repair in One Click"
 description: "Aliases, duplicates, dead links, orphans, empty pages — Karpathy LLM Wiki's Smart Fix All runs them in causal order so each repair doesn't undo the previous one."
 date: 2026-05-12
 tags: ["guides"]
-related: ["auto-maintenance", "contradiction-detection"]
+related: ["auto-maintenance", "contradiction-detection", "faster-ingestion"]
 series: "maintenance"
 ---
 

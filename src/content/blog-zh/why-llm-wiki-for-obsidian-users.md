@@ -1,10 +1,10 @@
 ---
-title: "入门必读：为什么你的 Vault 需要 Wiki"
+title: "入门必读（2）：为什么你的 Vault 需要 Wiki"
 description: "积累悖论：笔记越多，访问越难。手工 Wiki 维护的负担增长比价值更快——Karpathy LLM Wiki 自动化你的 Obsidian 库里的页面创建、链接写作与更新。"
 date: 2026-04-26
 tags: ["入门必读"]
 series: "getting-started"
-related: ["introducing-llm-wiki", "first-100-pages"]
+related: ["obsidian-basics", "introducing-llm-wiki", "first-100-pages"]
 ---
 
 ## 积累的悖论

@@ -1,0 +1,146 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+
+const title = '概要 — Karpathy LLM Wiki';
+const description = 'Karpathy LLM Wiki は、Andrej Karpathy の LLM Wiki コンセプトを実装した Obsidian プラグインです。その仕組み、開発者、参加方法を紹介します。';
+const keywords = 'Karpathy LLM Wiki, Obsidian プラグイン, LLM Wiki コンセプト, Andrej Karpathy, オープンソース ナレッジベース, AI Wiki, Greener-Dalii';
+---
+
+<BaseLayout
+  title={title}
+  description={description}
+  keywords={keywords}
+  locale="ja"
+  ogLocale="ja_JP"
+  breadcrumbs={[{ name: 'ホーム', path: '/ja/' }, { name: '概要', path: '/ja/about/' }]}
+>
+  <article class="relative w-full py-24 sm:py-32">
+    <div class="max-w-3xl mx-auto px-4 sm:px-6 prose prose-invert">
+      <header class="mb-12 not-prose">
+        <span class="text-[11px] font-mono text-obsidian-purple tracking-[0.15em] uppercase">概要</span>
+        <h1 class="text-[clamp(1.8rem,4vw,2.8rem)] font-semibold text-obsidian-heading mt-3 mb-4 leading-tight">
+          Karpathy LLM Wiki
+        </h1>
+        <p class="text-obsidian-muted text-base leading-relaxed">
+          あなたのノートを自己組織化する Wiki へと変換する、オープンソースの Obsidian プラグイン。
+          ローカルファーストの AI で、Andrej Karpathy の LLM Wiki コンセプトを実装しました。
+        </p>
+      </header>
+
+      <section>
+        <h2>Karpathy LLM Wiki とは？</h2>
+        <p>
+          Karpathy LLM Wiki は、
+          <a href="https://obsidian.md" target="_blank" rel="noopener noreferrer">Obsidian</a>
+          向けのコミュニティプラグインであり、
+          <a href="https://gist.github.com/karpathy/442a6bf555914893e9891c11519de94f" target="_blank" rel="noopener noreferrer">Andrej Karpathy の LLM Wiki コンセプト</a>
+          を実装したものです。いつものように Vault 内にノートを書けば OK。プラグインがそのノートを読み込み、
+          中に登場する人物・コンセプト・理論を抽出して、双方向の <code>[[リンク]]</code> で結ばれた
+          Wiki ページを自動生成します。完成した Wiki には自然言語で質問でき、回答は常にその根拠となった
+          ソースノートへのリンクを伴います。
+        </p>
+        <p>
+          このプラグインは<strong>無料・オープンソース・ローカルファースト</strong>で、Obsidian が
+          サポートするあらゆる LLM プロバイダーで動作します。Ollama や LM Studio を通じたローカルモデルも
+          もちろん利用可能です。
+        </p>
+      </section>
+
+      <section>
+        <h2>コンセプトの背景</h2>
+        <p>
+          2026 年 4 月、Andrej Karpathy が
+          <a href="https://gist.github.com/karpathy/442a6bf555914893e9891c11519de94f" target="_blank" rel="noopener noreferrer">gist</a>
+          を公開しました。そこで描かれたのは、個人の LLM があなたのノートを読み取り、その上に継続的に成長する
+          Wiki を書き上げていくというワークフローです。生のテキストを構造化され、相互にリンクされた知識へと
+          自動的に変換する仕組み ― 新しいノートは手動の操作なしに、生きているインデックスへと取り込まれていきます。
+        </p>
+        <p>
+          Karpathy LLM Wiki は、そのワークフローをエンドツーエンドで提供します。ゴールは Karpathy 自身と
+          同じ ― 読んだものを二度と失わないこと。論文も、記事も、ふと浮かんだ思考も、すべて後から取り出せる
+          ようにすること。<code>[[リンク]]</code> を書くかどうかは未来の自分に任せず、つながりは AI が
+          見つけてくれます。
+        </p>
+      </section>
+
+      <section>
+        <h2>仕組み</h2>
+        <ol>
+          <li><strong>ノートを書く。</strong> いつも通り Obsidian でノートを書いてください。元のノートが変更されることはありません。</li>
+          <li><strong>取り込み（Ingest）。</strong> 取り込みコマンドを実行すると、プラグインは選択されたノートを読み取り、LLM にエンティティ・コンセプト・理論を抽出させます。<code>sources/</code> 配下にソースレコードが作成され、frontmatter に元のファイルへの参照が記録されます。</li>
+          <li><strong>Wiki の生成。</strong> <code>entities/</code> と <code>concepts/</code> の配下に新しい Wiki ページが生成され、ソースレコードとの間で双方向の <code>[[リンク]]</code> が張られます。</li>
+          <li><strong>クエリ。</strong> 完成した Wiki には自然言語で質問できます。回答には必ず、その根拠となったノートへのリンクが含まれます。</li>
+          <li><strong>メンテナンス。</strong> 新しいノートは自動取り込みされ、矛盾はフラグ付けされ、確認済みのページは変更されません。</li>
+        </ol>
+        <p>
+          アーキテクチャの全容については、
+          <a href="https://github.com/green-dalii/obsidian-llm-wiki/discussions" target="_blank" rel="noopener noreferrer">GitHub Discussions</a>
+          をご覧ください。
+        </p>
+      </section>
+
+      <section>
+        <h2>プロジェクトの原則</h2>
+        <ul>
+          <li><strong>ローカルファースト。</strong> 明示的にクラウドプロバイダーを選択しない限り、ノートがあなたのマシンを離れることはありません。</li>
+          <li><strong>プロバイダーに依存しない。</strong> 12 種類の LLM プロバイダーに対応 ― Ollama、LM Studio をはじめ、主要なクラウド API をすべて含みます。</li>
+          <li><strong>テレメトリなし、バックエンドなし、アカウントなし。</strong> このプラグインにはサーバー側のインフラが一切ありません。</li>
+          <li><strong>確認済みページは神聖。</strong> 一度「確認済み」とマークしたページは、AI が上書きすることは決してありません。</li>
+          <li><strong>デフォルトでオープン。</strong> コードは Apache 2.0 ライセンス（DCO 付き）の下で公開されており、すべての行が GitHub にあります。</li>
+        </ul>
+      </section>
+
+      <section>
+        <h2>誰が作ったのか</h2>
+        <p>
+          プロジェクトのメンテナー兼メイン作者は
+          <a href="https://github.com/green-dalii" target="_blank" rel="noopener noreferrer">Greener-Dalii</a>
+          です。下記の方々（GitHub ハンドルのアルファベット順）は本プロジェクトに重要な貢献をしてくれました。
+        </p>
+        <ul>
+          <li><a href="https://github.com/green-dalii" target="_blank" rel="noopener noreferrer">green-dalii</a> — プロジェクトメンテナー兼メイン作者</li>
+          <li><a href="https://github.com/DocTpoint" target="_blank" rel="noopener noreferrer">DocTpoint</a> — ハブリタイアメントの結晶化シグナル、kNN ベースライン、ピアリンク品質分析、コールドスタート A/B 評価</li>
+          <li><a href="https://github.com/dmarchevsky" target="_blank" rel="noopener noreferrer">dmarchevsky</a> — コード貢献とレビューフィードバック</li>
+          <li><a href="https://github.com/FrancoTampieri" target="_blank" rel="noopener noreferrer">FrancoTampieri</a> — コード貢献</li>
+          <li><a href="https://github.com/Indexed-Apogrypha" target="_blank" rel="noopener noreferrer">Indexed-Apogrypha</a>（Matthew Harper）— source-slug フィンガープリント、取り込み前要件ゲート、Anthropic フォールバック修正、Issue 報告</li>
+          <li><a href="https://github.com/YounianC" target="_blank" rel="noopener noreferrer">YounianC</a>（xiaochuanlu）— 取り込みステータスバーと Query Wiki サイドパネル</li>
+        </ul>
+        <p>
+          このリストは
+          <a href="https://github.com/green-dalii/obsidian-llm-wiki/blob/main/NOTICE" target="_blank" rel="noopener noreferrer">NOTICE</a>
+          ファイルで管理されており、Apache 2.0 ライセンスの帰属表示を目的としています。
+        </p>
+        <p>
+          お手伝いいただける方は、
+          <a href="https://github.com/green-dalii/obsidian-llm-wiki/issues" target="_blank" rel="noopener noreferrer">Issue トラッカー</a>
+          をご覧いただくか、
+          <a href="https://github.com/green-dalii/obsidian-llm-wiki/discussions" target="_blank" rel="noopener noreferrer">Discussions</a>
+          にご参加ください。
+        </p>
+      </section>
+
+      <section>
+        <h2>ライセンス</h2>
+        <p>
+          Apache 2.0 ライセンス + Developer Certificate of Origin（DCO）の下で公開されています。
+          詳しくは GitHub 上の
+          <a href="https://github.com/green-dalii/obsidian-llm-wiki/blob/main/LICENSE" target="_blank" rel="noopener noreferrer">LICENSE</a>
+          および
+          <a href="https://github.com/green-dalii/obsidian-llm-wiki/blob/main/NOTICE" target="_blank" rel="noopener noreferrer">NOTICE</a>
+          ファイルをご確認ください。
+        </p>
+      </section>
+
+      <section class="not-prose mt-12 pt-8 border-t border-obsidian-border/50">
+        <h3 class="text-base font-semibold text-obsidian-heading mb-3">関連リンク</h3>
+        <ul class="text-sm space-y-2">
+          <li><a href="https://community.obsidian.md/plugins/karpathywiki" target="_blank" rel="noopener noreferrer" class="text-obsidian-purple-light hover:text-obsidian-purple transition-colors">Obsidian にインストール</a></li>
+          <li><a href="https://github.com/green-dalii/obsidian-llm-wiki" target="_blank" rel="noopener noreferrer" class="text-obsidian-purple-light hover:text-obsidian-purple transition-colors">GitHub のソースコード</a></li>
+          <li><a href="https://github.com/green-dalii/obsidian-llm-wiki/issues" target="_blank" rel="noopener noreferrer" class="text-obsidian-purple-light hover:text-obsidian-purple transition-colors">バグを報告する</a></li>
+          <li><a href="https://github.com/green-dalii/obsidian-llm-wiki/discussions" target="_blank" rel="noopener noreferrer" class="text-obsidian-purple-light hover:text-obsidian-purple transition-colors">ディスカッションに参加する</a></li>
+          <li><a href="/ja/blog/" class="text-obsidian-purple-light hover:text-obsidian-purple transition-colors">ブログを読む</a></li>
+        </ul>
+      </section>
+    </div>
+  </article>
+</BaseLayout>

@@ -1,10 +1,10 @@
 ---
-title: "实践指南：把最有价值的查询结果存为 Wiki 页面"
+title: "实践指南（1）：把最有价值的查询结果存为 Wiki 页面"
 description: "对话式查询会创造新知识。Karpathy LLM Wiki 让你把查询结果存为 Wiki 页面——让你的知识库在 source 摄入之外沿第二条路径生长。"
 date: 2026-05-25
 tags: ["实践指南"]
 series: "workflow-guides"
-related: ["daily-knowledge-loop", "canvas-llm-wiki"]
+related: ["daily-knowledge-loop", "chat-history-knowledge-base", "introducing-llm-wiki"]
 ---
 
 ## 一次查询，两个产出

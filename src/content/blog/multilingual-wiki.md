@@ -1,9 +1,9 @@
 ---
-title: "Maintenance: Write in English, Read in Japanese (and 7 More Languages)"
+title: "Maintenance (1): Write in English, Read in Japanese (and 7 More Languages)"
 description: "Wiki Output Language decouples your writing language from your reading language. Karpathy LLM Wiki generates the same content in 8 languages, independent of your Obsidian UI."
 date: 2026-05-09
 tags: ["getting-started"]
-related: ["eight-languages", "research-papers-workflow"]
+related: ["eight-languages", "introducing-llm-wiki"]
 series: "maintenance"
 ---
 

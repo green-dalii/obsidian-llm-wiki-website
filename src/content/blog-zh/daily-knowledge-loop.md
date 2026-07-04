@@ -1,10 +1,10 @@
 ---
-title: "实践指南：让 Wiki 持续生长的每日工作流"
+title: "实践指南（2）：让 Wiki 持续生长的每日工作流"
 description: "晨读、日间捕捉、晚间复盘。Karpathy LLM Wiki 融入 Obsidian 日常，让你的知识库自动生长，无需专门的\"Wiki 时间\"。"
 date: 2026-05-26
 tags: ["实践指南"]
 series: "workflow-guides"
-related: ["canvas-llm-wiki", "auto-maintenance"]
+related: ["web-clipper-workflow", "auto-maintenance", "query-to-wiki-feedback", "introducing-llm-wiki"]
 ---
 
 ## 阅读与理解之间的鸿沟

@@ -1,10 +1,10 @@
 ---
-title: "深入解析：当你的来源相互矛盾"
+title: "深入解析（4）：当你的来源相互矛盾"
 description: "来自多个来源的知识有时会冲突。Karpathy LLM Wiki 标记矛盾、跟踪双方、在相关 Wiki 页面提示冲突——以及在 Obsidian 中化解冲突的实战策略。"
 date: 2026-05-23
 tags: ["深入解析"]
 series: "inside-the-system"
-related: ["smart-fix-all", "schema-layer-deep-dive"]
+related: ["smart-fix-all", "auto-maintenance", "schema-layer-deep-dive"]
 ---
 
 ## 当来源各执一词

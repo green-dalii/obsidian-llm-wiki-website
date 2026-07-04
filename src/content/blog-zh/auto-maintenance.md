@@ -1,10 +1,10 @@
 ---
-title: "维护：文件监听、定期巡检、启动健康检查"
+title: "维护（3）：文件监听、定期巡检、启动健康检查"
 description: "三层自动化让 Wiki 保持最新，无需手工维护。Karpathy LLM Wiki 监听你的 Obsidian 库、按计划巡检、每次启动时检查 Wiki 健康状态。"
 date: 2026-05-11
 tags: ["实践指南"]
 series: "maintenance"
-related: ["smart-fix-all", "faster-ingestion"]
+related: ["smart-fix-all", "contradiction-detection", "v123-graph-engine-ai-sdk"]
 ---
 
 ## 维护间隙

@@ -1,9 +1,9 @@
 ---
-title: "Workflow Guide: Clipping ChatGPT, Claude, and Gemini into Your Vault"
+title: "Workflow Guide (7): Clipping ChatGPT, Claude, and Gemini into Your Vault"
 description: "Web Clipper drops the entire AI session into sources/; Karpathy LLM Wiki extracts entities and links them across platforms into one Obsidian knowledge base."
 date: 2026-06-21
 tags: ["guides"]
-related: ["web-clipper-workflow", "daily-knowledge-loop", "query-to-wiki-feedback"]
+related: ["web-clipper-workflow", "query-to-wiki-feedback", "daily-knowledge-loop"]
 series: "workflow-guides"
 ---
 

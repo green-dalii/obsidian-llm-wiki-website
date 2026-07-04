@@ -1,9 +1,9 @@
 ---
-title: "维护：用英语写，用日语读（再加 7 种语言）"
+title: "维护（1）：用英语写，用日语读（再加 7 种语言）"
 description: "Wiki Output Language 把\"写作语言\"和\"阅读语言\"解耦。Karpathy LLM Wiki 用 8 种语言生成同一份内容，独立于 Obsidian UI 语言。"
 date: 2026-05-09
 tags: ["入门必读"]
-related: ["eight-languages", "research-papers-workflow"]
+related: ["eight-languages", "introducing-llm-wiki"]
 series: "maintenance"
 ---
 

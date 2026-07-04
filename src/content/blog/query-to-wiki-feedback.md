@@ -1,10 +1,10 @@
 ---
-title: "Workflow Guide: Saving Your Best Queries as New Wiki Pages"
+title: "Workflow Guide (1): Saving Your Best Queries as New Wiki Pages"
 description: "Conversational queries create new knowledge. Karpathy LLM Wiki lets you save query results as wiki pages — the second path for your knowledge base to grow beyond source ingestion."
 date: 2026-05-25
 tags: ["guides"]
 series: "workflow-guides"
-related: ["daily-knowledge-loop", "canvas-llm-wiki"]
+related: ["daily-knowledge-loop", "chat-history-knowledge-base", "introducing-llm-wiki"]
 ---
 
 ## Two Outputs from One Query

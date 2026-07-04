@@ -1,11 +1,27 @@
 ---
 import { translations } from '../../i18n/astro';
 
+const LANGUAGES = [
+  { code: 'en', label: 'English', path: '/' },
+  { code: 'zh', label: '中文', path: '/zh/' },
+  { code: 'zh-tw', label: '繁體中文', path: '/zh-tw/' },
+  { code: 'ja', label: '日本語', path: '/ja/' },
+  { code: 'ko', label: '한국어', path: '/ko/' },
+  { code: 'de', label: 'Deutsch', path: '/de/' },
+  { code: 'es', label: 'Español', path: '/es/' },
+  { code: 'fr', label: 'Français', path: '/fr/' },
+  { code: 'pt', label: 'Português', path: '/pt/' },
+  { code: 'it', label: 'Italiano', path: '/it/' },
+  { code: 'ru', label: 'Русский', path: '/ru/' },
+];
+
 interface Props {
   locale?: string;
 }
 const { locale = 'en' } = Astro.props;
 const tMap: Record<string, any> = translations; const t = tMap[locale] || translations.en;
+const currentLang = LANGUAGES.find(l => l.code === locale) || LANGUAGES[0];
+const aboutPath = `${currentLang.path}about/`.replace(/\/+/g, '/');
 ---
 
 <footer class="relative w-full py-14 border-t border-obsidian-border transition-opacity duration-700 ease-out reveal">
@@ -18,10 +34,10 @@ const tMap: Record<string, any> = translations; const t = tMap[locale] || transl
         </p>
       </div>
       <div class="flex items-center gap-5">
-        <a href="/blog/" class="text-xs text-obsidian-dim hover:text-[#e5e5e5] transition-colors">
+        <a href={`${currentLang.path}blog/`.replace(/\/+/g, '/')} class="text-xs text-obsidian-dim hover:text-[#e5e5e5] transition-colors">
           {t.nav.blog}
         </a>
-        <a href={locale === 'zh' ? '/zh/about/' : '/about/'} class="text-xs text-obsidian-dim hover:text-[#e5e5e5] transition-colors">
+        <a href={aboutPath} class="text-xs text-obsidian-dim hover:text-[#e5e5e5] transition-colors">
           {t.footer.about}
         </a>
         <a href="https://github.com/green-dalii/obsidian-llm-wiki" target="_blank" rel="noopener noreferrer" class="text-xs text-obsidian-dim hover:text-[#e5e5e5] transition-colors">

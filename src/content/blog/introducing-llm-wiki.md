@@ -1,9 +1,9 @@
 ---
-title: "Getting Started: Introducing Karpathy LLM Wiki"
+title: "Getting Started (3): Introducing Karpathy LLM Wiki"
 description: "The open-source Obsidian plugin that turns your notes into a self-organizing wiki. Karpathy LLM Wiki extracts entities, builds bidirectional links, and answers natural-language questions about your own knowledge."
 date: 2026-04-27
 tags: ["getting-started"]
-related: ["first-100-pages"]
+related: ["obsidian-basics", "first-100-pages", "why-llm-wiki-for-obsidian-users", "modular-architecture"]
 series: "getting-started"
 ---
 

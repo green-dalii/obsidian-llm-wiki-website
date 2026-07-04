@@ -33,9 +33,10 @@ const anchorItems: NavItem[] = [
   { key: 'ecosystem', label: t.nav.ecosystem, target: '#ecosystem' },
 ];
 
-const blogPath = currentLocale === 'zh' ? '/zh/blog/' : '/blog/';
-const aboutPath = currentLocale === 'zh' ? '/zh/about/' : '/about/';
-const homePath = LANGUAGES.find(l => l.code === currentLocale)?.path || '/';
+const currentLang = LANGUAGES.find(l => l.code === currentLocale) || LANGUAGES[0];
+const blogPath = `${currentLang.path}blog/`.replace(/\/+/g, '/');
+const aboutPath = `${currentLang.path}about/`.replace(/\/+/g, '/');
+const homePath = currentLang.path;
 
 const navItems: NavItem[] = isBlog
   ? [...anchorItems.map(item => ({ ...item, href: homePath + item.target })), { key: 'blog', label: t.nav.blog, href: blogPath }, { key: 'about', label: t.footer.about, href: aboutPath }]

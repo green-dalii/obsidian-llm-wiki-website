@@ -1,9 +1,9 @@
 ---
-title: "深入解析：从 3000 行到 300 行，插件核心的重构"
+title: "深入解析（1）：从 3000 行到 300 行，插件核心的重构"
 description: "代码库如何把单体 main.ts 拆成模块化架构——并在此之上加入流式查询界面而不增加运行时负担。"
 date: 2026-05-20
 tags: ["深入解析"]
-related: ["introducing-llm-wiki", "schema-layer-deep-dive"]
+related: ["introducing-llm-wiki", "schema-layer-deep-dive", "faster-ingestion"]
 series: "inside-the-system"
 ---
 

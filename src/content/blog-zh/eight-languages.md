@@ -1,9 +1,9 @@
 ---
-title: "维护：插件的本地化流水线"
+title: "维护（2）：插件的本地化流水线"
 description: "v1.8.0 把 UI 从 2 种语言扩展到 8 种，每种语言精翻 269+ 字段。i18n 流程如何保证每次发布的一致性——以及 Karpathy LLM Wiki 在服务非英语用户中学到的。"
 date: 2026-05-10
 tags: ["入门必读"]
-related: ["multilingual-wiki"]
+related: ["multilingual-wiki", "introducing-llm-wiki"]
 series: "maintenance"
 ---
 

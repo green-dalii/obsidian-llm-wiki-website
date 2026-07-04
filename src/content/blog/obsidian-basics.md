@@ -1,5 +1,5 @@
 ---
-title: "Getting Started: Obsidian for Absolute Beginners"
+title: "Getting Started (1): Obsidian for Absolute Beginners"
 description: "What a vault is, how Markdown works, why bidirectional links change how you take notes. The minimum knowledge you need before installing Karpathy LLM Wiki."
 date: 2026-04-25
 tags: ["getting-started"]

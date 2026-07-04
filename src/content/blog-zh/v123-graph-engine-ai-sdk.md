@@ -3,7 +3,7 @@ title: "公告：v1.23 — 链接图作为搜索索引"
 description: "Karpathy LLM Wiki 通过蒙特卡洛个性化 PageRank 遍历你的 Wiki [[link]] 图，找到你写过的主题。每个 LLM 提供商真正流式输出，新增多文件摄入与自动生成的 Welcome 笔记。"
 date: 2026-07-02
 tags: ["公告"]
-related: ["introducing-llm-wiki"]
+related: ["monte-carlo-ppr", "modular-architecture", "introducing-llm-wiki", "auto-maintenance"]
 series: "announcement"
 ---
 

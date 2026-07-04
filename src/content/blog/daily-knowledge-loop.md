@@ -1,10 +1,10 @@
 ---
-title: "Workflow Guide: A Daily Routine for Continuous Wiki Growth"
+title: "Workflow Guide (2): A Daily Routine for Continuous Wiki Growth"
 description: "Morning reading, mid-day capture, evening review. Karpathy LLM Wiki fits into an Obsidian routine so your knowledge base grows on its own, without dedicated \"wiki time\"."
 date: 2026-05-26
 tags: ["guides"]
 series: "workflow-guides"
-related: ["canvas-llm-wiki", "auto-maintenance"]
+related: ["web-clipper-workflow", "auto-maintenance", "query-to-wiki-feedback", "introducing-llm-wiki"]
 ---
 
 ## The Gap Between Reading and Understanding

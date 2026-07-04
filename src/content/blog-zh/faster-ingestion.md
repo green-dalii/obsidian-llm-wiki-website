@@ -1,9 +1,9 @@
 ---
-title: "深入解析：砍掉 prompt 里 20 万字符，摄入延迟下降"
+title: "深入解析（3）：砍掉 prompt 里 20 万字符，摄入延迟下降"
 description: "v1.12.0 重构提取 prompt，让 Obsidian 摄入速度不再随 Wiki 规模线性增长。改动的思路与如何衡量加速。"
 date: 2026-05-22
 tags: ["深入解析"]
-related: ["query-to-wiki-feedback", "auto-maintenance"]
+related: ["modular-architecture", "choosing-models", "auto-maintenance", "v123-graph-engine-ai-sdk"]
 series: "inside-the-system"
 ---
 

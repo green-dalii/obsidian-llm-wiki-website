@@ -1,10 +1,10 @@
 ---
-title: "Workflow Guide: From Papers to a Queryable Research Wiki"
+title: "Workflow Guide (4): From Papers to a Queryable Research Wiki"
 description: "How to turn academic PDFs into a structured research knowledge base in Obsidian. Cross-referenced entities, concepts, and theories that Karpathy LLM Wiki makes searchable."
 date: 2026-05-28
 tags: ["guides"]
 series: "workflow-guides"
-related: ["zotero-pdf-integration", "schema-layer-deep-dive"]
+related: ["zotero-pdf-integration", "schema-layer-deep-dive", "contradiction-detection"]
 ---
 
 ## The Problem: Knowledge Trapped Inside Individual Papers

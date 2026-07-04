@@ -1,10 +1,10 @@
 ---
-title: "实践指南：Web Clipper 阅读到知识流水线"
+title: "实践指南（3）：Web Clipper 阅读到知识流水线"
 description: "把任何网页剪藏到 Obsidian，看 Karpathy LLM Wiki 把它变成带双向链接的 Wiki 页面，连回你已有的笔记。"
 date: 2026-05-27
 tags: ["实践指南"]
 series: "workflow-guides"
-related: ["daily-knowledge-loop", "zotero-pdf-integration"]
+related: ["chat-history-knowledge-base", "daily-knowledge-loop", "research-papers-workflow"]
 ---
 
 ## 剪藏党的困境

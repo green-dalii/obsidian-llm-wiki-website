@@ -1,0 +1,145 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+
+const title = '소개 — Karpathy LLM Wiki';
+const description = 'Karpathy LLM Wiki는 Andrej Karpathy의 LLM Wiki 컨셉을 구현한 Obsidian 플러그인입니다. 동작 원리와 기여자 정보를 확인하고 참여 방법을 알아보세요.';
+const keywords = 'Karpathy LLM Wiki, Obsidian 플러그인, LLM Wiki 컨셉, Andrej Karpathy, 오픈소스 지식 베이스, AI 위키, Greener-Dalii';
+---
+
+<BaseLayout
+  title={title}
+  description={description}
+  keywords={keywords}
+  locale="ko"
+  ogLocale="ko_KR"
+  breadcrumbs={[{ name: '홈', path: '/ko/' }, { name: '소개', path: '/ko/about/' }]}
+>
+  <article class="relative w-full py-24 sm:py-32">
+    <div class="max-w-3xl mx-auto px-4 sm:px-6 prose prose-invert">
+      <header class="mb-12 not-prose">
+        <span class="text-[11px] font-mono text-obsidian-purple tracking-[0.15em] uppercase">소개</span>
+        <h1 class="text-[clamp(1.8rem,4vw,2.8rem)] font-semibold text-obsidian-heading mt-3 mb-4 leading-tight">
+          Karpathy LLM Wiki
+        </h1>
+        <p class="text-obsidian-muted text-base leading-relaxed">
+          노트를 스스로 조직하는 위키로 만들어 주는 오픈소스 Obsidian 플러그인—
+          로컬 우선 AI로 Andrej Karpathy의 LLM Wiki 컨셉을 구현합니다.
+        </p>
+      </header>
+
+      <section>
+        <h2>Karpathy LLM Wiki란 무엇인가요?</h2>
+        <p>
+          Karpathy LLM Wiki는
+          <a href="https://obsidian.md" target="_blank" rel="noopener noreferrer">Obsidian</a>
+          용 커뮤니티 플러그인으로,
+          <a href="https://gist.github.com/karpathy/442a6bf555914893e9891c11519de94f" target="_blank" rel="noopener noreferrer">Andrej Karpathy의 LLM Wiki 컨셉</a>을
+          그대로 구현합니다. 여러분은 평소처럼 볼트(vault)에 노트를 작성합니다. 플러그인은 그 노트들을 읽어
+          안에서 등장하는 인물, 개념, 이론을 추출한 뒤, 양방향 <code>[[링크]]</code>로 서로 연결된
+          위키 페이지들을 생성합니다. 자연어로 위키에 질문을 던지면, 모든 답변이 근거가 된
+          원본 노트로 다시 연결됩니다.
+        </p>
+        <p>
+          이 플러그인은 <strong>무료이며 오픈소스, 로컬 우선</strong>으로 동작하고,
+          Obsidian이 지원하는 모든 LLM 제공업체—Ollama 또는 LM Studio를 통한 로컬 모델까지
+          포함해—와 함께 사용할 수 있습니다.
+        </p>
+      </section>
+
+      <section>
+        <h2>배경에 있는 아이디어</h2>
+        <p>
+          2026년 4월, Andrej Karpathy는 개인 LLM이 노트를 읽고 그 위에 끊임없이 성장하는 위키를
+          작성해 나가는—원시 텍스트를 자동으로 구조화되고 상호 연결된 지식으로 바꾸는—워크플로를
+          그린
+          <a href="https://gist.github.com/karpathy/442a6bf555914893e9891c11519de94f" target="_blank" rel="noopener noreferrer">gist</a>를
+          공개했습니다. 모든 새 노트는 수동 작업 없이 살아 있는 인덱스에 자연스럽게 편입됩니다.
+        </p>
+        <p>
+          Karpathy LLM Wiki는 그 워크플로를 처음부터 끝까지 제공합니다. 목표는 Karpathy의 그것과
+          같습니다—읽은 것을 더 이상 흘려보내지 않는 것. 모든 논문과 글, 생각이 다시 찾아올 수
+          있도록 만들고, 미래의 자신이 <code>[[링크]]</code>를 적어 두기 위해 기억해야 할 것에
+          기대는 대신, 연결이 저절로 떠오르게 합니다.
+        </p>
+      </section>
+
+      <section>
+        <h2>동작 방식</h2>
+        <ol>
+          <li><strong>노트를 작성합니다.</strong> 늘 하던 대로 Obsidian에서 노트를 씁니다. 원본 노트는 절대 수정되지 않습니다.</li>
+          <li><strong>수집(ingest).</strong> 수집 명령을 실행하면, 플러그인이 선택한 노트를 읽고 LLM에게 인물·개념·이론을 추출하도록 요청합니다. <code>sources/</code> 아래에 source 레코드가 생성되며, frontmatter가 원본 파일을 가리킵니다.</li>
+          <li><strong>위키 생성.</strong> 플러그인이 <code>entities/</code>와 <code>concepts/</code> 아래에 새로운 위키 페이지를 만들고, source 레코드와 그 페이지들 사이에 양방향 <code>[[링크]]</code>를 겁니다.</li>
+          <li><strong>질의(query).</strong> 자연어로 위키에 질문할 수 있으며, 모든 답변은 그 근거가 된 노트로 다시 연결됩니다.</li>
+          <li><strong>유지·보수.</strong> 새 노트는 자동으로 수집되고, 모순은 플래그되며, 검토 완료된 페이지는 손대지 않습니다.</li>
+        </ol>
+        <p>
+          전체 아키텍처는
+          <a href="https://github.com/green-dalii/obsidian-llm-wiki/discussions" target="_blank" rel="noopener noreferrer">GitHub Discussions</a>에서 확인할 수 있습니다.
+        </p>
+      </section>
+
+      <section>
+        <h2>프로젝트 원칙</h2>
+        <ul>
+          <li><strong>로컬 우선.</strong> 사용자가 명시적으로 클라우드 제공업체를 선택하지 않는 한, 노트는 사용자의 기기를 절대 떠나지 않습니다.</li>
+          <li><strong>제공업체 중립.</strong> 12개의 LLM 제공업체를 지원합니다—Ollama, LM Studio를 비롯하여 모든 주요 클라우드 API를 포함합니다.</li>
+          <li><strong>텔레메트리·백엔드·계정 없음.</strong> 이 플러그인은 서버 인프라를 전혀 두지 않습니다.</li>
+          <li><strong>검토된 페이지는 신성합니다.</strong> 한 번 검토 완료로 표시한 페이지는 AI가 절대 덮어쓰지 않습니다.</li>
+          <li><strong>기본값은 오픈소스.</strong> 코드는 Apache 2.0 라이선스(DCO 포함)로 공개되며, 모든 라인이 GitHub에 올라 있습니다.</li>
+        </ul>
+      </section>
+
+      <section>
+        <h2>만든 사람들</h2>
+        <p>
+          <a href="https://github.com/green-dalii" target="_blank" rel="noopener noreferrer">Greener-Dalii</a>가
+          프로젝트 메인테이너이자 주 저자입니다. 아래 기여자들(GitHub 핸들 기준 알파벳순)은
+          의미 있는 기여를 해 주셨습니다.
+        </p>
+        <ul>
+          <li><a href="https://github.com/green-dalii" target="_blank" rel="noopener noreferrer">green-dalii</a> — 프로젝트 메인테이너이자 주 저자</li>
+          <li><a href="https://github.com/DocTpoint" target="_blank" rel="noopener noreferrer">DocTpoint</a> — 허브 리타이어먼트(hub-retirement) 결정화 신호, knn 베이스라인, 피어 링크 품질 분석, 콜드스타트 A/B 평가</li>
+          <li><a href="https://github.com/dmarchevsky" target="_blank" rel="noopener noreferrer">dmarchevsky</a> — 코드 기여 및 리뷰 피드백</li>
+          <li><a href="https://github.com/FrancoTampieri" target="_blank" rel="noopener noreferrer">FrancoTampieri</a> — 코드 기여</li>
+          <li><a href="https://github.com/Indexed-Apogrypha" target="_blank" rel="noopener noreferrer">Indexed-Apogrypha</a>(Matthew Harper) — source-slug 지문(fingerprint), 사전 수집 요구사항 게이트, Anthropic 폴백 수정 및 이슈 리포트</li>
+          <li><a href="https://github.com/YounianC" target="_blank" rel="noopener noreferrer">YounianC</a>(xiaochuanlu) — 수집 상태바 및 Query Wiki 사이드 패널</li>
+        </ul>
+        <p>
+          이 목록은
+          <a href="https://github.com/green-dalii/obsidian-llm-wiki/blob/main/NOTICE" target="_blank" rel="noopener noreferrer">NOTICE</a>
+          파일에서 관리되며, Apache 2.0 라이선스 하의 attribution(원작자 표시) 목적을 위한 것입니다.
+        </p>
+        <p>
+          기여하고 싶으시다면,
+          <a href="https://github.com/green-dalii/obsidian-llm-wiki/issues" target="_blank" rel="noopener noreferrer">이슈 트래커</a>를
+          확인하시거나
+          <a href="https://github.com/green-dalii/obsidian-llm-wiki/discussions" target="_blank" rel="noopener noreferrer">Discussions</a>에
+          참여해 주세요.
+        </p>
+      </section>
+
+      <section>
+        <h2>라이선스</h2>
+        <p>
+          Apache 2.0 라이선스와 Developer Certificate of Origin(DCO) 하에 공개되었습니다.
+          자세한 내용은 GitHub의
+          <a href="https://github.com/green-dalii/obsidian-llm-wiki/blob/main/LICENSE" target="_blank" rel="noopener noreferrer">LICENSE</a>
+          및
+          <a href="https://github.com/green-dalii/obsidian-llm-wiki/blob/main/NOTICE" target="_blank" rel="noopener noreferrer">NOTICE</a>
+          파일을 참고하세요.
+        </p>
+      </section>
+
+      <section class="not-prose mt-12 pt-8 border-t border-obsidian-border/50">
+        <h3 class="text-base font-semibold text-obsidian-heading mb-3">유용한 링크</h3>
+        <ul class="text-sm space-y-2">
+          <li><a href="https://community.obsidian.md/plugins/karpathywiki" target="_blank" rel="noopener noreferrer" class="text-obsidian-purple-light hover:text-obsidian-purple transition-colors">Obsidian에 설치하기</a></li>
+          <li><a href="https://github.com/green-dalii/obsidian-llm-wiki" target="_blank" rel="noopener noreferrer" class="text-obsidian-purple-light hover:text-obsidian-purple transition-colors">GitHub 소스 코드</a></li>
+          <li><a href="https://github.com/green-dalii/obsidian-llm-wiki/issues" target="_blank" rel="noopener noreferrer" class="text-obsidian-purple-light hover:text-obsidian-purple transition-colors">버그 리포트하기</a></li>
+          <li><a href="https://github.com/green-dalii/obsidian-llm-wiki/discussions" target="_blank" rel="noopener noreferrer" class="text-obsidian-purple-light hover:text-obsidian-purple transition-colors">Discussion에 참여하기</a></li>
+          <li><a href="/ko/blog/" class="text-obsidian-purple-light hover:text-obsidian-purple transition-colors">블로그 읽기</a></li>
+        </ul>
+      </section>
+    </div>
+  </article>
+</BaseLayout>

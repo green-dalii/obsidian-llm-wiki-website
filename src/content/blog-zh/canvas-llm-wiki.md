@@ -1,10 +1,10 @@
 ---
-title: "实践指南：把 Wiki 页面画到 Obsidian Canvas 上"
+title: "实践指南（5）：把 Wiki 页面画到 Obsidian Canvas 上"
 description: "Canvas 能展示图谱视图看不到的结构——簇、枢纽、孤立页。Karpathy LLM Wiki 与 Canvas 联动，让你的 Wiki 从节点云变成空间地图。"
 date: 2026-05-29
 tags: ["实践指南"]
 series: "workflow-guides"
-related: ["daily-knowledge-loop", "query-to-wiki-feedback"]
+related: ["daily-knowledge-loop", "introducing-llm-wiki", "schema-layer-deep-dive"]
 ---
 
 ## Graph View 的局限

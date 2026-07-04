@@ -1,9 +1,9 @@
 ---
-title: "Maintenance: The Plugin's Localization Pipeline"
+title: "Maintenance (2): The Plugin's Localization Pipeline"
 description: "v1.8.0 extended the UI from 2 languages to 8, with 269+ fields translated per locale. Inside the i18n process that keeps every release consistent — and what shipping to non-English users taught the team."
 date: 2026-05-10
 tags: ["getting-started"]
-related: ["multilingual-wiki"]
+related: ["multilingual-wiki", "introducing-llm-wiki"]
 series: "maintenance"
 ---
 

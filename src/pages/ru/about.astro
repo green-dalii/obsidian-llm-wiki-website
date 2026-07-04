@@ -1,0 +1,146 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+
+const title = 'О проекте — Karpathy LLM Wiki';
+const description = 'Karpathy LLM Wiki — это плагин для Obsidian, реализующий концепцию LLM Wiki Андрея Карпатого. Узнайте, как он работает, кто его создал и как принять участие.';
+const keywords = 'Karpathy LLM Wiki, плагин Obsidian, концепция LLM Wiki, Андрей Карпатый, открытый исходный код, база знаний, AI-вики, Greener-Dalii';
+---
+
+<BaseLayout
+  title={title}
+  description={description}
+  keywords={keywords}
+  locale="ru"
+  ogLocale="ru_RU"
+  breadcrumbs={[{ name: 'Главная', path: '/ru/' }, { name: 'О проекте', path: '/ru/about/' }]}
+>
+  <article class="relative w-full py-24 sm:py-32">
+    <div class="max-w-3xl mx-auto px-4 sm:px-6 prose prose-invert">
+      <header class="mb-12 not-prose">
+        <span class="text-[11px] font-mono text-obsidian-purple tracking-[0.15em] uppercase">О проекте</span>
+        <h1 class="text-[clamp(1.8rem,4vw,2.8rem)] font-semibold text-obsidian-heading mt-3 mb-4 leading-tight">
+          Karpathy LLM Wiki
+        </h1>
+        <p class="text-obsidian-muted text-base leading-relaxed">
+          Плагин для Obsidian с открытым исходным кодом, который превращает ваши заметки
+          в самоорганизующуюся вики — реализация концепции LLM Wiki Андрея Карпатого
+          с локально-ориентированным ИИ.
+        </p>
+      </header>
+
+      <section>
+        <h2>Что такое Karpathy LLM Wiki?</h2>
+        <p>
+          Karpathy LLM Wiki — это плагин для сообщества
+          <a href="https://obsidian.md" target="_blank" rel="noopener noreferrer">Obsidian</a>,
+          реализующий
+          <a href="https://gist.github.com/karpathy/442a6bf555914893e9891c11519de94f" target="_blank" rel="noopener noreferrer">концепцию LLM Wiki Андрея Карпатого</a>.
+          Вы пишете заметки в своём хранилище как обычно. Плагин читает эти заметки,
+          извлекает содержащихся в них людей, концепции и теории — а затем создаёт
+          взаимосвязанные страницы вики с двунаправленными <code>[[ссылками]]</code>.
+          Вы можете задавать своей вики вопросы на естественном языке, и каждый ответ
+          содержит ссылки на исходные заметки, из которых он был получен.
+        </p>
+        <p>
+          Плагин <strong>бесплатный, с открытым исходным кодом и работает локально</strong>,
+          и совместим с любым поддерживаемым Obsidian LLM-провайдером — включая локальные модели
+          через Ollama или LM Studio.
+        </p>
+      </section>
+
+      <section>
+        <h2>Идея, стоящая за проектом</h2>
+        <p>
+          В апреле 2026 года Андрей Карпатый опубликовал
+          <a href="https://gist.github.com/karpathy/442a6bf555914893e9891c11519de94f" target="_blank" rel="noopener noreferrer">gist</a>,
+          в котором описал рабочий процесс, при котором персональная LLM читает ваши заметки
+          и поверх них пишет непрерывно растущую вики — систему, которая автоматически превращает
+          сырой текст в структурированные, перекрёстно связанные знания. Каждая новая заметка
+          включается в живой указатель без каких-либо ручных усилий.
+        </p>
+        <p>
+          Karpathy LLM Wiki реализует этот рабочий процесс от начала до конца. Цель та же,
+          что и у Карпатого: перестать терять прочитанное. Сделать каждую статью, каждую работу
+          и каждую мысль восстановимыми — и позволить связям проявляться самим, а не надеяться,
+          что ваше будущее «я» вспомнит вписать <code>[[ссылки]]</code>.
+        </p>
+      </section>
+
+      <section>
+        <h2>Как это работает</h2>
+        <ol>
+          <li><strong>Пишите заметки.</strong> Продолжайте писать в Obsidian как обычно. Ваши исходные заметки никогда не изменяются.</li>
+          <li><strong>Загрузка.</strong> Запустите команду загрузки — плагин прочитает выбранные заметки и попросит вашу LLM извлечь сущности, концепции и теории. В каталоге <code>sources/</code> создаётся запись-источник с frontmatter, указывающим на ваш исходный файл.</li>
+          <li><strong>Генерация вики.</strong> Плагин создаёт новые страницы вики в каталогах <code>entities/</code> и <code>concepts/</code>, связывая их и записи-источники двунаправленными <code>[[ссылками]]</code>.</li>
+          <li><strong>Запросы.</strong> Вы можете задавать своей вики вопросы на естественном языке; каждый ответ содержит ссылки на заметки, на которых он основан.</li>
+          <li><strong>Поддержка актуальности.</strong> Новые заметки загружаются автоматически; противоречия помечаются; проверенные страницы остаются нетронутыми.</li>
+        </ol>
+        <p>
+          Полное описание архитектуры смотрите в
+          <a href="https://github.com/green-dalii/obsidian-llm-wiki/discussions" target="_blank" rel="noopener noreferrer">GitHub Discussions</a>.
+        </p>
+      </section>
+
+      <section>
+        <h2>Принципы проекта</h2>
+        <ul>
+          <li><strong>Локально-ориентированность.</strong> Ваши заметки не покидают вашу машину, пока вы сами не выберете облачного провайдера.</li>
+          <li><strong>Независимость от провайдера.</strong> Поддерживается двенадцать LLM-провайдеров — включая Ollama, LM Studio и все основные облачные API.</li>
+          <li><strong>Никакой телеметрии, бэкенда и аккаунтов.</strong> У плагина нет никакой серверной инфраструктуры.</li>
+          <li><strong>Проверенные страницы священны.</strong> Как только вы отметите страницу как проверенную, ИИ никогда её не перезапишет.</li>
+          <li><strong>Открытость по умолчанию.</strong> Код распространяется по лицензии Apache 2.0 (с DCO); каждая строка лежит на GitHub.</li>
+        </ul>
+      </section>
+
+      <section>
+        <h2>Кто это сделал</h2>
+        <p>
+          <a href="https://github.com/green-dalii" target="_blank" rel="noopener noreferrer">Greener-Dalii</a>
+          является мейнтейнером проекта и его основным автором. Следующие участники
+          (перечислены в алфавитном порядке по имени на GitHub) внесли значительный вклад:
+        </p>
+        <ul>
+          <li><a href="https://github.com/green-dalii" target="_blank" rel="noopener noreferrer">green-dalii</a> — мейнтейнер проекта и основной автор</li>
+          <li><a href="https://github.com/DocTpoint" target="_blank" rel="noopener noreferrer">DocTpoint</a> — сигнал кристаллизации при выводе хаба из эксплуатации, бейзлайн knn, анализ качества пиринговых ссылок, A/B-оценка холодного старта</li>
+          <li><a href="https://github.com/dmarchevsky" target="_blank" rel="noopener noreferrer">dmarchevsky</a> — вклад в код и отзывы при ревью</li>
+          <li><a href="https://github.com/FrancoTampieri" target="_blank" rel="noopener noreferrer">FrancoTampieri</a> — вклад в код</li>
+          <li><a href="https://github.com/Indexed-Apogrypha" target="_blank" rel="noopener noreferrer">Indexed-Apogrypha</a> (Matthew Harper) — отпечаток source-slug, шлюз проверки требований перед загрузкой, исправления отката Anthropic и сообщения об ошибках</li>
+          <li><a href="https://github.com/YounianC" target="_blank" rel="noopener noreferrer">YounianC</a> (xiaochuanlu) — строка состояния загрузки и боковая панель Query Wiki</li>
+        </ul>
+        <p>
+          Этот список ведётся в файле <a href="https://github.com/green-dalii/obsidian-llm-wiki/blob/main/NOTICE" target="_blank" rel="noopener noreferrer">NOTICE</a>
+          и предназначен для атрибуции в соответствии с лицензией Apache 2.0.
+        </p>
+        <p>
+          Если вы хотите помочь, загляните в
+          <a href="https://github.com/green-dalii/obsidian-llm-wiki/issues" target="_blank" rel="noopener noreferrer">трекер задач</a>
+          или подключайтесь к
+          <a href="https://github.com/green-dalii/obsidian-llm-wiki/discussions" target="_blank" rel="noopener noreferrer">обсуждениям</a>.
+        </p>
+      </section>
+
+      <section>
+        <h2>Лицензия</h2>
+        <p>
+          Распространяется по лицензии Apache 2.0 с Developer Certificate of Origin.
+          Подробности смотрите в файлах
+          <a href="https://github.com/green-dalii/obsidian-llm-wiki/blob/main/LICENSE" target="_blank" rel="noopener noreferrer">LICENSE</a>
+          и
+          <a href="https://github.com/green-dalii/obsidian-llm-wiki/blob/main/NOTICE" target="_blank" rel="noopener noreferrer">NOTICE</a>
+          на GitHub.
+        </p>
+      </section>
+
+      <section class="not-prose mt-12 pt-8 border-t border-obsidian-border/50">
+        <h3 class="text-base font-semibold text-obsidian-heading mb-3">Полезные ссылки</h3>
+        <ul class="text-sm space-y-2">
+          <li><a href="https://community.obsidian.md/plugins/karpathywiki" target="_blank" rel="noopener noreferrer" class="text-obsidian-purple-light hover:text-obsidian-purple transition-colors">Установить в Obsidian</a></li>
+          <li><a href="https://github.com/green-dalii/obsidian-llm-wiki" target="_blank" rel="noopener noreferrer" class="text-obsidian-purple-light hover:text-obsidian-purple transition-colors">Исходный код на GitHub</a></li>
+          <li><a href="https://github.com/green-dalii/obsidian-llm-wiki/issues" target="_blank" rel="noopener noreferrer" class="text-obsidian-purple-light hover:text-obsidian-purple transition-colors">Сообщить об ошибке</a></li>
+          <li><a href="https://github.com/green-dalii/obsidian-llm-wiki/discussions" target="_blank" rel="noopener noreferrer" class="text-obsidian-purple-light hover:text-obsidian-purple transition-colors">Присоединиться к обсуждению</a></li>
+          <li><a href="/ru/blog/" class="text-obsidian-purple-light hover:text-obsidian-purple transition-colors">Читать блог</a></li>
+        </ul>
+      </section>
+    </div>
+  </article>
+</BaseLayout>

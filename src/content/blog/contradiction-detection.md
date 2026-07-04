@@ -1,10 +1,10 @@
 ---
-title: "Inside the System: When Your Sources Disagree"
+title: "Inside the System (4): When Your Sources Disagree"
 description: "Knowledge from multiple sources sometimes conflicts. Karpathy LLM Wiki flags the contradiction, tracks both sides, and surfaces the conflict on the affected wiki page — strategies for resolving them in Obsidian."
 date: 2026-05-23
 tags: ["internals"]
 series: "inside-the-system"
-related: ["smart-fix-all", "schema-layer-deep-dive"]
+related: ["smart-fix-all", "auto-maintenance", "schema-layer-deep-dive"]
 ---
 
 ## When Sources Disagree

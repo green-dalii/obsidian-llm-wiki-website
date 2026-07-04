@@ -1,9 +1,9 @@
 ---
-title: "Getting Started: Your First 100 Wiki Pages, Step by Step"
+title: "Getting Started (4): Your First 100 Wiki Pages, Step by Step"
 description: "From an empty Obsidian vault to a living 100-page knowledge graph. Setup, your first sources, your first ingest — a beginner's walkthrough of Karpathy LLM Wiki."
 date: 2026-04-28
 tags: ["getting-started"]
-related: ["daily-knowledge-loop", "web-clipper-workflow", "choosing-models"]
+related: ["introducing-llm-wiki", "obsidian-basics", "schema-layer-deep-dive", "daily-knowledge-loop"]
 series: "getting-started"
 ---
 

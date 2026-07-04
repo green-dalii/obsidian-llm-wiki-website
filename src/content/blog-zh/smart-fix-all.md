@@ -1,9 +1,9 @@
 ---
-title: "维护：五阶段 Wiki 修复，一键完成"
+title: "维护（4）：五阶段 Wiki 修复，一键完成"
 description: "别名、重复、死链、孤立页、空页——Karpathy LLM Wiki 的 Smart Fix All 按因果顺序修复，确保每步不会破坏前一步的成果。"
 date: 2026-05-12
 tags: ["实践指南"]
-related: ["auto-maintenance", "contradiction-detection"]
+related: ["auto-maintenance", "contradiction-detection", "faster-ingestion"]
 series: "maintenance"
 ---
 
