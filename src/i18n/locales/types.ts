@@ -165,6 +165,7 @@ export interface Translations {
     discussions: string;
     releases: string;
     obsidian: string;
+    sponsorUs: string;
   };
   cta: {
     title: string;

@@ -161,6 +161,7 @@ export const ja: Translations = {
     discussions: 'フィードバック',
     releases: 'リリース',
     obsidian: 'Obsidian',
+    sponsorUs: 'スポンサーになる',
   },
   cta: {
     title: 'Wikiを構築する準備はできましたか？',

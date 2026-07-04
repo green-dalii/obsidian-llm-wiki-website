@@ -165,6 +165,7 @@ Tags are consolidated into 3 user-centric categories (not technical/functional o
 |--------|--------|--------------|-----------------|
 | `getting-started` | `入门必读` | *"I haven't installed it yet / just installed"* | Basics, intro, first steps, multilingual support |
 | `guides` | `实践指南` | *"I have it, how do I use it better?"* | Workflows, productivity, maintenance, specific feature guides |
+| `announcement` | `公告` | *"What's new? Should I update?"* | Release announcements, major feature drops, version highlights |
 | `internals` | `深入解析` | *"Why is it designed this way?"* | Architecture, design philosophy, technical deep-dives |
 
 **Rules:**

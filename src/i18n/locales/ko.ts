@@ -161,6 +161,7 @@ export const ko: Translations = {
     discussions: '피드백',
     releases: '릴리스',
     obsidian: 'Obsidian',
+    sponsorUs: '후원하기',
   },
   cta: {
     title: '위키를 만들 준비가 되셨나요?',

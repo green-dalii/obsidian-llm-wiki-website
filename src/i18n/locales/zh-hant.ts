@@ -197,6 +197,7 @@ export const zhHant: Translations = {
     discussions: '意見回饋',
     releases: '版本',
     obsidian: 'Obsidian',
+    sponsorUs: '贊助我們',
   },
   cta: {
     title: '準備好打造你的 Wiki 了嗎？',
