@@ -17,7 +17,9 @@
   "dependencies": {
     "@astrojs/mdx": "^5.0.6",
     "@astrojs/sitemap": "^3.7.2",
+    "@iconify-json/lucide": "^1.2.116",
     "@tailwindcss/typography": "^0.5.19",
+    "astro-icon": "^1.1.5",
     "gsap": "^3.15.0",
     "lucide-react": "^0.562.0",
     "react": "^19.2.0",
