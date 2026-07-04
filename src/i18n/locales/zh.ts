@@ -209,11 +209,12 @@ export const zh: Translations = {
     title: '问题,都答了',
     subtitle: '开始前值得知道的一切。',
     items: [
-      { q: '这个插件到底是做什么的？', a: '把任何笔记丢进 Obsidian 知识库。AI 自动提取人物、概念和理论，生成互联的 Wiki 页面和双向链接。问 <em>"我写过关于 X 的什么？"</em>——答案来自你自己的笔记，而非互联网。' },
+      { q: '这和我在笔记里手动添加 [[双向链接]] 有什么区别？', a: '手动添加 [[链接]] 时，你只能连接你已经知道的关联。这个插件的工作方式不同：它会读取库中所有笔记，提取其中蕴含的人物、概念和理论，然后自动生成 Wiki 页面，浮现出你未曾注意到的联系——相隔数月阅读的论文之间的关联、跨文件夹的主题联系、埋藏在偶尔提及中的洞见。你手动添加的链接保持不变；插件在此基础上增加了一个 AI 驱动的层次，发现那些你不知道本来就存在的联系。' },
+      { q: '插件会修改我的笔记吗？如果 AI 生成了错误内容怎么办？', a: '你的原始笔记永远不会被覆盖。插件只会在自己的文件夹——entities/、concepts/ 等——中创建新的 Wiki 页面，而你的 sources/ 文件夹保持不变。如果自动生成的页面有误，只需删除它并重新运行摄入操作；它会从头重建。一旦你将某个页面标记为已审阅，AI 就再也不会重写它，只会追加内容。每个对话式回答也会链接回它所源自的笔记，让你可以一键验证任何说法。' },
       { q: '最低要求是什么？', a: 'Obsidian v1.11.0+（桌面：Windows、macOS、Linux）以及 LLM 提供商 API 密钥。支持：DeepSeek、Gemini、Claude、GPT、Kimi、GLM、MiniMax、OpenRouter，或任何自定义接口。Ollama 或 LM Studio 本地模型无需 API 密钥。' },
       { q: '应该选哪个模型？要花多少钱？', a: '推荐长上下文模型——它们能一次处理整个 Wiki。单次摄入通常花费 <em>$0.05–$0.50</em>。所有费用直接付给 LLM 提供商；插件本身 <em>免费且开源</em>。' },
-      { q: '能完全离线运行吗？', a: '可以。安装 <em>Ollama</em> 或 <em>LM Studio</em>，拉取模型后选作你的提供商——无需 API 密钥，笔记一个字节都不出门。重型摄入建议用云端（上下文更大），日常查询本地模型完全够用。' },
-      { q: '如何获取帮助或报告 Bug？', a: 'Bug 报告使用 <em>GitHub Issues</em>，问题咨询使用 <em>GitHub Discussions</em>。也可以在 <em>Obsidian 社区插件</em>页面找到该插件并留下评价。' },
+      { q: '如何确保我的数据完全私密？可以离线运行吗？', a: '完全可以——这正是插件的设计核心。使用 <em>Ollama</em> 或 <em>LM Studio</em> 本地模型，每一个字节都留在你的机器上：笔记、提取的实体、生成的 Wiki 页面——永不发送、永不记录、不触碰任何外部服务器。插件本身零遥测、无后端、无存储、不收集任何数据；它不会主动联网，连检查更新都不做。即使用云端提供商，数据也仅在你主动触发摄入或查询时才传输，且不会在外缓存、不会共享。这种零泄露架构意味着你可以放心处理科研数据、客户资料、个人日记或任何机密内容。云端模型适合批量处理（更大上下文、更快吞吐）；本地模型则赋予你日常使用的绝对数据主权。' },
+      { q: '如何获取帮助或报告 Bug？', a: '找到 Bug 了？在 GitHub 上提交 <a href="https://github.com/green-dalii/obsidian-llm-wiki/issues" target="_blank" rel="noopener noreferrer" class="text-obsidian-purple-light underline">Issue</a>。有问题或想法？在 GitHub 上发起 <a href="https://github.com/green-dalii/obsidian-llm-wiki/discussions" target="_blank" rel="noopener noreferrer" class="text-obsidian-purple-light underline">Discussion</a>。你也可以在 <a href="https://community.obsidian.md/plugins/karpathywiki" target="_blank" rel="noopener noreferrer" class="text-obsidian-purple-light underline">Obsidian 社区插件</a>页面找到该插件并留下评价。' },
     ],
   },
 };

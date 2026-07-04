@@ -173,11 +173,12 @@ export const ko: Translations = {
     title: '자주 묻는 질문, 답변 완료',
     subtitle: '시작하기 전에 알아둘 것들.',
     items: [
-      { q: '이 플러그인은 실제로 무엇을 하나요?', a: '노트를 Obsidian에 넣으면 AI가 사람, 개념, 이론을 추출하고 상호 연결된 Wiki 페이지와 양방향 링크를 자동 생성합니다. <em>"X에 대해 뭐라고 썼지?"</em>라고 물어보면 인터넷이 아닌 자신의 노트에서 답을 얻습니다.' },
+      { q: '직접 [[링크]]를 연결하는 것과 어떻게 다른가요?', a: '수동으로 [[링크]]를 연결할 때는 이미 알고 있는 연결만 기록할 수 있습니다. 이 플러그인은 다르게 작동합니다: 보관함의 모든 노트를 읽고, 그 안에 담긴 사람, 개념, 이론을 추출한 다음, 여러분이 미처 발견하지 못한 연결을 드러내는 Wiki 페이지를 자동으로 생성합니다——몇 달 간격으로 읽은 논문들 사이의 연결, 폴더를 넘나드는 주제, 지나가는 언급에 묻힌 통찰까지. 수동 링크는 그대로 유지되며, 플러그인이 여러분이 몰랐던 것을 찾아내는 AI 기반 계층을 추가합니다.' },
+      { q: '플러그인이 제 노트를 수정하나요? AI가 잘못된 내용을 생성하면 어떻게 하나요?', a: '원본 노트는 절대 덮어쓰지 않습니다. 플러그인은 자체 폴더(entities/, concepts/ 등)에만 새 Wiki 페이지를 생성하며, sources/ 폴더는 여러분이 작성한 그대로 유지됩니다. 자동 생성된 페이지가 잘못되었다면 삭제하고 인제스트를 다시 실행하기만 하면 처음부터 다시 구축됩니다. 페이지를 검토됨으로 표시하면 AI는 다시 쓰지 않고 추가만 합니다. 모든 대화형 답변도 출처가 된 노트로 다시 연결되므로 한 번의 클릭으로 주장을 검증할 수 있습니다.' },
       { q: '최소 요구 사항은?', a: 'Obsidian v1.11.0+ (데스크톱: Windows, macOS, Linux)와 LLM 제공업체 API 키 필요. 지원: DeepSeek, Gemini, Claude, GPT, Kimi, GLM, MiniMax, OpenRouter, 모든 사용자 정의 엔드포인트. Ollama·LM Studio 같은 로컬 모델은 API 키 불필요.' },
       { q: '어떤 모델을 선택해야 하나요? 비용은?', a: '긴 컨텍스트 모델 권장 — Wiki 전체를 한 번에 처리. 1회 수집 비용 약 <em>$0.05–$0.50</em>. 모든 비용은 LLM 제공업체에. 플러그인은 <em>무료 오픈 소스</em>.' },
-      { q: '완전 오프라인으로 사용할 수 있나요?', a: '네. <em>Ollama</em> 또는 <em>LM Studio</em> 설치, 모델을 받아 제공자로 선택 — API 키 불필요, 노트는 기기 밖으로 나가지 않습니다. 대량 수집은 클라우드(컨텍스트 큼), 일상 질의는 로컬 모델이 적합.' },
-      { q: '도움말이나 버그 신고는?', a: '버그 신고는 <em>GitHub Issues</em>, 질문은 <em>GitHub Discussions</em> 이용. <em>Obsidian Community Plugin</em> 페이지에서도 찾을 수 있습니다.' },
+      { q: '데이터를 완전히 비공개로 유지하면서 오프라인으로 실행할 수 있나요?', a: '네 — 그것이 바로 이 플러그인의 설계 핵심입니다. <em>Ollama</em> 또는 <em>LM Studio</em> 로컬 모델을 사용하면 모든 데이터가 사용자 기기에 남습니다: 노트, 추출된 개체, 생성된 Wiki 페이지 — 전송되지 않으며, 기록되지 않으며, 외부 서버에 닿지 않습니다. 이 플러그인은 제로 텔레메트리, 백엔드 불필요, 저장소 없음, 데이터 수집 없음 — 업데이트 확인조차 외부로 나가지 않습니다. 클라우드 제공자를 사용하는 경우에도 데이터는 사용자가 트리거한 특정 인제스트 또는 쿼리 동안에만 전송되며, 외부에 캐시되거나 공유되지 않습니다. 이러한 제로 유출 아키텍처 덕분에 연구 데이터, 고객 기록, 개인 일기 등 기밀 자료도 안심하고 사용할 수 있습니다. 클라우드 모델은 대량 배치 처리(더 큰 컨텍스트, 더 빠른 처리량)에 적합하고, 로컬 모델은 일상적인 사용에 절대적인 데이터 주권을 제공합니다.' },
+      { q: '도움말이나 버그 신고는 어떻게 하나요?', a: '버그를 발견하셨나요? <a href="https://github.com/green-dalii/obsidian-llm-wiki/issues" target="_blank" rel="noopener noreferrer" class="text-obsidian-purple-light underline">GitHub에서 Issue 열기</a>. 질문이나 아이디어가 있으신가요? <a href="https://github.com/green-dalii/obsidian-llm-wiki/discussions" target="_blank" rel="noopener noreferrer" class="text-obsidian-purple-light underline">GitHub에서 Discussion 시작하기</a>. <a href="https://community.obsidian.md/plugins/karpathywiki" target="_blank" rel="noopener noreferrer" class="text-obsidian-purple-light underline">Obsidian Community Plugin</a> 페이지에서 플러그인을 찾아 리뷰를 남길 수도 있습니다.' },
     ],
   },
 };

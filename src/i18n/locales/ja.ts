@@ -173,11 +173,12 @@ export const ja: Translations = {
     title: 'よくあるご質問、回答済み',
     subtitle: '使いはじめる前に、知っておくべきこと。',
     items: [
-      { q: 'このプラグインの目的は？', a: 'ノートを Obsidian に置くだけで、AI が人物・概念・理論を抽出し、相互リンクされた Wiki ページを自動生成します。<em>「X について何か書いた？」</em>と質問すれば、インターネットではなく自分のノートから回答を得られます。' },
+      { q: 'これは私が手動で [[リンク]] を張るのとどう違うのですか？', a: '手動で [[リンク]] を張るとき、あなたはすでに知っているつながりしか記録できません。このプラグインは異なる方法で動作します：Vault 内のすべてのノートを読み込み、そこに埋め込まれた人物、概念、理論を抽出し、あなたが気づかなかったリンクを表面化する Wiki ページを自動生成します——数ヶ月離れて読んだ論文間のつながり、フォルダをまたいだテーマ、ちょっとした言及に埋もれた洞察。手動のリンクはそのまま残り、プラグインはあなたが知らなかった発見を可能にする AI 駆動のレイヤーを追加します。' },
+      { q: 'プラグインは私のノートを変更しますか？AI が間違ったことをしたらどうなりますか？', a: '元のノートが上書きされることは決してありません。プラグインは独自のフォルダ（entities/、concepts/ など）に新しい Wiki ページを作成するだけで、sources/ はあなたが書いたままの状態を保ちます。自動生成されたページが間違っている場合は、削除してインジェストを再実行するだけで、最初から再構築されます。一度レビュー済みとしてマークすると、AI はそのページを書き換えず、追記のみを行います。すべての会話形式の回答も、元となったノートにリンクされているため、ワンクリックで主張を検証できます。' },
       { q: '最低要件は？', a: 'Obsidian v1.11.0+（デスクトップ：Windows、macOS、Linux）と LLM プロバイダーの API キーが必要です。対応：DeepSeek、Gemini、Claude、GPT、Kimi、GLM、MiniMax、OpenRouter、または任意のカスタムエンドポイント。Ollama・LM Studio のローカルモデルは API キー不要。' },
       { q: 'どのモデルを選ぶべき？費用は？', a: '長コンテキストモデル推奨 — Wiki 全体を1回で処理できます。1回の取り込みは約 <em>$0.05–$0.50</em>。費用はすべて LLM プロバイダーに。プラグイン自体は <em>無料のオープンソース</em>。' },
-      { q: '完全オフラインで動かせる？', a: 'はい。<em>Ollama</em> または <em>LM Studio</em> をインストールし、モデルをプルしてプロバイダーとして選択 — API キー不要、ノートは本機から一切出ません。大規模な取り込みはクラウド（コンテキストが大きい）、日常のクエリはローカルモデルがおすすめ。' },
-      { q: 'ヘルプやバグ報告は？', a: 'バグ報告は <em>GitHub Issues</em>、質問は <em>GitHub Discussions</em> へ。<em>Obsidian Community Plugin</em> ページでも見つけられます。' },
+      { q: 'データを完全にプライベートに保ちながらオフライン運用できますか？', a: 'はい——それが本プラグインの設計思想です。<em>Ollama</em> または <em>LM Studio</em> のローカルモデルを使えば、すべてのデータがあなたのマシンに留まります：ノート、抽出されたエンティティ、生成された Wiki ページ——送信されず、記録されず、外部サーバーに触れることは一切ありません。本プラグインはテレメトリゼロ、バックエンドなし、ストレージなし、データ収集なし——自ら外部接続することはありません。クラウドプロバイダーを使用する場合でも、データはあなたがトリガーした特定のインジェストまたはクエリの間のみ送信され、外部にキャッシュされたり共有されたりすることはありません。このゼロ漏洩アーキテクチャにより、研究データ、顧客情報、個人日記など、機密性の高い内容でも安心して使用できます。クラウドモデルはバッチ処理に適し（コンテキストが大きくスループットが高い）、ローカルモデルは日常的な作業に絶対的なデータ主権を提供します。' },
+      { q: 'ヘルプやバグ報告は？', a: 'バグを発見しましたか？<a href="https://github.com/green-dalii/obsidian-llm-wiki/issues" target="_blank" rel="noopener noreferrer" class="text-obsidian-purple-light underline">GitHub で Issue を開く</a>。質問やアイデアがありますか？<a href="https://github.com/green-dalii/obsidian-llm-wiki/discussions" target="_blank" rel="noopener noreferrer" class="text-obsidian-purple-light underline">GitHub で Discussion を開始する</a>。<a href="https://community.obsidian.md/plugins/karpathywiki" target="_blank" rel="noopener noreferrer" class="text-obsidian-purple-light underline">Obsidian Community Plugin</a> ページでもプラグインを見つけてレビューを残せます。' },
     ],
   },
 };

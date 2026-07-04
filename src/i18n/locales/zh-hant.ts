@@ -209,11 +209,12 @@ export const zhHant: Translations = {
     title: '問題,都答了',
     subtitle: '開始前值得知道的一切。',
     items: [
-      { q: '這個外掛到底在做什麼？', a: '把任何筆記丟進你的 Obsidian Vault。AI 自動萃取人物、概念與理論，並生成互相串連的 Wiki 頁面與雙向連結。問 <em>「我寫過哪些關於 X 的內容？」</em>——答案來自你自己的筆記，不是網路。' },
+      { q: '這和我在筆記裡手動添加 [[雙向連結]] 有什麼不同？', a: '手動添加 [[連結]] 時，你只能連接你已經知道的關聯。這個外掛的運作方式不同：它會讀取庫中所有筆記，提取其中蘊含的人物、概念和理論，然後自動生成 Wiki 頁面，浮現出你未曾注意到的聯繫——相隔數月閱讀的論文之間的關聯、跨資料夾的主題聯繫、埋藏在偶爾提及中的洞見。你手動添加的連結保持不變；外掛在此基礎上增加了一個 AI 驅動的層次，發現那些你不知道本來就存在的聯繫。' },
+      { q: '外掛會修改我的筆記嗎？如果 AI 產生了錯誤內容怎麼辦？', a: '你的原始筆記永遠不會被覆寫。外掛只會在自己的資料夾——entities/、concepts/ 等——中建立新的 Wiki 頁面，而你的 sources/ 資料夾保持不變。如果自動產生的頁面有誤，只需刪除它並重新執行攝入；它會從頭重建。一旦你將某個頁面標記為已審閱，AI 就再也不會重寫它，只會追加內容。每個對話式回答也會連結回它所源自的筆記，讓你一鍵驗證任何說法。' },
       { q: '最低需求是什麼？', a: 'Obsidian v1.11.0+（桌面：Windows、macOS、Linux）以及任一家 LLM 供應商的 API 金鑰。支援：DeepSeek、Gemini、Claude、GPT、Kimi、GLM、MiniMax、OpenRouter，或任何自訂端點。使用 Ollama 或 LM Studio 的本機模型則無需 API 金鑰。' },
       { q: '該選哪個模型？會花多少錢？', a: '推薦長脈絡模型——它們能一次處理整部 Wiki。單次 ingest 大約 <em>$0.05–$0.50</em>。費用直接付給 LLM 供應商；外掛本身 <em>免費且開源</em>。' },
-      { q: '可以用本機模型完全離線嗎？', a: '可以。安裝 <em>Ollama</em> 或 <em>LM Studio</em>，下載模型後把它選為供應商——不用 API 金鑰，所有資料不離開你的電腦。大量 ingest 建議用雲端（脈絡更長），日常查詢用本機模型已綽綽有餘。' },
-      { q: '如何求助或回報 Bug？', a: 'Bug 回報請用 <em>GitHub Issues</em>，一般問題請到 <em>GitHub Discussions</em>。你也可以到 <em>Obsidian 社群外掛</em>頁面為本外掛留下評價。' },
+      { q: '如何確保我的資料完全私密？可以離線執行嗎？', a: '完全可以——這正是本外掛的設計核心。使用 <em>Ollama</em> 或 <em>LM Studio</em> 本機模型，每一個位元組都留在你的電腦上：筆記、提取的實體、生成的 Wiki 頁面——永不傳送、永不記錄、不觸碰任何外部伺服器。外掛本身零遙測、無後端、不儲存、不收集任何資料；它不會回傳任何資訊，連檢查更新都不會。即使使用雲端供應商，資料也僅在你主動觸發攝入或查詢時傳輸，且不會在外快取或共享。這種零洩漏架構讓你可以安心處理研究資料、客戶記錄、個人日記或任何機密內容。雲端模型適合批次處理（更大脈絡、更快吞吐）；本機模型則賦予你日常使用的絕對資料主權。' },
+      { q: '如何求助或回報 Bug？', a: '找到 Bug 了？在 GitHub 上提交 <a href="https://github.com/green-dalii/obsidian-llm-wiki/issues" target="_blank" rel="noopener noreferrer" class="text-obsidian-purple-light underline">Issue</a>。有問題或想法？在 GitHub 上發起 <a href="https://github.com/green-dalii/obsidian-llm-wiki/discussions" target="_blank" rel="noopener noreferrer" class="text-obsidian-purple-light underline">Discussion</a>。你也可以在 <a href="https://community.obsidian.md/plugins/karpathywiki" target="_blank" rel="noopener noreferrer" class="text-obsidian-purple-light underline">Obsidian 社群外掛</a>頁面找到此外掛並留下評價。' },
     ],
   },
 };
