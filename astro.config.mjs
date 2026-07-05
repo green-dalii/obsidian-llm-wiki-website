@@ -4,12 +4,16 @@ import tailwindcss from '@tailwindcss/vite';
 import sitemap from '@astrojs/sitemap';
 import mdx from '@astrojs/mdx';
 import icon from 'astro-icon';
+import mermaid from 'astro-mermaid';
 
 // https://astro.build/config
 export default defineConfig({
   site: 'https://llmwiki.greenerai.top',
   output: 'static',
   integrations: [
+    mermaid({
+      theme: 'dark',
+    }),
     mdx(),
     react(),
     icon(),

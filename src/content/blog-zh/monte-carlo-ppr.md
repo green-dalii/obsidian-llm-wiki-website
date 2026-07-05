@@ -221,26 +221,15 @@ const distinctiveness = 1 - redundancy / max(redundancy);
 
 这是用户实际感知到的 consumer。`ppr-cascade` 模块（[`src/core/ppr-cascade.ts`](https://github.com/green-dalii/obsidian-llm-wiki/blob/main/src/core/ppr-cascade.ts)）是一条三档 cascade：
 
-```
-┌────────────────────────────────────────────────────────────────────┐
-│                        pprCascade(query)                           │
-└────────────────────────────────────────────────────────────────────┘
-                                 │
-       ┌─────────────────────────┼─────────────────────────────────┐
-       │                         │                                 │
-   Arm 1: lex              Arm 2: lex-seeded-ppr            Arm 3: graph-first-ppr
-   (稀疏库，seed            (中等密度，                    (成熟图：
-   孤立，|V| < 30           或 seed 来自                   |V| ≥ 30, |E| ≥ 30,
-   或 |E| < 30)             LLM 语义选中)                   |E|/|V| ≥ 1.0,
-                                                              最大连通片
-                                                              > 50% |V|)
-                                                              │
-                                                              ↓
-                                                    从显式 seed 列表
-                                                    跑 PPR（有 LLM 选中时
-                                                    用，否则取 lex top-1）
-                                                    合并：max(lexScore, pprScore)
-                                                    排序，取 topN=10。
+```mermaid
+graph TB
+    Q["pprCascade(query)"] ==> G{"Graph<br/>mature?<br/>(|V|, |E|, density,<br/>connectedness)"}
+    G ==>|"否：稀疏库<br/>|V| < 30 或 |E| < 30"| A1["Arm 1: lex<br/>纯关键词匹配"]
+    G ==>|"部分：中等密度<br/>或 LLM 语义选中种子"| A2["Arm 2: lex-seeded-ppr<br/>从前 3 lex 跑 PPR<br/>+ lex 合并"]
+    G ==>|"是：成熟图<br/>|V| ≥ 30, |E| ≥ 30<br/>|E|/|V| ≥ 1.0<br/>连通片 &gt; 50%"| A3["Arm 3: graph-first-ppr"]
+    A3 ==> S["从显式种子列表跑 PPR<br/>（LLM 选中优先，<br/>否则取 lex top-1）"]
+    S ==> M["合并：max(lexScore, pprScore)"]
+    M ==> R["降序排序<br/>取 topN=10"]
 ```
 
 阈值都是 *内部常量*（`30 / 30 / 1.0 / 50%`），不是用户可调的设置。理由：调它们是基于成本曲线的工程决策，不是用户偏好。如果你的库太小，你不会想要一个"切换回关键词模式"的开关——你想要的是它看上去就像那个老的、经过考验的关键词模式，而你不必感知到这件事。

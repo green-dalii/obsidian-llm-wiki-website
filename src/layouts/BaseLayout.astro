@@ -172,7 +172,7 @@ const jsonLd = { "@context": "https://schema.org", "@graph": graph };
 ---
 
 <!doctype html>
-<html lang={locale}>
+<html lang={locale} style="overflow-x: hidden;">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -233,7 +233,7 @@ const jsonLd = { "@context": "https://schema.org", "@graph": graph };
     <!-- Additional head content -->
     <slot name="head" />
   </head>
-  <body>
+  <body style="overflow: clip;">
     <div class="relative bg-obsidian-bg text-obsidian-text">
       <ProgressBar />
       <Header currentLocale={locale} isBlog={isBlog || (breadcrumbs && breadcrumbs.length > 0)} />

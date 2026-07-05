@@ -221,26 +221,15 @@ The output is a per-target `distinctivenessScore` in [0, 1] and a hub-level reco
 
 This is the consumer the user feels. The `ppr-cascade` module ([`src/core/ppr-cascade.ts`](https://github.com/green-dalii/obsidian-llm-wiki/blob/main/src/core/ppr-cascade.ts)) is a three-arm cascade:
 
-```
-┌────────────────────────────────────────────────────────────────────┐
-│                        pprCascade(query)                           │
-└────────────────────────────────────────────────────────────────────┘
-                                 │
-       ┌─────────────────────────┼─────────────────────────────────┐
-       │                         │                                 │
-   Arm 1: lex              Arm 2: lex-seeded-ppr            Arm 3: graph-first-ppr
-   (sparse vault,           (medium density,                 (mature graph:
-   seed isolated,           or seed from LLM                  |V| ≥ 30, |E| ≥ 30,
-   ||V| < 30                semantic selection)               |E|/|V| ≥ 1.0,
-   ||E| < 30)                                                  largest component
-                                                              > 50% of |V|)
-                                                              │
-                                                              ↓
-                                                    PPR from explicit seed list
-                                                    (LLM-selected when available,
-                                                     else top lex result)
-                                                    Merge: max(lexScore, pprScore)
-                                                    Sort, topN=10.
+```mermaid
+graph TB
+    Q["pprCascade(query)"] ==> G{"Graph<br/>mature?<br/>(|V|, |E|, density,<br/>connectedness)"}
+    G ==>|"NO: sparse vault"| A1["Arm 1: lex<br/>Pure keyword match<br/>(|V| < 30 or |E| < 30)"]
+    G ==>|"PARTIAL: medium density<br/>or LLM-selected seeds"| A2["Arm 2: lex-seeded-ppr<br/>PPR from top-3 lex seeds<br/>+ lex merge"]
+    G ==>|"YES: mature graph<br/>|V| ≥ 30, |E| ≥ 30<br/>|E|/|V| ≥ 1.0<br/>connected &gt; 50%"| A3["Arm 3: graph-first-ppr"]
+    A3 ==> S["PPR from explicit seed list<br/>(LLM-selected when available,<br/>else top lex result)"]
+    S ==> M["Merge: max(lexScore, pprScore)"]
+    M ==> R["Sort descending<br/>topN=10"]
 ```
 
 The thresholds are *internal constants* (`30 / 30 / 1.0 / 50%`), not user-facing settings. The reasoning: tuning these is an engineering decision based on the cost curve, not a user preference. If your vault is too small, you don’t want a “switch to keyword mode” toggle — you want it to behave like the older, well-tested keyword mode without you having to notice.

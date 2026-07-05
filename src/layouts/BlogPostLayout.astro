@@ -40,8 +40,7 @@ const breadcrumbs = [
   hreflangAlternates={hreflangAlternates}
   breadcrumbs={breadcrumbs}
 >
-  <main class="pt-14">
-    <article class="relative w-full py-16 sm:py-24">
+  <article class="relative w-full py-12 sm:py-24">
       <div class="max-w-7xl mx-auto px-4 sm:px-6">
         <a href={blogPath} class="inline-flex items-center gap-1.5 text-sm text-obsidian-dim hover:text-obsidian-heading transition-colors mb-8">
           <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m15 18-6-6 6-6"/></svg>
@@ -62,7 +61,7 @@ const breadcrumbs = [
           </aside>
 
           <!-- Center -->
-          <div class="flex-1 min-w-0 max-w-3xl mx-auto lg:mx-0">
+          <div class="flex-1 min-w-0 max-w-3xl w-full mx-auto lg:mx-0">
             <header class="mb-10">
               <time class="text-sm font-mono text-obsidian-dim block mb-2">{formattedDate}</time>
               <h1 class="text-[clamp(1.8rem,4vw,2.8rem)] font-semibold text-obsidian-heading leading-tight mb-4">{title}</h1>
@@ -84,21 +83,21 @@ const breadcrumbs = [
               <h4 class="text-xs font-semibold text-obsidian-heading uppercase tracking-wider mb-4">
                 {locale === 'zh' ? '相关链接' : 'Links'}
               </h4>
-              <a href="https://community.obsidian.md/plugins/karpathywiki" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 px-5 py-3 rounded-lg bg-obsidian-purple/15 border border-obsidian-purple/30 text-obsidian-purple-light hover:bg-obsidian-purple/25 transition-colors text-sm font-medium mb-3">
-                <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
-                {locale === 'zh' ? '在 Obsidian 安装插件' : 'Install on Obsidian'}
-              </a>
-              <div class="flex flex-wrap gap-2">
-                <a href="https://github.com/green-dalii/obsidian-llm-wiki" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1.5 px-3 py-2 rounded-md bg-obsidian-surface border border-obsidian-border text-obsidian-muted hover:text-obsidian-heading hover:border-obsidian-purple/30 transition-colors text-xs">
-                  <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
+              <div class="grid grid-cols-2 gap-2 sm:flex sm:flex-wrap sm:items-stretch">
+                <a href="https://community.obsidian.md/plugins/karpathywiki" target="_blank" rel="noopener noreferrer" class="inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-lg bg-obsidian-purple/15 border border-obsidian-purple/30 text-obsidian-purple-light hover:bg-obsidian-purple/25 transition-colors text-xs font-medium">
+                  <svg class="w-4 h-4 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+                  {locale === 'zh' ? '在 Obsidian 安装插件' : 'Install on Obsidian'}
+                </a>
+                <a href="https://github.com/green-dalii/obsidian-llm-wiki" target="_blank" rel="noopener noreferrer" class="inline-flex items-center justify-center gap-1.5 px-3 py-2.5 rounded-lg bg-obsidian-surface border border-obsidian-border text-obsidian-muted hover:text-obsidian-heading hover:border-obsidian-purple/30 transition-colors text-xs font-medium">
+                  <svg class="w-4 h-4 shrink-0" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
                   GitHub
                 </a>
-                <a href="https://github.com/green-dalii/obsidian-llm-wiki/discussions" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1.5 px-3 py-2 rounded-md bg-obsidian-surface border border-obsidian-border text-obsidian-muted hover:text-obsidian-heading hover:border-obsidian-purple/30 transition-colors text-xs">
-                  <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+                <a href="https://github.com/green-dalii/obsidian-llm-wiki/discussions" target="_blank" rel="noopener noreferrer" class="inline-flex items-center justify-center gap-1.5 px-3 py-2.5 rounded-lg bg-obsidian-surface border border-obsidian-border text-obsidian-muted hover:text-obsidian-heading hover:border-obsidian-purple/30 transition-colors text-xs font-medium">
+                  <svg class="w-4 h-4 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
                   {locale === 'zh' ? '反馈建议' : 'Discussions'}
                 </a>
-                <a href="https://github.com/green-dalii/obsidian-llm-wiki/issues" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1.5 px-3 py-2 rounded-md bg-obsidian-surface border border-obsidian-border text-obsidian-muted hover:text-obsidian-heading hover:border-obsidian-purple/30 transition-colors text-xs">
-                  <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+                <a href="https://github.com/green-dalii/obsidian-llm-wiki/issues" target="_blank" rel="noopener noreferrer" class="inline-flex items-center justify-center gap-1.5 px-3 py-2.5 rounded-lg bg-obsidian-surface border border-obsidian-border text-obsidian-muted hover:text-obsidian-heading hover:border-obsidian-purple/30 transition-colors text-xs font-medium">
+                  <svg class="w-4 h-4 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
                   {locale === 'zh' ? '问题 / Bug' : 'Issues'}
                 </a>
               </div>
@@ -138,7 +137,6 @@ const breadcrumbs = [
         </div>
       </div>
     </article>
-  </main>
 
   <Fragment slot="head">
     <style is:global>
@@ -146,8 +144,7 @@ const breadcrumbs = [
       .toc-link.active { color: #a78bfa; font-weight: 500; }
     </style>
     <script is:inline>
-    document.addEventListener('DOMContentLoaded',function(){var l=document.querySelectorAll('.toc-link');if(!l.length)return;var h=[];l.forEach(function(a){var e=document.querySelector(a.getAttribute('href'));if(e)h.push(e)});if(!h.length)return;var o=new IntersectionObserver(function(e){e.forEach(function(e){if(e.isIntersecting){var n=e.target.getAttribute('id');l.forEach(function(e){e.classList.toggle('active',e.getAttribute('href')==='#'+n)})}})},{rootMargin:'-80px 0px -70% 0px'});h.forEach(function(e){o.observe(e)})})();
-    </script>
+    document.addEventListener('DOMContentLoaded',function(){try{var l=document.querySelectorAll('.toc-link');if(!l.length)return;var h=[];l.forEach(function(a){var e=document.getElementById(a.getAttribute('href').slice(1));if(e)h.push(e)});if(!h.length)return;var o=new IntersectionObserver(function(e){e.forEach(function(e){if(e.isIntersecting){var n=e.target.getAttribute('id');l.forEach(function(e){e.classList.toggle('active',e.getAttribute('href')==='#'+n)})}})},{rootMargin:'-80px 0px -70% 0px'});h.forEach(function(e){o.observe(e)})}catch(_){}})</script>
   </Fragment>
 </BaseLayout>
 
@@ -161,4 +158,17 @@ const breadcrumbs = [
 .prose blockquote { border-left-width: 3px; font-style: normal; }
 .prose img { border-radius: 8px; }
 html { scroll-behavior: smooth; }
+</style>
+
+<style is:global>
+/* Prevent any pre (including Mermaid) from expanding its container on mobile */
+.prose pre { overflow-x: auto; -webkit-overflow-scrolling: touch; min-width: 0; max-width: 100%; }
+/* Mermaid SVG inside <pre>: mermaid sets its own inline max-width equal to
+   natural content width which overflows narrow viewports. Force-fit. */
+.prose pre svg { max-width: 100% !important; height: auto; display: block; }
+@media (max-width: 1023px) {
+  .prose table { display: block; overflow-x: auto; -webkit-overflow-scrolling: touch; }
+  .prose img { max-width: 100%; height: auto; }
+  .prose { font-size: 0.9375rem; line-height: 1.7; }
+}
 </style>
