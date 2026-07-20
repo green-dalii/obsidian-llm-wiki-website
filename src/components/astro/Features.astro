@@ -24,15 +24,27 @@ const features = [
   { title: t.features.smartFixTitle, tag: t.features.smartFixTag, desc: t.features.smartFixDesc, icon: 'zap', priority: 5 },
   { title: t.features.finalizedTitle, tag: t.features.finalizedTag, desc: t.features.finalizedDesc, icon: 'lock', priority: 6 },
   { title: t.features.citationsTitle, tag: t.features.citationsTag, desc: t.features.citationsDesc, icon: 'quote', priority: 7 },
-  { title: t.features.tagsTitle, tag: t.features.tagsTag, desc: t.features.tagsDesc, icon: 'tag', priority: 8 },
-  { title: t.features.granularityTitle, tag: t.features.granularityTag, desc: t.features.granularityDesc, icon: 'sliders', priority: 9 },
+  // PDF Ingest (v1.25.0) — joins the main 9-card grid at priority 8.
+  // `granularity` (was priority 9) demoted to chip-only entry in moreCapabilities
+  // to preserve the 4/6/9 responsive rhythm without a 10-card grid reshuffle.
+  { title: t.features.pdfIngestTitle, tag: t.features.pdfIngestTag, desc: t.features.pdfIngestDesc, icon: 'file-text', priority: 8 },
+  { title: t.features.tagsTitle, tag: t.features.tagsTag, desc: t.features.tagsDesc, icon: 'tag', priority: 9 },
 ];
 
 // Bidirectional links + history: always chips (never a card).
+// `granularity` was demoted from a priority-9 card to chip-only when PDF
+// Ingest joined the 9-card grid in v1.25.0; its full desc still lives in
+// t.features.* keys for completeness, but here we only show the title chip.
+// `perTaskModelsTitle` (v1.24.0) is EN-only; if the locale doesn't supply
+// it, we silently skip the chip.
 const alwaysChips: { title: string; tag: string }[] = [
   { title: t.features.bidirectionalTitle, tag: t.features.bidirectionalTag },
   { title: t.features.historyTitle, tag: t.features.historyTag },
+  { title: t.features.granularityTitle, tag: t.features.granularityTag },
 ];
+if (t.features.perTaskModelsTitle) {
+  alwaysChips.push({ title: t.features.perTaskModelsTitle, tag: '' });
+}
 
 const moreCaps = t.features.moreCapabilities || [];
 
