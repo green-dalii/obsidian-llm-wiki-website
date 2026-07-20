@@ -17,7 +17,7 @@ export const en: Translations = {
     title1: 'Your notes.',
     title2: 'A living wiki.',
     seoTitle: 'Karpathy LLM Wiki — AI Wiki Plugin for Obsidian',
-    subtitle: 'Write in Obsidian. Every note connects to a network that keeps growing.',
+    subtitle: 'Write in Obsidian — notes, PDFs, web clips. Every input connects to a network that keeps growing.',
     ctaInstall: 'Get the Plugin',
     ctaObsidian: 'Get Obsidian',
     obsidianHint: 'Obsidian required.',
@@ -112,6 +112,13 @@ export const en: Translations = {
     historyTitle: 'Every change, traceable',
     historyDesc: 'Open the activity panel and see exactly what the AI did, when, and to which note. Roll back any edit in one click.',
     historyTag: 'History',
+    // PDF Ingest (v1.25.0) — first-class source alongside Markdown.
+    pdfIngestTitle: 'PDFs become first-class sources',
+    pdfIngestDesc: 'Drop a research paper, manual, or scanned receipt into sources/. The plugin extracts text, tables, and figures — and cites the page you read.',
+    pdfIngestTag: 'PDF Ingest',
+    // Per-task model selection (v1.24.0) — chip-only entry.
+    perTaskModelsTitle: 'Per-task models',
+    perTaskModelsDesc: 'Pick a cheap model for extraction and a smart one for queries. Configure once, apply per workflow.',
     moreLabel: 'And more:',
     moreCapabilities: ['10-language output', 'See it reason', 'Catches contradictions', 'Finds duplicates', 'Recovers from hiccups', 'Skips what\'s done'],
   },
@@ -142,7 +149,7 @@ export const en: Translations = {
     obsidianDesc: 'No extra apps. Lives entirely in your Obsidian.',
     cardLabel: 'Twelve providers, ready to go',
     cardSubtitle: 'Cloud or local — use the one you trust.',
-    contextNote: 'Long-context models read your whole wiki in a single pass — the complete picture, not fragmented snippets.',
+    contextNote: 'Long-context models read your whole wiki in a single pass — the complete picture, not fragmented snippets. Ollama and LM Studio run fully on-device — no upload, no API key.',
     bestValue: 'Best value',
     noLockInTitle: 'Switch any time',
     noLockInDesc: 'Twelve providers, one dropdown apart. Outgrow one, switch to the next — your wiki never notices.',
@@ -217,6 +224,10 @@ export const en: Translations = {
       { q: 'Which model should I choose? How much will it cost?', a: 'Long-context models recommended — they process your entire wiki in one pass. A single ingest costs <em>$0.05–$0.50</em>. All costs go to the LLM provider; the plugin itself is <em>free and open source</em>.' },
       { q: 'Can I keep my data completely private by running fully offline?', a: 'Yes — and that\'s exactly how the plugin is built. With <em>Ollama</em> or <em>LM Studio</em>, every byte stays on your machine: notes, extracted entities, wiki pages — never sent, never logged, never touched by any external server. The plugin has zero telemetry, no backend, no storage, and no data collection of any kind; it never connects outbound on its own, even to check for updates. Using a cloud provider? Data is transmitted only during the specific ingest or query you trigger, never cached externally, never shared. This zero-exfiltration architecture means you can confidently use it with research data, client records, personal journals, or any confidential material — regardless of sensitivity. Cloud models offer larger context windows and faster throughput for heavy batch work; local models give you absolute data sovereignty for day-to-day use.' },
       { q: 'How do I get help or report bugs?', a: 'Found a bug? Open an <a href="https://github.com/green-dalii/obsidian-llm-wiki/issues" target="_blank" rel="noopener noreferrer" class="text-obsidian-purple-light underline">issue on GitHub</a>. Have a question or idea? Start a <a href="https://github.com/green-dalii/obsidian-llm-wiki/discussions" target="_blank" rel="noopener noreferrer" class="text-obsidian-purple-light underline">Discussion on GitHub</a>. You can also find the plugin on the <a href="https://community.obsidian.md/plugins/karpathywiki" target="_blank" rel="noopener noreferrer" class="text-obsidian-purple-light underline">Obsidian Community Plugin</a> page and leave a review.' },
+      // v1.25.0 additions
+      { q: 'Can the plugin read PDFs and scanned documents?', a: 'Yes — since v1.25.0, PDFs are a first-class source format. Drop a PDF into your sources/ folder: the plugin reads it through your LLM provider (Anthropic Claude, OpenAI GPT-4o, and Bedrock variants handle PDFs natively), converts it to Markdown via an OCR-style verbatim transcriber with anti-hallucination markers for figures and equations, and feeds the result into the same entity / concept / link extraction pipeline as Markdown sources. The converted Markdown is content-hash cached in <em>.obsidian/</em> so re-ingesting is instant. By default your vault is not modified; enable <em>Write PDF Markdown to Vault</em> in settings to also write a <em>&lt;basename&gt;.pdf.md</em> sidecar next to the source PDF.' },
+      { q: 'Can I pick a different model for indexing versus querying?', a: 'Yes — since v1.24.0, the plugin supports per-task model selection. In <em>Settings → Wiki → Model Scope</em>, switch from <em>Unified</em> (one model for everything) to <em>Per-Task</em>, then pick an independent model for <em>Ingest</em>, <em>Lint</em>, and <em>Query</em>. A common pattern: a cheap fast model for ingest (DeepSeek, MiniMax), a strong model for lint (Claude, GPT-4o), and a long-context model for query. <em>Test Connection</em> probes each configured model sequentially with fail-fast — until every per-task model passes, the connection is considered unhealthy.' },
+      { q: 'Does PDF ingestion work fully offline?', a: 'Yes — if you pair PDF Ingest with a local model via <em>Ollama</em> or <em>LM Studio</em>, every PDF stays on your machine end-to-end. The recommended setup on Apple Silicon is <a href="https://github.com/jundot/omlx" target="_blank" rel="noopener noreferrer" class="text-obsidian-purple-light underline">oMLX</a> + the Markitdown backend + Baidu\'s open-sourced Unlimited-OCR model (3B total / 0.5B active), connected via a <em>Custom OpenAI-Compatible</em> provider with <em>Force PDF Support</em> enabled. PDFs never leave your vault; conversion runs locally; the resulting Markdown hits the same entity-extraction pipeline, also on-device.' },
     ],
   },
 };

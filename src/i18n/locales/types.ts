@@ -105,6 +105,14 @@ export interface Translations {
     historyTitle: string;
     historyDesc: string;
     historyTag: string;
+    // PDF Ingest (v1.25.0) — first-class source format alongside Markdown.
+    // Required: lands in the main 9-card grid, so all 11 locales must define it.
+    pdfIngestTitle: string;
+    pdfIngestDesc: string;
+    pdfIngestTag: string;
+    // Per-task model selection (v1.24.0) — chip-only entry, optional with EN fallback.
+    perTaskModelsTitle?: string;
+    perTaskModelsDesc?: string;
     moreCapabilities: string[];
     moreLabel: string;
   };
