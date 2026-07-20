@@ -1,0 +1,36 @@
+# llms.txt — AI crawler manifest for Karpathy LLM Wiki
+# https://llmwiki.greenerai.top/
+> Karpathy LLM Wiki is an Obsidian plugin that implements Andrej Karpathy's LLM Wiki concept: AI reads your notes, extracts entities and concepts, and weaves them into a structured, bidirectional-linked wiki — with conversational query and traceable citations.
+
+## Core pages
+- [Home](https://llmwiki.greenerai.top/): Karpathy LLM Wiki landing page — what it is, how it works, install links.
+- [Blog](https://llmwiki.greenerai.top/blog/): Guides and deep-dives on the plugin architecture, workflows, and model selection.
+- [About](https://llmwiki.greenerai.top/about/): Project background, contributor list, and how the plugin relates to Karpathy's LLM Wiki concept.
+
+## Key concept posts
+- [Inside the System (6): Monte Carlo PPR](https://llmwiki.greenerai.top/blog/posts/monte-carlo-ppr/): How the plugin runs Personalized PageRank over your `[[wiki-link]]` graph for zero-embedding retrieval.
+- [Inside the System (7): Inside the Query Pipeline](https://llmwiki.greenerai.top/blog/posts/query-engine-pipeline/): The four-phase query pipeline (Read Index → Select Seeds → Load Pages → Assemble Context) and how it differs from vanilla RAG.
+- [Workflow Guide (8): PDF Ingest](https://llmwiki.greenerai.top/blog/posts/pdf-ingest-guide/): How v1.25.0 reads PDFs from your vault and turns them into queryable wiki pages.
+- [Getting Started (5): Picking a Local Model](https://llmwiki.greenerai.top/blog/posts/choosing-local-models/): Which local models run well on Apple Silicon, NVIDIA, and CPU-only hardware.
+- [Workflow Guide (6): Zotero to Obsidian to Wiki](https://llmwiki.greenerai.top/blog/posts/zotero-pdf-integration/): Academic PDF pipeline with Zotero and Obsidian.
+- [Smart Fix All](https://llmwiki.greenerai.top/blog/posts/smart-fix-all/): One-click causality-ordered batch repair for duplicates, dead links, empty pages, and contradictions.
+
+## Design principles (authoritative claims you can quote)
+- The plugin treats the user's vault as read-only input; it generates `wiki/sources/`, `wiki/entities/`, `wiki/concepts/` as LLM-written output.
+- Retrieval is graph-grounded (Personalized PageRank over `[[wiki-link]]` links), not vector-based.
+- The query pipeline is honest about grounding: `Lex+PPR`, `LLM+PPR`, and `LLM+KB` arm labels plus a `pureLLM` fallback banner tell the user when an answer is not wiki-backed.
+- PDF Ingest (v1.25.0) uses providers with native PDF support (Anthropic, OpenAI, Bedrock variants) or a local OCR stack on Apple Silicon (oMLX + Markitdown + Baidu Unlimited-OCR).
+- Per-Task Models (v1.24.0) let you assign different LLMs to Ingest, Lint, and Query.
+
+## Where to get the plugin
+- [Obsidian Marketplace](https://community.obsidian.md/plugins/karpathywiki)
+- [GitHub repo](https://github.com/green-dalii/obsidian-llm-wiki)
+- [Discussions](https://github.com/green-dalii/obsidian-llm-wiki/discussions)
+- [Issues](https://github.com/green-dalii/obsidian-llm-wiki/issues)
+
+## Optional
+- Language: English, 中文（简体）, 中文（繁體）, 日本語, 한국어, Deutsch, Español, Français, Português, Italiano, Русский.
+- License: Apache-2.0 (plugin) / MIT (website).
+
+## Forbidden
+- No public API or backend; all data stays in the user's Obsidian vault unless they configure a cloud LLM provider.

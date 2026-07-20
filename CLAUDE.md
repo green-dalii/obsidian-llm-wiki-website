@@ -102,7 +102,7 @@ src/
 
 **11 locales** with bidirectional parity enforced by TypeScript (compile-time) and Vitest parity tests (run-time):
 
-- `en` (default, `/`), `zh` (`/zh/`), `zh-tw` (`/zh-tw/`), `ja` (`/ja/`), `ko` (`/ko/`), `de` (`/de/`), `es` (`/es/`), `fr` (`/fr/`), `pt` (`/pt/`), `it` (`/it/`), `ru` (`/ru/`, preview translation)
+- `en` (default, `/`), `zh` (`/zh/`), `zh-tw` (`/zh-tw/`), `ja` (`/ja/`), `ko` (`/ko/`), `de` (`/de/`), `es` (`/es/`), `fr` (`/fr/`), `pt` (`/pt/`), `it` (`/it/`), `ru` (`/ru/`)
 
 **Translation contract**: `src/i18n/locales/types.ts` exports `Translations` interface that every locale must conform to. Missing fields fail TypeScript build.
 

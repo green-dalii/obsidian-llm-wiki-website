@@ -71,3 +71,18 @@ export function getText(
   }
   return local ?? en;
 }
+
+/** Map website locale codes to Facebook/Google Open Graph locale tags. */
+export const OG_LOCALE_MAP: Record<string, string> = {
+  en: 'en_US',
+  zh: 'zh_CN',
+  'zh-tw': 'zh_TW',
+  ja: 'ja_JP',
+  ko: 'ko_KR',
+  de: 'de_DE',
+  es: 'es_ES',
+  fr: 'fr_FR',
+  pt: 'pt_PT',
+  it: 'it_IT',
+  ru: 'ru_RU',
+};

@@ -1,10 +1,17 @@
 ---
 import BaseLayout from './BaseLayout.astro';
+import { OG_LOCALE_MAP } from '../i18n/astro';
 
 const { title, description } = Astro.props;
 const locale = Astro.props.locale || 'en';
 const rawDate = Astro.props.date;
+const rawDateModified = Astro.props.dateModified;
 const dt = rawDate instanceof Date ? rawDate : new Date(rawDate as string);
+const dtModified = rawDateModified instanceof Date
+  ? rawDateModified
+  : rawDateModified
+    ? new Date(rawDateModified as string)
+    : dt;
 const dateLocale = locale === 'zh' ? 'zh-CN' : 'en-US';
 const formattedDate = dt.toLocaleDateString(dateLocale, { year: 'numeric', month: 'long', day: 'numeric' });
 const tags = (Astro.props.tags || []) as string[];
@@ -18,7 +25,7 @@ const tf = locale === 'zh' ? '/zh/blog/' : '/blog/';
 
 // SEO: article structured data + breadcrumb trail + hreflang (passed from the route)
 const hreflangAlternates = (Astro.props.hreflang || []) as { code: string; path: string }[];
-const articleMeta = { datePublished: dt.toISOString(), tags };
+const articleMeta = { datePublished: dt.toISOString(), dateModified: dtModified.toISOString(), tags };
 const homePath = locale === 'zh' ? '/zh/' : '/';
 const homeLabel = locale === 'zh' ? '首页' : 'Home';
 const blogLabel = locale === 'zh' ? '博客' : 'Blog';
@@ -33,7 +40,7 @@ const breadcrumbs = [
   title={title}
   description={description}
   locale={locale}
-  ogLocale={locale === 'zh' ? 'zh_CN' : 'en_US'}
+  ogLocale={OG_LOCALE_MAP[locale] ?? 'en_US'}
   isBlog
   pageType="article"
   articleMeta={articleMeta}

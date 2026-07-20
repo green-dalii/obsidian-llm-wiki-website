@@ -1,5 +1,6 @@
 ---
 import BaseLayout from './BaseLayout.astro';
+import { OG_LOCALE_MAP } from '../i18n/astro';
 
 const { title, description = '', locale = 'en', hreflangAlternates, breadcrumbs } = Astro.props;
 ---
@@ -8,7 +9,7 @@ const { title, description = '', locale = 'en', hreflangAlternates, breadcrumbs 
   title={title}
   description={description}
   locale={locale}
-  ogLocale={locale === 'zh' ? 'zh_CN' : 'en_US'}
+  ogLocale={OG_LOCALE_MAP[locale] ?? 'en_US'}
   isBlog
   hreflangAlternates={hreflangAlternates}
   breadcrumbs={breadcrumbs}
