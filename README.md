@@ -183,7 +183,35 @@ npx vitest run    # i18n parity tests (currently 48/48 passing)
 
 Selected highlights; full version history lives in git log.
 
-### v3.1.0 (2026-06) — current
+**Versioning convention**: the website tracks the plugin version it documents, suffixed with `-web` (e.g. plugin `v1.25.1` → website `v1.25.1-web`). The website does **not** auto-update on every plugin patch — when you trigger a sync, first read the plugin `CHANGELOG` between the last synced plugin version and the current one, then translate that delta into website changes. Each website version entry below records the corresponding plugin release it documents.
+
+### v1.25.1-web (2026-07) — current. Plugin: v1.25.1
+- **PDF Ingest on landing page** — new "PDF Ingest" feature card in the 9-card grid; `granularity` demoted to chip row to preserve the 4/6/9 responsive rhythm
+- **Hero subtitle upgraded** — "Write in Obsidian — notes, PDFs, web clips" (EN) / ZH parallel
+- **Providers callout extended** — adds "Ollama and LM Studio run fully on-device — no upload, no API key"
+- **FAQ +3** — PDFs/scanned docs, per-task model selection, fully-offline PDF ingest with local OCR
+- **3 new bilingual blog posts** — `pdf-ingest-guide` (workflow-guides #8), `choosing-local-models` (getting-started #5), `query-engine-pipeline` (inside-the-system #7)
+- **All 11 locales** updated for new keys (PDF features, hero subtitle, providers note, FAQ items)
+
+### v1.25.0-web (2026-07). Plugin: v1.25.0
+[initial website release for v1.25.0 — superseded by v1.25.1-web]
+
+### v1.23.0-web (2026-07). Plugin: v1.23.0 → v1.25.0
+- **About pages in 9 missing locales** — zh-tw, ja, ko, de, es, fr, pt, it, ru about pages created, translated from EN baseline with full contributor list and corrected sources/ mechanism
+- **Nav/Footer About links fixed** — non-EN locale Nav/Footer aboutPath uses LANGUAGES table instead of binary `locale === 'zh'` check
+- **MC PPR internals blog post** — depth-dive on Monte Carlo Personalized PageRank algorithm, code annotation, tuning table, cascade architecture (EN + ZH)
+- **Series order suffixes** — all 5 series titles annotated with `(n)` suffix; announcement series excluded as event-driven
+- **Related links rewrite** — all related links fields across 46 posts rewritten for higher functional relevance
+- **Mermaid rendering** — astro-mermaid@2.1.0 integration for Mermaid diagram rendering
+- **Mermaid mobile overflow fixed** — `overflow-x: hidden` on `<html>`, `overflow: clip` on `<body>`, prose pre SVG force-fit
+- **BlogPost mobile responsive** — flex → grid for article footer links (2x2 on mobile), text-xs, prose font-size adjustment
+- **Footer mobile layout** — flex-wrap gap layout for footer links on mobile
+- **Double scrollbar fixed** — removed duplicate `<main>` wrapper in BlogPostLayout, fixed html/body overflow strategy
+- **TOC scripts fixed** — extra `()` caused `addEventListener is not a function` error; querySelector CJK bug fixed via getElementById
+- **Pre-delivery Gate** — `npm run gate` passes cleanly (tsc, eslint, vitest, astro build)
+- **All 11 locales** synced with about pages
+
+### v3.1.0 (2026-06). Plugin: v1.23.x
 - **Trust demoted into Features** — removed standalone Trust section; its three claims live as `features.finalized` (What you finalize, stays) and `features.history` (Every change, traceable) cards, with the third absorbed into the existing `citations` card
 - **Privacy reframed** — `providers.privacyTitle` rewritten as "Privacy first" / "隐私第一" across 11 locales (was "What you write, stays yours" — vague, read as a tagline)
 - **Providers re-titled** — "Your AI. Your rules." → "Your model. Your rules." (matches Nav chip "Models" / "AI 模型")
