@@ -31,8 +31,8 @@ export const en: Translations = {
     label: 'How It Works',
     title: 'From note to wiki',
     subtitle: 'One note. A world of connections.',
-    step1Title: 'Drop it in',
-    step1Desc: 'Articles, papers, ideas. Place them in sources/. The plugin reads every word.',
+    step1Title: 'Pick it',
+    step1Desc: 'Pick any note from your vault — `Cmd+P` → Ingest single source. The plugin reads every word.',
     step2Title: 'See what matters',
     step2Desc: 'People, places, themes. AI reads the full picture and surfaces what matters.',
     step3Title: 'Pages appear',
@@ -61,7 +61,7 @@ export const en: Translations = {
       {
         category: 'Saving',
         before: 'Save an article. Forget where. Search later. Nothing.',
-        after: 'Drop it in sources/. Ideas found, pages built, summary ready. In seconds.',
+        after: 'Pick a note from your vault. Ideas found, pages built, summary ready. In seconds.',
       },
       {
         category: 'Connecting',
@@ -80,7 +80,7 @@ export const en: Translations = {
     title: 'What changes for you',
     subtitle: 'Not features. A new relationship with everything you read.',
     organizeTitle: 'It just happens',
-    organizeDesc: 'Drop it in sources/. AI reads, extracts, builds. No folders. No tags. No work.',
+    organizeDesc: 'Pick a note from your vault — `Cmd+P` → Ingest. AI reads, extracts, builds. No folders. No tags. No work.',
     organizeTag: 'Zero effort',
     bidirectionalTitle: 'Living links',
     bidirectionalDesc: 'Every page joins your Obsidian graph. Open Graph View — and watch your knowledge grow.',
@@ -114,7 +114,7 @@ export const en: Translations = {
     historyTag: 'History',
     // PDF Ingest (v1.25.0) — first-class source alongside Markdown.
     pdfIngestTitle: 'PDFs become first-class sources',
-    pdfIngestDesc: 'Drop a research paper, manual, or scanned receipt into sources/. The plugin extracts text, tables, and figures — and cites the page you read.',
+    pdfIngestDesc: 'Pick a PDF from anywhere in your vault. The plugin reads it through your LLM provider, transcribes it to Markdown verbatim, and feeds the result into the same entity / concept / link extraction pipeline as Markdown notes.',
     pdfIngestTag: 'PDF Ingest',
     // Per-task model selection (v1.24.0) — chip-only entry.
     perTaskModelsTitle: 'Per-task models',
@@ -172,7 +172,7 @@ export const en: Translations = {
       {
         name: 'Web Clipper',
         standalone: 'Save articles',
-        amplified: 'Drop in sources/. AI extracts, links, updates. One clip becomes 10+ wiki pages.',
+        amplified: 'Save the clip anywhere in your vault. Run `Cmd+P` → Ingest from folder. AI extracts, links, updates. One clip becomes 10+ wiki pages.',
       },
       {
         name: 'Dataview',
@@ -219,13 +219,13 @@ export const en: Translations = {
     subtitle: 'Everything worth knowing, before you start.',
     items: [
       { q: 'How is this different from me just [[linking]] my own notes?', a: 'When you [[link]] notes manually, you capture connections you already know. The plugin works differently: it reads every note in your vault, extracts the people, concepts, and theories embedded in them, then auto-generates wiki pages that surface links you hadn\'t noticed — connections between papers you read months apart, themes across folders, insights buried in passing mentions. Your manual links stay intact; the plugin adds an AI-powered layer that finds what you didn\'t know was there.' },
-      { q: 'Does the plugin modify my notes? What if the AI gets something wrong?', a: 'Your original notes are never overwritten. The plugin only creates new wiki pages in its own folders — entities/, concepts/, and similar — while your sources/ stay exactly as you wrote them. If an auto-generated page is wrong, simply delete it and run ingest again; it will be rebuilt from scratch. Once you mark a page as reviewed, the AI never rewrites it, only appends. Every conversational answer also links back to the source notes it came from, so you can verify any claim with one click.' },
+      { q: 'Does the plugin modify my notes? What if the AI gets something wrong?', a: 'Your vault stays exactly as you wrote it. The plugin only creates new wiki pages in its own folders — entities/, concepts/, and similar — under your wiki/ folder. If an auto-generated page is wrong, simply delete it and run ingest again; it will be rebuilt from scratch. Once you mark a page as reviewed, the AI never rewrites it, only appends. Every conversational answer also links back to the source notes it came from, so you can verify any claim with one click.' },
       { q: 'What are the minimum requirements?', a: 'Obsidian v1.11.0+ (desktop: Windows, macOS, Linux) and an LLM provider API key. Supported: DeepSeek, Gemini, Claude, GPT, Kimi, GLM, MiniMax, OpenRouter, or any custom endpoint. No API key needed for local models via Ollama or LM Studio.' },
       { q: 'Which model should I choose? How much will it cost?', a: 'Long-context models recommended — they process your entire wiki in one pass. A single ingest costs <em>$0.05–$0.50</em>. All costs go to the LLM provider; the plugin itself is <em>free and open source</em>.' },
       { q: 'Can I keep my data completely private by running fully offline?', a: 'Yes — and that\'s exactly how the plugin is built. With <em>Ollama</em> or <em>LM Studio</em>, every byte stays on your machine: notes, extracted entities, wiki pages — never sent, never logged, never touched by any external server. The plugin has zero telemetry, no backend, no storage, and no data collection of any kind; it never connects outbound on its own, even to check for updates. Using a cloud provider? Data is transmitted only during the specific ingest or query you trigger, never cached externally, never shared. This zero-exfiltration architecture means you can confidently use it with research data, client records, personal journals, or any confidential material — regardless of sensitivity. Cloud models offer larger context windows and faster throughput for heavy batch work; local models give you absolute data sovereignty for day-to-day use.' },
       { q: 'How do I get help or report bugs?', a: 'Found a bug? Open an <a href="https://github.com/green-dalii/obsidian-llm-wiki/issues" target="_blank" rel="noopener noreferrer" class="text-obsidian-purple-light underline">issue on GitHub</a>. Have a question or idea? Start a <a href="https://github.com/green-dalii/obsidian-llm-wiki/discussions" target="_blank" rel="noopener noreferrer" class="text-obsidian-purple-light underline">Discussion on GitHub</a>. You can also find the plugin on the <a href="https://community.obsidian.md/plugins/karpathywiki" target="_blank" rel="noopener noreferrer" class="text-obsidian-purple-light underline">Obsidian Community Plugin</a> page and leave a review.' },
       // v1.25.0 additions
-      { q: 'Can the plugin read PDFs and scanned documents?', a: 'Yes — since v1.25.0, PDFs are a first-class source format. Drop a PDF into your sources/ folder: the plugin reads it through your LLM provider (Anthropic Claude, OpenAI GPT-4o, and Bedrock variants handle PDFs natively), converts it to Markdown via an OCR-style verbatim transcriber with anti-hallucination markers for figures and equations, and feeds the result into the same entity / concept / link extraction pipeline as Markdown sources. The converted Markdown is content-hash cached in <em>.obsidian/</em> so re-ingesting is instant. By default your vault is not modified; enable <em>Write PDF Markdown to Vault</em> in settings to also write a <em>&lt;basename&gt;.pdf.md</em> sidecar next to the source PDF.' },
+      { q: 'Can the plugin read PDFs and scanned documents?', a: 'Yes — since v1.25.0, PDFs are a first-class input. Pick a PDF from anywhere in your vault (`Cmd+P` → Ingest single source). The plugin reads it through your LLM provider\'s native file input (Anthropic Claude, OpenAI GPT-4o, and Bedrock variants handle PDFs natively), converts it to Markdown via OCR-style verbatim transcription with anti-hallucination markers for figures and equations, and re-enters the regular Markdown ingest pipeline. The converted Markdown is content-hash cached in <em>.obsidian/plugins/karpathywiki/pdf-cache/</em>, so re-ingesting is instant. By default your vault is not modified; enable <em>Write PDF Markdown to Vault</em> in Settings to also write a <em>&lt;basename&gt;.pdf.md</em> sidecar next to the source PDF.' },
       { q: 'Can I pick a different model for indexing versus querying?', a: 'Yes — since v1.24.0, the plugin supports per-task model selection. In <em>Settings → Wiki → Model Scope</em>, switch from <em>Unified</em> (one model for everything) to <em>Per-Task</em>, then pick an independent model for <em>Ingest</em>, <em>Lint</em>, and <em>Query</em>. A common pattern: a cheap fast model for ingest (DeepSeek, MiniMax), a strong model for lint (Claude, GPT-4o), and a long-context model for query. <em>Test Connection</em> probes each configured model sequentially with fail-fast — until every per-task model passes, the connection is considered unhealthy.' },
       { q: 'Does PDF ingestion work fully offline?', a: 'Yes — if you pair PDF Ingest with a local model via <em>Ollama</em> or <em>LM Studio</em>, every PDF stays on your machine end-to-end. The recommended setup on Apple Silicon is <a href="https://github.com/jundot/omlx" target="_blank" rel="noopener noreferrer" class="text-obsidian-purple-light underline">oMLX</a> + the Markitdown backend + Baidu\'s open-sourced Unlimited-OCR model (3B total / 0.5B active), connected via a <em>Custom OpenAI-Compatible</em> provider with <em>Force PDF Support</em> enabled. PDFs never leave your vault; conversion runs locally; the resulting Markdown hits the same entity-extraction pipeline, also on-device.' },
     ],
