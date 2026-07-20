@@ -1,6 +1,6 @@
 ---
 title: "Workflow Guide (7): Clipping ChatGPT, Claude, and Gemini into Your Vault"
-description: "Web Clipper drops the entire AI session into sources/; Karpathy LLM Wiki extracts entities and links them across platforms into one Obsidian knowledge base."
+description: "Web Clipper saves the entire AI session to a folder you choose; Karpathy LLM Wiki extracts entities and links them across platforms into one Obsidian knowledge base."
 date: 2026-06-21
 tags: ["guides"]
 related: ["web-clipper-workflow", "query-to-wiki-feedback", "daily-knowledge-loop"]
@@ -11,13 +11,13 @@ series: "workflow-guides"
 
 You use ChatGPT for quick answers. Claude for deep analysis. Gemini for code. Each platform holds dozens — sometimes hundreds — of conversations where you actually thought hard, made decisions, and arrived at insights.
 
-But those sessions don't talk to each other. A pattern you spotted in last week's Claude session might be exactly the missing piece in yesterday's ChatGPT conversation. You'd never know. The connection stays invisible — locked inside each platform's UI.
+Those sessions don't talk to each other. A pattern you spotted in last week's Claude session might be exactly the missing piece in yesterday's ChatGPT conversation. You'd never know. The connection stays invisible — locked inside each platform's UI.
 
 The value doesn't disappear. It just stays buried.
 
 ## Why Chat Sessions Are an Underrated Knowledge Source
 
-Unlike web articles or papers, AI sessions have a unique advantage: **they're a product of your own active thinking**.
+Unlike web articles or papers, AI sessions have one specific advantage: **they're a product of your own active thinking**.
 
 The questions you asked, the angles you pushed, the alternatives you considered — these capture your real cognitive trail. A web article is someone else's knowledge. A deep AI session is knowledge you've actively processed.
 
@@ -37,7 +37,7 @@ When you open a ChatGPT, Claude, or Gemini session in your browser and run Web C
 
 If you haven't already, install [Obsidian Web Clipper](https://obsidian.md/clipper) from your browser's extension store.
 
-Set up a dedicated template that saves clipped sessions to a `sources/chat-history/` folder — separate from your other source material so the ingest pipeline can treat them differently if you want.
+Set up a dedicated template that saves clipped sessions to any folder you choose — many users use `Clippings/Chat History/`. Keep it separate from your other source material so the ingest pipeline can treat it differently if you want.
 
 ### Step 2: Clip a Session When It's Worth Keeping
 
@@ -48,13 +48,13 @@ Don't clip after every conversation. Instead, develop a sense of when a session 
 - The session ended in a concrete plan, decision, or artifact you might revisit
 - You wrote a long, considered prompt — that prompt itself captures how you framed the problem
 
-When you see that signal, open the session in your browser and click Web Clipper. You get one Markdown file containing the entire conversation. Drop it in `sources/chat-history/`.
+When you see that signal, open the session in your browser and click Web Clipper. You get one Markdown file containing the entire conversation. Save it to your clippings folder.
 
-**Tip:** If the session is a planning conversation with a different framing (interview prep, design review, study notes), give the clipped file a descriptive name — `sources/chat-history/system-design-review-claude.md` reads better than `claude-conversation-2026-06-15.md` and makes the file's role obvious later.
+**Tip:** If the session is a planning conversation with a different framing (interview prep, design review, study notes), give the clipped file a descriptive name — `Clippings/Chat History/system-design-review-claude.md` reads better than `claude-conversation-2026-06-15.md` and makes the file's role obvious later.
 
 ### Step 3: Ingest
 
-Press `Cmd+P` → "Ingest from folder" → point to `sources/chat-history/`.
+Press `Cmd+P` → "Ingest from folder" and point at your clippings folder. Any folder works.
 
 **Granularity guidance:**
 - **Standard** for typical sessions — covers most conversational depth
@@ -67,15 +67,15 @@ For very long sessions (100+ messages), consider manually splitting into themati
 
 ### Step 4: Explore Cross-Session Connections
 
-Open your `wiki/` folder and look at what was extracted. You'll find that concepts and entities from different sessions and different platforms are now linked together.
+Open your `wiki/` folder and look at what was extracted. Concepts and entities from different sessions and different platforms are now linked together.
 
-**Example:** You discussed "context windows" and "retrieval-augmented generation" with Claude while exploring long-context LLM design. Separately, you asked Gemini about "vector databases" and "embedding models" for a side project. After ingestion, the `entities/context-window` page might reference both sessions — the Claude deep-dive and the Gemini exploration — and link to `concepts/rag` and `concepts/embeddings`, plus to any related material you've ingested from other sources.
+**Example:** You discussed "context windows" and "retrieval-augmented generation" with Claude while exploring long-context LLM design. Separately, you asked Gemini about "vector databases" and "embedding models" for a side project. After ingestion, the `entities/context-window` page references both sessions — the Claude deep-dive and the Gemini exploration — and links to `concepts/rag` and `concepts/embeddings`, plus any related material you've ingested from other sources.
 
 **This kind of cross-platform, cross-session semantic connection is nearly impossible to build by hand.**
 
 ### Step 5: Query Across All Your Sessions
 
-Press `Cmd+P` → "Query Wiki", then ask questions that span sessions:
+Press `Cmd+P` → "Query wiki", then ask questions that span sessions:
 
 - "What have I learned about transformer attention mechanisms across different conversations?"
 - "What different conclusions did I reach about database choices in past discussions?"
@@ -107,7 +107,7 @@ The most valuable discoveries are the unexpected ones: two concepts you discusse
 - **Claude** often reasons through trade-offs in long form, surfacing the *why* behind suggestions
 - **Gemini** is strong on code and technical specifics
 
-When you ingest from multiple platforms, Wiki pages aggregate these perspectives on the same concept — that's knowledge enrichment for free.
+When you ingest from multiple platforms, Wiki pages aggregate these perspectives on the same concept.
 
 **Maintenance:** Run Smart Fix All periodically to merge duplicate pages created when different sessions mention the same concept under slightly different names (e.g., "RAG" vs "retrieval-augmented generation" vs "retrieval augmented generation").
 

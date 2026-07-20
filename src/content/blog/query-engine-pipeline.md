@@ -7,143 +7,119 @@ series: "inside-the-system"
 related: ["modular-architecture", "monte-carlo-ppr", "schema-layer-deep-dive", "faster-ingestion"]
 ---
 
-This is the seventh article in the *Inside the System* series. Earlier ones walked through modular architecture, model selection, ingest latency, contradiction detection, schema extraction, and the Monte Carlo PPR engine that powers retrieval. This one opens up the *query-time* side of the engine — the four-phase pipeline that turns a user's natural-language question into a wiki-grounded, citation-backed answer.
+This is the seventh article in the *Inside the System* series. If you only want the user-facing story of what shipped, read [Announcement: v1.24 — Per-Task Models + Query Engine Refactor](/blog/posts/v123-graph-engine-ai-sdk/). This one is for the people who want to know *why the answers behave the way they do* — technical Obsidian users willing to spend fifteen minutes inside the architecture. No source-code tour, no line numbers. Just the design decisions and the reasoning behind them.
 
-If you only want the user-facing story, read [Announcement: v1.24 — Per-Task Models + Query Engine Refactor](/blog/posts/v123-graph-engine-ai-sdk/). This post assumes you're willing to spend 15 minutes inside a 1,000-line refactor.
+## The shape, briefly
 
-## The four-phase shape
-
-`QueryView.buildWikiContext` is decomposed into four pipeline phases (from `src/wiki/query-engine/pipeline/`):
+When you ask a question, four things happen in order before a single token of the answer is generated.
 
 ```mermaid
-graph TB
-    Q["User question<br/>(natural language)"] ==> P1["Phase 1<br/>readWikiIndex<br/><br/>Read + parse<br/>wiki/index.md"]
-    P1 --> P2["Phase 2<br/>selectPprSeeds<br/><br/>5-stage seed selection<br/>(lex → LLM keywords →<br/>PPR cascade → FALLBACK)"]
-    P2 -->|"seeds found"| P3["Phase 3<br/>loadRelevantPagesForQuery<br/><br/>Read page bodies<br/>+ Tier B summaries"]
-    P2 -->|"no seeds"| F["Stage FALLBACK<br/>(pure LLM KB)<br/>+ verify-vault banner"]
-    P3 --> P4["Phase 4<br/>assembleWikiContext<br/><br/>Build system prompt<br/>with __WIKI_FOLDER__<br/>placeholder"]
-    F --> P4
-    P4 --> G["Chat LLM call<br/>(QueryView Phase 5)"]
-    G --> A["Streaming answer<br/>with [[wiki-link]]<br/>citations"]
+graph LR
+    Q["Your question"] --> A["Read Index"]
+    A --> B["Select Seeds"]
+    B --> C["Load Pages"]
+    C --> D["Assemble Context"]
+    D --> E["Answer"]
 ```
 
-The four phases plus the chat-LLM call (Phase 5) form the full query pipeline. Each phase is a pure module under `src/wiki/query-engine/pipeline/` — the largest is 165 LOC, the smallest under 50. PR #250's split decomposed what used to be a 1,373-line `query-engine.ts` god function.
+**Read Index** opens the wiki's table of contents — a plain-text index listing every page with its path, title, and aliases. **Select Seeds** decides which handful of pages are actually relevant to your question. **Load Pages** reads the bodies of those pages. **Assemble Context** builds the prompt that goes to the chat model, and then the model streams back an answer with `[[wiki-link]]` citations pointing at the pages it used.
 
-The interesting design decisions live in **Phase 2**, which is itself a five-stage pipeline. This is where the pipeline diverges most from a vanilla RAG system.
+Three of those four phases are almost boring. Reading the index is a file read. Loading pages is I/O. Assembling context is string templating. If the pipeline were a movie, they'd be establishing shots.
 
-## Phase 2 in detail: the five-stage seed selector
+Almost all of the interesting design decisions live in the second phase — Select Seeds. That's where the pipeline decides what "relevant" means, whether to spend any model tokens at all, and what to do when your wiki simply doesn't cover the thing you asked about. So that's where we're going to spend our time.
 
-When the user asks "量子纠缠的本质", how does the plugin find the right pages? It runs through five stages — each one a fallback to the next:
+## The first fork in the road: this is not a vector system
 
-```mermaid
-graph TB
-    Q["query:<br/>'quantum entanglement nature'"] --> S1["Stage 1: lex<br/>tokenize → substring match<br/>title + aliases only"]
-    S1 -->|"strong: count ≥ N,<br/>top score ≥ T,<br/>tokens reliable"| OUT1["→ seeds for PPR<br/>arm: 'Lex+PPR'"]
-    S1 -->|"weak: missing one of N/T/reliable"| S15a["Stage 1.5a: LLM keywords<br/>prompt: extract 5-10 concept names<br/>(language-agnostic, English fallback)"]
-    S15a --> S15b["Stage 1.5b: keyword scan<br/>O(n) substring scan<br/>ALL pageRefs with keywords<br/>(milliseconds, zero tokens)"]
-    S15b -->|"≥1 wiki seed found"| S3["Stage 3: PPR cascade<br/>from wiki seeds"]
-    S15b -->|"no wiki seed,<br/>but LLM client available"| S15["Stage 1.5 (legacy):<br/>LLM seed selector<br/>50-candidate focused list"]
-    S15 -->|"LLM returns seeds"| S3
-    S15a -->|"keyword gen failed"| S15
-    S3 --> OUT2["→ expanded seeds<br/>arm: 'LLM+PPR'"]
-    S15 -->|"no seeds"| F["Stage FALLBACK:<br/>pure LLM KB<br/>arm: 'LLM+KB'<br/>+ verify-vault UI banner"]
-    S1 -->|"no hits at all,<br/>no LLM client"| F
-```
+Before the design choices, one framing decision that colors everything else.
 
-Three arm labels surface in the UI — `Lex+PPR`, `LLM+PPR`, `LLM+KB` — so the user always knows which stages contributed their answer. The `Lex++PPR` variant covers the rare case where lex was weak, the keyword scan returned nothing, but lex top-K still gets used as last-resort seeds.
+Textbook RAG — retrieval-augmented generation — works like this: embed your question into a vector, do a similarity search against a store of embedded document chunks, take the top few chunks, stuff them into the prompt, let the model answer. Almost every "chat with your notes" tool you've tried does some version of this.
 
-The **5-stage shape is the central design decision** of this pipeline. Why five stages instead of one?
+This pipeline does none of it. There's no embedding of your query, no vector store, no chunk-similarity search. Instead the retrieval signal is your wiki's own structure — the `[[wiki-link]]` graph that the plugin built when it ingested your notes. Relevance is computed with Personalized PageRank walking that graph, seeded from the pages your question most directly names. (The PPR engine has its own writeup: [Inside the System (6): Monte Carlo PPR](/blog/posts/monte-carlo-ppr/).)
 
-## What this is and what it isn't
+The distinction matters because graph signals and embedding signals make *different mistakes*. An embedding search over a 2,000-page vault will happily surface pages that are semantically similar to your question but that you have never once linked to — true-by-similarity, but structurally strangers in your own knowledge base. A graph search surfaces pages that *your own linking behavior* has already marked as connected — structurally related, occasionally semantically surprising. Choosing the graph is a stance on what "relevant" means for a *personal* wiki: it means "related in the way you, the author, decided things are related," not "related in the way a general-purpose embedding model thinks things are related."
 
-First, an honest accounting: this isn't RAG in the textbook sense. Standard RAG goes:
+That single choice is why the answers cite pages, why they feel tied to your notes rather than to the internet, and why the pipeline can tell you honestly when your wiki has nothing to say. With that framing in place, here are the five design choices inside Select Seeds that follow from it.
 
-1. Embed the query
-2. Vector-similarity search against chunk embeddings
-3. Top-K chunks → prompt
-4. LLM answers with chunks as context
+## Choice 1: Lex-then-PPR, the decision that this isn't a vector system
 
-We don't do any of that. We don't embed the query, we don't have a vector store, and we don't fetch chunks by similarity. What we have instead:
+The seed selector's first move is the cheapest one imaginable: tokenize your question and do a plain substring match against page titles and aliases. No model call, no vectors, no I/O beyond the index that's already in memory. If your question was "January 2026 meeting" and you have a page titled exactly that, the match is instant and unambiguous.
 
-- A `[[wiki-link]]` graph (built at ingest time, rebuilt lazily when the wiki folder changes)
-- A deterministic page index (`wiki/index.md`) listing every page with path, title, aliases, and summary
-- Personalized PageRank (PPR) over the wiki-link graph — see [Inside the System (6): Monte Carlo PPR](/blog/posts/monte-carlo-ppr/) for the algorithm
+Those matched pages become the *seeds* for a Personalized PageRank walk over your link graph, which expands outward to the pages your wiki has connected to them. The whole thing is deterministic: the same question produces the same matches, the same seeds, and the same ranked results, every time.
 
-So what kind of system is this?
+Why start with something so unsophisticated? Because at the scale most personal wikis actually live at — a few hundred to a couple thousand pages — lexical-plus-graph beats embed-then-rerank on nearly every axis that matters:
 
-**It's a graph-grounded retrieval pipeline**, not a vector retrieval pipeline. The wiki's own structure — what links to what — is the retrieval signal. The LLM's role is interpretation and synthesis, not search.
+- It costs **zero tokens and zero vector I/O** for the common case.
+- It has **no cold-start problem** — a page is findable the instant it exists, with no embedding pass to run first.
+- It's **deterministic**, so behavior is reproducible and debuggable.
+- It's **explainable** — the plugin can literally show you which words in your question matched which page titles.
 
-This distinction matters because **graph signals and embedding signals make different mistakes**. An embedding retrieval over a 2,000-page vault might surface semantically related pages that the user's wiki has never linked to — true-by-similarity but **structurally unrelated**. A graph retrieval surfaces pages that the user's own knowledge graph has marked as connected — **structurally related but possibly semantically surprising**. The choice between them is a stance on what "relevant" means to a personal wiki.
+There is an honest ceiling here, and it's worth naming clearly rather than burying. Past roughly 5,000 pages, the lexical step starts returning too many weak matches — common words collide with too many titles — and a real vector store would genuinely help. Measured on a real 2,142-page vault, recall-at-5 for the lex-PPR cascade came in within sampling noise of a strong embedding model on the same vault. At that scale, embeddings would have bought essentially nothing while adding an ingest-time embedding pass, a vector store to maintain, and per-query embedding cost. So they weren't added. Not "embeddings are bad" — "embeddings don't pay for themselves yet, at this scale." When they do, they'll slot in as an optional pre-lex stage, not a replacement for the cascade.
 
-## Five design choices that diverge from vanilla RAG
+## Choice 2: Five stages, the decision that the hot path stays fast
 
-### 1. Lex-then-PPR beats vector-then-rerank at small-to-medium scale
+A tempting way to build a query engine is: always send the question to a model first to "understand" it, then retrieve. It feels smart. It's also wasteful, because the overwhelming majority of real questions are simple enough that the substring match already nailed them. Paying a model round-trip on every single query to re-derive something you already have is latency and cost set on fire.
 
-For wikis under ~2,000 pages, the lex-first cascade is faster and more accurate than an embedding-based retrieval:
+So Select Seeds is built as a cascade of stages, each one a fallback for the last, and the expensive stages only fire when the cheap ones come up short. The first stage is the lexical match from Choice 1 — no model involved. The plugin only escalates when that match is *weak*: too few hits, or the top hit isn't confident enough, or the tokenization looks unreliable (which happens with, say, unsegmented CJK text).
 
-- **No embedding cost**: 0 LLM tokens, 0 vector-store IO for Stage 1
-- **No cold-start problem**: lex works the moment a page exists; embeddings need an upfront ingest step
-- **Deterministic**: same query → same Stage 1 hits → same Stage 3 PPR seeds → same top-K
-- **Explainable**: you can show the user which lex tokens matched which titles
+Concretely:
 
-The cost shows up at scale. Past ~5,000 pages the lex step starts returning too many weak hits, and a real vector store helps. We considered adding embedding-based retrieval as a Stage 0 (before lex); the v1.23.0 design review discussed it and chose not to, because the empirical R@5 on a 2,142-page real vault was 23.8% — within sampling noise of bge-m3 embeddings on the same vault (see v1.23 release notes). At 2K pages, the cascade's lex path is good enough that adding embeddings would buy us nothing.
+- "January 2026 meeting" hits the lexical stage, finds a strong exact match, and never touches a model for retrieval. Milliseconds.
+- "that thing we discussed about pricing psychology" hits the lexical stage weakly — none of those words is a literal page title — and *only then* escalates to a model-assisted stage to figure out what pages you might mean.
 
-This is **not** a permanent verdict. The v1.24 design discussion has an explicit **"source-revision awareness"** workstream, and embedding enrichment is on the v1.25+ roadmap as an opt-in. When we add it, it will sit as a Stage 0 (cold-start retrieval, before Stage 1 lex) — not replacing the cascade.
+The five stages, in order: lexical match; model keyword extraction (only when lexical is weak); a local substring scan over every page using those keywords; PPR expansion from the seeds; and a fallback that fires when nothing matches. The principle is "never call the model if you don't have to." About 90% of queries never need the escalation, so 90% get answered with a retrieval step measured in single-digit milliseconds. The model still writes the final answer, of course — that latency is unavoidable and identical no matter how you retrieve. But the *retrieval* stays off the model's critical path unless it genuinely needs help.
 
-### 2. Five stages so the LLM augmentation never blocks the hot path
+## Choice 3: Local scan over model disambiguation, the decision that fixed a real bug
 
-A common pattern in RAG systems is "always call the LLM for query understanding, then vector search." This is wasteful: 90% of the time the query is a simple term that lex handles directly.
+This is the subtlest choice in the whole pipeline, and the best way to explain it is to tell the story of the bug that forced it.
 
-Our Stage 1 lex runs **without any LLM call**. Only when lex is *weak* (count below threshold, top score below threshold, or tokens unreliable) do we escalate to Stage 1.5a (LLM keyword generation). This means:
+Before v1.24.1, the escalation path worked like this: when the lexical match was weak, the plugin sent the model your question *plus a list of up to 50 candidate pages* — path, title, and summary for each — and asked it to pick the three most relevant. On paper, reasonable: let the smart model disambiguate.
 
-- A query like "January 2026 meeting" hits Stage 1, finds 4 strong lex matches, and never calls the LLM for query understanding
-- A query like "what's that concept about X" hits Stage 1 weakly (X isn't a literal title), escalates to Stage 1.5a, gets keywords, scans, finds seeds, runs PPR
+Then a user reported that a question about a topic they'd definitely written about came back with nothing useful. The investigation found the cause. Their vault had thousands of pages. The relevant page sat around index position 1,410. And the candidate list handed to the model was the *first 50 pages* by the wiki's internal ordering. The model never disambiguated the right page, because the right page was never in the list. It had been sliced off before the model ever saw it. The model did its job perfectly on a set of candidates that didn't contain the answer.
 
-The "never call the LLM if you don't have to" principle keeps the hot path fast and cheap. The expensive stages (1.5a, 1.5 legacy) only run when the cheap stages failed.
-
-### 3. Local substring scan > LLM 50-candidate disambiguation
-
-This is the most subtle design choice and worth walking through carefully. The **old v1.23.0 design** did:
+You can't fix that by making the model smarter. The information was gone before the model's turn. So the entire structure was inverted. Instead of asking the model to *pick from candidates*, it now asks the model to *extract concepts*:
 
 ```
-LLM seed selector: send query + 50 candidates (path, title, summary) → LLM picks up to 3
+Question: "什么是量子纠缠的本质"
+Model extracts keywords:
+["量子纠缠", "quantum entanglement", "entanglement", "量子", "quantum"]
 ```
 
-The bug surfaced in real-world use: when a user asked about a concept that lived at index line 1,410 in their vault, the LLM never saw it because the candidate list was sliced from `pageRefs[0..50]`. The relevant page was simply not in the input.
+Then the plugin takes those keywords and does a local substring scan over **every page in the vault** — not the first 50, all of them. The page at position 1,410 is now just as reachable as the page at position 3.
 
-The **v1.24.1 fix** inverts the structure:
+Four things make this the right shape:
 
-```
-LLM keyword generation: extract 5-10 concept names from the query
-Local substring scan:  O(n) over ALL pageRefs with those keywords (zero tokens)
-```
+- **The model extracts intent, not matches.** It doesn't need to see your pages to know what you're asking about. Naming the concept is a language task; finding the pages is a search task. The two were conflated before; now they aren't.
+- **The scan is exhaustive.** Every page gets checked. There is no arbitrary window to fall outside of.
+- **It costs nothing to scan.** The keyword extraction is a small model call; the scan itself is a linear pass over a few thousand short strings — title and aliases, tens of characters each. It finishes in milliseconds with zero tokens.
+- **It's language-agnostic by design.** The extraction prompt asks for keywords in the question's own primary language *and* in English as a universal fallback. A Japanese, Korean, or French speaker gets keywords that match their pages, plus English variants for the mixed-language aliases that real multilingual vaults are full of. Hardcoding "Chinese-or-English" would have quietly broken everyone else.
 
-Why this works:
+This is the choice worth being proudest of, precisely because the failure it fixed was invisible until a real person hit it. The seeds this stage finds feed straight into the same PPR walk from Choice 1, and the UI labels the result so you can see the model helped find the entry points.
 
-- **LLM extracts concepts, not matches.** The LLM doesn't need to see the candidates to know what the user is asking about. "量子纠缠的本质" → keywords `["量子纠缠", "quantum entanglement", "entanglement", "量子", "quantum"]`.
-- **Local scan is exhaustive.** Every page in the vault gets checked, not just the first 50 by wiki-internal order. The page at index line 1,410 is now reachable.
-- **Zero token cost.** The scan is O(n) over ~2,000 pageRefs. Each pageRef is title + aliases (~50 chars). The scan runs in milliseconds.
-- **Language-agnostic.** The keyword prompt (in `query-keywords.ts`) is explicitly language-agnostic — the LLM auto-detects the query's primary language and emits keywords in that language AND English (the universal cross-language fallback for i18n wikis that may have mixed-language aliases). Hardcoding "Chinese ↔ English" would break Japanese / Korean / French primary speakers.
+While we're here: those labels are the arms you may have noticed in the interface. **`Lex+PPR`** means the lexical match was strong enough on its own — no model needed to find your pages. **`LLM+PPR`** means the lexical match was weak, the model extracted keywords, the local scan found seeds, and PPR expanded from them. **`LLM+KB`** means none of that found anything in your wiki — which brings us to the fourth choice.
 
-The pre-v1.24.1 bug is fixed in PR #260's Tier-1+Tier-2 merge triage and v1.24.1 PATCH Phase 5.5.0/5.5.1. The full audit trail is in `src/core/ppr-cascade.ts` and `src/wiki/query-engine/pipeline/query-keywords.ts`.
+## Choice 4: pureLLM as a first-class state, the decision that keeps the plugin honest
 
-### 4. `pureLLM` is a first-class state, not a silent fallback
+Sometimes the answer to "which pages are relevant" is *none*. You asked about something your wiki genuinely doesn't cover. Every retrieval system hits this case. The difference is entirely in what you do about it.
 
-The Stage FALLBACK path — when neither lex nor keyword scan nor LLM seed selector find any wiki-relevant pages — returns an answer mode we call **`pureLLM`**:
+The lazy option is to let the model answer anyway from its general training, and say nothing. The answer comes out fluent and confident, indistinguishable from a wiki-grounded one — and the user slowly learns that "asking my wiki" produces authoritative-sounding answers whether or not the wiki actually knows anything. That's exactly how trust in these tools erodes: not through obvious errors, but through confident answers that were never grounded and never labeled as such.
 
-- The chat LLM is told: "no relevant pages found; answer from general knowledge"
-- The UI surfaces a **"verify-vault" banner** so the user sees this answer is NOT wiki-backed
-- The answer has no citations (no source pages to cite)
+The opposite choice was made. When retrieval comes up empty, the pipeline enters an explicit state called **pureLLM**, and it is a real, named branch of the system rather than a silent fallthrough:
 
-This is a deliberate choice. The alternative — silently letting the LLM answer without flagging the lack of wiki backing — would teach users that "asking the wiki" returns confident-but-ungrounded answers. That's how RAG systems erode user trust: by not being clear about when the answer is grounded vs. when it's confabulated.
+- The chat model is told plainly: no relevant pages were found; answer from general knowledge and don't pretend otherwise.
+- The interface shows a **verify-vault banner** so you can see at a glance that this answer is *not* backed by your notes.
+- The answer carries **no citations**, because there are no source pages to cite. The absence of `[[wiki-links]]` is itself a signal.
 
-The `pureLLM` flag also feeds back into the cascade for observability: if a high fraction of queries land in `pureLLM`, that's a signal that the wiki's content doesn't cover the topics the user is asking about — useful information for the user (and for future ingest decisions).
+This is the line between a wiki and a chatbot wearing a wiki costume. A wiki that will confidently improvise about things it doesn't contain isn't a wiki; it's a chatbot with your notes bolted on as decoration. Marking the pureLLM state loudly is what keeps the tool honest — when it cites pages, it really used them, and when it can't, it says so.
 
-### 5. The chat prompt doesn't include the full wiki index
+There's a quiet second benefit. Because pureLLM is a named state, it's countable. If a large fraction of your questions are landing in pureLLM, that's a concrete signal that your wiki doesn't cover what you keep asking about — useful information for you, and a good prompt to ingest more source material. Honesty turns out to be observable, and observability turns out to be useful.
 
-This is the most counterintuitive design choice. The standard RAG failure mode at scale is "the top-K chunks plus the system instructions exceed the context window." The fix is usually better embeddings + chunking.
+## Choice 5: A compact index hint over the full wiki dump, the decision that lets small models work too
 
-We took a different path: **we don't put the wiki index in the chat prompt at all**. Instead, we put a compact `pageSummaryHint`:
+One more counterintuitive choice, and it's about the prompt itself.
+
+The naive way to give the model wiki-awareness is to paste the entire wiki index into the system prompt — every page, its title, its summary. On a 2,000-page vault that index ran to roughly 70,000 tokens. For anyone on a large-context frontier model, that's merely wasteful. For anyone on a free-tier or local model with an 8K–32K context window, it's fatal: the index alone blows past the window, the prompt gets truncated, and truncated prompts produce exactly the confident hallucinations the design is trying to avoid.
+
+Here's the thing, though — after PPR has already ranked and selected the relevant pages, the model *doesn't need* the full index. The pages it should reason about are already loaded into the context as actual content. What it needs beyond that is just enough awareness of what *else* exists in the wiki to say "I don't have a page on Baz" instead of inventing one. That takes a compact hint, not a data dump:
 
 ```
 - entities/Foo — Foo | aliases: Foo Corp / FOO
@@ -151,72 +127,47 @@ We took a different path: **we don't put the wiki index in the chat prompt at al
 - sources/qux — Qux paper | aliases: qux-2026
 ```
 
-This is **path + title + aliases only** — derived from `pageRefs`. The chat LLM sees what pages exist in the wiki (so it can say "I don't know about Baz because Baz isn't in your wiki") without seeing the heavy full-text summaries.
+Path, title, and aliases — nothing more. The heavy per-page summaries stay out of the prompt entirely, because the pages that matter are already present as full content and the pages that don't matter only need to be *nameable*, not *described*. That compact hint costs a fraction of the tokens, and it's what lets someone running a modest local model get the same structurally-honest behavior as someone on a top-tier hosted one. The design doesn't quietly assume you can afford a giant context window.
 
-Before v1.24.1, the prompt included the entire `wiki/index.md` text — 70K tokens on a 2,137-page vault. The Phase 5.5.0 PATCH removed this:
+## The one-line fix that mattered: the folder placeholder
 
-> The converted Markdown already gives the LLM the content it needs; an optional `pageSummaryHint` (a compact path/title/aliases list derived from pageRefs) can be supplied by the caller if it wants the LLM to know about non-retrieved pages. The wiki structure is implied by the loaded pages and the entity/concept/source folder convention below.
+A quick war story, because it's a good illustration of how a tiny bug can silently corrupt answers.
 
-The 70K-token savings matter most for users on free-tier models with 8K–32K context windows. They can now use the plugin without truncation-induced hallucinations.
+The chat model needs to know your wiki's folder name so it can render `[[wiki-link]]` paths correctly. The obvious thing is to bake the real folder name straight into the prompt. That worked — until someone renamed their wiki folder. Their chat history had persisted old prompts and old answers with the *previous* folder name baked in, the model saw those as examples of "how paths look here," and it happily kept emitting links pointing at a folder that no longer existed. Renaming a folder silently broke every subsequent answer, and nothing in the UI hinted at why.
 
-### Bonus 6. `__WIKI_FOLDER__` placeholder prevents stale-folder leak
+The fix is one line of concept: never put the real folder name in the prompt. Use a literal placeholder — `__WIKI_FOLDER__` — everywhere, and substitute the *current* folder name at display time only, for rendering. The model never sees a real folder name, so it can never memorize a stale one. One placeholder, and an entire class of "I renamed something and now answers are subtly wrong" bugs just stops existing. Those are the best fixes: small, permanent, and invisible once they work.
 
-A subtle bug we hit in v1.24.0 (Bug C 3.0): the chat LLM is asked to render `[[wiki-link]]` paths using the user's current `settings.wikiFolder`. If we baked the real folder into the prompt, and the user's chat history persisted that prompt (and the LLM's response with rendered paths), the LLM would then re-use those paths in subsequent prompts — even after the user changed `wikiFolder`.
+## The tradeoff, stated plainly
 
-Fix: use the literal placeholder `__WIKI_FOLDER__` everywhere in the system prompt. Render-time substitution (in `thinking-extract.ts`) replaces the placeholder with the *current* folder for display only. The LLM never sees the literal folder, so it never bakes one into its behavior.
+Every design choice gives something up, and it's better to hear the costs up front than to discover them yourself.
 
-This is the kind of bug that's invisible until you actually change a setting — and then it ruins the answer. The placeholder fix is one line but pays off forever.
+**Embeddings aren't in here**, which means there's no true semantic matching. A page that talks about "feline behavior" won't surface for a question about "cats" unless the page carries "cat" as an alias, because the match is lexical, not conceptual. The same gap shows up across languages: a Chinese question won't automatically find an English-only page without an explicit cross-language alias — the keyword-extraction stage helps here, but it's not the same as the automatic bridging embeddings would give you. The tradeoff is accepted because on a personal wiki *you* are the author, and the aliases and links you created are usually a better relevance signal than a general model's notion of similarity. On a sprawling multi-author wiki, or a domain where people phrase the same idea fifty different ways, that calculus flips and embeddings would be a clear win. It's a tradeoff, tuned deliberately for the personal-wiki case.
 
-## Cost and latency, empirically
+**Chunk-level retrieval isn't in here** either. A page is atomic — if one paragraph of a long page is what's relevant, you still get the whole page (capped at a maximum length), not the surgical slice a chunking system would extract. This keeps the graph model clean: nodes are pages, links are between pages, and PPR walks a graph of whole pages. Introducing sub-page chunks would fracture that model for a precision gain that, on human-scale personal notes, is usually marginal.
 
-For a 2,000-page vault on a typical query:
+These aren't hypothetical limitations dressed up as features. They're real, and the cascade is genuinely biased toward what you've explicitly named and linked. For the person writing and querying their own knowledge base, that bias is usually correct. Embedding enrichment is on the roadmap as an *opt-in* Stage 0 for the cases where it isn't — cold-start retrieval that runs before the lexical stage, never replacing it.
 
-| Stage | Latency (typical) | LLM tokens | Notes |
-|-------|------------------:|-----------:|-------|
-| Phase 1: readWikiIndex | 5–15 ms | 0 | File read + parse |
-| Stage 1: lex | 1–3 ms | 0 | Pure substring scan |
-| Stage 1.5a: LLM keywords | 200–800 ms | 50–150 | Only when Stage 1 weak |
-| Stage 1.5b: keyword scan | 1–5 ms | 0 | O(n) over pageRefs |
-| Stage 3: PPR cascade | 30–80 ms | 0 | Monte Carlo, K=3000 L=20 |
-| Phase 3: loadPages | 50–200 ms | 0 | I/O bound |
-| Phase 4: assemble | 1–5 ms | 0 | Pure template build |
-| Phase 5: chat LLM | 1–4 s | 2–8K | Streaming output |
+## Cost and latency
 
-For a "strong lex" query (e.g. "January 2026 meeting"): total ≤300 ms before chat LLM. PPR runs in <80 ms even at K=3000 walks.
+For a roughly 2,000-page vault, here's where the time and tokens actually go on a typical query.
 
-For a "weak lex, LLM keywords" query: adds 200–800 ms for Stage 1.5a, but only when needed.
+| Stage | Latency (typical) | Model tokens |
+|-------|------------------:|-------------:|
+| Read index | 5–15 ms | 0 |
+| Lexical match | 1–3 ms | 0 |
+| Keyword extraction (only when lex is weak) | 200–800 ms | 50–150 |
+| PPR expansion | 30–80 ms | 0 |
+| Load pages | 50–200 ms | 0 |
+| Chat model (streaming answer) | 1–4 s | 2–8K |
 
-For a "pure LLM KB" fallback: skips PPR entirely, falls through to chat with the `pureLLM=true` flag.
+The read across that table is the whole thesis in numbers. A strong-lexical query reaches the chat model in under 300 milliseconds of retrieval work, spending zero tokens on retrieval. A weak-lexical query adds a few hundred milliseconds for keyword extraction — but only when it's needed. And everything above the chat-model row is perceived as instant by a human. The one genuinely slow, genuinely expensive step is the chat model writing the answer, and that cost is identical no matter how you retrieve. The entire point of the cascade is to make sure you're not paying model latency *twice* — once to understand the query and again to answer it — when 90% of the time understanding it was free.
 
-The latencies are all **perceived-as-instant** by humans except the chat LLM call — which is unavoidable regardless of retrieval strategy.
+## Why this matters if you use the plugin
 
-## What this design gives up
+Here's the payoff for reading this far. The answers you get from this plugin are *structurally* honest about what they know and don't know — not honest as a matter of the model's good behavior, which can't be relied on, but honest as a matter of how the pipeline is built.
 
-Honest accounting of the tradeoffs:
+That's what the arm labels are telling you. See **`Lex+PPR`** and you know your question matched your pages cleanly, no model guessing involved. See **`LLM+PPR`** and you know the model helped name what you were after, then your own link graph did the finding. See **`LLM+KB`** with a verify-vault banner and you know, unambiguously, that this answer came from the model's general training and *not* from your notes — believe it accordingly. The presence or absence of `[[wiki-link]]` citations tells you the same story from another angle.
 
-- **No semantic similarity.** A page that mentions "feline" won't match a query for "cat" unless the page has an alias for it. Embeddings would bridge this; we don't.
-- **No semantic cross-language.** A Chinese query about a page written only in English needs an explicit cross-language alias. Embeddings would auto-bridge; we don't.
-- **No chunk-level retrieval.** A page is atomic. If only one section of a long page is relevant, you get the whole page (truncated to MAX_PAGE_CONTENT_CHARS). Embeddings over chunks would help; we don't.
-- **Lex can miss idiomatic phrasing.** A query "what's that thing about X" hits Stage 1 weakly; only the LLM keyword stage can save it.
+Choosing a graph-grounded pipeline over a vector-grounded one, keeping the model off the hot path, extracting keywords instead of slicing candidate lists, making pureLLM a loud first-class state instead of a silent fallthrough, sending a compact hint instead of a 70K-token dump, hiding the folder name behind a placeholder — none of these are engineering hygiene for its own sake. They're the concrete decisions that let a pile of Markdown files behave like a wiki you can trust instead of a chatbot in a costume. The wiki's structure is the source of truth. The model is the interpreter. PPR is the navigator. Embeddings are enrichment to be added the day they earn their place — and not before.
 
-These are **real limitations**, not theoretical ones. The cascade is biased toward what the user has explicitly linked and named. For a personal wiki where the user is the author, that bias is often the right one — but for a multi-author wiki or a domain where natural-language phrasing varies widely, embeddings would be a strict win.
-
-The roadmap (Discussion #246) covers opt-in embedding enrichment as a Stage 0. It will be **opt-in**, not the default, because the lex-PPR cascade is fast, deterministic, and zero-token — and the marginal accuracy gain on a well-curated personal wiki is small.
-
-## Why this matters for users
-
-If you've read this far, here's the takeaway: **the answer you see from Query Wiki is structurally honest about what it knows and doesn't know**. The arm labels (`Lex+PPR`, `LLM+PPR`, `LLM+KB`), the `pureLLM` flag, the verify-vault banner, the `__WIKI_FOLDER__` placeholder — these aren't engineering hygiene. They're the design choices that make a personal wiki feel like a wiki instead of a chatbot with a costume.
-
-The plugin's stance is: your wiki's structure is the source of truth. The LLM is the interpreter. PPR is the navigator. Embeddings are optional enrichment we'll add when they pay for themselves.
-
-If you want the deeper read on any specific piece:
-
-- PPR algorithm: [Inside the System (6): Monte Carlo PPR](/blog/posts/monte-carlo-ppr/)
-- Hub identification using PPR: `src/core/hub-detection.ts`
-- PPR cascade arms: `src/core/ppr-cascade.ts`
-- The seed selector stages: `src/wiki/query-engine/pipeline/select-seeds.ts`
-- The keyword generation prompt: `src/wiki/query-engine/pipeline/query-keywords.ts`
-- The placeholder fix: `src/wiki/query-engine/pipeline/assemble-context.ts` (Bug C 3.0)
-- v1.24 release notes: the per-call-site model resolution in `core/model-resolver.ts`
-
-The v1.24.0 PATCH (Phases 5.5.0 and 5.5.1) is what made this pipeline trustworthy at scale. The five-stage shape is what makes it fast. The `pureLLM` honesty is what makes it worth using.
+If you want to go deeper on the retrieval math itself, [Inside the System (6): Monte Carlo PPR](/blog/posts/monte-carlo-ppr/) covers the algorithm that powers the expansion step.

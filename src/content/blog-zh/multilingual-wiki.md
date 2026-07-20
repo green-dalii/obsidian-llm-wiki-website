@@ -1,6 +1,6 @@
 ---
 title: "维护（1）：用英语写，用日语读（再加 7 种语言）"
-description: "Wiki Output Language 把\"写作语言\"和\"阅读语言\"解耦。Karpathy LLM Wiki 用 8 种语言生成同一份内容，独立于 Obsidian UI 语言。"
+description: "Wiki Output Language 把「写作语言」和「阅读语言」解耦。Karpathy LLM Wiki 用 8 种语言生成同一份内容，独立于 Obsidian UI 语言。"
 date: 2026-05-09
 tags: ["入门必读"]
 related: ["eight-languages", "introducing-llm-wiki"]
@@ -9,7 +9,7 @@ series: "maintenance"
 
 ## 问题：你的语言，你做主
 
-你是一位日本开发者，Obsidian 用的是英文界面。你把日文笔记放进 `sources/`。Wiki 应该用英文还是日文？
+你是一位日本开发者，Obsidian 用的是英文界面。你从 Vault 里挑出日文笔记（位置不限）。Wiki 应该用英文还是日文？
 
 在 v1.6.5 之前，答案是：必须和界面语言一致。
 

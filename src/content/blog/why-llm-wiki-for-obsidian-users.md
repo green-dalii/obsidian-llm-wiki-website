@@ -13,7 +13,7 @@ More notes should mean more knowledge. In practice, more notes means more mess.
 
 When your Vault has 50 notes, you can maintain everything manually. You know what each note contains. You write `[[links]]` as you go. The structure is tidy because you built it recently.
 
-When your Vault hits 500 notes, you stop remembering what you have. Notes you wrote six months ago contain ideas you've since re-discovered and re-written. Links point to notes that have been renamed or restructured. Some notes have zero links and zero tags — they exist in the Vault but not in your mental model. They might as not exist.
+When your Vault hits 500 notes, you stop remembering what you have. Notes you wrote six months ago contain ideas you've since re-discovered and re-written. Links point to notes that have been renamed or restructured. Some notes have zero links and zero tags — they exist in the Vault but not in your mental model. They might as well not exist.
 
 This is the accumulation paradox: **the knowledge you've collected becomes harder to access as it grows.** The effort required to maintain connections scales faster than the value of the notes themselves. At some point, the friction of maintenance outweighs the benefit of taking notes in the first place.
 
@@ -31,23 +31,23 @@ Most people solve this by abandoning old notes and starting fresh. The cycle rep
 
 LLM Wiki solves these three burdens by offloading the architecture work to an LLM while keeping you in control of the content.
 
-**Automated page creation.** You write notes normally in a `sources/` folder. When you run the "Ingest Sources" command, LLM Wiki reads each source, identifies the entities and concepts inside it, and creates dedicated pages for each one. The LLM decides what deserves a page — not you. It extracts people, theories, projects, and technical terms with high accuracy because it understands the text.
+**Automated page creation.** You write notes normally — anywhere in your vault. When you run `Cmd+P` → "Ingest single source" on a note, LLM Wiki reads it, identifies the entities and concepts inside it, and creates dedicated pages for each one under `wiki/entities/` and `wiki/concepts/`. The LLM decides what deserves a page — not you. It extracts people, theories, projects, and technical terms with high accuracy because it understands the text.
 
 **Automated link writing.** Every page it creates gets `[[bidirectional links]]` to every related page. The links are semantically accurate — they connect notes based on meaning, not keyword matching. When you open a new wiki page, the backlinks section shows you every source that references it. Connections that would take you hours to build manually are established in seconds.
 
-**Automated updates.** Re-run ingestion on new sources, and the LLM updates existing wiki pages as needed. It adds new connections, flags contradictions between sources, and keeps the index current. If a new source mentions "GPT-5.5" and your existing wiki page on "Large Language Models" still references "GPT-4," the LLM adds an update note or reconciles the discrepancy. You don't need to re-read old notes to maintain accuracy or worry about stale information. The re-ingestion process handles it.
+**Automated updates.** Re-run ingestion on new sources, and the LLM updates existing wiki pages as needed. It adds new connections, flags contradictions between sources, and keeps the index current. If a new source mentions "GPT-5.5" and your existing wiki page on "Large Language Models" still references "GPT-4," the LLM adds an update note or reconciles the discrepancy. The re-ingestion process handles it — you don't need to re-read old notes to maintain accuracy.
 
 ## One-Minute Demo
 
-Here's what using LLM Wiki looks like on a typical day:
+A typical day with LLM Wiki looks like this:
 
-1. You find an interesting article about retrieval-augmented generation. You copy the key points into a new note in `sources/`. Takes 2–3 minutes.
-2. Press `Cmd+P`, type "Ingest Sources," press Enter.
-3. Wait 15 seconds. The plugin sends your source to the configured LLM, which extracts entities, creates pages, and builds links.
+1. You find an interesting article about retrieval-augmented generation. You save the key points to a new note in your vault (wherever you keep reading notes). Takes 2–3 minutes.
+2. Press `Cmd+P`, run "Ingest single source", pick the note, press Enter.
+3. Wait 15 seconds. The plugin sends your note to the configured LLM, which extracts entities, creates pages, and builds links.
 4. Open the `wiki/` folder. You now have pages for "Retrieval-Augmented Generation," "Dense Passage Retrieval," and "Hybrid Search" — all linked to each other and to any existing wiki pages that reference similar concepts.
 5. Open the Graph View. Three new nodes appear in your existing knowledge graph, already connected.
 
-**Source to structured wiki in 15 seconds.** That's the core loop. Write, ingest, explore. Write, ingest, explore.
+**Source to structured wiki in 15 seconds.** Write, ingest, explore.
 
 ## How LLM Wiki Fits Obsidian
 
@@ -82,7 +82,7 @@ Using LLM Wiki requires a small shift in how you think about note-taking.
 
 Your job is still to write good source material. The AI still needs high-quality input — garbage in, garbage out applies. But the mechanical work of page creation, link maintenance, and index updating moves from your shoulders to the LLM's.
 
-This frees you to focus on what matters: **thinking, writing, and exploring connections** — not maintaining infrastructure. You end up writing more because the friction of organization disappears. Notes that would have stayed as fragments in your head become structured knowledge because the path from raw thought to wiki page is one command and fifteen seconds.
+You end up writing more because the friction of organization disappears. Notes that would have stayed as fragments in your head become structured knowledge because the path from raw thought to wiki page is one command and fifteen seconds.
 
 ## Next Steps
 

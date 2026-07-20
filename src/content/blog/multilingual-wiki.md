@@ -9,7 +9,7 @@ series: "maintenance"
 
 ## The Problem: Your Language, Your Choice
 
-You're a Japanese developer using Obsidian with an English UI. You drop Japanese notes into `sources/`. Should your Wiki be in English or Japanese?
+You're a Japanese developer using Obsidian with an English UI. You keep Japanese notes in your vault. Should your Wiki come out in English or Japanese?
 
 Before v1.6.5, the answer was: it had to match your UI language.
 

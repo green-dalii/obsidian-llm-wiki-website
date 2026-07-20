@@ -1,6 +1,6 @@
 ---
 title: "实践指南（7）：把 ChatGPT、Claude、Gemini 会话剪进 Vault"
-description: "Web Clipper 把整个 AI 会话放到 sources/；Karpathy LLM Wiki 自动提取实体，并把它们跨平台链接到同一个 Obsidian 知识库。"
+description: "Web Clipper 把整个 AI 会话剪进 Vault；Karpathy LLM Wiki 自动提取实体，并把它们跨平台链接到同一个 Obsidian 知识库。"
 date: 2026-06-21
 tags: ["实践指南"]
 related: ["web-clipper-workflow", "query-to-wiki-feedback", "daily-knowledge-loop"]
@@ -31,7 +31,7 @@ LLM-Wiki 做的事，就是把这些线性对话**拆解成结构化的知识网
 
 这里的关键认知和剪藏单篇文章不同：**你不是挑几条好的对话来剪，而是把整个 Session 一次性剪下来。**
 
-为什么？一段真正有价值的对话，往往是先绕远路、先走进死胡同、先聊了一些看似无关的话题——**然后**才触达关键洞察。那些绕弯的过程同样是认知轨迹的一部分。一个干净的回答远不如一段跌跌撞撞最终抵达 insight 的完整对话有价值。
+一段真正有价值的对话，往往是先绕远路、先走进死胡同、先聊了一些看似无关的话题——**然后**才触达关键洞察。那些绕弯的过程同样是认知轨迹的一部分。一个干净的回答远不如一段跌跌撞撞最终抵达 insight 的完整对话有价值。
 
 打开 ChatGPT、Claude、DeepSeek 或 Kimi 的某个 Session 页面，点击 Obsidian Web Clipper，整个 Session 的所有消息、代码块、侧边笔记都会被保存为一个 Markdown 文件。
 
@@ -39,7 +39,7 @@ LLM-Wiki 做的事，就是把这些线性对话**拆解成结构化的知识网
 
 如果还没安装，从浏览器插件商店搜索 [Obsidian Web Clipper](https://obsidian.md/clipper) 安装。
 
-配置一个专用模板，将剪藏内容保存到 `sources/chat-history/` 文件夹。跟你的其他素材分开放，方便后续的摄入管道做分类处理。
+配置一个专用模板，将剪藏内容保存到任意文件夹（比如 `Clippings/Chat History/`）。跟你的其他素材分开放，方便后续的摄入管道做分类处理。
 
 ### 第二步：判断哪些 Session 值得留存
 
@@ -52,11 +52,11 @@ LLM-Wiki 做的事，就是把这些线性对话**拆解成结构化的知识网
 
 当出现这些信号时，打开这个 Session 页面，点击 Web Clipper 一键剪藏。
 
-**小提示：** 剪藏后给文件起一个描述性名称，比如 `sources/chat-history/系统设计评审-Claude.md` 而非 `claude-对话-2026-06-15.md`——好的文件名让你一眼知道这条记录的用途。
+**小提示：** 剪藏后给文件起一个描述性名称，比如 `系统设计评审-Claude.md` 而非 `claude-对话-2026-06-15.md`——好的文件名让你一眼知道这条记录的用途。文件位置放在你的剪藏文件夹里就行。
 
 ### 第三步：摄入
 
-使用 `Cmd+P` → "Ingest from folder"，指向 `sources/chat-history/`。
+使用 `Cmd+P` → "Ingest from folder"，指向你的剪藏文件夹。
 
 **粒度选择：**
 - **Standard**：适用于大多数对话，覆盖深度和效率的平衡点

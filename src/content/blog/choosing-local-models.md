@@ -7,99 +7,85 @@ series: "getting-started"
 related: ["choosing-models", "obsidian-basics", "first-100-pages", "introducing-llm-wiki"]
 ---
 
-## Why run local at all
+## Three reasons, pick the one that's yours
 
-Three reasons drive people to a fully-offline Karpathy LLM Wiki setup:
+There are three reasons a serious Karpathy LLM Wiki user eventually switches to local models. Pick the one that's yours:
 
-- **Privacy posture**: notes never leave the machine. Client records, research drafts, personal journals.
-- **Network reality**: travel, restricted networks, behind a corporate firewall that blocks API egress.
-- **Cost ceiling**: high-frequency batch ingest on cloud APIs adds up. A one-time hardware purchase amortizes.
+- **Privacy** — your vault holds something that genuinely shouldn't leave the machine: a journalist's sources, a lawyer's client files, research under an NDA, or a personal journal you'd rather no API logs. On ingest, every note, every name gets packed into a prompt and shipped to someone else's GPU. For most people that doesn't matter; for those groups it's a hard constraint.
+- **Network** — you're on a plane a lot, behind a corporate firewall that blocks API egress, or on a connection too flaky to trust with a batch ingest job. In those situations the cloud simply isn't there.
+- **Cost** — you ingest a lot, and the per-token bill for chewing through thousands of notes has crossed the line where a one-time hardware purchase just makes sense.
 
-The plugin was designed for this case from the start — zero telemetry, no backend, no data collection. Since v1.25.0 the **fully-local PDF path** (oMLX + Markitdown + Baidu Unlimited-OCR, see [Workflow Guide (8): PDF Ingest](/blog/posts/pdf-ingest-guide/)) closes the last gap that used to push users back to cloud for PDFs.
+If none of those is a real constraint for you — if you're mostly curious — that's fine too, and the end of this post says honestly when local isn't worth the trouble. But if one of them made you nod, keep reading. The plugin was built for this from day one: zero telemetry, no backend, nothing phoning home. And since v1.25.0 even the PDF path runs fully offline (oMLX + Markitdown + Baidu Unlimited-OCR — see [Workflow Guide (8): PDF Ingest](/blog/posts/pdf-ingest-guide/)), which used to be the one thing that dragged people back to the cloud.
 
-This post walks through the practical question: **which local model, on which hardware, does what well?** The answer changes fast — this post is calibrated to v1.25.0's recommendations and the model releases of mid-2026.
+The only question left once you've decided is simple: **what do you actually download, and will it run on the hardware you own?**
 
-## The hardware tiers (what you're running on)
+## Start with what you have, not what's best
 
-### Apple Silicon (M-series)
+Most guides open with a leaderboard of models. That's backwards. The model you should run is almost entirely determined by the hardware already sitting on your desk, so let's start there. Find yourself in one of these three:
 
-Unified memory is the killer feature. The LLM weights live in the same memory pool as everything else, so a Mac with 64 GB unified memory can run a 27B-parameter quantized model comfortably, and a 128 GB machine can run 70B-class models that would need 2× NVIDIA 3090s otherwise.
+```
+Your machine is —
 
-| Chip | Unified RAM | Practical ceiling |
-|------|-------------|-------------------|
-| M1 / M2 | 8–24 GB | 7B Q4_K_M, 13B Q3_K_S |
-| M3 | 8–36 GB | 13B Q4_K_M, 27B Q3_K_M |
-| M4 | 16–48 GB | 27B Q4_K_M, 35B-A3B comfortably |
-| M4 Max | 36–128 GB | 70B Q4, 122B-A10B feasible |
-| M4 Ultra (when available) | 64–192 GB | 122B+ at higher precision |
+  A Mac with an M-series chip (M1/M2/M3/M4)?
+      → The easiest path; unified memory does a lot of the work for you. See Apple Silicon.
 
-The "A3B" / "A10B" notation refers to **active parameters** in a Mixture-of-Experts model — the model has 35B (or 122B) total parameters but only 3B (or 10B) activate per token, so the actual compute and memory-bandwidth cost is closer to a 3B (or 10B) dense model. This is the architecture behind the recent Qwen3.5-A3B / Qwen3.5-A10B family.
+  A PC / workstation with a discrete NVIDIA GPU?
+      → Your ceiling is VRAM, not system RAM, and the math is stricter. See NVIDIA.
 
-### NVIDIA
+  A plain laptop / desktop with no real GPU?
+      → You can run a small model, but be straight first: it'll be slow. See CPU-only.
+```
 
-Discrete GPU VRAM is the constraint, not system RAM. You can spill to CPU but throughput drops by an order of magnitude.
+### Apple Silicon: unified memory is the cheat code
 
-| VRAM | Practical ceiling |
-|------|-------------------|
-| 8 GB (RTX 3060/4060) | 7B Q4_K_M |
-| 12 GB (RTX 3060/4070) | 13B Q4_K_M |
-| 16 GB (RTX 4060 Ti/4070 Ti Super) | 13B Q5_K_M, 27B Q3_K_S |
-| 24 GB (RTX 3090/4090) | 27B Q4_K_M, 35B-A3B |
-| 48 GB (RTX A6000 / 2× 3090) | 70B Q4 |
-| 80 GB (A100 / H100) | 70B Q5, 122B-A10B |
+On a normal PC the model weights have to fit in your graphics card's dedicated VRAM, which is small and expensive. On Apple Silicon there's one big memory pool shared by everything, so the Mac's entire RAM is available to the model. This is why a 64 GB MacBook can comfortably run a 27B-parameter model that would otherwise demand a pair of NVIDIA 3090s, and a 128 GB Mac Studio can run 70B-class models that most people assume need a server rack.
 
-### CPU-only (no GPU)
+Rough ceilings, so you know where you stand:
 
-Still possible for small models — Qwen3.5-7B at Q4 runs on a modern desktop CPU at ~3 tokens/sec, which is slow but usable for a 1k-token query. Not recommended for batch ingest.
+| Chip | Unified RAM | What runs comfortably |
+|------|-------------|-----------------------|
+| M1 / M2 | 8–24 GB | A 7B model; a 13B if you quantize hard |
+| M3 | 8–36 GB | A 13B comfortably; a 27B if you push it |
+| M4 | 16–48 GB | A 27B, or a 35B MoE with room to spare |
+| M4 Max | 36–128 GB | 70B-class, even the big MoE models |
 
-## The model shortlist (mid-2026)
+One piece of notation you'll trip over: names like **35B-A3B**. The "A3B" means *active* parameters. It's a Mixture-of-Experts model — 35 billion parameters total, but only 3 billion light up for any given token. So it costs about as much to run as a 3B model while answering closer to a 27B. The Qwen3.5 A3B / A10B family is the best thing to happen to consumer local inference in a while, and it's why a laptop can now punch above its weight.
 
-These are the models the v1.25.0 release notes name, plus a few that have stabilized since. The recommendation is **per task**, because the plugin's Per-Task Models setting (v1.24.0) lets you pick different models for Ingest / Lint / Query.
+### NVIDIA: it's all about VRAM
 
-### For Ingest (entity extraction, concept pages, page generation)
+If you're on a discrete NVIDIA card, only the VRAM on the card counts. You can spill overflow into system RAM, but throughput falls off a cliff — roughly 10× slower — so treat your VRAM number as a hard wall.
 
-Ingest wants a model that follows instructions precisely, handles structured output, and doesn't refuse benign requests. **Throughput matters more than absolute quality** — you're paying this cost on every new source note.
+| VRAM | What runs well |
+|------|----------------|
+| 8 GB (RTX 3060/4060) | A 7B model, and that's it |
+| 12 GB (RTX 4070) | A 13B comfortably |
+| 16 GB (RTX 4070 Ti Super) | A 13B with headroom, a 27B if you squeeze |
+| 24 GB (RTX 3090/4090) | A 27B, or a 35B-A3B MoE |
+| 48 GB+ (A6000 / dual 3090) | 70B-class |
 
-| Model | Size | Strength | Weakness |
-|-------|------|----------|----------|
-| **Qwen3.5-27B-Instruct (Q4_K_M)** | ~17 GB on Apple Silicon | Best open-source instruction-following at this size for entity extraction | Needs ≥32 GB unified RAM |
-| **Qwen3.5-35B-A3B (Q4)** | ~20 GB | MoE — active 3B cost, near-27B quality | First-token latency higher than dense |
-| **Qwen3.6-27B-Instruct** | ~17 GB | 256K+ context, beats Qwen3.5 on long-wiki extractions | Newer, less field-tested |
-| **Gemma 4-26B-A4B** | ~16 GB | Google's open weights, strong on structured output | Slightly weaker multilingual coverage |
-| **DeepSeek-V3 (Q4)** | ~40 GB | Top open-source reasoning, native 128K context | Heavy — needs 64 GB unified RAM minimum |
+A single 24 GB 4090 is the sweet spot for most enthusiasts — it comfortably runs the models that make the wiki feel good.
 
-The v1.25.0 release notes put Qwen3.5 at the top of this list because the prompt templates in `src/wiki/prompts/*.ts` were tested most heavily against its output shape.
+### CPU only: possible, but be honest with yourself
 
-### For Lint (alias merging, dead-link fixing, contradiction detection)
+No GPU at all? You can still run a small model — Qwen3.5-7B at a heavy quantization will chug along on a modern desktop CPU at maybe 3 tokens per second. That's fine for a single short query if you're patient. It is miserable for ingesting a vault of notes, where you'll be waiting minutes per file. If CPU is all you have, the pragmatic move is to try it on ten notes, and if the wait drives you crazy, keep query local and push ingest to the cloud (the hybrid pattern at the end). Local-everything on CPU is a "because I can" setup, not a "because it's good" one.
 
-Lint runs on your whole wiki at intervals. It needs a model that's both **perceptive enough to spot subtle contradictions** and **cheap enough to run periodically**. A model that's great at creative writing is overkill here — you want determinism.
+## The four or five models worth your attention right now
 
-| Model | Size | Why it fits |
-|-------|------|-------------|
-| **Qwen3.5-13B-Instruct (Q5_K_M)** | ~10 GB | Mid-tier instruction-following, fits in 16 GB |
-| **Gemma 4-E4B (Q4)** | ~4 GB | Tiny, fast, surprisingly good at classification |
-| **DeepSeek-V3 (Q4)** | (same as above) | If you already have it loaded for ingest |
+Model releases move fast, so instead of a giant catalog that's stale in three months, here are the handful actually worth downloading in mid-2026. Pick based on what you want most:
 
-The user-reported sweet spot is a 13B-class model for lint. Below 7B you start losing nuance on contradictions; above 27B you're overpaying for tasks that don't need it.
+- **If you want one model that does everything okay:** Qwen3.5-13B at Q5_K_M. This is the default I recommend to almost everyone. It's about a 10 GB download, fits on a 16 GB machine, follows the wiki's structured-output prompts reliably, and never leaves you fighting it. Start here.
+- **If you want real quality on the chat side:** Qwen3.5-27B, or the 35B-A3B MoE if your hardware likes MoE. This is the jump you feel — answers get more coherent, entity extraction gets sharper, long queries hold together. Worth it once you've got 24 GB+ to work with.
+- **If you want Google's particular strengths:** Gemma 4. It's excellent at structured output and holds instructions well on long prompts, which matters for wide queries. Comes in a range of sizes including a tiny E4B that's shockingly capable for classification-style work.
+- **If you want frontier reasoning and have the memory to burn:** DeepSeek-V3. It's the strongest open reasoner and the best multilingual model here, with native long context. It's also heavy — plan on 64 GB of unified RAM minimum — so this is a big-Mac-Studio or serious-GPU-rig choice, not a laptop one.
+- **The freshest option:** Qwen3.6-27B, if you want the newest long-context extraction quality and don't mind being an early adopter. It's less field-tested than 3.5 but pulls ahead on very long wiki pages.
 
-### For Query (chat, retrieval-augmented generation)
+The wiki's prompt templates have been tuned hardest against Qwen's output shape, which is the main reason it sits at the top of these recommendations — you'll hit fewer malformed-output surprises. If you're unsure, Qwen3.5-13B is the answer.
 
-Query is the user-facing surface. Latency and reasoning quality both matter. The plugin's first-query PPR warmup (v1.24.0) means the first query after a settings change is now fast, but you still want a model that **answers well under a multi-thousand-token context**.
+## Four real setups, and what to run on each
 
-| Model | Size | Why it fits |
-|-------|------|-------------|
-| **Qwen3.6-27B with 256K+ context** | ~17 GB | Long-wiki answers without truncation |
-| **Qwen3.5-35B-A3B (Q4)** | ~20 GB | Excellent answer quality at MoE cost |
-| **Gemma 4-31B** | ~20 GB | Google's strongest open model for chat |
-| **DeepSeek-V3** | (heavy) | Top-tier reasoning, slower throughput |
+Abstract recommendations stay vague, so here are four machines and a sensible config for each.
 
-If you can only afford one model on your hardware, **make it your query model** — that's where the user-perceived quality lives. The other two tasks can fall back to a cheaper model.
-
-## A practical configuration matrix
-
-Three pre-built configurations that fit the named hardware tiers. Per-task model assignment is set in **Settings → Wiki → Model Scope → Per-Task**.
-
-### MacBook Pro M4 Pro (48 GB unified)
+**The traveling consultant — MacBook Pro, M4 Pro, 48 GB.** A road machine that has to do everything offline, with plenty of headroom. Run a strong 27B for ingest so entity extraction is accurate, a lean 13B for the background lint sweeps, and a 35B-A3B MoE for query because the MoE gives near-27B answers at a fraction of the running cost. LM Studio is the easiest provider to point the plugin at.
 
 ```
 Ingest:  Qwen3.5-27B-Instruct (Q4_K_M, MLX)
@@ -108,123 +94,91 @@ Query:   Qwen3.5-35B-A3B (Q4, MLX)
 Provider: LM Studio (port 1234)
 ```
 
-All three fit comfortably. Ingest and Lint use the same base model family for prompt-template compatibility; query uses a slightly bigger MoE for answer quality.
-
-### Mac Studio M4 Max (128 GB unified)
+**The privacy maximalist — Mac Studio, M4 Max, 128 GB.** Notes that will never touch a network, and the hardware to make offline feel like nothing was sacrificed. With this much unified memory you can reach for the big guns: the newest Qwen3.6 for long-context ingest, and a 122B-A10B MoE for query — active-10B cost, near-frontier answers. Use oMLX rather than LM Studio; it's the Apple-Silicon-native server and it squeezes noticeably more throughput out of the chip by skipping cross-platform overhead.
 
 ```
 Ingest:  Qwen3.6-27B (Q4_K_M, MLX) with 256K context
 Lint:    Qwen3.5-13B (Q5_K_M, MLX)
-Query:   Qwen3.5-122B-A10B (Q4, MLX) — top-tier
-Provider: oMLX (Apple-Silicon-native OpenAI-compatible server)
+Query:   Qwen3.5-122B-A10B (Q4, MLX)
+Provider: oMLX (Apple-Silicon-native, OpenAI-compatible)
 ```
 
-oMLX outperforms LM Studio on Apple Silicon because it bypasses some cross-platform abstractions. The 122B-A10B active-10B MoE gives you near-frontier answer quality on a 128 GB machine.
-
-### Linux + RTX 4090 (24 GB VRAM)
+**The tinkerer with a gaming rig — Linux, RTX 4090, 24 GB VRAM.** VRAM is the wall here, and 24 GB won't hold a 27B and a 13B loaded at once. So the trick is to swap: run the 13B for ingest and lint, and load a 27B (with a little CPU offload) only when you query. If juggling models annoys you, just run the 13B for everything — ingest will be a touch slower to reach the same quality, but it's a perfectly good setup. Ollama is the simplest thing to install.
 
 ```
 Ingest:  Qwen3.5-13B (Q5_K_M, GGUF)
-Lint:    Qwen3.5-13B (Q5_K_M, GGUF)  — same model
+Lint:    Qwen3.5-13B (Q5_K_M, GGUF)
 Query:   Qwen3.5-27B (Q4_K_M, GGUF) with partial CPU offload
-Provider: Ollama (simplest setup)
-```
-
-On a single 4090 you can't fit a 27B and a 13B simultaneously, but you can swap them based on which task is running. Or: drop one and use Qwen3.5-13B for everything (ingest will be slower than 27B but still acceptable).
-
-### Minimal: M2 MacBook Air (16 GB unified)
-
-```
-Ingest:  Qwen3.5-7B-Instruct (Q4_K_M)
-Lint:    Qwen3.5-7B-Instruct (Q4_K_M)  — same model
-Query:   Qwen3.5-7B-Instruct (Q4_K_M)  — same model
 Provider: Ollama
 ```
 
-One model for everything. Ingest quality is noticeably lower than the 27B path — you'll see more "wrong entity extracted" cases that need manual review. But it works, on a thin-and-light laptop.
+**The thin-and-light minimalist — MacBook Air, M2, 16 GB.** One model for all three jobs, because that's what fits. A 7B at Q4 will run, and it'll answer your questions offline on a fanless laptop, which is genuinely impressive. Be realistic about ingest quality though: you'll see more "it grabbed the wrong entity" cases that need a manual fix. It works — it's just the floor of "actually usable."
+
+```
+Ingest:  Qwen3.5-7B-Instruct (Q4_K_M)
+Lint:    Qwen3.5-7B-Instruct (Q4_K_M)
+Query:   Qwen3.5-7B-Instruct (Q4_K_M)
+Provider: Ollama
+```
+
+## The single biggest lever: different models for different jobs
+
+The feature that changes the most, and almost nobody uses at first: **the plugin lets you run a fast, cheap model for ingest and a smart, expensive model for query — at the same time.**
+
+Think about what each job actually needs. Ingest runs on every new note; you're paying that cost constantly, so throughput matters more than brilliance. Lint sweeps your whole wiki on a schedule looking for contradictions and dead links; it needs to be perceptive but cheap enough to run in the background. Query is the part you actually stare at, so that's where you want your best model. Matching each job to a right-sized model instead of using one do-everything model is the biggest quality-per-dollar (and quality-per-watt) lever available.
+
+You set it in settings, no code required: **Settings → Wiki → Model Scope**, switch from *Unified* to *Per-Task*, and then you get three independent dropdowns — one for Ingest, one for Lint, one for Query. Leave any of them blank and it falls back to your default model. When you run Test Connection, the plugin checks each model in turn and tells you if any one of them is unreachable, so you won't discover a typo mid-ingest.
+
+Rule of thumb: if you can only afford to run one good model on your hardware, **make it the query model**. That's where you perceive quality. Ingest and lint can share a cheaper one. For the deeper reasoning behind why this matters so much, the deep dive is [Inside the System (3): Choosing the Right Model for Each Task](/blog/posts/choosing-models/).
 
 ## The context-length trap
 
-A common mistake: choosing a model because it advertises 128K or 256K context. **The number you actually use is far smaller** because the wiki pages are pre-ranked by the PPR cascade (see [Inside the System (6): Monte Carlo PPR](/blog/posts/monte-carlo-ppr/) for how this works).
+A long context window is the number most people fixate on when picking a model — 256K sounds safer than 128K. But it's worth measuring first what the plugin actually feeds the model on a normal question.
 
-The empirical distribution from the v1.23.0 tuning cycle on a 2,142-page real-vault:
+Usually under 10K tokens.
 
-| Top-k | Mean prompt tokens | p95 prompt tokens |
-|-------|-------------------:|------------------:|
-| k=5 | 3,800 | 12,100 |
-| k=10 | 6,400 | 19,800 |
-| k=20 | 11,200 | 31,500 |
+Here's why. The plugin doesn't dump your whole vault into the prompt. It runs a Monte Carlo Personalized PageRank cascade that *pre-ranks* your wiki pages and hands the model only the most relevant handful (see [Inside the System (6): Monte Carlo PPR](/blog/posts/monte-carlo-ppr/) for the mechanics). Measured on a real 2,142-page vault, the prompt sizes look like this:
 
-So unless you're doing wide queries ("summarize everything related to X"), 32K context is plenty. A model that advertises 128K but loses coherence past 32K is fine. A model that advertises 256K but doesn't lose coherence at 200K is overkill but harmless.
+| Pages fed to the model | Typical prompt | Even on a heavy query |
+|------------------------|---------------:|----------------------:|
+| Top 5 | ~3,800 tokens | ~12,000 tokens |
+| Top 10 | ~6,400 tokens | ~20,000 tokens |
+| Top 20 | ~11,000 tokens | ~31,000 tokens |
 
-What **does** matter is the cascade's PPR behavior on long prompts. Models that degrade gracefully (still follow instructions at 50K tokens) handle wide queries better. Gemma 4-31B is strong here; some Qwen variants lose structure past 64K.
+So unless you're firing off deliberately sprawling queries ("summarize everything I know about X"), 32K of context is plenty. A model that claims 128K but quietly loses the thread past 32K is completely fine for this. Chasing a 256K window buys you nothing here — the pre-ranking already did the hard part.
 
-## Quantization: MLX vs GGUF
+What does matter is how gracefully a model behaves when a wide query does push the prompt long. Some models keep following instructions cleanly at 50K tokens; others start dropping structure past 64K. Gemma 4 is a standout for holding it together. Spend your attention on that, not on the headline context number.
 
-The two ecosystems for Apple Silicon and NVIDIA respectively. v1.25.0's local recommendations list is the first time MLX is the default for Apple Silicon — GGUF still works but is a tier slower.
+## Quantization, in plain English
 
-| Format | Best for | Tradeoff |
-|--------|----------|----------|
-| **MLX** | Apple Silicon (M-series) | Apple-native, uses Apple's AMX/NEON; ~20–40% faster than GGUF on M3/M4 |
-| **GGUF** | NVIDIA, CPU, cross-platform | Universal; llama.cpp under the hood; smaller community now |
-| **GPTQ / AWQ** | Older NVIDIA cards (pre-Ampere) | 4-bit weight-only quantization; faster than GGUF on RTX 30-series but worse quality at the same size |
+Quantization is just how much you compress the model's weights to make it smaller and faster, at some cost to quality. You'll see labels like `Q4_K_M`, `Q5_K_M`, `Q8_0`. Don't overthink it:
 
-The rule of thumb from the v1.25.0 release notes: **MLX on Apple Silicon, GGUF everywhere else**, unless you're on RTX 30-series where GPTQ can beat GGUF by 15%.
+- **Q5 is the sweet spot.** It's about a third the size of the full model and keeps roughly 97% of the quality. If you don't have a specific reason to do otherwise, pick Q5_K_M.
+- **Q4 when you need to fit more.** Drop to Q4 when going down a quant level lets you load a meaningfully bigger model in the same memory. A bigger model at Q4 usually beats a smaller model at Q5.
+- **Q8 if you're swimming in memory.** Diminishing returns, but if you've got the headroom and want to be sure quantization isn't costing you anything, go Q8 and forget about it.
 
-## MLX vs GGUF quantization levels
+On Apple Silicon you'll see MLX builds labeled `4bit` and `8bit` instead — those map to roughly Q4 and Q6; MLX doesn't offer a 5-bit yet, so `8bit` is the safe choice when you can afford it. As of v1.25.0 MLX is the default recommendation for Macs. The recipe most people land on: **Q5 for ingest and lint, Q4 for query** so you can load a bigger, smarter query model in the same RAM. If you've got memory to spare, Q6 or Q8 across the board is the no-regrets option.
 
-Within each format, the quantization level (Q4, Q5, Q6, Q8) trades quality against size/throughput. The naming convention is `Q{level}_K_{variant}` for GGUF and `4bit`/`8bit` for MLX.
+## When local isn't enough — three honest signals
 
-| Level | Size vs FP16 | Quality vs FP16 | When to use |
-|-------|--------------|-----------------|-------------|
-| Q8_0 | 50% | ~99% | Storage-cheap, want quality |
-| Q6_K | 40% | ~98% | Diminishing returns over Q5 |
-| **Q5_K_M** | 35% | ~97% | **Recommended for most setups** |
-| Q4_K_M | 28% | ~94% | When you need to fit a bigger model in the same RAM |
-| Q3_K_S | 22% | ~88% | Last resort |
+Local isn't always the right answer. Here are the three signs it's time to go hybrid — keep the privacy-sensitive parts local, hand the demanding parts to the cloud:
 
-For MLX the equivalents are 8bit (~Q6) and 4bit (~Q4_K_M). MLX doesn't have a 5-bit or 7-bit option yet.
+1. **Ingest is painfully slow** — minutes per note. Your model is too small or too aggressively quantized. Either step up to a bigger local model, or (thanks to per-task settings) push *just ingest* to a cloud provider while everything else stays offline.
+2. **Query answers are wrong on the subtle stuff.** If the model hallucinates past what the PPR retrieval can rescue, that's a reasoning-quality ceiling. Move to a larger model, or offload only the final answer-generation call to the cloud while keeping retrieval local.
+3. **Multilingual quality is uneven.** If your vault mixes, say, CJK and European languages and your local model is English-first, you'll see it in the answers. DeepSeek-V3 is the strongest open multilingual option if you want to stay local; otherwise this is a good reason to hybrid.
 
-The user-reported sweet spot across the v1.24 tuning cycle: **Q5_K_M on ingest/lint, Q4_K_M on query** (so you can load a bigger query model in the same memory). Unless you have plenty of headroom, in which case Q6_K everywhere is the safest choice.
+The pattern that works best: **ingest and store locally (the privacy-critical part), query in the cloud (the quality-critical part).** Because of per-task models, that's a single dropdown change — not a rebuild.
 
-## The Per-Task Models setting
+## What to do tomorrow morning
 
-Since v1.24.0, the plugin supports **per-task model assignment**. The path:
+Enough theory. Here's the concrete first hour if you've never run a local model:
 
-**Settings → Wiki → Model Scope → Per-Task** (vs Unified)
+1. **Install a runner.** Ollama is the simplest and works everywhere. LM Studio if you'd rather have a GUI. On a Mac where you want maximum speed, install oMLX.
+2. **Pull a starter model.** `ollama pull qwen3.5:13b` — about 10 GB, and the one model to bet on for a first run.
+3. **Point the plugin at it.** Settings → Wiki Configuration → Provider → Ollama. It auto-detects the local server.
+4. **Run Test Connection.** It should pass in a couple of seconds. If it doesn't, the server isn't running or the port's wrong — fix that before anything else.
+5. **Ingest one note and look at the result.** Did it pull out the right entities? Do the generated links make sense? If yes, you're done — pull the network cable and enjoy it. If the extraction looks sloppy, that's your signal to step up to a 27B.
 
-Switch from `Unified` to `Per-Task`, then independently pick:
+The floor for "genuinely usable" is a 7B at Q4 — below that you fight the model more than you use the wiki. The sweet spot for most people is a 13B at Q5. And a 27B at Q4 is where long-context queries start to feel genuinely good. Start in the middle, and move up only when a real limitation pushes you there.
 
-- **Ingest model** — used by source-analyzer, page-factory × 7, conversation-ingest × 4, wiki-engine, schema-manager, auto-maintain × 2
-- **Lint model** — used by analysis-phase, dedup-phase, fill-empty-page, fix-dead-link × 2, fix-runners × 2, link-orphan, merge-duplicates, contradictions
-- **Query model** — used by QueryView × 3 send + save-eval + seed-selector
-
-Each task's model resolution goes through `core/model-resolver.ts`'s `resolveModelForTask(settings, task)`. Empty per-task fields fall back to `settings.model`. Test Connection probes each model sequentially with fail-fast — if any per-task model fails the probe, the connection is unhealthy until you fix it.
-
-The 28 LLM call sites that switched to per-task model resolution in v1.24.0 (PR #264) are the single biggest reason the per-task setting actually pays off — you can use a fast cheap model for ingest and a smart expensive model for query without writing code.
-
-## When local isn't enough
-
-A few signals that you've outgrown a local setup and should consider hybrid (local + cloud for specific tasks):
-
-- **Ingest takes >10 minutes per note**: the model is too small or too quantized. Either move to a bigger local model or switch ingest to a cloud provider while keeping query local.
-- **Query answers are wrong on subtle facts**: the model is hallucinating beyond what the PPR cascade can rescue. Try a larger model, or offload the final LLM call to a cloud provider while keeping the retrieval local.
-- **Multilingual coverage is uneven**: if your wiki mixes CJK + European languages and the local model is English-centric, the answer quality will be visibly worse. DeepSeek-V3 is the strongest multilingual open model as of mid-2026.
-
-A common pattern: **ingest locally (privacy-critical), query in cloud (quality-critical)**. The Per-Task Models setting makes this one config change.
-
-## Where to start
-
-If you've never run a local model before:
-
-1. **Install Ollama** (simplest setup, cross-platform) or **LM Studio** (nicer GUI, also cross-platform). On Apple Silicon and you want maximum throughput, install **oMLX** instead.
-2. **Pull a starter model**: `ollama pull qwen3.5:13b` (about 8 GB download).
-3. **In the plugin**: Settings → Wiki Configuration → Provider → Ollama. The plugin auto-detects the local server.
-4. **Run a Test Connection**: should pass in seconds.
-5. **Ingest one note**. If the entity extraction looks reasonable, you're set. If not, try a bigger model.
-
-The 7B Q4 model on a modern laptop is the floor for "actually usable". Below that, you'll fight the model more than the wiki. The 13B Q5 is the sweet spot for most setups. The 27B Q4 is where quality noticeably improves on long-context queries.
-
-For PDF ingest on Apple Silicon specifically, see [Workflow Guide (8): PDF Ingest](/blog/posts/pdf-ingest-guide/) for the oMLX + Markitdown + Baidu Unlimited-OCR stack.
-
-If you want to understand why the per-task model setting matters at all, the deep dive is [Inside the System (3): Choosing the Right Model for Each Task](/blog/posts/choosing-models/).
+For the fully-offline PDF stack on Apple Silicon, see [Workflow Guide (8): PDF Ingest](/blog/posts/pdf-ingest-guide/). And for the deeper reasoning behind why per-task models matter so much, the deep dive is [Inside the System (3): Choosing the Right Model for Each Task](/blog/posts/choosing-models/).

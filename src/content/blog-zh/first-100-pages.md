@@ -1,6 +1,6 @@
 ---
 title: "入门必读（4）：你的前 100 个 Wiki 页面，从零开始"
-description: "从空 Obsidian 库到 100 页活的知识图谱。配置、首批 sources、首次摄入——Karpathy LLM Wiki 新手完整 walkthrough。"
+description: "从空 Obsidian 库到 100 页活的知识图谱。配置、首批笔记、首次摄入——Karpathy LLM Wiki 新手完整 walkthrough。"
 date: 2026-04-28
 tags: ["入门必读"]
 related: ["introducing-llm-wiki", "obsidian-basics", "schema-layer-deep-dive", "daily-knowledge-loop"]
@@ -9,7 +9,7 @@ series: "getting-started"
 
 ## 循序渐进
 
-第一天不要把整个知识库都倒进 `sources/`。从 2–3 篇你熟悉的文档开始。观察 10 个页面的生长过程，比盯着 200 个页面发呆收获更多。
+第一天不要急着摄入整个 Vault。从 2–3 篇你熟悉的文档开始。观察 10 个页面的生长过程，比盯着 200 个页面发呆收获更多。
 
 ## 第一步：安装和配置
 
@@ -20,13 +20,13 @@ series: "getting-started"
 5. 点击 **测试连接** → 绿色"LLM 就绪"指示灯亮起即表示准备就绪
 6. 点击 **保存设置**
 
-## 第二步：创建第一个来源
+## 第二步：挑出第一份笔记
 
-在知识库根目录创建 `sources/` 文件夹。把一篇笔记放进去——可以是博客文章、论文摘要或研究笔记。
+从 Vault 里挑一条笔记——位置不限，可以是博客文章、论文摘要或研究笔记。
 
 ## 第三步：运行提取
 
-按 `Cmd+P`，输入 **"Ingest Sources"**。一篇普通文章大约需要 5–15 秒。
+按 `Cmd+P`，输入 **"Ingest single source"**（或"Ingest from folder"指向多个文件）。一篇普通文章大约需要 5–15 秒。
 
 完成后，你会看到一份**提取报告**，展示提取了哪些实体、创建了哪些页面、建立了哪些链接。
 

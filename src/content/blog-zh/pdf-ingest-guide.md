@@ -1,170 +1,144 @@
 ---
 title: "实践指南（8）：PDF 摄取——从研究论文到可查询的 Wiki 页面"
-description: "把 PDF 放进 sources/。插件通过你的 LLM 提取文本、表格与图片，缓存结果，然后与 Markdown 来源走同一条实体/概念/链接提取流水线。"
+description: "从 vault 中任选 PDF。插件通过你的 LLM 提供商读取、逐字转写为 Markdown，再接入标准的 Wiki 抽取流水线。"
 date: 2026-07-20
 tags: ["实践指南"]
 series: "workflow-guides"
 related: ["zotero-pdf-integration", "research-papers-workflow", "first-100-pages", "choosing-local-models"]
 ---
 
-## v1.25.0 带来了什么
+## 那 50 篇论文的困境
 
-PDF 自 v1.25.0 起成为与 Markdown 并列的一级来源格式。把研究论文、手册、扫描件或 400 页合同放进 `sources/` 文件夹，插件就会通过你的 LLM 服务商读取它，经 OCR 风格的逐字转写器转换为 Markdown，再送入与 Markdown 笔记同一条实体/概念/`[[wiki-link]]` 提取流水线。既有的一切——双向链接、跨语言别名、矛盾检测、查询引用——都不需要改动。
+研究工作里，PDF 是最常见的素材来源。论文、产品手册、扫描的合同、技术规格——这些文件往往都堆在 vault 的各个角落，桌面上、下载文件夹里、Zotero 里，都有。你打算把它们都整理进 Obsidian，让它们真正成为知识库的一部分。
 
-转换后的 Markdown 按内容哈希缓存在 `.obsidian/plugins/karpathywiki/pdf-cache/`。缓存键嵌入了转换器版本（`PDF_CONVERTER_VERSION`，定义于 `src/core/pdf-converter.ts`），因此未来的 prompt 升级会自动让旧条目失效。你的 **vault 默认不被修改**——只有一个可选开关会在转换后于源 PDF 旁写入 `<basename>.pdf.md` 旁注文件。
+于是你打开第一篇，开始做笔记。摘要还好，复制粘贴几句话。然后你翻到第三页，那里有一张关键的对比表格，六列十行，是整篇论文的核心结论。你想把它搬进笔记里，却发现 Markdown 根本装不下——你要么手敲一遍 Markdown 表格（半小时过去了），要么截个图贴进去（然后它就再也不能被搜索、被链接、被查询了）。再往后翻，还有一个漂亮的架构示意图，一串你看不太懂但很重要的公式。
 
-本文带你走一遍 PDF 摄取实际发生的全过程、哪些服务商原生支持、何时打开 `Force PDF Support`、以及如何在 Apple Silicon 上完全离线跑通整条流水线。
+你忽然意识到一件让人沮丧的事：**你的笔记只能装下这篇论文里最容易复制的那部分。** 那些真正花了作者心血、也最难替代的图、表、公式，全被挡在门外。而你手上还有四十九篇。
 
-## 摄取流水线（按正确性顺序）
+这篇文章，就是讲 Karpathy LLM Wiki 从 v1.25.0 开始怎么解决这件事的。
 
-PDF 路径与 Markdown 路径一致，只是前面多了一步。**顺序是有意义的**：服务商能力闸门跑在缓存查找之前——这样从 `anthropic` 切换到 `ollama` 的用户不会不知不觉拿到一份现在已不支持的服务商留下的旧缓存。
+## PDF 不再是附件，而是源材料
 
-```mermaid
-graph TB
-    A["PDF 放进 sources/"] --> B["1. 读取 PDF 字节<br/>(vault.adapter.readBinary)"]
-    B --> C["2. 服务商能力闸门"]
-    C -->|"原生：anthropic / openai /<br/>bedrock-anthropic / bedrock-openai"| D["3. sha256 字节 +<br/>组合缓存键<br/>sha256:model:converterVersion"]
-    C -->|"开关开启：custom /<br/>anthropic-compatible"| D
-    C -->|"不支持：ollama / lmstudio /<br/>deepseek / glm"| E["抛 UnsupportedProviderError<br/>(本地化 Notice 引导修复)"]
-    D --> F["4. 缓存查找"]
-    F -->|"命中"| G["返回缓存的 Markdown<br/>(不发 LLM 请求)"]
-    F -->|"未命中"| H["5. 加密检查 +<br/>元数据提取"]
-    H --> I["6. LLM 调用：<br/>PDF 作为文件内容部分<br/>+ 逐字系统 prompt"]
-    I --> J["7. unwrapFencedMarkdown<br/>(剥离 ```markdown 围栏<br/>针对小/本地模型)"]
-    J --> K["8. 写入缓存 +<br/>产出实体/概念页面"]
-    K --> L["生成的 Wiki 页面<br/>出现在 entities/"]
-    G --> L
+在 v1.25.0 之前，PDF 对插件来说是个"外人"。你可以把它放进 vault，但它只是一个躺在那里的二进制文件，Wiki 生成流程看不见它的内容。
+
+v1.25.0 改变了这件事：**PDF 升为和 Markdown 笔记完全平级的一级来源。** 从 vault 里挑一份研究论文、产品手册、扫描的合同或四百页的技术规格，插件就会像对待你手写的笔记一样对待它——读进来，理解里面的文字、表格、图示，然后生成互相链接的 Wiki 页面。
+
+关键在于，这一切接进的是你**已经在用的那条流水线**。双向链接、跨语言别名、矛盾检测、对话式查询时的引用溯源——你为 Markdown 笔记熟悉的每一个功能，现在对 PDF 一样有效。你不需要学任何新东西，只是在熟悉的流程前面多接了一段 PDF 转换。
+
+一句话：PDF 从"附件"变成了"源材料"。
+
+## 它到底怎么工作的
+
+如果要用人话讲清楚背后发生了什么，其实只有三步，而且后两步你早就见过：
+
+```
+PDF → （LLM 读它、转写成 Markdown） → 走和笔记一模一样的 Wiki 抽取流程
 ```
 
-转换器自身头注释里的四个关键事实（`src/core/pdf-converter.ts`）：
+第一步，插件把 PDF 交给你的 LLM。注意，这里不是某个第三方 OCR 服务，就是你自己在设置里配好的那个模型——比如 Claude 或 GPT-4o。模型直接"看"这份 PDF，把里面的文字、表格、图示的说明，逐字转写成干净的 Markdown。
 
-> Architecture（按正确性顺序排列；闸门先于缓存，避免用户从 `anthropic` 切到 `ollama` 时悄悄收到一份已不支持的服务商留下的缓存）：
-> 1. 读取 PDF 字节
-> 2. 服务商能力闸门（廉价的，必须先于缓存返回执行）
-> 3. sha256 字节并组合逻辑缓存键（sha256:model:version）
-> 4. 缓存命中 → 返回缓存条目（不发 LLM 请求）
-> 5. 缓存未命中 → 加密检查、元数据提取、LLM 调用
-> 6. 将 LLM 响应写入缓存
+第二步之后就没什么新鲜的了：这份转写出来的 Markdown，和你亲手敲的笔记走进的是同一道门。实体被抽出来、概念被识别、`[[wiki-link]]` 被生成、页面之间互相连起来。从这一步往后，插件根本分不清、也不关心这段内容当初是来自一篇 PDF 还是你敲的一段字。
 
-这个顺序是有负载意义的。如果把缓存检查放在闸门之前，那么从 `anthropic` 切到 `ollama` 的用户会看到一份过期的 Anthropic 转换 Markdown，归因于 Ollama 模型——两个维度都错了（服务商错配 + 模型版本漂移）。架构顺序就是用来防这个 bug 的。
+这就是整个设计最舒服的地方：新能力没有另起炉灶，它只是在你熟悉的流程前面接了一小段。
 
-## 服务商支持矩阵
+## 你的服务商能不能用
 
-闸门使用 `src/constants.ts` 里的两组常量：
+这是大多数人真正想先弄清楚的问题。答案取决于你在用哪个 LLM。
 
-| 服务商 | PDF 支持 | 备注 |
-|--------|----------|------|
-| `anthropic` | ✅ 原生 | Claude 把 PDF 作为文件内容部分读取 |
-| `openai` | ✅ 原生 | GPT-4o+ 把 PDF 作为文件内容部分读取 |
-| `bedrock-anthropic` | ✅ 原生 | AWS 上的 Claude |
-| `bedrock-openai` | ✅ 原生 | AWS 上的 OpenAI |
-| `custom` | ⚠️ 需开启 `forcePdfSupport=true` | 用户自担风险 |
-| `anthropic-compatible` | ⚠️ 需开启 `forcePdfSupport=true` | 用户自担风险 |
-| `ollama` / `lmstudio` / `deepseek` / `glm` | ❌ 永远不支持 | 只能走本地 OCR 路径——见下文 |
+**如果你在用 Claude 或 GPT-4o（及更新版本），恭喜，直接能用。** 这些模型原生就能把 PDF 当作一段文件内容来读，你什么都不用调。AWS Bedrock 上的 Claude 和 OpenAI 也一样，属于原生支持。
 
-切换到原生服务商（`anthropic` / `openai` / `bedrock-*`）会自动把 `forcePdfSupport` 开关重置为 `false`。v1.25.0 删除了 `FORCE_PDF_PROVIDER_IDS` 常量——服务商支持现在通过 `NATIVE_PDF_PROVIDER_IDS ∪ FORCE_PDF_PROVIDER_IDS` 的并集来表达，不再走"每个开关的允许列表"模式。
+**如果你在用别的，情况就要分两种看。** 有些服务商——像自建的 OpenAI 兼容端点、Anthropic 兼容的镜像——技术上*可能*能处理 PDF，但插件不敢替你打包票，所以默认关着。你需要手动打开一个叫 `Force PDF Support`（强制 PDF 支持）的开关，自担风险地试一试（后面有一整节讲什么时候该开、什么时候别开）。
 
-碰到不支持的服务商时，错误信息会本地化：
+**还有一些服务商，PDF 这条路是走不通的。** 具体说就是 Ollama、LM Studio、DeepSeek、GLM 这几个——它们不接受把 PDF 作为文件内容直接喂进去。但别急着失望：这不代表你就跟离线 PDF 无缘了，你还有一条本地 OCR 路径可以走，后面「Apple Silicon 完全离线」那一节专门讲它。
 
-> PDF conversion is not supported by provider "ollama". Supported providers: anthropic, openai, bedrock-anthropic, bedrock-openai. For other OpenAI-compatible or Anthropic-compatible providers, enable "Force PDF Support" in Settings → LLM Configuration → Advanced (at your own risk).
+如果你实在想要一张速查表，就是下面这张。但请记住，表里每一行对你的真正含义，上面几段已经说清楚了：
 
-"at your own risk"（自担风险）这个措辞是故意的：非原生服务商可能接受 PDF 作为文件部分然后悄悄幻觉内容，也可能直接拒绝请求而没有清晰错误。开关设计为 opt-in 就是出于这个原因。
+| 你的服务商 | PDF 能不能用 | 你要做什么 |
+|--------|----------|----------|
+| Claude / GPT-4o+ / Bedrock | 原生支持 | 什么都不用做 |
+| Custom / Anthropic-compatible | 要手动开开关 | 打开 Force PDF Support，自担风险 |
+| Ollama / LM Studio / DeepSeek / GLM | 这条路不通 | 改走本地 OCR 路径（见下文） |
 
-## 逐字转写器 prompt
+顺带一提，当你从别的服务商切回原生服务商（Claude、GPT-4o、Bedrock）时，那个强制开关会自动帮你关掉——因为原生服务商根本不需要它。
 
-PDF → Markdown 系统 prompt（在 `src/wiki/prompts/pdf.ts`）于 v1.25.0 PR3 follow-up #9 重写，以更好地适配小/本地模型。原本的"preserve source, do not summarize"（保留原文，不要总结）对它们太抽象——Qwen3.5-2B 和 Llama 3 8B Instruct 在这条指令下会幻觉。新的"OCR-style verbatim transcriber"（OCR 风格逐字转写器）框架对小模型足够具体，并且包含三个反幻觉标记：
+## 缓存：为什么这跟你有关
 
-| 标记 | 模型何时输出 |
-|------|--------------|
-| `[illegible]` | 短语/句子确实读不清 |
-| `[figure: brief description]` | 图表无法忠实描述 |
-| `[equation: snippet or "unreadable"]` | 数学公式无法干净转写 |
+把一份 PDF 交给 LLM 转写，是要花钱、花时间的。一篇长论文可能要跑好几秒，还要消耗 token。如果你每次重新生成 Wiki 都得把同一批 PDF 再转一遍，那这个功能用起来会很心疼。
 
-标记方案给了模型一个**明确的、替代猜测的选项**——不必编造看似合理但错误的内容，而是承认这一段是空白。对一个引用必须能追溯到真实内容的研究工作流而言，这是"可用的 Wiki 页面"与"幻觉工厂"的分水岭。
+所以插件做了一件很自然的事：**同一份 PDF 只转一次。** 第一次转好之后，结果被缓存下来；之后无论你怎么重新摄取、重新生成，只要 PDF 内容没变，插件就直接拿现成的 Markdown 用，一个 LLM 请求都不再发。转换的代价，你这辈子对这份文件只付一次。
 
-prompt 还显式禁止：
+这时候一个很合理的担心会冒出来：**"那如果插件升级了、转写的方式变好了，我那些旧缓存岂不是永远停留在旧质量上？"**
 
-- ` ```markdown ` / ` ``` ` / `<output></output>` 围栏（小模型最爱套的壳）
-- "Modernization" 标点或大小写（逐字就是逐字）
-- 翻译源语言（转换保留原文语言不变）
-- 添加 "Here is the converted Markdown:" 之类的元文本
+不会。缓存并不是简单地"认文件"，它同时记住了当初是用哪一版转写逻辑生成的。当插件升级、转写方式改进之后，旧版本生成的缓存会**自动失效**，下次摄取时插件会用新方式重新转一遍。你不需要记得去手动清缓存，也不用担心自己一直吃着过期的老结果。它该用旧的时候用旧的（省钱），该更新的时候自己更新（保质量）。
 
-当小模型即使在 prompt 明确禁止下仍套围栏时——Qwen3.5-2B-MLX-4bit 一直如此——`unwrapFencedMarkdown()` 会在 LLM 调用之后、缓存写入之前清理响应。这是纵深防御：即使 prompt 被忽略，缓存里也只有干净的 Markdown。
+## 你的 vault 是安全的
 
-## 三层防御的缓存管理
+这一点值得单独拿出来讲，因为它关系到你敢不敢放心大胆地把一大堆 PDF 丢进去。
 
-缓存在 `.obsidian/plugins/karpathywiki/pdf-cache/` 下，由三层守卫管理（同样来自 v1.25.0）：
+**默认情况下，摄取 PDF 不会碰你 vault 里的任何文件。** 你的 PDF 还是那些 PDF，一个字节都不变。转写出来的 Markdown 只安静地待在缓存里，你得到的只是新生成的 Wiki 页面。换句话说，就算你摄取了两百篇 PDF，你的文件树也不会突然冒出两百个新文件。
 
-1. **单条目上限（10 MB）**：写前检查，超过 10 MB 一律拒绝
-2. **LRU 按 mtime 淘汰（总 100 MB / 1000 条）**：写后检查，目录超限时淘汰最旧条目
-3. **`prepareBatchIngest()`**：TTL 清理 + 大小执行，插件加载时与每次批量摄取开始时执行
+这不是偷懒，是刻意的设计。我们把它叫做"最少惊讶原则"——你的文件系统只应该在你明确要求时才增长。
 
-物理文件名是 `sha256(logicalKey).slice(0, 16)`——16 个十六进制字符，Git 短哈希风格。逻辑键保留 `sha256:model:converterVersion` 语义，方便调试时阅读。这种双层方案避开了直接使用模型名作为文件名时的跨平台问题（Windows 拒绝文件名里的 `/` 和 `:`）。
+那如果你**确实想要**在 vault 里留一份 PDF 的 Markdown 版本呢？比如你想对转写内容做全文搜索、想分享给别的工具、或者想在图谱视图里看到它——完全可以。设置里有一个可选开关，打开之后，每次成功转写，插件会在源 PDF 旁边写一个同名的 `.pdf.md` 旁注文件，内容和缓存里的完全一致。
 
-## 可选的 vault 旁注
+关键是**这是你主动选的**。默认关着，是因为一觉醒来发现 vault 多了两百个文件不是好体验；但只要你需要，它随时在那儿等你打开。
 
-默认情况下，PDF 转换是**只缓存**的：你的 vault 会得到新的 Wiki 页面（`entities/<X>.md`、`concepts/<Y>.md` 等），但源 PDF 不会被修改。转换后的 Markdown 只存在于缓存中。
+## 对小模型的诚实
 
-如果你想在 vault 里保留一份永久的 PDF Markdown 版本——比如跨转换内容做 grep、分享给其他工具、或在图谱视图里看见转换结果——打开 **Settings → Wiki Configuration → Wiki Folder → Write PDF Markdown to Vault**。之后每次成功转换，插件会在源 PDF 旁写入 `<basename>.pdf.md` 旁注文件。旁注内容与缓存中存储的完全一致。
+这里要讲一个容易被忽略、但对做研究的人极其重要的细节。
 
-v1.25.0 我们**没有**默认开启这个开关。早期的草稿默认开启；评审时意识到，`sources/` 里有 200 个 PDF 的用户一觉醒来会发现 vault 多了 200 个新文件。只缓存的默认符合"最少惊讶"原则——文件系统只在你要求时增长。
+当 LLM 转写 PDF 时，最危险的不是它读不出某个字，而是它**读不清却硬猜**。一个模型面对一张模糊的扫描图、一个印糊了的公式，很可能自信地编出一段看起来很合理、其实完全错误的内容。对随便记记的场景这也许无所谓，但对一个"每条引用都必须能追溯到原文"的研究工作流来说，**幻觉比缺失糟糕得多**——一段留白你会去查证，一段编造你可能就直接信了。
 
-## Apple Silicon 完全离线的 PDF 路径
+所以插件用的转写方式，被明确框定成"OCR 风格的逐字转写器"：它的任务是老老实实抄，不是总结，不是润色，不是翻译。更重要的是，当它真的遇到读不清的地方时，我们给了它一个比猜测更好的选项——**如实标记**：
 
-如果你的隐私姿态或网络情况要求 PDF 永不离开本机，v1.25.0 推荐的配置是：
+- 一段文字确实认不出，它写 `[illegible]`
+- 一张图没法忠实描述，它写 `[figure: ...]` 加简短说明
+- 一个公式没法干净转写，它写 `[equation: ...]`
+
+这些标记的意义在于，它把"我不确定"变成了页面上一个看得见的记号，而不是一段以假乱真的内容。你在 Wiki 里翻到 `[illegible]`，就知道那里需要你回去看原文；这远比翻到一段流畅但错误的伪造要靠谱。这套框架和标记方式，专门为了在小模型、本地模型上也能守住底线而设计——因为越小的模型越爱脑补。
+
+## Apple Silicon 完全离线
+
+如果你的 PDF 因为隐私或合规原因**不能离开这台电脑**——机密合同、未发表的研究、病历——那么下面这套技术栈就是为你准备的：整条流水线，从 PDF 到 Wiki 页面，全程不发出一个字节到外网。
+
+在 Apple Silicon（M 系列芯片）上，推荐的组合是：
 
 ```
 ┌─────────────────────────────────────────────────┐
 │ 服务商： Custom OpenAI-Compatible               │
 │ Base URL：http://localhost:1234/v1（oMLX）       │
-│ API 密钥：（空——LM Studio / oMLX 不需要）       │
+│ API 密钥：（空——本地服务器不需要）              │
 │ 模型：   <你的本地模型>                          │
 │ Force PDF：☑ 启用（在 Advanced 下）              │
 └─────────────────────────────────────────────────┘
 ```
 
-Apple Silicon 上的技术栈：
+三个名字你需要认识：**oMLX** 是一个针对 M 系列芯片做了原生优化的本地服务器，对外提供 OpenAI 兼容的接口；**Markitdown** 负责把 PDF 喂给本地模型；**Baidu Unlimited-OCR** 则是那个真正干识别活的 OCR 模型，它专门解决了老一代 OCR 在长文档上"越读越慢"的毛病。
 
-- **[oMLX](https://github.com/jundot/omlx)**——针对 M 系列芯片原生 MLX 支持的 OpenAI 兼容本地服务器
-- **Markitdown** 后端——把 PDF 作为文件内容部分喂给本地模型
-- **Baidu Unlimited-OCR**——OCR 模型。2026-06-22 开源。3B 总参数 / 0.5B 激活参数；之所以选它，是因为它解决了旧 OCR 模型在长文档上"生成越长越慢"的失效模式
+配好之后的妙处在于，插件对这一切毫不知情。它只看到一个"Custom OpenAI-Compatible 服务商"，缓存照缓存、失效照失效、生成的 Wiki 页面和用云端模型时一模一样。从它的视角，本地和云端只是"另一个服务商"的区别。而对你来说，这意味着你的 PDF 从头到尾没离开过这台机器。
 
-把 oMLX 作为 `Custom OpenAI-Compatible` 服务商接入，开启 `Force PDF Support`，整条转换就在本机完成。插件并不知道也不关心转换是本地的——缓存哈希一样、淘汰规则一样、随后产出的 Wiki 页面一样。从插件视角，这只是另一个服务商。
+## 什么时候该开 Force PDF Support
 
-至于把 Markdown 转成 Wiki 页面的 LLM 那一步（实体抽取），把本地 OCR 配 Ollama 或 LM Studio 上的本地对话模型即可。整条流水线完全不发出任何出站网络流量。v1.25.0 的三层防御缓存保证你不会在反复摄取中重复付转换代价。
+前面说过那个"自担风险"的开关，这里展开讲讲什么时候动它。
 
-## 何时打开 Force PDF Support
+如果你跑的是一个你自己掌控、也信任的 Custom OpenAI-Compatible 端点，那开它是合理的——你清楚背后是什么模型。同样，如果你连的是一个自托管的 Anthropic 兼容镜像，或者你通过 OpenRouter 之类的路由用到了一个上游其实支持 PDF、只是接口层没声明的模型，这些情况下打开开关去试，都说得通。
 
-这个开关是为了原生列表之外、但**可能**接受 PDF 作为文件部分的那一大长尾服务商设计的。下面这些情形打开它是合理的：
+反过来，有几种情况**别开**。如果某个服务商压根就直接拒绝 PDF 请求，那你不用开关也会看到清晰的报错，开了也没用。如果你已经发现这个服务商（往往是小模型配长 PDF）转出来的质量很差，那强开只会给你一堆不可靠的页面。而最该警惕的一种：**如果你不确定这个服务商到底是老实转发、还是会悄悄记录你上传的 PDF，那就别开**——尤其当文件敏感时，这个开关关着才是安全的默认。
 
-- **Custom OpenAI-Compatible 端点**，跑的是你控制或信任的模型
-- **Anthropic-compatible 端点**（自托管的 Claude API 镜像）
-- **OpenRouter 路由模型**，上游服务商恰好支持 PDF，但 OpenRouter 接口没有声明
+## 三种你多半会遇到的状况
 
-下面这些情形**不要**打开：
+用得久了，下面这三种情况你至少会碰上一次，提前知道就不慌。
 
-- 服务商直接拒绝请求（反正你会看到清晰错误，不需要开关）
-- 服务商接受但转换质量差（小模型 + 长 PDF）
-- 你不确定服务商是真透传还是会记录你的 PDF
+第一种是**加密的 PDF**。插件不会替你解密——这是故意的，一个会悄悄破解加密文件的工具会让处理机密材料的人很不安。碰到它，你自己先解密再放进来就好：macOS 用预览打开另存，Linux 可以用 qpdf，或者干脆在任意阅读器里"打印为 PDF"把加密展平。
 
-错误分类器 `isPdfRelatedLlmError`（在 `src/core/pdf-converter.ts`）在标记为"服务商不支持 PDF"之前**必须同时**满足：拒绝动词（`reject` / `not support` / `unsupported` / `invalid` / `not allowed`）+ PDF/媒体标记（`pdf` / `application/pdf` / `file part` / `mediatype`）。v1.25.0 之前分类器只在 `'pdf'` 上做子串匹配，导致 413 大小错误和 Rust-serde "unknown variant `file`" 模式拒绝被误判为"服务商不支持 PDF"——已在 PR #302 修复。
+第二种是**纯图片的扫描件**，也就是那种没有文字层、整页都是图的 PDF。云端原生服务商靠模型的视觉能力能读，Apple Silicon 上的本地 OCR 路径也能处理。只是要有心理准备：它比处理有文字层的 PDF 更慢、也更容易出错，时间和 token 预算上都留点余地。
 
-## 常见失败模式
+第三种有点微妙——**内容明明变了，读到的却是旧的**。绝大多数时候这不会发生，因为缓存会自动失效；但万一你确实撞上转写结果和当前 PDF 对不上，最直接的办法就是把缓存里对应的那份删掉，下次摄取时它会自动重建。
 
-至少会碰到一次的三个模式，以及对应的修法：
+## 收尾
 
-**1. "PDF is encrypted"。** v1.25.0 不能解密加密 PDF。提前解密（macOS 用 Preview，Linux 用 qpdf，或在会把加密展平的阅读器里"打印为 PDF"）。我们刻意不内置解密库——威胁模型不清晰，悄悄解密会让处理机密文件的用户感到意外。
+把这些串起来看，PDF 摄取想做的事其实很朴素：让那五十篇论文里最难搬运的部分——表格、图示、公式——也能变成你 Wiki 里可搜索、可链接、可查询的一等公民，而不是被挡在 Markdown 门外。
 
-**2. "PDF is image-only"。** 没有文字层的扫描 PDF。Apple Silicon 上的 OCR 路径能处理；云服务商那边，LLM 的原生 PDF 支持也通过 OCR 读图像。转换会比文字原生 PDF 更慢、保真度更低；预算上要留余地。
+如果你要挑一台机器、一个模型来扛住 PDF 转写的负担，去看看 [入门必读（5）：选一个真正跑得动你 Wiki 的本地模型](/zh/blog/posts/choosing-local-models/)；如果你想把这条流水线接进 Zotero，搭一套完整的学术文献工作流，去看 [实践指南（6）：Zotero → Obsidian → Wiki，学术文献流水线](/zh/blog/posts/zotero-pdf-integration/)。
 
-**3. 缓存命中但内容错。** 如果你看到的 Markdown 与当前 PDF 不匹配，是转换器版本 bump 了（prompt 升级），缓存没失效。手动跑 `prepareBatchIngest()`，或者直接删 `.obsidian/plugins/karpathywiki/pdf-cache/` 下的相关缓存文件。下次摄取会重建。
-
-## 进一步阅读
-
-- `src/core/pdf-converter.ts`——完整的 PDF → Markdown 转换器（约 200 行）。服务商闸门、缓存键组合、错误类。
-- `src/core/pdf-cache.ts`——v1.25.1 抽离出来的 `DiskCache<T>` 抽象，附带 PDF 专用条目格式。
-- `src/wiki/prompts/pdf.ts`——逐字系统 prompt 与 `unwrapFencedMarkdown()` 助手。
-- `src/core/pdf-metadata.ts`——加密检测、信息字典解析、页数提取。
-- v1.25.0 release notes——完整的服务商、设置、CLI 标志列表。
-
-如果你要批量摄取学术 PDF 并想把它与 Zotero 串联，看 [实践指南（6）：Zotero → Obsidian → Wiki，学术文献流水线](/zh/blog/posts/zotero-pdf-integration/)。要选一个能在你硬件上扛得住 PDF 转换的模型，看 [入门必读（5）：选一个真正跑得动你 Wiki 的本地模型](/zh/blog/posts/choosing-local-models/)。
+最后，用一句话概括整个设计的用心：**缓存让你只付一次代价，校验让你能信任结果，旁注可选所以你的 vault 还是你的 vault。**
