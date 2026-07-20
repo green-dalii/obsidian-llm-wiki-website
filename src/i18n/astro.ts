@@ -40,6 +40,7 @@ export function getTranslations(locale: string): Translations {
     providers: { ...EN.providers, ...local.providers },
     nav: { ...EN.nav, ...local.nav },
     trust: local.trust ?? EN.trust,
+    latestBlog: local.latestBlog ?? EN.latestBlog,
   } as Translations;
 }
 

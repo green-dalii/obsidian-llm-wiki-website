@@ -58,4 +58,5 @@ export const de: Translations = {
       { q: 'Funktioniert die PDF-Verarbeitung vollständig offline?', a: 'Ja — wenn du PDF-Ingest mit einem lokalen Modell über <em>Ollama</em> oder <em>LM Studio</em> kombinierst, bleibt jede PDF End-to-End auf deinem Rechner. Das empfohlene Setup auf Apple Silicon ist <a href="https://github.com/jundot/omlx" target="_blank" rel="noopener noreferrer" class="text-obsidian-purple-light underline">oMLX</a> + das Markitdown-Backend + Baidus Open-Source-Modell Unlimited-OCR (3B gesamt / 0,5B aktiv), angebunden über einen <em>Custom OpenAI-Compatible</em>-Anbieter mit aktivierter Option <em>Force PDF Support</em>. PDFs verlassen deinen Vault nie; die Konvertierung läuft lokal; das resultierende Markdown durchläuft dieselbe Entitäten-Extraktions-Pipeline — ebenfalls auf dem Gerät.' },
     ],
   },
+  latestBlog: { label: 'Blog', title: 'Neueste Blogbeiträge', subtitle: 'Tiefergehende Einblicke in Architektur, Workflows und Modellauswahl.', cta: 'Alle Beiträge', readMore: 'Weiterlesen' },
 };

@@ -58,4 +58,5 @@ export const it: Translations = {
       { q: 'L\'ingest dei PDF funziona completamente offline?', a: 'Sì — se abbini PDF Ingest a un modello locale tramite <em>Ollama</em> o <em>LM Studio</em>, ogni PDF resta sulla tua macchina end-to-end. La configurazione consigliata su Apple Silicon è <a href="https://github.com/jundot/omlx" target="_blank" rel="noopener noreferrer" class="text-obsidian-purple-light underline">oMLX</a> + il backend Markitdown + il modello Unlimited-OCR di Baidu open-source (3B totali / 0,5B attivi), collegato tramite un provider <em>Custom OpenAI-Compatible</em> con <em>Force PDF Support</em> attivato. I PDF non lasciano mai il tuo vault; la conversione gira in locale; il Markdown risultante passa per lo stesso pipeline di estrazione delle entità, sempre in locale.' },
     ],
   },
+  latestBlog: { label: 'Blog', title: 'Ultimi articoli', subtitle: 'Approfondimenti su architettura, flussi di lavoro e selezione dei modelli.', cta: 'Vedi tutti gli articoli', readMore: 'Leggi di più' },
 };

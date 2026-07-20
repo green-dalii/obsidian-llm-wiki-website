@@ -58,4 +58,5 @@ export const es: Translations = {
       { q: '¿La ingesta de PDF funciona totalmente sin conexión?', a: 'Sí — si combinas la ingesta de PDF con un modelo local mediante <em>Ollama</em> o <em>LM Studio</em>, cada PDF se queda en tu máquina de extremo a extremo. La configuración recomendada en Apple Silicon es <a href="https://github.com/jundot/omlx" target="_blank" rel="noopener noreferrer" class="text-obsidian-purple-light underline">oMLX</a> + el backend Markitdown + el modelo Unlimited-OCR de código abierto de Baidu (3B totales / 0,5B activos), conectado mediante un proveedor <em>Custom OpenAI-Compatible</em> con <em>Force PDF Support</em> activado. Los PDF nunca salen de tu bóveda; la conversión se ejecuta localmente; el Markdown resultante pasa por el mismo pipeline de extracción de entidades, también en el dispositivo.' },
     ],
   },
+  latestBlog: { label: 'Blog', title: 'Últimas entradas', subtitle: 'Análisis profundos sobre arquitectura, flujos de trabajo y selección de modelos.', cta: 'Ver todas las entradas', readMore: 'Leer más' },
 };

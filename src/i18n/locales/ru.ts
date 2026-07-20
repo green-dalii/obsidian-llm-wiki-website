@@ -225,4 +225,11 @@ export const ru: Translations = {
       { q: 'Работает ли ingest PDF полностью офлайн?', a: 'Да — если вы сочетаете PDF Ingest с локальной моделью через <em>Ollama</em> или <em>LM Studio</em>, каждый PDF остаётся на вашей машине от начала до конца. Рекомендуемая конфигурация на Apple Silicon — <a href="https://github.com/jundot/omlx" target="_blank" rel="noopener noreferrer" class="text-obsidian-purple-light underline">oMLX</a> + бэкенд Markitdown + модель Unlimited-OCR с открытым кодом от Baidu (всего 3B / активных 0,5B), подключённые через провайдера <em>Custom OpenAI-Compatible</em> с включённым <em>Force PDF Support</em>. PDF не покидают ваше хранилище; конвертация выполняется локально; полученный Markdown поступает в тот же конвейер извлечения сущностей — также на устройстве.' },
     ],
   },
+  latestBlog: {
+    label: 'Блог',
+    title: 'Последние записи',
+    subtitle: 'Глубокое погружение в архитектуру, рабочие процессы и выбор моделей',
+    cta: 'Все записи',
+    readMore: 'Читать далее',
+  },
 };

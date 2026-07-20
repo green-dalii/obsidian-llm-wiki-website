@@ -189,4 +189,11 @@ export const ko: Translations = {
       { q: 'PDF 수집은 완전한 오프라인으로 동작하나요?', a: '네 — PDF 수집을 <em>Ollama</em> 또는 <em>LM Studio</em>의 로컬 모델과 함께 쓰면 모든 PDF가 기기 안에서 완결됩니다. Apple Silicon에서 추천하는 구성은 Markitdown 백엔드와 바이두가 오픈소스로 공개한 Unlimited-OCR 모델(총 3B / 활성 0.5B), 그리고 <a href="https://github.com/jundot/omlx" target="_blank" rel="noopener noreferrer" class="text-obsidian-purple-light underline">oMLX</a>를 <em>Force PDF Support</em>를 켠 <em>사용자 정의 OpenAI 호환</em> 제공업체로 연결하는 것입니다. PDF는 보관함을 떠나지 않고, 변환도 로컬에서 실행되며, 만들어진 마크다운이 같은 개체 추출 파이프라인으로 역시 기기 안에서 흘러갑니다.' },
     ],
   },
+  latestBlog: {
+    label: '블로그',
+    title: '최신 블로그',
+    subtitle: '아키텍처, 워크플로우 및 모델 선택에 대한 심층 탐구',
+    cta: '모든 게시물 보기',
+    readMore: '더 읽기',
+  },
 };

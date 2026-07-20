@@ -188,4 +188,12 @@ export interface Translations {
     subtitle: string;
     items: Array<{ q: string; a: string }>;
   };
+  /** Latest blog section (optional — falls back to English on non-EN/ZH locales) */
+  latestBlog?: {
+    label: string;
+    title: string;
+    subtitle: string;
+    cta: string;
+    readMore: string;
+  };
 }

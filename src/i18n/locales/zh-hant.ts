@@ -225,4 +225,11 @@ export const zhHant: Translations = {
       { q: 'PDF 攝入可以完全離線執行嗎？', a: '可以——如果將 PDF 攝入與透過 <em>Ollama</em> 或 <em>LM Studio</em> 執行的本機模型搭配使用，每份 PDF 從頭到尾都留在你的電腦上。Apple Silicon 上推薦的配置是 <a href="https://github.com/jundot/omlx" target="_blank" rel="noopener noreferrer" class="text-obsidian-purple-light underline">oMLX</a> + Markitdown 後端 + 百度開源的 Unlimited-OCR 模型（總計 3B / 啟用 0.5B），透過啟用 <em>Force PDF Support</em> 的 <em>Custom OpenAI-Compatible</em> 供應商連接。PDF 永遠不會離開你的庫；轉換在本機執行；產生的 Markdown 納入同一套實體提取流程，也全程在本機完成。' },
     ],
   },
+  latestBlog: {
+    label: '博客',
+    title: '最新博客',
+    subtitle: '深入架構、工作流與模型選型',
+    cta: '查看全部',
+    readMore: '閱讀更多',
+  },
 };

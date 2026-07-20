@@ -189,4 +189,11 @@ export const ja: Translations = {
       { q: 'PDF取り込みは完全オフラインで動きますか？', a: 'はい——PDF取り込みを <em>Ollama</em> や <em>LM Studio</em> のローカルモデルと組み合わせれば、すべてのPDFがあなたのマシン内で完結します。Apple Silicon での推奨構成は、Markitdownバックエンド＋百度がオープンソース化した Unlimited-OCR モデル（合計3B／活性0.5B）と <a href="https://github.com/jundot/omlx" target="_blank" rel="noopener noreferrer" class="text-obsidian-purple-light underline">oMLX</a> を、<em>Force PDF Support</em> を有効にした <em>カスタム OpenAI 互換</em> プロバイダー経由で接続する方法です。PDFが保管庫の外に出ることはなく、変換もローカルで実行され、生成されたマークダウンも同じエンティティ抽出パイプラインへ、デバイス内で流れます。' },
     ],
   },
+  latestBlog: {
+    label: 'ブログ',
+    title: '最新のブログ記事',
+    subtitle: 'アーキテクチャ、ワークフロー、モデル選定の深掘り',
+    cta: 'すべての記事を見る',
+    readMore: '続きを読む',
+  },
 };

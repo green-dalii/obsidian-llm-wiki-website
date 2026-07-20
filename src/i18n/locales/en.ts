@@ -230,4 +230,11 @@ export const en: Translations = {
       { q: 'Does PDF ingestion work fully offline?', a: 'Yes — if you pair PDF Ingest with a local model via <em>Ollama</em> or <em>LM Studio</em>, every PDF stays on your machine end-to-end. The recommended setup on Apple Silicon is <a href="https://github.com/jundot/omlx" target="_blank" rel="noopener noreferrer" class="text-obsidian-purple-light underline">oMLX</a> + the Markitdown backend + Baidu\'s open-sourced Unlimited-OCR model (3B total / 0.5B active), connected via a <em>Custom OpenAI-Compatible</em> provider with <em>Force PDF Support</em> enabled. PDFs never leave your vault; conversion runs locally; the resulting Markdown hits the same entity-extraction pipeline, also on-device.' },
     ],
   },
+  latestBlog: {
+    label: 'Blog',
+    title: 'Latest from the blog',
+    subtitle: 'Deep dives on architecture, workflows, and model selection.',
+    cta: 'See all posts',
+    readMore: 'Read more',
+  },
 };
