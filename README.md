@@ -185,7 +185,16 @@ Selected highlights; full version history lives in git log.
 
 **Versioning convention**: the website tracks the plugin version it documents, suffixed with `-web` (e.g. plugin `v1.25.1` → website `v1.25.1-web`). The website does **not** auto-update on every plugin patch — when you trigger a sync, first read the plugin `CHANGELOG` between the last synced plugin version and the current one, then translate that delta into website changes. Each website version entry below records the corresponding plugin release it documents.
 
-### v1.25.1-web (2026-07) — current. Plugin: v1.25.1
+### v1.25.9-web (2026-07) — current. Plugin: v1.25.9
+
+Catch-up sync from `v1.25.1-web` → current plugin `v1.25.9`. Plugin delta spans 8 patch releases; website adds the security-differentiator item (API-key SecretStorage) without a content-area reshuffle. Implemented as a single small chore commit.
+
+- **Version**: plugin `v1.25.9` (released 2026-07-25; SecretStorage, tag dedup, provider-switch flush fix), website tracks it as `v1.25.9-web`.
+- **Claims introduced**: none new on this commit. The v1.25.9 plugin delta is operational (SecretStorage was already shipped in v1.25.3 with the FAQ item in `v1.25.1-web`; v1.25.7 was a regression fix; v1.25.8/9 were release-process fixes). No copy changes required. Subsequent commits (C2–C10) layer on the security card / trust block / competitor comparison / etc., so each lands in its own auditable commit.
+
+**Verification**: `npm run gate` 4/4 green (tsc, eslint, vitest 48/48, astro build). 76 pages.
+
+### v1.25.1-web (2026-07). Plugin: v1.25.1
 Sync covers the v1.24.0 → v1.25.0 → v1.25.1 delta. Implemented across 7 per-site-area commits for easy review and rollback:
 
 1. **feat(i18n): add PDF ingest + per-task models keys (EN baseline)** — `types.ts` adds required `pdfIngestTitle/Desc/Tag` (v1.25.0 main 9-card) and optional `perTaskModelsTitle/Desc` (v1.24.0 chip-only). `en.ts` upgrades hero subtitle to "notes, PDFs, web clips", adds the 5 new keys, extends `providers.contextNote` with the "Ollama and LM Studio run fully on-device" clause, appends 3 FAQ items (PDFs, per-task models, offline PDF ingest).
