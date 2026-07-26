@@ -113,7 +113,7 @@ export const zhHant: Translations = {
     historyDesc: '打開操作面板，看清 AI 每一步在何時、對哪則筆記做了什麼。不滿意？一鍵回滾。',
     historyTag: '操作歷史',
     pdfIngestTitle: 'PDF，也能變成知識',
-    pdfIngestDesc: '從 vault 的任何位置挑一份 PDF。外掛會透過你的 LLM 供應商讀取它，逐字轉寫為 Markdown，再送入和 Markdown 筆記同一套實體、概念、連結萃取流程。',
+    pdfIngestDesc: 'PDF 也是來源。丟一份進 vault，它就接入和筆記同一張 Wiki 圖。',
     pdfIngestTag: 'PDF 攝入',
     moreLabel: '還有更多：',
     moreCapabilities: ['10 種語言輸出', '看見它如何推理', '標出矛盾', '找出複本', '網路抖動自動恢復', '跳過已處理的部分'],

@@ -113,7 +113,7 @@ export const zh: Translations = {
     historyDesc: '打开操作面板，看清 AI 每一步在何时、对哪条笔记做了什么。不满意？一键回滚。',
     historyTag: '操作历史',
     pdfIngestTitle: 'PDF，也能变成知识',
-    pdfIngestDesc: '从 vault 的任意位置挑一份 PDF。插件会通过你的 LLM 提供商读取它，逐字转写为 Markdown，再送入和 Markdown 笔记同一套实体、概念、链接提取流水线。',
+    pdfIngestDesc: 'PDF 也是源。丢一份进 vault，它就接入和笔记同一张 Wiki 图。',
     pdfIngestTag: 'PDF 摄入',
     moreLabel: '更多能力：',
     moreCapabilities: ['10 语言输出', '看它如何思考', '发现矛盾', '识别重复', '网络抖动自动恢复', '跳过已处理'],

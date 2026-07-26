@@ -28,7 +28,7 @@ export const de: Translations = {
     historyDesc: 'Öffne das Aktivitäts-Panel und sieh genau, was die KI wann, in welcher Notiz gemacht hat. Jede Bearbeitung in einem Klick rückgängig.',
     historyTag: 'Verlauf',
     pdfIngestTitle: 'PDFs werden zu vollwertigen Quellen',
-    pdfIngestDesc: 'Seit v1.25.0 liest das Plugin PDFs nativ. Wähle ein PDF aus deinem Vault — die KI liest es über deinen LLM-Anbieter, transcodiert es Wort für Wort in Markdown und führt es durch denselben Wissensgraph wie deine Notizen.',
+    pdfIngestDesc: 'PDFs werden zu Quellen. Leg eines in deinen Vault — es verbindet sich mit demselben Wiki-Graph wie deine Notizen.',
     pdfIngestTag: 'PDF-Ingest',
     moreLabel: 'Und mehr:',
     moreCapabilities: ['Ausgabe in 10 Sprachen', 'Sieh die KI denken', 'Erkennt Widersprüche', 'Findet Duplikate', 'Erholt sich von Aussetzern', 'Überspringt Erledigtes'],

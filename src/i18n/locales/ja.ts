@@ -101,7 +101,7 @@ export const ja: Translations = {
     historyDesc: '操作パネルを開けば、AIがいつ・どのノートに・何をしたかが一目瞭然。やり直しもワンクリック。',
     historyTag: '操作履歴',
     pdfIngestTitle: 'PDFも一次ソースに',
-    pdfIngestDesc: 'Vault のどこからでも PDF を選ぶだけ。AI が LLM プロバイダー経由で読み取り、逐語書き起こしでマークダウンへ変換し、Markdown ノートと同じエンティティ／概念／リンク抽出パイプラインへ流します。',
+    pdfIngestDesc: 'PDF もソースに。vault に置けば、ノートと同じ Wiki グラフに加わります。',
     pdfIngestTag: 'PDF取り込み',
     moreLabel: 'さらに：',
     moreCapabilities: ['10言語出力', '思考が見える', '矛盾を検出', '重複を統合', 'ネットワーク揺らぎも自動回復', '処理済みはスキップ'],

@@ -28,7 +28,7 @@ export const es: Translations = {
     historyDesc: 'Abre el panel de actividad y mira exactamente qué hizo la IA, cuándo y en qué nota. Revierte cualquier edición con un clic.',
     historyTag: 'Historial',
     pdfIngestTitle: 'Los PDF se vuelven fuentes de primera clase',
-    pdfIngestDesc: 'Desde v1.25.0, el plugin lee PDF de forma nativa. Elige un PDF desde cualquier lugar de tu vault: la IA lo lee a través de tu proveedor LLM, lo transcribe palabra por palabra a Markdown y lo envía al mismo grafo de conocimiento que tus notas.',
+    pdfIngestDesc: 'Los PDF también son fuentes. Suelta uno en tu bóveda — se une al mismo grafo wiki que tus notas.',
     pdfIngestTag: 'Ingesta de PDF',
     moreLabel: 'Y más:',
     moreCapabilities: ['Salida en 10 idiomas', 'Mira cómo razona', 'Detecta contradicciones', 'Encuentra duplicados', 'Se recupera de interrupciones', 'Lo procesado se omite'],

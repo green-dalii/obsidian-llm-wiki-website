@@ -28,7 +28,7 @@ export const it: Translations = {
     historyDesc: 'Apri il pannello attività e vedi esattamente cosa ha fatto l\'IA, quando e su quale nota. Annulla qualsiasi modifica in un clic.',
     historyTag: 'Cronologia',
     pdfIngestTitle: 'I PDF diventano sapere',
-    pdfIngestDesc: 'Scegli un PDF da qualsiasi punto del tuo vault. L\'IA lo legge tramite il tuo provider LLM, lo trascrive verbatim in Markdown e lo fa passare per lo stesso pipeline di estrazione di entità, concetti e link delle note Markdown.',
+    pdfIngestDesc: 'Anche i PDF diventano fonti. Mettine uno nel tuo vault — si unisce allo stesso grafo wiki delle tue note.',
     pdfIngestTag: 'PDF nativo',
     moreLabel: 'E altro ancora:',
     moreCapabilities: ['Output in 10 lingue', 'Guardalo ragionare', 'Coglie le contraddizioni', 'Trova i duplicati', 'Si riprende dagli intoppi', 'Salta ciò che è già fatto'],

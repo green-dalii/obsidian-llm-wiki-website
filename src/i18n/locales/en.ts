@@ -114,7 +114,7 @@ export const en: Translations = {
     historyTag: 'History',
     // PDF Ingest (v1.25.0) — first-class source alongside Markdown.
     pdfIngestTitle: 'PDFs become first-class sources',
-    pdfIngestDesc: 'Pick a PDF from anywhere in your vault. The plugin reads it through your LLM provider, transcribes it to Markdown verbatim, and feeds the result into the same entity / concept / link extraction pipeline as Markdown notes.',
+    pdfIngestDesc: 'PDFs become sources too. Drop one in your vault — it joins the same wiki graph as your notes.',
     pdfIngestTag: 'PDF Ingest',
     // Per-task model selection (v1.24.0) — chip-only entry.
     perTaskModelsTitle: 'Per-task models',

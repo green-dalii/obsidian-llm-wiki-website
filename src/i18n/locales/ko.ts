@@ -101,7 +101,7 @@ export const ko: Translations = {
     historyDesc: '활동 패널을 열면 AI가 언제, 어떤 노트에, 무엇을 했는지 한눈에 보입니다. 원치 않으면 한 번에 되돌리세요.',
     historyTag: '활동 기록',
     pdfIngestTitle: 'PDF도 일등 시민 소스로',
-    pdfIngestDesc: '보관함 어디에서나 PDF를 고르세요. AI가 LLM 제공업체를 통해 읽고, 축어 변환으로 마크다운을 만든 뒤, Markdown 노트와 동일한 개체 / 개념 / 링크 추출 파이프라인으로 보냅니다.',
+    pdfIngestDesc: 'PDF도 소스가 됩니다. 보관함에 넣으면, 노트와 같은 위키 그래프에 함께 묶입니다.',
     pdfIngestTag: 'PDF 수집',
     moreLabel: '그리고 더:',
     moreCapabilities: ['10개 언어 출력', '사고 과정을 본다', '모순을 잡아냄', '중복을 병합', '네트워크 흔들림도 자동 복구', '처리한 건 건너뜀'],

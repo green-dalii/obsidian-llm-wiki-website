@@ -28,7 +28,7 @@ export const pt: Translations = {
     historyDesc: 'Abra o painel de atividades e veja exatamente o que a IA fez, quando e em qual nota. Reverta qualquer edição com um clique.',
     historyTag: 'Histórico',
     pdfIngestTitle: 'PDFs como fontes de primeira classe',
-    pdfIngestDesc: 'Escolha um PDF de qualquer lugar do seu vault. A IA lê pelo seu provedor de LLM, transcreve verbatim para Markdown e envia o resultado pelo mesmo pipeline de extração de entidades, conceitos e links das notas Markdown.',
+    pdfIngestDesc: 'PDFs também viram fontes. Solte um no seu vault — ele entra no mesmo grafo wiki que suas notas.',
     pdfIngestTag: 'Ingestão de PDF',
     moreLabel: 'E mais:',
     moreCapabilities: ['Saída em 10 idiomas', 'Veja-o raciocinar', 'Detecta contradições', 'Encontra duplicatas', 'Se recupera de falhas', 'Pula o já processado'],

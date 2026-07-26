@@ -17,8 +17,9 @@ const label = tr?.label ?? 'Trust';
 const title = tr?.title ?? 'Six hard guarantees, no asterisks.';
 const subtitle = tr?.subtitle ?? 'Architecture-level promises you can verify by reading the source.';
 
-// Icon per guarantee. Order matches trust.items.
-const ICONS = ['code-2', 'shield-check', 'lock', 'eye-off', 'globe-2', 'check-circle-2'];
+// Icon per guarantee. Order matches the four-item trust block:
+// open source, vault stays untouched, nothing leaves machine, keys locked.
+const ICONS = ['code-2', 'lock', 'eye-off', 'shield-check'];
 ---
 
 {items.length > 0 && (
@@ -30,7 +31,7 @@ const ICONS = ['code-2', 'shield-check', 'lock', 'eye-off', 'globe-2', 'check-ci
         <p class="text-obsidian-muted text-sm max-w-lg mx-auto">{subtitle}</p>
       </div>
 
-      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
+      <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-3">
         {items.map((it: { title: string; desc: string }, i: number) => (
           <div class="rounded-xl card card-hover reveal p-5 flex items-start gap-3" data-delay={i * 2}>
             <div class="flex-shrink-0 w-9 h-9 rounded-lg bg-obsidian-purple/10 border border-obsidian-purple/20 flex items-center justify-center">
