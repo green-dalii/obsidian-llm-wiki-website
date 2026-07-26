@@ -14,10 +14,9 @@ export const zhHant: Translations = {
   },
   hero: {
     badge: 'Andrej Karpathy 的 LLM Wiki 理念',
-    title1: '你的筆記。',
-    title2: '一部活的 Wiki。',
-    seoTitle: 'Karpathy LLM Wiki — Obsidian AI Wiki 外掛',
-    subtitle: '在 Obsidian 裡記錄——筆記、PDF、網頁剪藏。每一種輸入都連成一張不斷成長的網絡。',
+    title1: '你只管記錄，',
+    title2: '我們組織成 Wiki',
+    subtitle: '選一篇筆記/PDF，透過外掛變成結構化的知識庫。',
     ctaInstall: '取得外掛',
     ctaObsidian: '下載 Obsidian',
     obsidianHint: '需要先安裝 Obsidian',

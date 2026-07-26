@@ -14,10 +14,9 @@ export const en: Translations = {
   },
   hero: {
     badge: 'Andrej Karpathy\'s LLM Wiki concept',
-    title1: 'Your notes.',
-    title2: 'A living wiki.',
-    seoTitle: 'Karpathy LLM Wiki — AI Wiki Plugin for Obsidian',
-    subtitle: 'Write in Obsidian — notes, PDFs, web clips. Every input connects to a network that keeps growing.',
+    title1: 'Just take notes.',
+    title2: 'We organize into Wiki.',
+    subtitle: 'Notes, PDFs, anything you read. We turn them into a knowledge base you can query — every answer cites its source.',
     ctaInstall: 'Get the Plugin',
     ctaObsidian: 'Get Obsidian',
     obsidianHint: 'Obsidian required.',

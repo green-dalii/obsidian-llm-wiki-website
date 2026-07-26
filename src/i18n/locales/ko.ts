@@ -14,10 +14,9 @@ export const ko: Translations = {
   },
   hero: {
     badge: '안드레이 카파시의 LLM Wiki 컨셉',
-    title1: '당신의 노트가',
-    title2: '살아있는 위키가 됩니다.',
-    seoTitle: 'Karpathy LLM Wiki — Obsidian AI Wiki 플러그인',
-    subtitle: 'Obsidian에서 작성하세요 — 노트, PDF, 웹 클립까지. 모든 입력이 계속 성장하는 네트워크로 연결됩니다.',
+    title1: '메모는 당신이、',
+    title2: 'Wiki 는 우리가 만듭니다',
+    subtitle: '노트든 PDF든, 읽은 모든 것을 구조화된 지식 베이스로. 플러그인이 정리합니다.',
     ctaInstall: '플러그인 받기',
     ctaObsidian: 'Obsidian 받기',
     obsidianHint: 'Obsidian 필요',

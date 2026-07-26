@@ -28,15 +28,16 @@ const tMap: Record<string, any> = translations; const t = tMap[locale] || transl
       </a>
     </div>
 
-    <!-- SEO-friendly H1 with keyword-rich title -->
+    <!-- User-benefit H1: title1 + title2 (the seoTitle keyword variant
+         is unused — page-level <title> in each locale's index.astro already
+         carries the SEO claim, so the visible H1 can speak like Apple). -->
     <h1 class="hero-item text-[clamp(2rem,5vw,3.8rem)] font-semibold tracking-tight text-obsidian-heading leading-[1.15] mb-4">
-      {t.hero.seoTitle}
+      {t.hero.title1}<br />{t.hero.title2}
     </h1>
 
-    <!-- Brand tagline and subtitle — same muted color, same text-lg size -->
+    <!-- Subtitle: a single descriptive sentence under the H1. -->
     <p class="hero-item text-lg text-obsidian-muted max-w-xl mx-auto mb-10 leading-relaxed">
-      {t.hero.title1} {t.hero.title2}
-      <span class="block mt-1">{t.hero.subtitle}</span>
+      {t.hero.subtitle}
     </p>
 
     <!-- CTA buttons -->

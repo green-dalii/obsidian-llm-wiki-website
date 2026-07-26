@@ -14,10 +14,9 @@ export const ja: Translations = {
   },
   hero: {
     badge: 'Andrej KarpathyのLLM Wikiコンセプト',
-    title1: 'あなたのノートが、',
-    title2: '生きたWikiになる。',
-    seoTitle: 'Karpathy LLM Wiki — Obsidian AI Wiki プラグイン',
-    subtitle: 'Obsidianで書く —— ノート、PDF、ウェブクリップまで、すべての入力が成長し続けるネットワークへ。',
+    title1: 'メモはあなたに、',
+    title2: 'Wiki は私たちが組みます',
+    subtitle: 'ノートも PDF も、読んだものぜんぶ。プラグインが構造化された知識ベースに変えます。',
     ctaInstall: 'プラグインを入手',
     ctaObsidian: 'Obsidianを入手',
     obsidianHint: 'Obsidianが必要です',
