@@ -225,6 +225,84 @@ Tags are consolidated into 3 user-centric categories (not technical/functional o
 - `BlogPostLayout.astro` MUST pass `isBlog` to `BaseLayout` — without it, Header renders anchor items as `<button data-scroll-to="#xxx">` which silently fails on blog post pages (no `#features`, `#faq`, etc. exist there)
 - `BlogLayout.astro` does this correctly (line 7); `BlogPostLayout.astro` had the same pattern but missed the prop before v3.0.0
 
+## Copywriting standard — Apple.com tier (MANDATORY for every section)
+
+The website's user-facing copy is held to the same standard as apple.com product pages. This is the project's single, non-negotiable copywriting rule. Every new section, every card title, every description, every FAQ, every Trust entry must pass these filters before being merged.
+
+### 1. Headline-first, plain-spoken, second-person
+
+- Section labels are short, declarative phrases ("Privacy.", "Designed to Last.", "Why iPhone.")
+- Feature titles read like a single confident line ("Last phone standing.", "Snap on a MagSafe Charger.")
+- Descriptions lead with what the user gets, never with what the code does
+- Use "you/your" liberally; avoid passive voice; avoid "the plugin provides…", "the system enables…"
+
+### 2. Hard limits on length
+
+- Card title: ≤ 8 words
+- Card description: ≤ 28 words (single sentence preferred)
+- Section title: ≤ 6 words
+- Section subtitle: ≤ 18 words
+- FAQ answer body: ≤ 80 words unless the question is structurally technical
+
+If a sentence doesn't fit, **cut it**. Compression is a feature, not a bug.
+
+### 3. Never expose implementation, version numbers, or engineering metrics
+
+| Banned | Why | Use instead |
+|---|---|---|
+| `v1.25.3 起，所有 API 密钥都放在 Obsidian SecretStorage(macOS Keychain / Windows Credential Manager / Linux Secret Service)……` | Version number + triple-platform enumeration + mechanism name in one breath | "Your API keys stay in your system keychain. Always." |
+| `GPT-4o`, `Claude 3.5 Sonnet`, `Gemini 1.5 Pro`, `Grok 4.1 Fast` | Version numbers go stale within months | Brand/series only: `Claude`, `GPT`, `Gemini`, `Grok` |
+| `2,572 tests, 193 files`, `PPR @5 = 27.1%` | Engineering metrics ≠ user-facing guarantees | Move to blog / changelog / repo badge — never landing-page copy |
+| `迁移自动完成；钥匙圈锁死时一条指令即可恢复` | Recovery procedure is for docs, not marketing | Omit |
+
+Rule of thumb: if a reader 6 months from now would have to verify the number is still true, it doesn't belong on the landing page.
+
+### 4. No duplicate statements across sections
+
+- A fact stated in **Features** does not reappear in **Trust/Privacy**
+- A fact stated in **Trust** does not reappear in **FAQ**
+- A fact stated in **Hero subtitle** does not reappear in **Features** copy
+
+Each section owns its own claim. If you can't tell which section "owns" a fact, **the fact doesn't belong on the page**.
+
+### 5. No "showcasing" of honesty, simplicity, or baselines
+
+- Don't add a banner that says "we're honest" — be honest in the copy itself
+- Don't add a section that says "we're simple" — make the copy simple
+- Don't add a card that says "we respect privacy" — the privacy-respecting fact in the next card already says it
+
+Baselines are demonstrated, not announced.
+
+### 6. Provider/model list ordering
+
+- First entry is **the recommendation** (DeepSeek by default — best value, low cost, fits the wiki use case)
+- Subsequent entries grouped by **deployment shape** (cloud flagship → cloud budget → fully local → aggregator)
+- Never display version numbers, internal model codes, or per-model pricing
+- No "best" / "recommended" badges — the position itself is the recommendation
+- Default to ≤ 12 entries on the landing page; full provider list belongs in docs
+
+### 7. Trust section rules (if a Trust section is warranted)
+
+- Each item is a **behavior the user can verify by reading the source**
+- Each item is ≤ 12 words in the body
+- No version numbers, no test counts, no language count
+- No implementation details (which keychain API, which OS, which migration tool) — those belong in docs
+- Skip the section entirely if the count drops below 4 items — 3 honest guarantees > 6 padded ones
+
+### 8. The "is this Apple-quality?" self-check
+
+Before merging any new copy, read the section aloud and ask:
+
+1. Would Apple write this on a product page?
+2. If a reader 6 months later reads this, is every word still true?
+3. Is there a single word I can cut without losing meaning?
+4. Does this section own this fact, or am I duplicating another section?
+5. Could a user who has never heard of LLM Wiki understand what they get?
+
+If any answer is "no", **stop and rewrite** — do not ship.
+
+---
+
 ## Pre-delivery Gate (run before claiming done)
 
 A single command runs the full gate. Every check MUST exit 0 — 0 error, 0 warning, no exceptions.
