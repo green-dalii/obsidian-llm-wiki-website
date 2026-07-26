@@ -33,10 +33,9 @@ const LOCALES = Object.keys(translations) as Array<keyof typeof translations>;
  */
 const KNOWN_GAPS: Array<{ path: string; reason: string }> = [
   // v1.24.0 per-task model selection chip — optional on per-locale translations;
-  // declared as `perTaskModelsTitle?: string` / `perTaskModelsDesc?: string`
-  // in Translations, so it falls back to EN in components when missing.
+  // declared as `perTaskModelsTitle?: string` in Translations, so it falls back
+  // to EN in components when missing.
   { path: 'features.perTaskModelsTitle', reason: 'v1.24.0 per-task model chip title is optional on non-EN locales; EN supplies fallback' },
-  { path: 'features.perTaskModelsDesc', reason: 'v1.24.0 per-task model chip desc is optional on non-EN locales; EN supplies fallback' },
 ];
 
 /** True when a gap path is covered (equal to or nested under) a known gap. */

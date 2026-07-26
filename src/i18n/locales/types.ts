@@ -26,10 +26,6 @@ export interface Translations {
     ctaInstall: string;
     ctaObsidian: string;
     obsidianHint: string;
-    ctaRead: string;
-    legendSources: string;
-    legendEntities: string;
-    legendConcepts: string;
     scrollHint: string;
   };
   wikiDemo: {
@@ -112,7 +108,6 @@ export interface Translations {
     pdfIngestTag: string;
     // Per-task model selection (v1.24.0) — chip-only entry, optional with EN fallback.
     perTaskModelsTitle?: string;
-    perTaskModelsDesc?: string;
     moreCapabilities: string[];
     moreLabel: string;
   };
@@ -127,20 +122,11 @@ export interface Translations {
     step3Title: string;
     step3Desc: string;
     pluginPageButton: string;
-    cta: string;
   };
   providers: {
     label: string;
     title: string;
     subtitle: string;
-    openSourceTitle: string;
-    openSourceDesc: string;
-    communityTitle: string;
-    communityDesc: string;
-    vendorTitle: string;
-    vendorDesc: string;
-    obsidianTitle: string;
-    obsidianDesc: string;
     cardLabel: string;
     cardSubtitle: string;
     contextNote: string;
@@ -153,6 +139,8 @@ export interface Translations {
     privacyDesc?: string;
     affordableTitle?: string;
     affordableDesc?: string;
+    openSourceTitle?: string;
+    openSourceDesc?: string;
     localBadge?: string;
   };
   ecosystem: {
