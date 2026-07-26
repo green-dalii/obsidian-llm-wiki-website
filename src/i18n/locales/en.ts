@@ -56,7 +56,7 @@ export const en: Translations = {
       {
         category: 'Saving',
         before: 'Save an article. Forget where. Search later. Nothing.',
-        after: 'Pick a note from your vault. Ideas found, pages built, summary ready. In seconds.',
+        after: 'Pick a note from your vault. Ideas found, pages built, summary ready.',
       },
       {
         category: 'Connecting',

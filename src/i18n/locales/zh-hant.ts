@@ -56,7 +56,7 @@ export const zhHant: Translations = {
       {
         category: '保存',
         before: '收藏一篇文章。忘了放在哪。回頭搜尋。一無所獲。',
-        after: '從 vault 裡挑一則筆記。要點萃取好了，頁面生成好了，摘要備好了。轉眼就完成。',
+        after: '從 vault 裡挑一則筆記。要點萃取好了，頁面生成好了，摘要備好了。',
       },
       {
         category: '連結',

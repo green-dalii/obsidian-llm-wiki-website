@@ -56,7 +56,7 @@ export const zh: Translations = {
       {
         category: '保存',
         before: '收藏一篇文章。忘了在哪。回头搜索。一无所获。',
-        after: '从 vault 里挑一条笔记。要点提炼了，页面生成了，摘要备好了。转眼就好。',
+        after: '从 vault 里挑一条笔记。要点提炼了，页面生成了，摘要备好了',
       },
       {
         category: '连接',
