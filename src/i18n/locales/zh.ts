@@ -134,7 +134,7 @@ export const zh: Translations = {
   providers: {
     label: '带上你自己的 AI',
     title: '你的模型，你做主。',
-    subtitle: '十二家提供商，云端或本地。随时切换——不锁定任何一家。',
+    subtitle: '十二种接法——云端、本地，或你自己的 endpoint。随时切换。',
     openSourceTitle: '开源',
     openSourceDesc: 'MIT 许可证。完整源码在 GitHub。Fork、扩展、自由定制。',
     communityTitle: '社区',
@@ -144,8 +144,8 @@ export const zh: Translations = {
     obsidianTitle: '纯粹 Obsidian',
     obsidianDesc: '无需额外应用。一切只在你的 Obsidian 里。',
     cardLabel: '十二家提供商，即刻可用',
-    cardSubtitle: '云端或本地——选你信得过的那个。',
-    contextNote: '长上下文模型一次读完整部 Wiki——掌握全貌，而不是拼凑零散片段。Ollama 和 LM Studio 完全在本机运行——无需上传，无需 API 密钥。',
+    cardSubtitle: '首选 DeepSeek，性价比最高；不够用了随时换别家。',
+    contextNote: '长上下文模型一次读完整部 Wiki——掌握全貌，而不是拼凑零散片段。本地模型完全在本机运行——无需上传，无需 API 密钥。',
     bestValue: '性价比首选',
     noLockInTitle: '随时切换',
     noLockInDesc: '十二家提供商，下拉框里换一个就行。不喜欢了随时换——你的 Wiki 毫无感觉。',
@@ -223,6 +223,17 @@ export const zh: Translations = {
       { q: '插件能读取 PDF 和扫描文档吗？', a: '可以——从 v1.25.0 起，PDF 成为正式的一类输入。从 vault 的任意位置挑一份 PDF（Cmd+P → Ingest single source）。插件会通过你的 LLM 提供商原生文件输入读取它（Anthropic Claude、OpenAI GPT-4o 和 Bedrock 系列都原生支持 PDF），通过带防幻觉图表与公式标记的 OCR 风格逐字转写器转成 Markdown，然后回到常规的 Markdown 摄入流水线。转换后的 Markdown 按内容哈希缓存在 <em>.obsidian/plugins/karpathywiki/pdf-cache/</em> 中，重新摄入会立即完成。默认情况下不会修改你的库；在设置中启用 <em>Write PDF Markdown to Vault</em> 后，还会在源 PDF 旁写入 <em>&lt;basename&gt;.pdf.md</em> 配套文件。' },
       { q: '可以为索引和查询分别选择不同的模型吗？', a: '可以——从 v1.24.0 起，插件支持按任务选择模型。在 <em>Settings → Wiki → Model Scope</em> 中，将 <em>Unified</em>（所有任务使用同一模型）切换为 <em>Per-Task</em>，然后分别为 <em>Ingest</em>、<em>Lint</em> 和 <em>Query</em> 选择独立模型。常见搭配是：摄入使用便宜快速的模型（DeepSeek、MiniMax），Lint 使用更强的模型（Claude、GPT-4o），查询使用长上下文模型。<em>Test Connection</em> 会按顺序逐一探测每个已配置的模型，并在首次失败时立即停止——只有所有按任务配置的模型都通过后，连接才会被视为正常。' },
       { q: 'PDF 摄入可以完全离线运行吗？', a: '可以——如果将 PDF 摄入与通过 <em>Ollama</em> 或 <em>LM Studio</em> 运行的本地模型搭配使用，每份 PDF 从头到尾都留在你的机器上。Apple Silicon 上推荐的配置是 <a href="https://github.com/jundot/omlx" target="_blank" rel="noopener noreferrer" class="text-obsidian-purple-light underline">oMLX</a> + Markitdown 后端 + 百度开源的 Unlimited-OCR 模型（总计 3B / 激活 0.5B），通过启用 <em>Force PDF Support</em> 的 <em>Custom OpenAI-Compatible</em> 提供商连接。PDF 永远不会离开你的库；转换在本地运行；生成的 Markdown 进入同一套实体提取流程，也全程在本机完成。' },
+    ],
+  },
+  trust: {
+    label: '隐私',
+    title: '我们的承诺。',
+    subtitle: '读源码。逐字验证。',
+    items: [
+      { title: '全栈开源。', desc: '网站和插件的每一行代码都在 GitHub 上。fork、审阅、自用。' },
+      { title: '你的 vault 始终是你的。', desc: '插件只往自己的 wiki/ 目录写入页面。你的笔记不会被读取、修改或替换。' },
+      { title: '一切留在本机。', desc: '无追踪、无分析、无服务器。插件本身不会主动发起任何对外请求。' },
+      { title: '你的密钥始终上锁。', desc: 'API 密钥只存在系统钥匙串里——从不以明文写入任何笔记或配置文件。' },
     ],
   },
   latestBlog: {

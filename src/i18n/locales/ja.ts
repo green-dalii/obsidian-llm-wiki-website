@@ -122,7 +122,7 @@ export const ja: Translations = {
   providers: {
     label: '自分のAIを持ち込む',
     title: 'あなたのモデル。あなたのルール。',
-    subtitle: '12のプロバイダー、クラウドもローカルも。いつでも切り替え——どこにも縛られない。',
+    subtitle: '12の入口——クラウド、ローカル、または自作の endpoint。いつでも切り替え。',
     openSourceTitle: 'オープンソース',
     openSourceDesc: 'MITライセンス。GitHubで完全なソース公開。フォーク、拡張、自分好みに。',
     communityTitle: 'コミュニティ',
@@ -132,8 +132,8 @@ export const ja: Translations = {
     obsidianTitle: 'ピュアObsidian',
     obsidianDesc: '余計なアプリ不要。Obsidianの中だけで完結。',
     cardLabel: '12のプロバイダー、すぐに使える',
-    cardSubtitle: 'クラウドでもローカルでも——信頼できるものを。',
-    contextNote: 'ロングコンテキストモデルならWiki全体を一括で読み切れる——断片ではなく全体像を把握。Ollama・LM Studioなら完全ローカル動作——アップロードもAPIキーも不要。',
+    cardSubtitle: 'まずは DeepSeek、コストパフォーマンス最強。物足りなくなったら次へ。',
+    contextNote: 'ロングコンテキストモデルならWiki全体を一括で読み切れる——断片ではなく全体像を把握。ローカルモデルなら完全ローカル動作——アップロードもAPIキーも不要。',
     bestValue: 'おすすめ',
     noLockInTitle: 'いつでも切り替え',
     noLockInDesc: '12のプロバイダーがドロップダウンひとつで選べる。合わなければ次へ——Wikiは何も気づかない。',
@@ -187,6 +187,17 @@ export const ja: Translations = {
       { q: 'プラグインはPDFやスキャンした文書も読めますか？', a: 'はい——v1.25.0からPDFは正式な入力形式になりました。Vault のどこからでも PDF を選んでください（Cmd+P → Ingest single source）。プラグインが LLM プロバイダーのネイティブファイル入力経由で読み取り（Anthropic Claude、OpenAI GPT-4o、Bedrock系はPDFをネイティブ処理）、OCR 風の逐語書き起こしで図や数式にハルシネーション防止マーカーを付けてマークダウンに変換し、通常の Markdown インジェストパイプラインに戻します。変換後のマークダウンは <em>.obsidian/plugins/karpathywiki/pdf-cache/</em> 内にコンテンツハッシュでキャッシュされ、再取り込みは即座に完了します。デフォルトでは保管庫は変更されません。設定で <em>PDFマークダウンを保管庫に書き出す</em> を有効にすると、ソースPDFの隣に <em>&lt;basename&gt;.pdf.md</em> のサイドカーも書き出されます。' },
       { q: 'インデックス用とクエリ用で別のモデルを選べますか？', a: 'はい——v1.24.0からタスクごとにモデルを分けられます。<em>設定 → Wiki → モデル範囲</em> で、<em>統一</em>（すべて同じモデル）から <em>タスク別</em> に切り替え、<em>取り込み</em>、<em> lint </em>、<em>クエリ</em> にそれぞれ独立したモデルを設定できます。よくある構成：取り込みは高速で安価なモデル（DeepSeek、MiniMax）、lint は高性能モデル（Claude、GPT-4o）、クエリは長コンテキストモデル。<em>接続テスト</em> はフェイルファストで各モデルを順に確認し、すべてのタスク別モデルが通るまで接続は「異常」と判定されます。' },
       { q: 'PDF取り込みは完全オフラインで動きますか？', a: 'はい——PDF取り込みを <em>Ollama</em> や <em>LM Studio</em> のローカルモデルと組み合わせれば、すべてのPDFがあなたのマシン内で完結します。Apple Silicon での推奨構成は、Markitdownバックエンド＋百度がオープンソース化した Unlimited-OCR モデル（合計3B／活性0.5B）と <a href="https://github.com/jundot/omlx" target="_blank" rel="noopener noreferrer" class="text-obsidian-purple-light underline">oMLX</a> を、<em>Force PDF Support</em> を有効にした <em>カスタム OpenAI 互換</em> プロバイダー経由で接続する方法です。PDFが保管庫の外に出ることはなく、変換もローカルで実行され、生成されたマークダウンも同じエンティティ抽出パイプラインへ、デバイス内で流れます。' },
+    ],
+  },
+  trust: {
+    label: 'プライバシー',
+    title: '私たちの約束。',
+    subtitle: 'ソースを読んで、一語一句確かめてください。',
+    items: [
+      { title: '完全オープンソース。', desc: 'サイトもプラグインも、すべてのコードが GitHub にあります。fork して、監査して、自分用に。' },
+      { title: 'vault はあなたのもの。', desc: 'プラグインは自分の wiki/ フォルダだけに書き込みます。あなたのノートが読まれたり、書き換えられたりすることはありません。' },
+      { title: 'すべて手元で完結。', desc: '追跡なし、分析なし、サーバーなし。プラグイン自身が外部へ接続することは一切ありません。' },
+      { title: '鍵は鍵の中に。', desc: 'API キーはシステムキーチェーンに保存されます——平文ではどこにも書きません。' },
     ],
   },
   latestBlog: {

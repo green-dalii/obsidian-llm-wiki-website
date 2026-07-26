@@ -188,6 +188,17 @@ export interface Translations {
     subtitle: string;
     items: Array<{ q: string; a: string }>;
   };
+  /** Trust guarantees block — six hard-coded promises (optional, EN fallback) */
+  trust?: {
+    label: string;
+    title: string;
+    subtitle: string;
+    items: Array<{
+      title: string;
+      desc: string;
+      link?: string;
+    }>;
+  };
   /** Latest blog section (optional — falls back to English on non-EN/ZH locales) */
   latestBlog?: {
     label: string;

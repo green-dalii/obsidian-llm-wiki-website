@@ -138,7 +138,7 @@ export const en: Translations = {
   providers: {
     label: 'Bring Your Own AI',
     title: 'Your model. Your rules.',
-    subtitle: 'Twelve providers, cloud or local. Switch anytime — lock into nothing.',
+    subtitle: 'Twelve ways in — cloud, local, or your own endpoint. Switch any time.',
     openSourceTitle: 'Open source',
     openSourceDesc: 'MIT licensed, every line on GitHub. Fork it, audit it, make it yours.',
     communityTitle: 'Community',
@@ -148,8 +148,8 @@ export const en: Translations = {
     obsidianTitle: 'Pure Obsidian',
     obsidianDesc: 'No extra apps. Lives entirely in your Obsidian.',
     cardLabel: 'Twelve providers, ready to go',
-    cardSubtitle: 'Cloud or local — use the one you trust.',
-    contextNote: 'Long-context models read your whole wiki in a single pass — the complete picture, not fragmented snippets. Ollama and LM Studio run fully on-device — no upload, no API key.',
+    cardSubtitle: 'DeepSeek is the pick for value. Pick anything else when you outgrow it.',
+    contextNote: 'Long-context models read your whole wiki in one pass — the complete picture, not fragmented snippets. Local models run fully on-device — no upload, no API key.',
     bestValue: 'Best value',
     noLockInTitle: 'Switch any time',
     noLockInDesc: 'Twelve providers, one dropdown apart. Outgrow one, switch to the next — your wiki never notices.',
@@ -228,6 +228,17 @@ export const en: Translations = {
       { q: 'Can the plugin read PDFs and scanned documents?', a: 'Yes — since v1.25.0, PDFs are a first-class input. Pick a PDF from anywhere in your vault (`Cmd+P` → Ingest single source). The plugin reads it through your LLM provider\'s native file input (Anthropic Claude, OpenAI GPT-4o, and Bedrock variants handle PDFs natively), converts it to Markdown via OCR-style verbatim transcription with anti-hallucination markers for figures and equations, and re-enters the regular Markdown ingest pipeline. The converted Markdown is content-hash cached in <em>.obsidian/plugins/karpathywiki/pdf-cache/</em>, so re-ingesting is instant. By default your vault is not modified; enable <em>Write PDF Markdown to Vault</em> in Settings to also write a <em>&lt;basename&gt;.pdf.md</em> sidecar next to the source PDF.' },
       { q: 'Can I pick a different model for indexing versus querying?', a: 'Yes — since v1.24.0, the plugin supports per-task model selection. In <em>Settings → Wiki → Model Scope</em>, switch from <em>Unified</em> (one model for everything) to <em>Per-Task</em>, then pick an independent model for <em>Ingest</em>, <em>Lint</em>, and <em>Query</em>. A common pattern: a cheap fast model for ingest (DeepSeek, MiniMax), a strong model for lint (Claude, GPT-4o), and a long-context model for query. <em>Test Connection</em> probes each configured model sequentially with fail-fast — until every per-task model passes, the connection is considered unhealthy.' },
       { q: 'Does PDF ingestion work fully offline?', a: 'Yes — if you pair PDF Ingest with a local model via <em>Ollama</em> or <em>LM Studio</em>, every PDF stays on your machine end-to-end. The recommended setup on Apple Silicon is <a href="https://github.com/jundot/omlx" target="_blank" rel="noopener noreferrer" class="text-obsidian-purple-light underline">oMLX</a> + the Markitdown backend + Baidu\'s open-sourced Unlimited-OCR model (3B total / 0.5B active), connected via a <em>Custom OpenAI-Compatible</em> provider with <em>Force PDF Support</em> enabled. PDFs never leave your vault; conversion runs locally; the resulting Markdown hits the same entity-extraction pipeline, also on-device.' },
+    ],
+  },
+  trust: {
+    label: 'Privacy',
+    title: 'What we promise.',
+    subtitle: 'Read the source. Verify every word.',
+    items: [
+      { title: 'Open source, end to end.', desc: 'Every line of the website and the plugin lives on GitHub. Fork it. Audit it. Make it yours.' },
+      { title: 'Your vault stays yours.', desc: 'The plugin writes only to its own wiki/ folder. Your notes are never read, edited, or replaced.' },
+      { title: 'Nothing leaves your machine.', desc: 'No tracking. No analytics. No server. The plugin never makes an outbound request on its own.' },
+      { title: 'Your keys stay locked.', desc: 'API keys live in your system keychain — never in plaintext, never in your notes.' },
     ],
   },
   latestBlog: {

@@ -122,7 +122,7 @@ export const ko: Translations = {
   providers: {
     label: '당신만의 AI를 가져오세요',
     title: '당신의 모델. 당신의 규칙.',
-    subtitle: '12개 제공자, 클라우드와 로컬. 언제든 바꾸세요 — 어디에도 묶이지 않습니다.',
+    subtitle: '12가지 길 — 클라우드, 로컬, 또는 당신만의 endpoint. 언제든 바꾸세요.',
     openSourceTitle: '오픈 소스',
     openSourceDesc: 'MIT 라이선스. GitHub에 전체 소스. 포크하고, 확장하고, 당신의 것으로 만드세요.',
     communityTitle: '커뮤니티',
@@ -132,8 +132,8 @@ export const ko: Translations = {
     obsidianTitle: '순수 Obsidian',
     obsidianDesc: '추가 앱 없음. Obsidian 안에 완전히 존재합니다.',
     cardLabel: '12개 제공자, 바로 사용 가능',
-    cardSubtitle: '클라우드든 로컬이든 — 믿을 만한 것을 선택하세요.',
-    contextNote: '긴 컨텍스트 모델이 위키 전체를 한 번에 읽습니다 — 단편이 아닌 완전한 그림. Ollama와 LM Studio는 기기 안에서 완전히 동작 — 업로드 없음, API 키 없음.',
+    cardSubtitle: '가성비는 DeepSeek. 부족하면 그때 바꿔도 됩니다.',
+    contextNote: '긴 컨텍스트 모델이 위키 전체를 한 번에 읽습니다 — 단편이 아닌 완전한 그림. 로컬 모델은 기기 안에서 완전히 동작 — 업로드 없음, API 키 없음.',
     bestValue: '최고의 가성비',
     noLockInTitle: '언제든 바꿔서 써요',
     noLockInDesc: '12개 제공자가 드롭다운 한 칸 거리. 마음에 안 들면 다음으로 — 위키는 눈치 채지 못합니다.',
@@ -187,6 +187,17 @@ export const ko: Translations = {
       { q: '플러그인이 PDF와 스캔 문서도 읽을 수 있나요?', a: '네 — v1.25.0부터 PDF는 정식 입력 형식이 되었습니다. 보관함 어디에서나 PDF를 고르세요 (Cmd+P → Ingest single source). 플러그인이 LLM 제공업체의 네이티브 파일 입력으로 읽고 (Anthropic Claude, OpenAI GPT-4o, Bedrock 계열은 PDF를 네이티브 처리), OCR 방식의 축어 변환기로 그림과 수식에 환각 방지 마커를 붙여 마크다운으로 변환한 뒤, 일반적인 Markdown 인제스트 파이프라인으로 다시 보냅니다. 변환된 마크다운은 <em>.obsidian/plugins/karpathywiki/pdf-cache/</em> 안에 콘텐츠 해시로 캐시되어 재수집은 즉시 끝납니다. 기본적으로 보관함은 변경되지 않습니다. 설정에서 <em>PDF 마크다운을 보관함에 쓰기</em>를 켜면 소스 PDF 옆에 <em>&lt;basename&gt;.pdf.md</em> 사이드카 파일도 함께 저장됩니다.' },
       { q: '인덱싱과 쿼리에 서로 다른 모델을 고를 수 있나요?', a: '네 — v1.24.0부터 작업별 모델 선택을 지원합니다. <em>설정 → Wiki → 모델 범위</em>에서 <em>통합</em>(모든 작업에 같은 모델)에서 <em>작업별</em>로 바꾼 뒤, <em>수집</em>, <em>린트</em>, <em>쿼리</em>에 각각 다른 모델을 지정할 수 있습니다. 흔한 조합: 수집은 저가·고속 모델(DeepSeek, MiniMax), 린트는 강력한 모델(Claude, GPT-4o), 쿼리는 긴 컨텍스트 모델. <em>연결 테스트</em>는 fail-fast로 각 모델을 순차 점검하며, 모든 작업별 모델이 통과할 때까지 연결은 비정상으로 간주됩니다.' },
       { q: 'PDF 수집은 완전한 오프라인으로 동작하나요?', a: '네 — PDF 수집을 <em>Ollama</em> 또는 <em>LM Studio</em>의 로컬 모델과 함께 쓰면 모든 PDF가 기기 안에서 완결됩니다. Apple Silicon에서 추천하는 구성은 Markitdown 백엔드와 바이두가 오픈소스로 공개한 Unlimited-OCR 모델(총 3B / 활성 0.5B), 그리고 <a href="https://github.com/jundot/omlx" target="_blank" rel="noopener noreferrer" class="text-obsidian-purple-light underline">oMLX</a>를 <em>Force PDF Support</em>를 켠 <em>사용자 정의 OpenAI 호환</em> 제공업체로 연결하는 것입니다. PDF는 보관함을 떠나지 않고, 변환도 로컬에서 실행되며, 만들어진 마크다운이 같은 개체 추출 파이프라인으로 역시 기기 안에서 흘러갑니다.' },
+    ],
+  },
+  trust: {
+    label: '프라이버시',
+    title: '우리의 약속.',
+    subtitle: '소스를 읽고, 한 글자씩 확인하세요.',
+    items: [
+      { title: '처음부터 끝까지 오픈소스.', desc: '사이트와 플러그인의 모든 코드가 GitHub에 있습니다. fork하고, 감사하고, 당신의 것으로 만드세요.' },
+      { title: '당신의 vault는 당신의 것.', desc: '플러그인은 자기 wiki/ 폴더에만 페이지를 씁니다. 당신의 노트는 절대 읽히거나, 수정되거나, 교체되지 않습니다.' },
+      { title: '모든 것은 당신의 기기에.', desc: '추적 없음, 분석 없음, 서버 없음. 플러그인이 스스로 외부에 요청을 보낼 일은 없습니다.' },
+      { title: '열쇠는 잠긴 채로.', desc: 'API 키는 시스템 키체인에만 보관됩니다——평문으로는 어디에도 쓰지 않습니다.' },
     ],
   },
   latestBlog: {

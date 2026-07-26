@@ -1,0 +1,48 @@
+---
+import Icon from './Icon.astro';
+import { translations } from '../../i18n/astro';
+
+interface Props {
+  locale?: string;
+}
+const { locale = 'en' } = Astro.props;
+const tMap: Record<string, any> = translations;
+const t = tMap[locale] || translations.en;
+
+// Trust block falls back to EN verbatim — six guarantees are universal across
+// 11 locales because they're architecture-level promises, not marketing copy.
+const tr = t.trust ?? translations.en!.trust;
+const items = tr?.items ?? [];
+const label = tr?.label ?? 'Trust';
+const title = tr?.title ?? 'Six hard guarantees, no asterisks.';
+const subtitle = tr?.subtitle ?? 'Architecture-level promises you can verify by reading the source.';
+
+// Icon per guarantee. Order matches trust.items.
+const ICONS = ['code-2', 'shield-check', 'lock', 'eye-off', 'globe-2', 'check-circle-2'];
+---
+
+{items.length > 0 && (
+  <section id="trust" class="relative w-full py-20 sm:py-28 reveal">
+    <div class="max-w-5xl mx-auto px-4 sm:px-6">
+      <div class="mb-10 text-center reveal">
+        <span class="text-[11px] font-mono text-obsidian-purple tracking-[0.15em] uppercase">{label}</span>
+        <h2 class="text-[clamp(1.6rem,4vw,2.8rem)] font-semibold mt-3 mb-3 text-obsidian-heading reveal" data-delay="1">{title}</h2>
+        <p class="text-obsidian-muted text-sm max-w-lg mx-auto">{subtitle}</p>
+      </div>
+
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
+        {items.map((it: { title: string; desc: string }, i: number) => (
+          <div class="rounded-xl card card-hover reveal p-5 flex items-start gap-3" data-delay={i * 2}>
+            <div class="flex-shrink-0 w-9 h-9 rounded-lg bg-obsidian-purple/10 border border-obsidian-purple/20 flex items-center justify-center">
+              <Icon name={ICONS[i] || 'check'} class="w-4.5 h-4.5 text-obsidian-purple-light" />
+            </div>
+            <div class="min-w-0">
+              <h3 class="text-base font-semibold text-obsidian-heading mb-1">{it.title}</h3>
+              <p class="text-xs text-obsidian-muted leading-relaxed">{it.desc}</p>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+)}

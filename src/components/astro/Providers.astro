@@ -10,21 +10,25 @@ const tMap: Record<string, any> = translations; const t = tMap[locale] || transl
 // New keys fall back to English until other locales are translated.
 const tp = { ...translations.en.providers, ...t.providers };
 
-// Twelve providers — cloud and local. Context windows are intentionally
-// de-emphasized; the story is choice and freedom, not a spec sheet.
+// Twelve providers — twelve cards, three rows of four. The first card is the
+// recommendation (DeepSeek = best value for the wiki use case); the rest are
+// grouped by deployment shape — cloud flagship → cloud budget → local →
+// aggregator / custom endpoint. Brand names first; version numbers never
+// (e.g. "Grok" not "Grok 4") because they go stale. Gemma rides with the
+// Google card since it's Google's open-source model.
 const PROVIDERS = [
-  { name: 'DeepSeek', tagline: 'Best value', badge: 'bestValue' },
+  { name: 'DeepSeek', tagline: 'Alibaba', badge: 'bestValue' },
   { name: 'Anthropic', tagline: 'Claude' },
-  { name: 'Google', tagline: 'Gemini' },
   { name: 'OpenAI', tagline: 'GPT' },
+  { name: 'Google', tagline: 'Gemini / Gemma' },
+  { name: 'xAI', tagline: 'Grok' },
+  { name: 'Qwen', tagline: 'Alibaba' },
   { name: 'Kimi', tagline: 'Moonshot' },
-  { name: 'GLM', tagline: 'Zhipu AI' },
-  { name: 'MiniMax', tagline: 'Cloud' },
+  { name: 'GLM', tagline: 'Zhipu' },
+  { name: 'Ollama + LM Studio', tagline: 'Local', local: true },
   { name: 'OpenRouter', tagline: 'Any model' },
-  { name: 'Ollama', tagline: 'Local', local: true },
-  { name: 'LM Studio', tagline: 'Local', local: true },
-  { name: 'Anthropic-Compatible', tagline: 'Custom endpoint' },
-  { name: 'OpenAI-Compatible', tagline: 'Custom endpoint' },
+  { name: 'OpenAI-Compatible', tagline: 'Custom OpenAI endpoint' },
+  { name: 'Anthropic-Compatible', tagline: 'Custom Anthropic endpoint' },
 ];
 
 // "Bring your own AI" pillars — benefit-first, not feature-first.
@@ -99,6 +103,15 @@ const PILLARS = [
     <div class="mt-6 flex items-start gap-2.5 p-3 rounded-lg border border-obsidian-purple/20 bg-obsidian-purple/[0.04] reveal" data-delay="24">
       <Icon name="lightbulb" class="w-4 h-4 text-obsidian-purple-light flex-shrink-0 mt-0.5" />
       <p class="text-xs text-obsidian-muted leading-relaxed">{tp.contextNote}</p>
+    </div>
+
+    <!-- Deep link to plugin repo's MODEL-GUIDE for the full tiered provider table + PDF-OCR-GUIDE. -->
+    <div class="mt-4 text-center reveal" data-delay="25">
+      <a href="https://github.com/green-dalii/obsidian-llm-wiki/blob/main/docs/MODEL-GUIDE.md" target="_blank" rel="noopener noreferrer"
+        class="inline-flex items-center gap-1.5 text-[11px] text-obsidian-purple-light hover:text-obsidian-heading transition-colors">
+        Full tiered model table (PDF-OCR + per-hardware picks)
+        <Icon name="external-link" class="w-3 h-3" />
+      </a>
     </div>
   </div>
 </section>
