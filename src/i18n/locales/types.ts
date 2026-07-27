@@ -126,20 +126,11 @@ export interface Translations {
     label: string;
     title: string;
     subtitle: string;
-    cardLabel: string;
-    cardSubtitle: string;
     contextNote: string;
     bestValue: string;
-    // Reframed "Bring your own AI" pillars — optional until other locales
-    // are translated. Components fall back to English.
-    noLockInTitle?: string;
-    noLockInDesc?: string;
-    privacyTitle?: string;
-    privacyDesc?: string;
-    affordableTitle?: string;
-    affordableDesc?: string;
-    openSourceTitle?: string;
-    openSourceDesc?: string;
+    // Footer of the provider wall — deep-link to the plugin repo's
+    // MODEL-GUIDE for the full tiered table and per-hardware picks.
+    modelGuideLink: string;
     localBadge?: string;
   };
   ecosystem: {

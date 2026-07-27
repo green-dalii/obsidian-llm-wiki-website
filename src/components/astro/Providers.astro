@@ -7,17 +7,16 @@ interface Props {
 }
 const { locale = 'en' } = Astro.props;
 const tMap: Record<string, any> = translations; const t = tMap[locale] || translations.en;
-// New keys fall back to English until other locales are translated.
 const tp = { ...translations.en.providers, ...t.providers };
 
-// Twelve providers — twelve cards, three rows of four. The first card is the
-// recommendation (DeepSeek = best value for the wiki use case); the rest are
-// grouped by deployment shape — cloud flagship → cloud budget → local →
-// aggregator / custom endpoint. Brand names first; version numbers never
-// (e.g. "Grok" not "Grok 4") because they go stale. Gemma rides with the
-// Google card since it's Google's open-source model.
+// Twelve providers — twelve cards, four rows of three on desktop, three
+// rows of four at md+. The first card is the recommendation (DeepSeek =
+// best value for the wiki use case); the rest are grouped by deployment
+// shape — cloud flagship → cloud budget → local → aggregator / custom
+// endpoint. Brand names first; version numbers never. Note: DeepSeek is
+// independent (backed by High-Flyer, NOT Alibaba). Qwen is Alibaba.
 const PROVIDERS = [
-  { name: 'DeepSeek', tagline: 'Alibaba', badge: 'bestValue' },
+  { name: 'DeepSeek', tagline: 'DeepSeek' },
   { name: 'Anthropic', tagline: 'Claude' },
   { name: 'OpenAI', tagline: 'GPT' },
   { name: 'Google', tagline: 'Gemini / Gemma' },
@@ -30,15 +29,6 @@ const PROVIDERS = [
   { name: 'OpenAI-Compatible', tagline: 'Custom OpenAI endpoint' },
   { name: 'Anthropic-Compatible', tagline: 'Custom Anthropic endpoint' },
 ];
-
-// "Bring your own AI" pillars — benefit-first, not feature-first.
-// Trust / "finalized stays" has been moved to the Features section.
-const PILLARS = [
-  { titleKey: 'noLockInTitle', descKey: 'noLockInDesc', icon: 'refresh-cw', link: null },
-  { titleKey: 'privacyTitle', descKey: 'privacyDesc', icon: 'lock', link: null },
-  { titleKey: 'affordableTitle', descKey: 'affordableDesc', icon: 'wallet', link: null },
-  { titleKey: 'openSourceTitle', descKey: 'openSourceDesc', icon: 'code-2', link: 'https://github.com/green-dalii/obsidian-llm-wiki' },
-];
 ---
 
 <section id="providers" class="relative w-full py-20 sm:py-28 reveal">
@@ -49,67 +39,33 @@ const PILLARS = [
       <p class="text-obsidian-muted text-sm max-w-lg mx-auto">{tp.subtitle}</p>
     </div>
 
-    <!-- Bring-your-own-AI pillars: 4 across at md+, link variant for open-source -->
-    <div class="grid grid-cols-2 md:grid-cols-4 gap-3 mb-12">
-      {PILLARS.map((p) => (
-        <div class="reveal" data-delay={2}>
-          {p.link ? (
-            <a href={p.link} target="_blank" rel="noopener noreferrer" class="block h-full">
-              <div class="pillar-card group p-4 rounded-xl card card-hover h-full flex flex-col cursor-pointer">
-                <div class="w-8 h-8 rounded-lg bg-obsidian-purple/10 border border-obsidian-purple/20 flex items-center justify-center mb-3 group-hover:bg-obsidian-purple/20 transition-colors">
-                  <Icon name={p.icon} class="w-4 h-4 text-obsidian-purple-light" />
-                </div>
-                <h3 class="text-base font-semibold text-[#e5e5e5] mb-1">{tp[p.titleKey]}</h3>
-                <p class="text-xs text-obsidian-muted leading-relaxed flex-1">{tp[p.descKey]}</p>
-                <span class="inline-block mt-2 text-[10px] font-mono text-obsidian-purple-light opacity-0 group-hover:opacity-100 transition-opacity">→ GitHub</span>
-              </div>
-            </a>
-          ) : (
-            <div class="pillar-card group p-4 rounded-xl card card-hover h-full flex flex-col">
-              <div class="w-8 h-8 rounded-lg bg-obsidian-purple/10 border border-obsidian-purple/20 flex items-center justify-center mb-3">
-                <Icon name={p.icon} class="w-4 h-4 text-obsidian-purple-light" />
-              </div>
-              <h3 class="text-base font-semibold text-[#e5e5e5] mb-1">{tp[p.titleKey]}</h3>
-              <p class="text-xs text-obsidian-muted leading-relaxed flex-1">{tp[p.descKey]}</p>
-            </div>
-          )}
-        </div>
-      ))}
-    </div>
-
-    <!-- Provider wall subsection -->
-    <div class="mb-4 text-center reveal" data-delay="10">
-      <span class="text-[11px] font-mono text-obsidian-dim tracking-[0.1em] uppercase">{tp.cardLabel}</span>
-      <p class="text-xs text-obsidian-muted mt-0.5">{tp.cardSubtitle}</p>
-    </div>
-
     <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-2.5">
       {PROVIDERS.map((p, i) => (
-        <div class="provider-card group p-3.5 rounded-lg card card-hover reveal flex items-center justify-between gap-2" data-delay={11 + i}>
+        <div class="provider-card group p-3.5 rounded-lg card card-hover reveal flex items-center justify-between gap-2" data-delay={2 + i}>
           <div class="min-w-0">
             <div class="text-sm font-medium text-[#e5e5e5] truncate">{p.name}</div>
             <div class="text-[10px] font-mono text-obsidian-dim leading-tight truncate">{p.tagline}</div>
           </div>
           {p.badge === 'bestValue' && (
-            <span class="flex-shrink-0 text-[9px] font-mono px-1.5 py-0.5 rounded bg-obsidian-purple/15 text-obsidian-purple-light border border-obsidian-purple/25">{tp.bestValue}</span>
+            <span class="shrink-0 text-[9px] font-mono px-1.5 py-0.5 rounded bg-obsidian-purple/15 text-obsidian-purple-light border border-obsidian-purple/25">{tp.bestValue}</span>
           )}
           {p.local && (
-            <span class="flex-shrink-0 text-[9px] font-mono px-1.5 py-0.5 rounded bg-obsidian-bg text-obsidian-dim border border-obsidian-border">{tp.localBadge}</span>
+            <span class="shrink-0 text-[9px] font-mono px-1.5 py-0.5 rounded bg-obsidian-bg text-obsidian-dim border border-obsidian-border">{tp.localBadge}</span>
           )}
         </div>
       ))}
     </div>
 
-    <div class="mt-6 flex items-start gap-2.5 p-3 rounded-lg border border-obsidian-purple/20 bg-obsidian-purple/[0.04] reveal" data-delay="24">
-      <Icon name="lightbulb" class="w-4 h-4 text-obsidian-purple-light flex-shrink-0 mt-0.5" />
-      <p class="text-xs text-obsidian-muted leading-relaxed">{tp.contextNote}</p>
+    <div class="mt-6 flex items-start gap-2.5 p-3 rounded-lg border border-obsidian-purple/20 bg-obsidian-purple/[0.04] reveal" data-delay={15}>
+      <Icon name="lightbulb" class="w-4 h-4 text-obsidian-purple-light shrink-0 mt-0.5" />
+      <p class="text-xs text-obsidian-muted leading-relaxed min-w-0">{tp.contextNote}</p>
     </div>
 
     <!-- Deep link to plugin repo's MODEL-GUIDE for the full tiered provider table + PDF-OCR-GUIDE. -->
-    <div class="mt-4 text-center reveal" data-delay="25">
+    <div class="mt-4 text-center reveal" data-delay="16">
       <a href="https://github.com/green-dalii/obsidian-llm-wiki/blob/main/docs/MODEL-GUIDE.md" target="_blank" rel="noopener noreferrer"
         class="inline-flex items-center gap-1.5 text-[11px] text-obsidian-purple-light hover:text-obsidian-heading transition-colors">
-        Full tiered model table (PDF-OCR + per-hardware picks)
+        {tp.modelGuideLink}
         <Icon name="external-link" class="w-3 h-3" />
       </a>
     </div>
