@@ -1,7 +1,7 @@
 {
   "name": "obsidian-llm-wiki-website",
   "private": true,
-  "version": "1.25.1-web",
+  "version": "1.26.0-web",
   "type": "module",
   "scripts": {
     "dev": "astro dev",
