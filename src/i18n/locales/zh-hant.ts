@@ -111,7 +111,7 @@ export const zhHant: Translations = {
     pdfIngestDesc: '把研究論文丟進 vault。它會接入和筆記同一張 Wiki 圖。',
     pdfIngestTag: 'PDF 擷取',
     moreLabel: '還有更多：',
-    moreCapabilities: ['10 種語言輸出', '看見它如何推理', '標出矛盾', '找出複本', '網路抖動自動恢復', '跳過已處理的部分'],
+    moreCapabilities: ['10 種語言輸出', '看見它如何推理', '標出矛盾', '找出複本', '網路抖動自動恢復', '跳過已處理的部分', 'Agent 原生 CLI 介面', '海量筆記也流暢'],
   },
   install: {
     label: '快速開始',

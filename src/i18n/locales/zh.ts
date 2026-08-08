@@ -111,7 +111,7 @@ export const zh: Translations = {
     pdfIngestDesc: '把研究论文丢进 vault。它会接入和笔记同一张 Wiki 图。',
     pdfIngestTag: 'PDF 摄入',
     moreLabel: '更多能力：',
-    moreCapabilities: ['10 语言输出', '看它如何思考', '发现矛盾', '识别重复', '网络抖动自动恢复', '跳过已处理'],
+    moreCapabilities: ['10 语言输出', '看它如何思考', '发现矛盾', '识别重复', '网络抖动自动恢复', '跳过已处理', 'Agent 原生 CLI 接口', '海量笔记也流畅'],
   },
   install: {
     label: '快速开始',

@@ -99,7 +99,7 @@ export const ja: Translations = {
     pdfIngestDesc: '論文を vault に入れれば、ノートと同じ Wiki グラフに合流します。',
     pdfIngestTag: 'PDF 取り込み',
     moreLabel: 'さらに：',
-    moreCapabilities: ['10言語出力', '思考が見える', '矛盾を検出', '重複を統合', 'ネットワーク揺らぎも自動回復', '処理済みはスキップ'],
+    moreCapabilities: ['10言語出力', '思考が見える', '矛盾を検出', '重複を統合', 'ネットワーク揺らぎも自動回復', '処理済みはスキップ', 'ネイティブ CLI', '巨大な vault でも快適'],
   },
   install: {
     label: 'はじめに',

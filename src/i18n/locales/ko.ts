@@ -99,7 +99,7 @@ export const ko: Translations = {
     pdfIngestDesc: '논문을 vault에 넣으면, 노트와 같은 Wiki 그래프에 합류합니다.',
     pdfIngestTag: 'PDF 수집',
     moreLabel: '그리고 더:',
-    moreCapabilities: ['10개 언어 출력', '사고 과정을 본다', '모순을 잡아냄', '중복을 병합', '네트워크 흔들림도 자동 복구', '처리한 건 건너뜀'],
+    moreCapabilities: ['10개 언어 출력', '사고 과정을 본다', '모순을 잡아냄', '중복을 병합', '네트워크 흔들림도 자동 복구', '처리한 건 건너뜀', '네이티브 CLI', '거대한 vault 도 부드럽게'],
   },
   install: {
     label: '시작하기',

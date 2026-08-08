@@ -114,7 +114,7 @@ export const en: Translations = {
     // Per-task model selection (v1.24.0) — chip-only entry.
     perTaskModelsTitle: 'Per-task models',
     moreLabel: 'And more:',
-    moreCapabilities: ['10-language output', 'See it reason', 'Catches contradictions', 'Finds duplicates', 'Recovers from hiccups', 'Skips what\'s done'],
+    moreCapabilities: ['10-language output', 'See it reason', 'Catches contradictions', 'Finds duplicates', 'Recovers from hiccups', 'Skips what\'s done', 'Native CLI', 'Smooth on huge vaults'],
   },
   install: {
     label: 'Get Started',
