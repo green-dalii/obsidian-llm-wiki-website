@@ -185,14 +185,16 @@ Selected highlights; full version history lives in git log.
 
 **Versioning convention**: the website tracks the plugin version it documents, suffixed with `-web` (e.g. plugin `v1.25.1` → website `v1.25.1-web`). The website does **not** auto-update on every plugin patch — when you trigger a sync, first read the plugin `CHANGELOG` between the last synced plugin version and the current one, then translate that delta into website changes. Each website version entry below records the corresponding plugin release it documents.
 
-### v1.25.9-web (2026-07) — current. Plugin: v1.25.9
+### v1.26.0-web (2026-08) — current. Plugin: v1.26.0
 
-Catch-up sync from `v1.25.1-web` → current plugin `v1.25.9`. Plugin delta spans 8 patch releases; website adds the security-differentiator item (API-key SecretStorage) without a content-area reshuffle. Implemented as a single small chore commit.
+Catch-up sync from `v1.25.9-web` → current plugin `v1.26.0` (a MINOR release). Per scope decision, only the two user-visible headline changes make it to the landing page; the rest of the delta stays in the plugin CHANGELOG / docs.
 
-- **Version**: plugin `v1.25.9` (released 2026-07-25; SecretStorage, tag dedup, provider-switch flush fix), website tracks it as `v1.25.9-web`.
-- **Claims introduced**: none new on this commit. The v1.25.9 plugin delta is operational (SecretStorage was already shipped in v1.25.3 with the FAQ item in `v1.25.1-web`; v1.25.7 was a regression fix; v1.25.8/9 were release-process fixes). No copy changes required. Subsequent commits (C2–C10) layer on the security card / trust block / competitor comparison / etc., so each lands in its own auditable commit.
-
-**Verification**: `npm run gate` 4/4 green (tsc, eslint, vitest 48/48, astro build). 76 pages.
+- **Version**: plugin `v1.26.0` (released 2026-08-05; headless CLI, dedup speedup, Russian i18n, dedup thresholds, force-disable thinking), website tracks it as `v1.26.0-web`.
+- **Claims introduced**:
+  - *Native CLI* chip in the Features `moreCapabilities` pool — the headless ingest CLI (`llm-wiki` / `pnpm llm-wiki`) presented as a first-party interface. ZH `Agent 原生 CLI 接口`, EN `Native CLI`, etc.
+  - *Smooth on huge vaults* chip — the dedup speedup (2141-page vault dedup wall-time 979s → 151s) framed as a user outcome, not a metric (per CLAUDE.md rule #3). ZH `海量笔记也流畅`, EN `Smooth on huge vaults`, etc.
+  - *Workflow Guide (9): The Headless CLI* blog post (EN + ZH) covering what the CLI does, the key flags, and where it fits.
+- **Verification**: `npm run gate` 4/4 green (tsc, eslint, vitest 48/48, astro build 78 pages).
 
 ### v1.25.1-web (2026-07). Plugin: v1.25.1
 Sync covers the v1.24.0 → v1.25.0 → v1.25.1 delta. Implemented across 7 per-site-area commits for easy review and rollback:
