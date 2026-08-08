@@ -154,6 +154,8 @@ export interface Translations {
     obsidian: string;
     sponsorUs: string;
     about: string;
+    // Link to the author's other open-source project (ShiftRouter).
+    moreProjects: string;
   };
   cta: {
     title: string;
