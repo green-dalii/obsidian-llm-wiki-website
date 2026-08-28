@@ -82,7 +82,9 @@ The native backend (MinerU off) is still PDF-only by design — multi-format rou
 
 ## The source page now keeps the quotes
 
-The v1.27.0 release also fixed something quieter. Every entity and concept page already carried a `Mentions in Source` section built from the verbatim quotes the extraction captured. The page that represented the underlying document itself — `sources/<slug>.md` — did not. After a measured vault showed the section on 96% of concept pages but 0 of 1,045 source pages, the route that aggregates per-item quotes onto the analysis is now wired into the summary page as well. The transcribed source keeps the same verbatim trail back to the original document that every entity page carries. Lint grounds those quotes against the underlying PDF (or Markdown) so a misplaced citation is caught before it reaches the wiki.
+One quieter v1.27.0 fix worth knowing about. Every entity and concept page in your wiki already carries a **Mentions in Source** section — the verbatim quotes from the source the extraction captured. The page that represented the underlying document itself (`sources/<slug>.md`) did not. If you ever tried to verify a claim by opening the source page, you'd find the quote trail ended at the entity, not at the source.
+
+Now it doesn't. The transcribed source keeps the same verbatim trail back to the original document that every entity page carries. Lint grounds those quotes against the underlying PDF (or Markdown), so a misplaced citation is caught before it reaches your wiki. For research workflows, the trail from any wiki page back to the original document is unbroken in both directions.
 
 ## The cache: you pay the conversion cost once
 
