@@ -154,6 +154,9 @@ export interface Translations {
     obsidian: string;
     sponsorUs: string;
     about: string;
+    // Link to the author's parent site (greenerai.top). Short preposition
+    // phrase, sits next to the brand on the left side of the footer.
+    parentSite: string;
     // Link to the author's other open-source project (ShiftRouter).
     moreProjects: string;
   };

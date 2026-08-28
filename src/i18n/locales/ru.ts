@@ -181,6 +181,7 @@ export const ru: Translations = {
     releases: 'Релизы',
     obsidian: 'Obsidian',
     sponsorUs: 'Поддержать',
+    parentSite: 'От greenerai.top',
     moreProjects: 'Другие проекты',
     about: 'О проекте',
   },

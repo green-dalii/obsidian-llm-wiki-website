@@ -145,6 +145,7 @@ export const ko: Translations = {
     releases: '릴리스',
     obsidian: 'Obsidian',
     sponsorUs: '후원하기',
+    parentSite: 'greenerai.top 에서',
     moreProjects: '다른 프로젝트',
     about: '소개',
   },

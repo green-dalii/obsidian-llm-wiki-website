@@ -181,6 +181,7 @@ export const zh: Translations = {
     releases: '版本',
     obsidian: 'Obsidian',
     sponsorUs: '赞助我们',
+    parentSite: '来自 greenerai.top',
     moreProjects: '更多项目',
     about: '关于',
   },

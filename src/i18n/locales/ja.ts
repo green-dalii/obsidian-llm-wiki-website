@@ -145,6 +145,7 @@ export const ja: Translations = {
     releases: 'リリース',
     obsidian: 'Obsidian',
     sponsorUs: 'スポンサーになる',
+    parentSite: 'greenerai.top より',
     moreProjects: '関連プロジェクト',
     about: 'について',
   },

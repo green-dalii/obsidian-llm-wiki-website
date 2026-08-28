@@ -186,6 +186,7 @@ export const en: Translations = {
     releases: 'Releases',
     obsidian: 'Obsidian',
     sponsorUs: 'Sponsor us',
+    parentSite: 'From greenerai.top',
     moreProjects: 'More projects',
     about: 'About',
   },
