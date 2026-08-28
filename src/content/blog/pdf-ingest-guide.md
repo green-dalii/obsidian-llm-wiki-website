@@ -4,7 +4,7 @@ description: "Pick a PDF from anywhere in your vault. The plugin reads it throug
 date: 2026-07-20
 tags: ["guides"]
 series: "workflow-guides"
-related: ["zotero-pdf-integration", "research-papers-workflow", "first-100-pages", "choosing-local-models"]
+related: ["zotero-pdf-integration", "research-papers-workflow", "first-100-pages", "choosing-local-models", "v1270-minor-release"]
 ---
 
 ## The PDFs sitting beside your vault
@@ -17,9 +17,9 @@ This is especially frustrating in a personal wiki because the valuable part of a
 
 That is the problem PDF ingest is meant to solve.
 
-## PDFs are now sources, not attachments
+## Documents are now sources, not attachments
 
-With v1.25.0, PDFs became a first-class source format for Karpathy LLM Wiki. Pick a paper, book chapter, manual, receipt, or contract from anywhere in your vault, and the plugin treats it as source material alongside your Markdown notes. It asks your configured model to turn the document into readable Markdown, then sends that Markdown through the same wiki-making process used for notes: entities, concepts, aliases, links, contradictions, and query citations all work the same way.
+With v1.25.0, PDFs became a first-class source format for Karpathy LLM Wiki. v1.27.0 extends that to **PDF plus images and Office documents** through a new built-in conversion backend — pick a paper, scan, slide deck, or spreadsheet from anywhere in your vault, and the plugin treats it as source material alongside your Markdown notes. It asks your configured model to turn the document into readable Markdown, then sends that Markdown through the same wiki-making process used for notes: entities, concepts, aliases, links, contradictions, and query citations all work the same way.
 
 The important change is not that the plugin can “read a PDF.” Plenty of software can extract text from a PDF. The important change is that the extracted document enters the existing knowledge pipeline instead of stopping at a one-off text dump. The paper can become part of the graph. A concept mentioned in its methods section can connect to a note you wrote six months ago. A person in the references can resolve to an entity page. A later question can cite the resulting wiki content rather than asking you to remember which of fifty browser tabs contained the answer.
 
@@ -46,7 +46,7 @@ We therefore keep conversion and extraction conceptually separate. The first pas
 
 The first question most people have is not “How is the cache keyed?” It is “Will this work with the model I already pay for?” The honest answer is: it depends on whether your provider supports PDFs as native document input, rather than merely accepting an OpenAI-shaped request.
 
-If you use Anthropic Claude or OpenAI with a GPT-4o-class model or newer, PDF ingest should work without a special switch. Those providers understand a PDF as a document, not just as an arbitrary binary attachment. The Bedrock variants for Claude and OpenAI are also in the native group. In those cases, pick the PDF from your vault, choose the provider you normally use, and let the normal ingest flow run.
+If you use Anthropic Claude or OpenAI with a current multimodal model, PDF ingest should work without a special switch. Those providers understand a PDF as a document, not just as an arbitrary binary attachment. The Bedrock variants for Claude and OpenAI are also in the native group. In those cases, pick the PDF from your vault, choose the provider you normally use, and let the normal ingest flow run.
 
 The word “native” is doing useful work here. A provider may advertise an OpenAI-compatible API while implementing only the text and image parts of that API. It may accept the request body and then reject the document field, ignore the file, or pass it to a model that was never trained to inspect PDFs. The request can look perfectly valid from the plugin's perspective and still produce a bad conversion. Native support means the provider's document path is an intended capability of the model service, not merely a lucky coincidence in the wire format.
 
@@ -55,8 +55,9 @@ Here is the short version. The first column is the provider family you select in
 | Provider family | PDF conversion | What this means for you |
 |---|---|---|
 | Anthropic Claude | Native | Works without Force PDF Support |
-| OpenAI GPT-4o or newer | Native | Works without Force PDF Support |
+| OpenAI (current multimodal models) | Native | Works without Force PDF Support |
 | Bedrock Claude or OpenAI | Native | Works without Force PDF Support |
+| Google Gemini | Native | Works without Force PDF Support |
 | Custom OpenAI-compatible | Force toggle | Try only when you know the endpoint accepts PDFs |
 | Anthropic-compatible | Force toggle | Try only when you trust the compatibility layer |
 | Ollama, LM Studio, DeepSeek, GLM | Not for native PDF input | Use the OCR/local conversion path, then ingest the Markdown |
@@ -64,6 +65,24 @@ Here is the short version. The first column is the provider family you select in
 This is also why the plugin does not simply attempt every provider and report whatever comes back. A model that refuses a PDF is easy to diagnose. A model that accepts it but quietly reads only the first page, drops a table, or treats the bytes as meaningless text is much harder to diagnose after the fact. The Force PDF Support setting exists for people who know their endpoint well enough to make that tradeoff.
 
 There is a useful division of labor for local setups. Ollama and LM Studio can still be excellent choices for the later wiki extraction step, where the input is Markdown and the job is entity and concept linking. They are not the providers to rely on for native PDF conversion. Separating those jobs lets you keep a local chat model for your vault while using either a provider with native PDF support or a local OCR stack for the document boundary.
+
+## Five ways in, switchable per ingest
+
+v1.27.0 reorganizes the conversion options into five on-ramps you can switch per ingest:
+
+1. **Built-in MinerU backend** — Settings → Wiki Configuration → Markdown Conversion Backend → *MinerU*. PDF, images (PNG, JPG, JPEG, JP2, WebP, GIF, BMP), and Office documents (DOC, DOCX, PPT, PPTX, XLS, XLSX) through [MinerU's Precise parser](https://mineru.net/apiManage/docs). Best path for scientific papers, scanned documents, and Office files where layout preservation matters. The API token lives only in Obsidian SecretStorage. Server caps: 200 MB / 200 pages per PDF, 256 MB / 10,000 files per archive.
+2. **Cloud providers with native PDF** — Anthropic, OpenAI, Google Gemini, and AWS Bedrock (Claude and OpenAI variants) read PDFs as file parts out of the box. No setup beyond provider selection.
+3. **Local OCR on Apple Silicon** — [oMLX](https://github.com/jundot/omlx) bundles Microsoft Markitdown as a built-in PDF→Markdown backend. Enable Markitdown in oMLX, load [Baidu Unlimited-OCR](https://huggingface.co/baidu/Unlimited-OCR) as the vision model, point the plugin at oMLX as a Custom OpenAI-Compatible provider, turn on **Force PDF Support**, pick the multimodal model oMLX is serving. The PDF never leaves your machine.
+4. **Third-party extractor (MinerU online UI)** — use the [MinerU Extractor online service](https://mineru.net/OpenSourceTools/Extractor) for a quick manual UI when you do not want to wire up an API token. Download the converted `.md`, drop it in your vault outside the wiki folder, and ingest as a regular Markdown note.
+5. **Force PDF Support** — for any other OpenAI / Anthropic-compatible endpoint that accepts file parts, the plugin attempts the call (Settings → LLM Configuration → Advanced). The endpoint decides; failures surface as a localized Notice.
+
+The native backend (MinerU off) is still PDF-only by design — multi-format routing under the native path is not in scope. Switch backend to MinerU when you need images or Office files.
+
+**A caveat for Office formats.** Obsidian does not natively render `.docx` / `.xlsx` / `.pptx`, so the practical workflow for Office files is: MinerU converts to `.md`, the plugin ingests that `.md` into wiki pages, and the original Office file is kept around for reference.
+
+## The source page now keeps the quotes
+
+The v1.27.0 release also fixed something quieter. Every entity and concept page already carried a `Mentions in Source` section built from the verbatim quotes the extraction captured. The page that represented the underlying document itself — `sources/<slug>.md` — did not. After a measured vault showed the section on 96% of concept pages but 0 of 1,045 source pages, the route that aggregates per-item quotes onto the analysis is now wired into the summary page as well. The transcribed source keeps the same verbatim trail back to the original document that every entity page carries. Lint grounds those quotes against the underlying PDF (or Markdown) so a misplaced citation is caught before it reaches the wiki.
 
 ## The cache: you pay the conversion cost once
 
@@ -117,7 +136,7 @@ The setup is intentionally short. Run oMLX on your Mac, point a Custom OpenAI-Co
 
 The PDF conversion request then stays on the machine. The plugin uses the same cache and the same downstream wiki extraction path as it would with a cloud provider; “local” changes where the document is processed, not what a successful ingest means. If you also want entity extraction to remain offline, pair the OCR service with a local chat model through Ollama or LM Studio. In that arrangement, both the document conversion and the Markdown-to-wiki step can run without outbound network traffic.
 
-There are ordinary local-model tradeoffs. A small model may need more time, may miss a complex figure, and may produce more `[illegible]` markers than Claude or GPT-4o. That is not a reason to hide the limitation. It is a reason to keep the original PDF, inspect important results, and let the verifier prefer an explicit gap to an invented detail.
+There are ordinary local-model tradeoffs. A small model may need more time, may miss a complex figure, and may produce more `[illegible]` markers than Claude or GPT. That is not a reason to hide the limitation. It is a reason to keep the original PDF, inspect important results, and let the verifier prefer an explicit gap to an invented detail.
 
 ## When to flip Force PDF Support
 

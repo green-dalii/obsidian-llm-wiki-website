@@ -4,7 +4,7 @@ description: "从 vault 中任选 PDF。插件通过你的 LLM 提供商读取�
 date: 2026-07-20
 tags: ["实践指南"]
 series: "workflow-guides"
-related: ["zotero-pdf-integration", "research-papers-workflow", "first-100-pages", "choosing-local-models"]
+related: ["zotero-pdf-integration", "research-papers-workflow", "first-100-pages", "choosing-local-models", "v1270-minor-release"]
 ---
 
 ## 那 50 篇论文的困境
@@ -17,15 +17,13 @@ related: ["zotero-pdf-integration", "research-papers-workflow", "first-100-pages
 
 这篇文章，就是讲 Karpathy LLM Wiki 从 v1.25.0 开始怎么解决这件事的。
 
-## PDF 不再是附件，而是源材料
+## 不只是 PDF，文档都能进
 
-在 v1.25.0 之前，PDF 对插件来说是个"外人"。你可以把它放进 vault，但它只是一个躺在那里的二进制文件，Wiki 生成流程看不见它的内容。
+v1.25.0 改变了这件事：**PDF 升为和 Markdown 笔记完全平级的一级来源。** v1.27.0 又把这件事推了一步——**PDF、图片、Office 文档都能进来**。插件内置了一条新的转换后端，从 vault 里挑一份研究论文、扫描件、PPT 演示稿或 Excel 表格，插件都会像对待你手写的笔记一样对待它——读进来，理解里面的文字、表格、图示，然后生成互相链接的 Wiki 页面。
 
-v1.25.0 改变了这件事：**PDF 升为和 Markdown 笔记完全平级的一级来源。** 从 vault 里挑一份研究论文、产品手册、扫描的合同或四百页的技术规格，插件就会像对待你手写的笔记一样对待它——读进来，理解里面的文字、表格、图示，然后生成互相链接的 Wiki 页面。
+关键在于，这一切接进的是你**已经在用的那条流水线**。双向链接、跨语言别名、矛盾检测、对话式查询时的引用溯源——你为 Markdown 笔记熟悉的每一个功能，现在对 PDF 一样有效。你不需要学任何新东西，只是在熟悉的流程前面多接了一段文档转换。
 
-关键在于，这一切接进的是你**已经在用的那条流水线**。双向链接、跨语言别名、矛盾检测、对话式查询时的引用溯源——你为 Markdown 笔记熟悉的每一个功能，现在对 PDF 一样有效。你不需要学任何新东西，只是在熟悉的流程前面多接了一段 PDF 转换。
-
-一句话：PDF 从"附件"变成了"源材料"。
+一句话：文档从"附件"变成了"源材料"。
 
 ## 它到底怎么工作的
 
@@ -35,7 +33,7 @@ v1.25.0 改变了这件事：**PDF 升为和 Markdown 笔记完全平级的一�
 PDF → （LLM 读它、转写成 Markdown） → 走和笔记一模一样的 Wiki 抽取流程
 ```
 
-第一步，插件把 PDF 交给你的 LLM。注意，这里不是某个第三方 OCR 服务，就是你自己在设置里配好的那个模型——比如 Claude 或 GPT-4o。模型直接"看"这份 PDF，把里面的文字、表格、图示的说明，逐字转写成干净的 Markdown。
+第一步，插件把 PDF 交给你的 LLM。注意，这里不是某个第三方 OCR 服务，就是你自己在设置里配好的那个模型——比如 Claude 或当前的多模态 GPT 模型。模型直接"看"这份 PDF，把里面的文字、表格、图示的说明，逐字转写成干净的 Markdown。
 
 第二步之后就没什么新鲜的了：这份转写出来的 Markdown，和你亲手敲的笔记走进的是同一道门。实体被抽出来、概念被识别、`[[wiki-link]]` 被生成、页面之间互相连起来。从这一步往后，插件根本分不清、也不关心这段内容当初是来自一篇 PDF 还是你敲的一段字。
 
@@ -45,7 +43,7 @@ PDF → （LLM 读它、转写成 Markdown） → 走和笔记一模一样的 Wi
 
 这是大多数人真正想先弄清楚的问题。答案取决于你在用哪个 LLM。
 
-**如果你在用 Claude 或 GPT-4o（及更新版本），恭喜，直接能用。** 这些模型原生就能把 PDF 当作一段文件内容来读，你什么都不用调。AWS Bedrock 上的 Claude 和 OpenAI 也一样，属于原生支持。
+**如果你在用 Claude 或当前的多模态 GPT 模型，恭喜，直接能用。** 这些模型原生就能把 PDF 当作一段文件内容来读，你什么都不用调。AWS Bedrock 上的 Claude 和 OpenAI 也一样，属于原生支持。Google Gemini 同样原生支持 PDF。
 
 **如果你在用别的，情况就要分两种看。** 有些服务商——像自建的 OpenAI 兼容端点、Anthropic 兼容的镜像——技术上*可能*能处理 PDF，但插件不敢替你打包票，所以默认关着。你需要手动打开一个叫 `Force PDF Support`（强制 PDF 支持）的开关，自担风险地试一试（后面有一整节讲什么时候该开、什么时候别开）。
 
@@ -55,11 +53,30 @@ PDF → （LLM 读它、转写成 Markdown） → 走和笔记一模一样的 Wi
 
 | 你的服务商 | PDF 能不能用 | 你要做什么 |
 |--------|----------|----------|
-| Claude / GPT-4o+ / Bedrock | 原生支持 | 什么都不用做 |
+| Claude / GPT（当前多模态）/ Bedrock | 原生支持 | 什么都不用做 |
+| Google Gemini | 原生支持 | 什么都不用做 |
 | Custom / Anthropic-compatible | 要手动开开关 | 打开 Force PDF Support，自担风险 |
 | Ollama / LM Studio / DeepSeek / GLM | 这条路不通 | 改走本地 OCR 路径（见下文） |
 
-顺带一提，当你从别的服务商切回原生服务商（Claude、GPT-4o、Bedrock）时，那个强制开关会自动帮你关掉——因为原生服务商根本不需要它。
+顺带一提，当你从别的服务商切回原生服务商（Claude、GPT、Bedrock）时，那个强制开关会自动帮你关掉——因为原生服务商根本不需要它。
+
+## 五种入口，按摄入切换
+
+v1.27.0 把转换选项整理成五条入口，摄入时按需切换：
+
+1. **内置 MinerU 后端** —— Settings → Wiki Configuration → Markdown Conversion Backend → *MinerU*。支持 PDF、图片（PNG/JPG/JPEG/JP2/WebP/GIF/BMP）和 Office 文档（DOC/DOCX/PPT/PPTX/XLS/XLSX），通过 [MinerU 的 Precise 解析器](https://mineru.net/apiManage/docs) 处理。学术论文、扫描件、对版式保真有要求的 Office 文件走这条最稳。API token 只放在 Obsidian SecretStorage 里。服务端限额：单 PDF 200 MB / 200 页，压缩包 256 MB / 10,000 个文件。
+2. **云服务商原生 PDF** —— Anthropic、OpenAI、Google Gemini、AWS Bedrock（Claude 与 OpenAI 变体）默认就把 PDF 当文件块来读，配好服务商就能用。
+3. **Apple Silicon 本地 OCR** —— [oMLX](https://github.com/jundot/omlx) 内置 Microsoft Markitdown 作为 PDF→Markdown 后端。在 oMLX 里启用 Markitdown，加载 [Baidu Unlimited-OCR](https://huggingface.co/baidu/Unlimited-OCR) 作为视觉模型，把插件指向 oMLX 当作 Custom OpenAI-Compatible 服务商，打开 **Force PDF Support**，选 oMLX 提供的多模态模型即可。PDF 从头到尾不出本机。
+4. **第三方提取器（MinerU 在线 UI）** —— 不想配 token 时，用 [MinerU Extractor 在线服务](https://mineru.net/OpenSourceTools/Extractor) 手动转一份。下载转换好的 `.md`，放进 vault 里 wiki 文件夹之外的位置，作为普通 Markdown 笔记摄取即可。
+5. **Force PDF Support** —— 其他接受文件块的 OpenAI / Anthropic 兼容端点都可以试一下（Settings → LLM Configuration → Advanced）。端点自己决定接不接；失败会显示本地化的提示。
+
+原生后端（关闭 MinerU）按设计仍然只支持 PDF——多格式路由不在它的范围内。需要图片或 Office 文件时，把后端切到 MinerU。
+
+**Office 格式的注意事项。** Obsidian 原生不渲染 `.docx` / `.xlsx` / `.pptx`（[文件格式说明](https://obsidian.md/help/file-formats)），所以 Office 文件的实际工作流是：MinerU 转成 `.md`，插件把它摄入成 Wiki 页面，原始 Office 文件保留在原位置供查阅。
+
+## 来源页也带上原文引用了
+
+v1.27.0 还悄悄修了一个不那么显眼的地方。每张实体页和概念页早就带有一段 `Mentions in Source`——用抽取阶段捕获的原文引用搭出来的。但代表原始文档本身的那张页——`sources/<slug>.md`——一直没有。实测一个 vault：96% 的概念页有这段，但 1,045 张来源页里 0 张有。修复之后，把每条实体的原文引用聚合到 analysis 上的那条路径也接进了 summary 页。转写出的来源页现在和每张实体页一样，带着同一条通往原文的可追溯链路。Lint 还会把每条引用回到底层 PDF（或 Markdown）做校对，让错放的引用在进入 Wiki 之前就被拦下。
 
 ## 缓存：为什么这跟你有关
 
