@@ -107,14 +107,16 @@ export const en: Translations = {
     historyTitle: 'Every change, traceable',
     historyDesc: 'Open the activity panel and see exactly what the AI did, when, and to which note. Roll back any edit in one click.',
     historyTag: 'History',
-    // PDF Ingest (v1.25.0) — first-class source alongside Markdown.
-    pdfIngestTitle: 'PDFs become sources',
-    pdfIngestDesc: 'Drop a research paper into your vault. It joins the same wiki graph as your notes.',
-    pdfIngestTag: 'PDF Ingest',
+    // Document Ingest (v1.27.0) — PDF + images + Office documents as sources.
+    // Renamed from PDF Ingest (v1.25.0) when the MinerU backend joined the
+    // native PDF path; the field name is kept for i18n-stability.
+    pdfIngestTitle: 'Any document becomes a source',
+    pdfIngestDesc: 'PDF, image, or Office file — drop it in your vault and it joins the same wiki graph as your notes.',
+    pdfIngestTag: 'Document Ingest',
     // Per-task model selection (v1.24.0) — chip-only entry.
     perTaskModelsTitle: 'Per-task models',
     moreLabel: 'And more:',
-    moreCapabilities: ['10-language output', 'See it reason', 'Catches contradictions', 'Finds duplicates', 'Recovers from hiccups', 'Skips what\'s done', 'Native CLI', 'Smooth on huge vaults'],
+    moreCapabilities: ['11-language output', 'See it reason', 'Catches contradictions', 'Finds duplicates', 'Recovers from hiccups', 'Skips what\'s done', 'Native CLI', 'Smooth on huge vaults'],
   },
   install: {
     label: 'Get Started',
@@ -199,7 +201,7 @@ export const en: Translations = {
     items: [
       { q: 'How is this different from just [[linking]] my notes?', a: 'You capture what you already see. The plugin reads every note, surfaces links you missed, and builds pages between them — across months, folders, and buried mentions.' },
       { q: 'Does the plugin touch my notes or vault?', a: 'No. The plugin only writes inside its own wiki/ folder. Mark a page reviewed and the AI never rewrites it — only adds. Every answer cites back to your notes.' },
-      { q: 'What does it cost and what do I need?', a: 'Obsidian v1.11.0 or later (desktop) and an LLM provider API key. Long-context models work best. A single ingest runs $0.05 to $0.50 on the LLM side — the plugin itself is free and open source. Local models via Ollama or LM Studio need no key.' },
+      { q: 'What does it cost and what do I need?', a: 'Obsidian desktop (latest stable) and an LLM provider API key. Long-context models work best. A single ingest runs $0.05 to $0.50 on the LLM side — the plugin itself is free and open source. Local models via Ollama or LM Studio need no key.' },
       { q: 'Can I keep my data fully private?', a: 'Yes. With Ollama or LM Studio, every byte stays on your machine. With cloud providers, data only leaves during the specific ingest or query you trigger — no telemetry, no backend, no storage.' },
       { q: 'Does it work with PDFs and per-task models?', a: 'PDFs are a first-class source — pick one from your vault and it joins the same wiki graph as your notes. You can also assign different models to ingest, lint, and query.' },
       { q: 'How do I get help?', a: 'Open an issue on GitHub, or start a discussion. You can also leave a review on the plugin\'s Obsidian Community page.' },
