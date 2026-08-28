@@ -187,7 +187,7 @@ Selected highlights; full version history lives in git log.
 
 ### v1.27.0-web (2026-08) — current. Plugin: v1.27.0
 
-Catch-up sync covering `v1.26.0-web` → plugin `v1.27.0` (a MINOR release, 36 merge commits, 181 files). P0 corrections: three stale claims were real drift — the in-tree CLI was removed in v1.27.0 (the *Native CLI* chip still stands but the *Workflow Guide (9): The Headless CLI* blog post was rewritten end-to-end to point at the published `karpathywiki-cli` npm package, including the warning that `npx llm-wiki` resolves to an unrelated registry package), the "10-language output" chip became 11 (Russian was already in scope but the chip never moved), and the FAQ's hardcoded `Obsidian v1.11.0` was lifted in favor of "current stable desktop" to drop the maintenance tax (per CLAUDE.md rule #3). P1 additions: the *Document Ingest* feature card was widened from PDF-only to PDF + images + Office documents (the new built-in MinerU backend), AWS Bedrock was added to the Providers grid (with the *OpenAI-Compatible* generic slot retired to keep the count at 12), and a new *Announcement: v1.27.0* blog post was added in EN+ZH as the v1.27.0 release overview, drawing from upstream Discussion #555.
+Catch-up sync covering `v1.26.0-web` → plugin `v1.27.0` (a MINOR release, 36 merge commits, 181 files). P0 corrections: three stale claims were real drift — the in-tree CLI was removed in v1.27.0 (the *Native CLI* chip still stands but the *Workflow Guide (9): The Headless CLI* blog post was rewritten end-to-end to point at the published `karpathywiki-cli` npm package, including the warning that `npx llm-wiki` resolves to an unrelated registry package), the "10-language output" chip became 11 (Russian was already in scope but the chip never moved), and the FAQ's hardcoded `Obsidian v1.11.0` was lifted in favor of "current stable desktop" to drop the maintenance tax (per AGENTS.md rule #3). P1 additions: the *Document Ingest* feature card was widened from PDF-only to PDF + images + Office documents (the new built-in MinerU backend), AWS Bedrock was added to the Providers grid (with the *OpenAI-Compatible* generic slot retired to keep the count at 12), and a new *Announcement: v1.27.0* blog post was added in EN+ZH as the v1.27.0 release overview, drawing from upstream Discussion #555.
 
 - **Version**: plugin `v1.27.0` (released 2026-08-27; MinerU backend, AWS Bedrock SSO/IAM, source-page verbatim quotes, Fix Dead Links leave-it, ingest candidate gate, per-step task policies, headless CLI repo split), website tracks it as `v1.27.0-web`.
 - **Claims introduced**:
@@ -199,7 +199,7 @@ Catch-up sync covering `v1.26.0-web` → plugin `v1.27.0` (a MINOR release, 36 m
   - Headless-cli blog post (EN + ZH) rewritten to use `npx karpathywiki-cli`; old `pnpm llm-wiki` / `tools/llm-wiki-cli/run-llm-wiki.mjs` paths are stale since v1.27.0.
   - pdf-ingest-guide blog post (EN + ZH) — GPT-4o-class reference retired in favor of "current multimodal model"; MinerU section reframed as built-in backend; five on-ramps documented; new section on source-page verbatim quotes (`Mentions in Source` now wired into `sources/<slug>.md`).
   - FAQ entry "What does it cost and what do I need?" — `Obsidian v1.11.0` → "Obsidian desktop (latest stable)" across all 11 locales.
-- **Out of scope** (kept in plugin CHANGELOG / docs, not on landing page per CLAUDE.md rule #3):
+- **Out of scope** (kept in plugin CHANGELOG / docs, not on landing page per AGENTS.md rule #3):
   - Per-step task policies (#525), ingest candidate gate (#514) — settings-level, not user-facing surface.
   - `npm audit` HIGH→0, composite-key probe caches, complementary-append leak fix, duplicate policy entry error — engineering hygiene, not user outcomes.
 - **Verification**: `npm run gate` 4/4 green (tsc, eslint, vitest, astro build).
@@ -211,7 +211,7 @@ Catch-up sync from `v1.25.9-web` → current plugin `v1.26.0` (a MINOR release).
 - **Version**: plugin `v1.26.0` (released 2026-08-05; headless CLI, dedup speedup, Russian i18n, dedup thresholds, force-disable thinking), website tracks it as `v1.26.0-web`.
 - **Claims introduced**:
   - *Native CLI* chip in the Features `moreCapabilities` pool — the headless ingest CLI (`llm-wiki` / `pnpm llm-wiki`) presented as a first-party interface. ZH `Agent 原生 CLI 接口`, EN `Native CLI`, etc.
-  - *Smooth on huge vaults* chip — the dedup speedup (2141-page vault dedup wall-time 979s → 151s) framed as a user outcome, not a metric (per CLAUDE.md rule #3). ZH `海量笔记也流畅`, EN `Smooth on huge vaults`, etc.
+  - *Smooth on huge vaults* chip — the dedup speedup (2141-page vault dedup wall-time 979s → 151s) framed as a user outcome, not a metric (per AGENTS.md rule #3). ZH `海量笔记也流畅`, EN `Smooth on huge vaults`, etc.
   - *Workflow Guide (9): The Headless CLI* blog post (EN + ZH) covering what the CLI does, the key flags, and where it fits.
 - **Verification**: `npm run gate` 4/4 green (tsc, eslint, vitest 48/48, astro build 78 pages).
 
@@ -224,7 +224,7 @@ Sync covers the v1.24.0 → v1.25.0 → v1.25.1 delta. Implemented across 7 per-
 4. **docs(blog): add PDF ingest guide (workflow-guides #8, EN+ZH)** — `pdf-ingest-guide.md`. Covers the correctness-ordered pipeline (provider gate precedes cache lookup), provider matrix (native: anthropic/openai/bedrock-*; force toggle: custom/anthropic-compatible; never: ollama/lmstudio/deepseek/glm), verbatim transcriber prompt with `[illegible]`/`[figure]`/`[equation]` anti-hallucination markers, three-defense cache housekeeping (10 MB single-entry / 100 MB LRU / prepareBatchIngest TTL), default cache-only behavior + opt-in vault sidecar rationale, fully-offline Apple Silicon path (oMLX + Markitdown + Baidu Unlimited-OCR 3B/0.5B), common failure modes.
 5. **docs(blog): add local model selection guide (getting-started #5, EN+ZH)** — `choosing-local-models.md`. Three reasons to run local (privacy / network / cost), hardware tiers (Apple Silicon unified memory, NVIDIA VRAM, CPU-only), model shortlist per task (Ingest/Lint/Query) — Qwen3.5, Qwen3.6, Gemma 4, DeepSeek-V3, MoE variants (35B-A3B / 122B-A10B), four pre-built configurations, the context-length trap (empirical PPR-cascade token distribution shows 32K context is enough), MLX vs GGUF, Q-level selection, Per-Task Models setting walkthrough, when to go hybrid.
 6. **docs(blog): add Query pipeline deep-dive (inside-the-system #7, EN+ZH)** — `query-engine-pipeline.md`. The 4-phase buildWikiContext pipeline (read-index → select-seeds → load-pages → assemble-context), the 5-stage seed selector inside Phase 2 (lex → LLM keywords → keyword scan → legacy LLM → PPR → FALLBACK), five design choices that diverge from vanilla RAG (lex-then-PPR beats vector-then-rerank at small-medium scale; five stages so LLM augmentation never blocks hot path; local substring scan > LLM 50-candidate; pureLLM is a first-class state; pageSummaryHint replaces full wiki index), plus the Bug C 3.0 `__WIKI_FOLDER__` placeholder fix. Cost/latency empirical table for each stage.
-7. **chore(release): align website version with plugin v1.25.1 (v1.25.1-web)** — README, CLAUDE.md, package.json bumped to v1.25.1-web. Optimization history entries rewritten to use `v{X.Y.Z}-web` naming with explicit Plugin: mapping. 5 new memory files capturing version-sync convention, i18n required-key vs KNOWN_GAPS distinction, PDF Ingest feature shape, query pipeline architecture, blog post commit pipeline.
+7. **chore(release): align website version with plugin v1.25.1 (v1.25.1-web)** — README, AGENTS.md, package.json bumped to v1.25.1-web. Optimization history entries rewritten to use `v{X.Y.Z}-web` naming with explicit Plugin: mapping. 5 new memory files capturing version-sync convention, i18n required-key vs KNOWN_GAPS distinction, PDF Ingest feature shape, query pipeline architecture, blog post commit pipeline.
 
 **Verification across all 7 commits**: `npm run gate` 4/4 green at each step (tsc, eslint, vitest 48/48, astro build). Page count progression: 70 → 70 → 70 → 72 → 74 → 76.
 
@@ -254,7 +254,7 @@ Sync covers the v1.24.0 → v1.25.0 → v1.25.1 delta. Implemented across 7 per-
 - **Features cleanup** — removed redundant ASCII micro-code snippets from every card
 - **Nav slimmed** — 8 → 5 items; removed `nav.providers` and `nav.trust` from the i18n contract; FAQ section still exists with `#faq` anchor
 - **Icon library** — added `history` icon (lucide clock + arrow)
-- **Pre-delivery Gate** — `npm run gate` runs `tsc --noEmit` → `eslint --max-warnings 0` → `vitest run` → `astro build` in sequence. Any non-zero exit stops the chain. Documented in CLAUDE.md as the contract for "done"
+- **Pre-delivery Gate** — `npm run gate` runs `tsc --noEmit` → `eslint --max-warnings 0` → `vitest run` → `astro build` in sequence. Any non-zero exit stops the chain. Documented in AGENTS.md as the contract for "done"
 - **WikiDemo cleanup** — removed unused `ScenarioIcon` declaration
 - **All 11 locales** synced (en, zh, zh-hant, ja, ko, de, es, fr, pt, it, ru)
 
@@ -278,7 +278,7 @@ Earlier v1.x versions (v1.0 → v1.9): initial landing page, FAQ section, FR/PT/
 
 ## Documentation
 
-- **Project instructions**: [CLAUDE.md](CLAUDE.md)
+- **Project instructions**: [AGENTS.md](AGENTS.md)
 - **Deployment guide**: [docs/cloudflare-pages-deployment.md](docs/cloudflare-pages-deployment.md)
 - **Astro migration plan**: [docs/astro-migration-plan.md](docs/astro-migration-plan.md)
 
