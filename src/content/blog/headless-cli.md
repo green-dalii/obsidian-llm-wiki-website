@@ -4,7 +4,7 @@ description: "The same ingest pipeline that runs inside Obsidian, now callable f
 date: 2026-08-08
 tags: ["guides"]
 series: "workflow-guides"
-related: ["pdf-ingest-guide", "faster-ingestion", "auto-maintenance", "first-100-pages"]
+related: ["pdf-ingest-guide", "faster-ingestion", "auto-maintenance", "first-100-pages", "v1270-minor-release"]
 ---
 
 ## The plugin, without the app
@@ -19,77 +19,85 @@ Consider the cases where you do not want to open Obsidian at all:
 - **A scripted pipeline.** You want to run ingest every night, or after every Zotero export, without a human pressing buttons.
 - **A big batch you do not want to babysit.** You would rather launch a process, walk away, and read the summary when it finishes.
 - **Deterministic runs.** You want the same command, the same vault, the same result — for testing, for reproducing an issue, or for comparing models.
-- **An agent in the loop.** You delegate to an AI agent — a coding assistant, an automation — and it calls `llm-wiki` itself. The wiki updates without you touching a terminal.
+- **An agent in the loop.** You delegate to an AI agent — a coding assistant, an automation — and it calls the CLI itself. The wiki updates without you touching a terminal.
 
-v1.26.0 answers these with a **headless CLI**. The full ingest engine — `WikiEngine`, `SourceAnalyzer`, `PageFactory`, the LLM clients — runs under plain Node. No Obsidian, no Electron, no display. You point it at a vault directory and it does exactly what the plugin would do.
+The headless CLI answers these. The full ingest engine — `WikiEngine`, `SourceAnalyzer`, `PageFactory`, the LLM clients — runs under plain Node. No Obsidian, no Electron, no display. You point it at a vault directory and it does exactly what the plugin would do.
+
+> **Note (v1.27.0-web).** The CLI now lives in its own repo, published to npm as [`karpathywiki-cli`](https://www.npmjs.com/package/karpathywiki-cli). The in-tree copy was retired to a dev-only measurement instrument (`tools/dev-instrument/`) so it stops dragging the Obsidian marketplace Bot's review. **Use the npm package — `npx llm-wiki` will install an unrelated package from the registry, not this one.**
 
 ## What you get
 
-The CLI is installed with the plugin repo and invoked as `llm-wiki` (or `pnpm llm-wiki` in the pnpm layout). The most basic run looks like this:
+The package installs the `llm-wiki` binary. The most basic run looks like this:
 
 ```bash
-WIKI_API_KEY=... node tools/llm-wiki-cli/run-llm-wiki.mjs \
-  --vault /path/to/your/vault \
-  --source "sources/Attention Is All You Need.md"
+npx karpathywiki-cli ingest \
+  --sources ./notes \
+  --wiki ./wiki \
+  --provider deepseek \
+  --key sk-... \
+  --model deepseek-chat
 ```
 
-Point it at the vault, name a source file, and it ingests that note — extracting entities and concepts, creating wiki pages, updating the index — through the exact same write path the plugin uses.
+Point it at a sources folder, name a wiki output directory, and it ingests every Markdown it finds — extracting entities and concepts, creating wiki pages, writing the index — through the exact same write path the plugin uses.
 
 A few flags matter more than the rest:
 
 | Flag | What it does |
 |------|--------------|
-| `--vault` | Vault root. Required. |
-| `--source` | Source file, relative to the vault. Required. |
-| `--dry-run` | Run everything, keep every write in memory. The safe way to preview. |
-| `--force` | Re-ingest even if the duplicate-content gate would skip it. |
-| `--extract-only` | Stop after extraction. Implies `--dry-run`. |
-| `--granularity` | `fine` / `standard` / `coarse` / `minimal` / `custom`. |
-| `--thinking-mode` | `data-json` / `plugin-off` / `server-default`. |
-| `--model` | Override the configured model for this run. |
+| `--sources <path>` | Source folder, single `.md` file, or repeated mixed list. |
+| `--wiki <path>` | Wiki output folder. Required. Pages land directly under it. |
+| `--provider <id>` | One-off LLM provider override (e.g. `deepseek`, `anthropic`, `ollama`). |
+| `--key <key>` | One-off API key override. |
+| `--baseurl <url>` | One-off base URL override (custom endpoints). |
+| `--model <model>` | One-off model override. |
+| `--config <path>` | Path to a `settings.json` that mirrors the plugin's `LLMWikiSettings`. |
+| `--dry-run` | List files only — never calls the LLM. |
 
-Two things to know before you trust it:
+Three things to know before you trust it:
 
-**It writes for real.** Without `--dry-run`, the CLI writes into the vault — pages, `index.md`, `log.md`, the schema file — exactly as the plugin does. Preview first with `--dry-run`; it keeps every write in memory and prints what *would* have happened.
+**It writes for real.** Without `--dry-run`, the CLI writes into the wiki folder — `entities/`, `concepts/`, the index — exactly as the plugin does. Use `--dry-run` first; it lists files and exits without calling the model.
 
-**It reuses your settings.** The CLI reads `data.json` from the vault's plugin folder — your provider, model, base URL, extraction granularity — so you do not reconfigure anything. The API key comes from `WIKI_API_KEY` (or the same secret-storage flow the plugin uses).
+**It reuses your settings.** The CLI reads the same `LLMWikiSettings` JSON shape the plugin uses. Drop a `--config settings.json` to mirror your in-Obsidian setup, or pass the override flags per run. The four override flags mirror the settings fields one-to-one; before any LLM traffic the CLI runs a preflight and prints a copy-pasteable guidance block (exact flag forms + a `settings.json` example + the supported-provider list) when the config is incomplete.
+
+**Twelve known providers, no manual `baseUrl` needed.** `anthropic`, `openai`, `gemini`, `openrouter`, `deepseek`, `minimax`, `kimi`, `glm`, `ollama`, `lmstudio`, plus two custom-endpoint interfaces that require a `baseUrl`: `openai-compat` (alias: `openai-custom`) and `anthropic-compat` (alias: `anthropic-custom`).
 
 ## Where the CLI fits
 
 The CLI is not a replacement for the plugin. It is the same engine with a different host — useful exactly where a GUI host is in the way.
 
-- **Scheduled.** A cron job runs `llm-wiki` on a vault at midnight. New notes are ingested before you wake up.
+- **Scheduled.** A cron job runs the CLI on a vault at midnight. New notes are ingested before you wake up.
 - **Batched.** A Zotero export script pipes new PDFs into a folder, then calls the CLI to ingest them in one pass.
-- **Headless.** A NAS or container ingests a shared vault on a schedule, and you read `log.md` for what changed.
-- **Deterministic.** `--dry-run --extract-only` lets you compare extraction between two models on the same source, or reproduce a bug with a fixed command.
-- **Agent-driven.** Any AI agent that can run a terminal command can call `llm-wiki` directly — ingest a note, batch a folder, or query the wiki it just built. Your agent operates the vault the same way you would.
+- **Headless.** A NAS or container ingests a shared vault on a schedule, and you read the run summary for what changed.
+- **Deterministic.** `--dry-run` lets you preview a batch on the same source for comparison, or reproduce an issue with a fixed command.
+- **Agent-driven.** Any AI agent that can run a terminal command can call the CLI directly — ingest a note, batch a folder, or query the wiki it just built. Your agent operates the vault the same way you would.
 
 ## A tool your agent can drive
 
-The headless form has a second audience: AI agents. Because the CLI is a plain command — flags in, summary out — it plugs straight into any agent that can run a terminal: a coding assistant, Cursor, an automation harness, your own script. The agent calls `llm-wiki`, reads the plain-text summary, and decides what to do next.
+The headless form has a second audience: AI agents. Because the CLI is a plain command — flags in, summary out — it plugs straight into any agent that can run a terminal: a coding assistant, Cursor, an automation harness, your own script. The agent calls the CLI, reads the plain-text summary, and decides what to do next.
 
 What an agent can do with it:
 
-- **Ingest on demand.** The agent points at a source file and runs the CLI. The wiki updates through the same engine the plugin uses.
-- **Preview before committing.** `--dry-run` and `--extract-only` let the agent check what a run would change without writing a thing.
-- **Chain into a workflow.** Ingest a batch, read `log.md` for flagged duplicates, then query the wiki — all from the agent's own shell session.
-- **Compare models deterministically.** `--dry-run --extract-only --model A` against `--model B` on the same source gives the agent two clean, comparable results.
+- **Ingest on demand.** The agent points at a source folder and runs the CLI. The wiki updates through the same engine the plugin uses.
+- **Preview before committing.** `--dry-run` lets the agent check what a run would touch without calling the LLM.
+- **Chain into a workflow.** Ingest a batch, read the run summary for flagged duplicates, then query the wiki — all from the agent's own shell session.
+- **Compare models deterministically.** Running the same `--sources` against two `--model` values gives the agent two clean, comparable results.
 
 Because the CLI is the plugin's own engine, what the agent triggers is exactly what you would get by hand — same extraction, same write path, same wiki. Your agent gets a real lever, not a toy wrapper.
 
 ## Getting started
 
-The CLI lives in `tools/llm-wiki-cli/` in the plugin repo. Its README documents the full flag surface, environment requirements (Node 24, matching the plugin), and the shim caveats for pnpm users.
-
-The fastest path:
+Install once, then call the binary:
 
 ```bash
-WIKI_API_KEY=... node tools/llm-wiki-cli/run-llm-wiki.mjs \
-  --vault /path/to/your/vault \
-  --source "sources/Your Note.md" \
-  --dry-run
+# Either form works — both resolve to the `llm-wiki` binary:
+npx karpathywiki-cli ingest --sources ./notes --wiki ./wiki \
+  --provider openai --key sk-...
+
+# or install globally:
+npm install -g karpathywiki-cli
+llm-wiki ingest --sources ./notes --wiki ./wiki
 ```
 
-Run it once with `--dry-run` to see what would happen. Add `--force` if the gate skips a source you genuinely want re-ingested. Drop `--dry-run` when you are ready to commit the writes.
+Run it once with `--dry-run` to see which files it would touch. Drop `--dry-run` when you are ready to commit the writes.
 
-The plugin was built on a simple idea: you read, the wiki organizes itself. The CLI extends that idea to places where there is no app to open — a terminal, a script, a server, an agent — and the same engine keeps the promise.
+The full flag surface, environment variables (`LLM_WIKI_API_KEY` for script-friendly secrets), and exit-code contract live in the [`karpathywiki-cli` repo](https://github.com/green-dalii/obsidian-llm-wiki-cli). The plugin was built on a simple idea: you read, the wiki organizes itself. The CLI extends that idea to places where there is no app to open — a terminal, a script, a server, an agent — and the same engine keeps the promise.
