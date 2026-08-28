@@ -12,9 +12,12 @@ const tp = { ...translations.en.providers, ...t.providers };
 // Twelve providers — twelve cards, four rows of three on desktop, three
 // rows of four at md+. The first card is the recommendation (DeepSeek =
 // best value for the wiki use case); the rest are grouped by deployment
-// shape — cloud flagship → cloud budget → local → aggregator / custom
-// endpoint. Brand names first; version numbers never. Note: DeepSeek is
-// independent (backed by High-Flyer, NOT Alibaba). Qwen is Alibaba.
+// shape — cloud flagship → cloud budget → enterprise / VPC → local →
+// aggregator / custom endpoint. Brand names first; version numbers
+// never. Note: DeepSeek is independent (backed by High-Flyer, NOT
+// Alibaba). Qwen is Alibaba. The "OpenAI-Compatible" slot was retired
+// in v1.27.0-web to make room for AWS Bedrock — Claude / GPT are still
+// reachable via any custom OpenAI- or Anthropic-protocol endpoint.
 const PROVIDERS = [
   { name: 'DeepSeek', tagline: 'DeepSeek' },
   { name: 'Anthropic', tagline: 'Claude' },
@@ -24,9 +27,9 @@ const PROVIDERS = [
   { name: 'Qwen', tagline: 'Alibaba' },
   { name: 'Kimi', tagline: 'Moonshot' },
   { name: 'GLM', tagline: 'Zhipu' },
+  { name: 'AWS Bedrock', tagline: 'Claude / GPT in your VPC' },
   { name: 'Ollama + LM Studio', tagline: 'Local', local: true },
   { name: 'OpenRouter', tagline: 'Any model' },
-  { name: 'OpenAI-Compatible', tagline: 'Custom OpenAI endpoint' },
   { name: 'Anthropic-Compatible', tagline: 'Custom Anthropic endpoint' },
 ];
 ---
