@@ -185,7 +185,26 @@ Selected highlights; full version history lives in git log.
 
 **Versioning convention**: the website tracks the plugin version it documents, suffixed with `-web` (e.g. plugin `v1.25.1` → website `v1.25.1-web`). The website does **not** auto-update on every plugin patch — when you trigger a sync, first read the plugin `CHANGELOG` between the last synced plugin version and the current one, then translate that delta into website changes. Each website version entry below records the corresponding plugin release it documents.
 
-### v1.26.0-web (2026-08) — current. Plugin: v1.26.0
+### v1.27.0-web (2026-08) — current. Plugin: v1.27.0
+
+Catch-up sync covering `v1.26.0-web` → plugin `v1.27.0` (a MINOR release, 36 merge commits, 181 files). P0 corrections: three stale claims were real drift — the in-tree CLI was removed in v1.27.0 (the *Native CLI* chip still stands but the *Workflow Guide (9): The Headless CLI* blog post was rewritten end-to-end to point at the published `karpathywiki-cli` npm package, including the warning that `npx llm-wiki` resolves to an unrelated registry package), the "10-language output" chip became 11 (Russian was already in scope but the chip never moved), and the FAQ's hardcoded `Obsidian v1.11.0` was lifted in favor of "current stable desktop" to drop the maintenance tax (per CLAUDE.md rule #3). P1 additions: the *Document Ingest* feature card was widened from PDF-only to PDF + images + Office documents (the new built-in MinerU backend), AWS Bedrock was added to the Providers grid (with the *OpenAI-Compatible* generic slot retired to keep the count at 12), and a new *Announcement: v1.27.0* blog post was added in EN+ZH as the v1.27.0 release overview, drawing from upstream Discussion #555.
+
+- **Version**: plugin `v1.27.0` (released 2026-08-27; MinerU backend, AWS Bedrock SSO/IAM, source-page verbatim quotes, Fix Dead Links leave-it, ingest candidate gate, per-step task policies, headless CLI repo split), website tracks it as `v1.27.0-web`.
+- **Claims introduced**:
+  - *Document Ingest* card widened to "Any document becomes a source" — PDF + images + Office through the new built-in MinerU backend, with five on-ramps (MinerU, native cloud providers, Apple Silicon local OCR, MinerU online UI, Force PDF Support). ZH `文档就是源`, EN `Any document becomes a source`, etc.
+  - *AWS Bedrock* added to Providers grid (with *OpenAI-Compatible* generic slot retired to keep the count at 12) — three auth modes (API key / SSO / IAM), VPC / compliance path. Card subtitle: `Claude / GPT in your VPC`.
+  - *Announcement: v1.27.0 — MinerU Joins Document Ingest, Bedrock SSO Lands, Stubs Stop Spamming* blog post (EN + ZH) — release overview anchored on upstream Discussion #555.
+  - *Native CLI* chip kept in Features (CLI is now external at `npx karpathywiki-cli`; chip label still captures the capability).
+- **Claims corrected**:
+  - Headless-cli blog post (EN + ZH) rewritten to use `npx karpathywiki-cli`; old `pnpm llm-wiki` / `tools/llm-wiki-cli/run-llm-wiki.mjs` paths are stale since v1.27.0.
+  - pdf-ingest-guide blog post (EN + ZH) — GPT-4o-class reference retired in favor of "current multimodal model"; MinerU section reframed as built-in backend; five on-ramps documented; new section on source-page verbatim quotes (`Mentions in Source` now wired into `sources/<slug>.md`).
+  - FAQ entry "What does it cost and what do I need?" — `Obsidian v1.11.0` → "Obsidian desktop (latest stable)" across all 11 locales.
+- **Out of scope** (kept in plugin CHANGELOG / docs, not on landing page per CLAUDE.md rule #3):
+  - Per-step task policies (#525), ingest candidate gate (#514) — settings-level, not user-facing surface.
+  - `npm audit` HIGH→0, composite-key probe caches, complementary-append leak fix, duplicate policy entry error — engineering hygiene, not user outcomes.
+- **Verification**: `npm run gate` 4/4 green (tsc, eslint, vitest, astro build).
+
+### v1.26.0-web (2026-08). Plugin: v1.26.0
 
 Catch-up sync from `v1.25.9-web` → current plugin `v1.26.0` (a MINOR release). Per scope decision, only the two user-visible headline changes make it to the landing page; the rest of the delta stays in the plugin CHANGELOG / docs.
 

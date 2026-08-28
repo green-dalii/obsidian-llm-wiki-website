@@ -24,7 +24,7 @@ Astro-based landing page for the Karpathy LLM Wiki Obsidian plugin. Implements A
 
 **Project name**: "Karpathy LLM Wiki" (formerly "LLM Wiki for Obsidian"). Always refer to it as "Karpathy LLM Wiki" in user-facing copy.
 
-**Version**: v1.26.0-web (current). Tracks the plugin release (v1.26.0) it documents; the website does not auto-update on every plugin patch — only when you manually trigger a sync. See `README.md` "Optimization history" for the per-version change log.
+**Version**: v1.27.0-web (current). Tracks the plugin release (v1.27.0) it documents; the website does not auto-update on every plugin patch — only when you manually trigger a sync. See `README.md` "Optimization history" for the per-version change log.
 
 ## Tech stack
 
