@@ -20,7 +20,7 @@ const tMap: Record<string, any> = translations; const t = tMap[locale] || transl
       {t.faq.items.map((item: { q: string; a: string }, idx: number) => (
         <details class="group rounded-xl card card-hover reveal" data-delay={idx * 2}>
           <summary class="flex items-center justify-between p-5 cursor-pointer select-none list-none">
-            <span class="text-sm font-medium text-[#e5e5e5] pr-4">{item.q}</span>
+            <span class="text-sm font-medium text-ink pr-4">{item.q}</span>
             <svg class="w-4 h-4 text-obsidian-dim flex-shrink-0 transition-transform duration-200 group-open:rotate-180" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m6 9 6 6 6-6"/></svg>
           </summary>
           <div class="px-5 pb-5 pt-0 border-t border-obsidian-border/50">

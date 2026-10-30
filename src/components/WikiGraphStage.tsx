@@ -10,6 +10,36 @@ interface WikiGraphStageProps {
 }
 
 // Flatten all nodes from layout into a single indexed array
+/* ── Theme bridge ───────────────────────────────────────────────
+   The graph is painted white-on-black, which only worked while the
+   site had one scheme. It now draws in --ink over --canvas, so on
+   paper it is ink on paper. The palette is cached per theme: reading
+   getComputedStyle on every frame would force style resolution 60×
+   a second for three values. */
+
+function toTriple(hex: string, fallback: string): string {
+  const clean = (hex || '').trim().replace('#', '');
+  const v = clean.length === 3 ? clean.split('').map((c) => c + c).join('') : clean;
+  const n = /^[0-9a-fA-F]{6}$/.test(v) ? parseInt(v, 16) : parseInt(fallback.replace('#', ''), 16);
+  return `${(n >> 16) & 255},${(n >> 8) & 255},${n & 255}`;
+}
+
+let paletteCache: { ink: string; canvas: string; accent: string } | null = null;
+let paletteTheme = '';
+
+function palette() {
+  const theme = document.documentElement.dataset.theme || 'dark';
+  if (paletteCache && paletteTheme === theme) return paletteCache;
+  const cs = getComputedStyle(document.documentElement);
+  paletteTheme = theme;
+  paletteCache = {
+    ink: toTriple(cs.getPropertyValue('--ink').trim(), '#ECECF1'),
+    canvas: cs.getPropertyValue('--canvas').trim() || '#0B0B0F',
+    accent: toTriple(cs.getPropertyValue('--accent').trim(), '#8C7BF7'),
+  };
+  return paletteCache;
+}
+
 function flattenNodes(layout: GraphLayout): Array<{ x: number; y: number; cluster: number; radius: number }> {
   const nodes: Array<{ x: number; y: number; cluster: number; radius: number }> = [];
   for (const n of layout.mainNodes) nodes.push({ x: n.x, y: n.y, cluster: 0, radius: 4 });
@@ -154,8 +184,10 @@ export default function WikiGraphStage({ layout, links, pageLabels }: WikiGraphS
       ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
       ctx.clearRect(0, 0, cssW, cssH);
 
-      // Dark background
-      ctx.fillStyle = '#121212';
+      const P = palette();
+
+      // The surface the graph sits on, whatever the scheme is.
+      ctx.fillStyle = P.canvas;
       ctx.fillRect(0, 0, cssW, cssH);
 
       // ── Draw edges ──────────────────────────────
@@ -171,7 +203,7 @@ export default function WikiGraphStage({ layout, links, pageLabels }: WikiGraphS
         ctx.beginPath();
         ctx.moveTo(a.x, a.y);
         ctx.lineTo(b.x, b.y);
-        ctx.strokeStyle = `rgba(255,255,255,${alpha})`;
+        ctx.strokeStyle = `rgba(${P.ink},${alpha})`;
         ctx.lineWidth = 0.5 + e.strength * 0.3;
         ctx.stroke();
       }
@@ -192,8 +224,8 @@ export default function WikiGraphStage({ layout, links, pageLabels }: WikiGraphS
           const glowAlpha = alpha * 0.15 * pulse;
 
           const glow = ctx.createRadialGradient(n.x, n.y, 0, n.x, n.y, 10);
-          glow.addColorStop(0, `rgba(255,255,255,${glowAlpha})`);
-          glow.addColorStop(1, 'rgba(255,255,255,0)');
+          glow.addColorStop(0, `rgba(${P.ink},${glowAlpha})`);
+          glow.addColorStop(1, `rgba(${P.ink},0)`);
           ctx.fillStyle = glow;
           ctx.beginPath();
           ctx.arc(n.x, n.y, 10, 0, Math.PI * 2);
@@ -201,7 +233,7 @@ export default function WikiGraphStage({ layout, links, pageLabels }: WikiGraphS
         }
 
         // Node circle
-        ctx.fillStyle = `rgba(255,255,255,${alpha})`;
+        ctx.fillStyle = `rgba(${P.ink},${alpha})`;
         ctx.beginPath();
         ctx.arc(n.x, n.y, n.radius, 0, Math.PI * 2);
         ctx.fill();
@@ -216,7 +248,7 @@ export default function WikiGraphStage({ layout, links, pageLabels }: WikiGraphS
 
         ctx.font = '10px "JetBrains Mono", monospace';
         ctx.textAlign = 'center';
-        ctx.fillStyle = `rgba(255,255,255,${0.45 * n.opacity})`;
+        ctx.fillStyle = `rgba(${P.ink},${0.45 * n.opacity})`;
         ctx.fillText(short, n.x, n.y + 14);
       }
 
@@ -224,7 +256,7 @@ export default function WikiGraphStage({ layout, links, pageLabels }: WikiGraphS
       if (mouse.active) {
         ctx.beginPath();
         ctx.arc(mouse.x, mouse.y, 12, 0, Math.PI * 2);
-        ctx.strokeStyle = 'rgba(124,58,237,0.12)';
+        ctx.strokeStyle = 'rgba(' + P.accent + ',0.12)';
         ctx.lineWidth = 1;
         ctx.stroke();
       }

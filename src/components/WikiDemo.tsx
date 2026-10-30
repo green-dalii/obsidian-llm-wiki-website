@@ -90,7 +90,7 @@ export default function WikiDemo({ locale = 'en' }: Props) {
   }, [step, autoPlay]);
 
   const renderMarkdownLine = (line: string) => {
-    if (line.startsWith('# ')) return <span className="text-[#e5e5e5] font-semibold">{line}</span>;
+    if (line.startsWith('# ')) return <span className="text-ink font-semibold">{line}</span>;
     if (line.startsWith('## ')) return <span className="text-obsidian-muted">{line}</span>;
     if (line.startsWith('- ')) return <span className="text-obsidian-dim">{line}</span>;
     return <span>{line}</span>;
@@ -156,12 +156,12 @@ export default function WikiDemo({ locale = 'en' }: Props) {
                 key={s.id}
                 onClick={() => { setStep(i); setAutoPlay(false); }}
                 className={`w-full text-left p-3.5 sm:p-4 rounded-lg border transition-all duration-300 ${
-                  i === step ? 'border-obsidian-purple/40 bg-obsidian-purple/5' : 'border-obsidian-border bg-[#1a1a1a]/30 hover:border-obsidian-border-light'
+                  i === step ? 'border-obsidian-purple/40 bg-obsidian-purple/5' : 'border-obsidian-border bg-surface-2/30 hover:border-obsidian-border-light'
                 }`}
               >
                 <div className="flex items-center gap-2.5 mb-1">
-                  <span className={`text-xs font-mono w-5 h-5 rounded-full flex items-center justify-center ${i === step ? 'bg-obsidian-purple text-[#1e1e1e]' : 'bg-[#333] text-obsidian-dim'}`}>{s.id}</span>
-                  <span className={`text-sm font-medium ${i === step ? 'text-[#e5e5e5]' : 'text-obsidian-muted'}`}>{t.wikiDemo[s.titleKey]}</span>
+                  <span className={`text-xs font-mono w-5 h-5 rounded-full flex items-center justify-center ${i === step ? 'bg-obsidian-purple text-accent-ink' : 'bg-surface-3 text-obsidian-dim'}`}>{s.id}</span>
+                  <span className={`text-sm font-medium ${i === step ? 'text-ink' : 'text-obsidian-muted'}`}>{t.wikiDemo[s.titleKey]}</span>
                 </div>
                 <p className={`text-xs leading-relaxed pl-7 ${i === step ? 'text-obsidian-muted' : 'text-obsidian-dim'}`}>
                   {i === 0 ? scenario.sourceNoteContext : t.wikiDemo[s.descKey]}
@@ -177,7 +177,7 @@ export default function WikiDemo({ locale = 'en' }: Props) {
 
           {/* Stage - 自适应高度容器 */}
           <div className="lg:col-span-3">
-            <div className="relative rounded-xl border border-obsidian-border bg-[#1a1a1a]/60 overflow-hidden h-[700px]">
+            <div className="relative rounded-xl border border-obsidian-border bg-surface-2/60 overflow-hidden h-[700px]">
               <div className="absolute top-3 left-3 z-10 flex items-center gap-2">
                 <span className="w-1.5 h-1.5 rounded-full bg-obsidian-purple animate-pulse" />
                 <span className="text-xs font-mono text-obsidian-dim tracking-wider uppercase">
@@ -244,7 +244,7 @@ export default function WikiDemo({ locale = 'en' }: Props) {
                     {extractedItems.slice(0, 4).map(e => (
                       <span key={e.name} className={`text-xs font-mono px-2 py-1 rounded border ${e.type === 'entity' ? 'bg-obsidian-amber/10 text-obsidian-amber border-obsidian-amber/25' : 'bg-obsidian-purple/10 text-obsidian-purple-light border-obsidian-purple/25'}`}>{e.name}</span>
                     ))}
-                    <span className="text-xs font-mono px-2 py-1 rounded bg-[#333] text-obsidian-dim">+{extractedItems.length - 4} more</span>
+                    <span className="text-xs font-mono px-2 py-1 rounded bg-surface-3 text-obsidian-dim">+{extractedItems.length - 4} more</span>
                   </div>
                 </div>
               )}
@@ -333,24 +333,24 @@ export default function WikiDemo({ locale = 'en' }: Props) {
                     title={<><span className="text-xs text-obsidian-dim">wiki/</span><span className="text-xs text-obsidian-muted">{selPage.path.replace('wiki/', '').replace(/\.md$/, '')}</span></>}
                     contentClassName="flex h-[520px]"
                   >
-                    <div className="w-[42%] border-r border-obsidian-border bg-[#161616] p-3 overflow-y-auto">
+                    <div className="w-[42%] border-r border-obsidian-border bg-surface p-3 overflow-y-auto">
                       <div className="text-[9px] text-obsidian-dim/60 mb-2 uppercase tracking-widest">Explorer</div>
                       {renderWikiTree(wikiRoot, 0)}
                     </div>
-                    <div className="flex-1 p-4 overflow-y-auto bg-[#1e1e1e]">
+                    <div className="flex-1 p-4 overflow-y-auto bg-surface-2">
                       <div className="text-[9px] text-obsidian-dim/60 mb-3 uppercase tracking-widest">Preview</div>
                       <div className="space-y-3">
-                        <h1 className="text-sm font-semibold text-[#e5e5e5]">{selPage.title}</h1>
+                        <h1 className="text-sm font-semibold text-ink">{selPage.title}</h1>
                         <div className="flex flex-wrap gap-1">
                           {selPage.tags.map(tag => (
                             <span key={tag} className="text-[10px] font-mono px-1.5 py-0.5 rounded bg-obsidian-purple/10 text-obsidian-purple-light border border-obsidian-purple/20">#{tag}</span>
                           ))}
                         </div>
-                        <div className="h-px bg-[#333]" />
+                        <div className="h-px bg-surface-3" />
                         <p className="text-xs text-obsidian-muted leading-relaxed">{selPage.summary}</p>
-                        <div className="h-px bg-[#333]" />
+                        <div className="h-px bg-surface-3" />
                         <div>
-                          <h2 className="text-xs font-semibold text-[#e5e5e5] mb-1.5">Related Topics</h2>
+                          <h2 className="text-xs font-semibold text-ink mb-1.5">Related Topics</h2>
                           <ul className="space-y-0.5">
                             {generatedPages.filter(p => p.title !== selPage.title).slice(0, 2).map(p => (
                               <li key={p.title} className="text-xs text-obsidian-purple-light">[[{p.title}]]</li>
@@ -358,7 +358,7 @@ export default function WikiDemo({ locale = 'en' }: Props) {
                           </ul>
                         </div>
                         <div>
-                          <h2 className="text-xs font-semibold text-[#e5e5e5] mb-1.5">Backlinks</h2>
+                          <h2 className="text-xs font-semibold text-ink mb-1.5">Backlinks</h2>
                           <p className="text-[10px] text-obsidian-dim">2 pages reference this page</p>
                         </div>
                       </div>
@@ -402,10 +402,10 @@ export default function WikiDemo({ locale = 'en' }: Props) {
                     <div className="space-y-4 max-w-xl mx-auto">
                       {/* User message — right aligned */}
                       <div className="flex items-start gap-3 justify-end">
-                        <div className="rounded-lg border border-obsidian-border bg-[#1f1f1f] px-4 py-3 text-sm text-obsidian-text max-w-[85%]">
+                        <div className="rounded-lg border border-obsidian-border bg-surface-2 px-4 py-3 text-sm text-obsidian-text max-w-[85%]">
                           {chatQuestion}
                         </div>
-                        <div className="w-7 h-7 rounded-full bg-[#333] flex items-center justify-center flex-shrink-0 mt-0.5">
+                        <div className="w-7 h-7 rounded-full bg-surface-3 flex items-center justify-center flex-shrink-0 mt-0.5">
                           <span className="text-[10px] font-medium">You</span>
                         </div>
                       </div>
@@ -439,7 +439,7 @@ export default function WikiDemo({ locale = 'en' }: Props) {
                     aria-current={i === step ? 'step' : undefined}
                     className="min-w-6 min-h-6 flex items-center justify-center rounded-full"
                   >
-                    <span className={`block h-1.5 rounded-full transition-all duration-300 ${i === step ? 'bg-obsidian-purple w-4' : 'bg-[#333] hover:bg-[#444] w-1.5'}`} />
+                    <span className={`block h-1.5 rounded-full transition-all duration-300 ${i === step ? 'bg-obsidian-purple w-4' : 'bg-surface-3 hover:bg-ink-3 w-1.5'}`} />
                   </button>
                 ))}
               </div>

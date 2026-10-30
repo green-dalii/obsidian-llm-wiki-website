@@ -187,24 +187,66 @@ const jsonLd = { "@context": "https://schema.org", "@graph": graph };
 ---
 
 <!doctype html>
-<html lang={locale} style="overflow-x: hidden;">
+<html lang={locale}>
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+
     <title>{title}</title>
     <meta name="description" content={description} />
     <meta name="keywords" content={keywords} />
     <meta name="author" content="Greener-Dalii" />
     <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large" />
-    <meta name="theme-color" content="#1a1a1a" />
+    <meta name="theme-color" content="#0B0B0F" />
     <meta name="application-name" content="Karpathy LLM Wiki" />
     <meta name="apple-mobile-web-app-title" content="Karpathy LLM Wiki" />
-    <meta name="msapplication-TileColor" content="#1a1a1a" />
+    <meta name="msapplication-TileColor" content="#0B0B0F" />
+
+    <!-- Theme, resolved before first paint. Blocking on purpose: a deferred
+         read would show the wrong scheme for one frame. Strategy: follow the
+         OS; when it reports no preference, stay dark. A manual choice wins. -->
+    <script is:inline>
+      (() => {
+        const KEY = 'klw-theme';
+        const root = document.documentElement;
+        let mode = 'auto';
+        try {
+          const stored = localStorage.getItem(KEY);
+          if (stored === 'light' || stored === 'dark' || stored === 'auto') mode = stored;
+        } catch {}
+
+        const light = window.matchMedia('(prefers-color-scheme: light)');
+        const resolve = () => (mode === 'auto' ? (light.matches ? 'light' : 'dark') : mode);
+
+        const apply = () => {
+          const theme = resolve();
+          root.dataset.theme = theme;
+          root.dataset.themeMode = mode;
+          const meta = document.querySelector('meta[name="theme-color"]');
+          if (meta) meta.setAttribute('content', theme === 'light' ? '#FAFAF7' : '#0B0B0F');
+        };
+
+        apply();
+        light.addEventListener('change', () => { if (mode === 'auto') apply(); });
+
+        window.__klwTheme = {
+          get mode() { return mode; },
+          set(next) {
+            mode = next;
+            try { localStorage.setItem(KEY, next); } catch {}
+            apply();
+            window.dispatchEvent(new CustomEvent('klw:themechange', { detail: { theme: resolve(), mode } }));
+          },
+        };
+      })();
+    </script>
 
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <link rel="apple-touch-icon" href="/favicon.svg" />
 
-    <link rel="preload" href="/fonts/outfit.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href="/fonts/instrument-serif.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href="/fonts/instrument-sans.woff2" as="font" type="font/woff2" crossorigin />
     <link rel="preload" href="/fonts/jetbrains-mono.woff2" as="font" type="font/woff2" crossorigin />
 
     <link rel="canonical" href={canonical} />
@@ -249,8 +291,8 @@ const jsonLd = { "@context": "https://schema.org", "@graph": graph };
     <!-- Additional head content -->
     <slot name="head" />
   </head>
-  <body style="overflow: clip;">
-    <div class="relative bg-obsidian-bg text-obsidian-text">
+  <body>
+    <div class="relative bg-canvas text-ink">
       <ProgressBar />
       <Header currentLocale={locale} isBlog={isBlog || (breadcrumbs && breadcrumbs.length > 0)} />
       <main class="pt-14">

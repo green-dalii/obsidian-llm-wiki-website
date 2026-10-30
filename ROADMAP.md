@@ -32,21 +32,21 @@ a second time.
 
 ### P0 — foundation (correctness, not aesthetics)
 
-- [ ] Semantic token layer in `src/index.css`: `:root` (dark) +
+- [x] Semantic token layer in `src/index.css`: `:root` (dark) +
       `:root[data-theme="light"]`, `@theme inline` utilities, legacy
       `--color-obsidian-*` aliases so no component breaks mid-migration
-- [ ] Theme mechanism, strategy A: `prefers-color-scheme` → **dark fallback** when
+- [x] Theme mechanism, strategy A: `prefers-color-scheme` → **dark fallback** when
       the OS reports no preference; manual `Auto / Light / Dark` persisted in
       `localStorage`; blocking inline `<head>` script so there is no flash
-- [ ] `color-scheme` declared; `<meta name="theme-color">` follows the theme
-- [ ] Fonts: Instrument Serif (display) + Instrument Sans (UI), self-hosted;
+- [x] `color-scheme` declared; `<meta name="theme-color">` follows the theme
+- [x] Fonts: Instrument Serif (display) + Instrument Sans (UI), self-hosted;
       retire Outfit; explicit CJK stacks for `zh`, `zh-tw`, `ja`, `ko`
-- [ ] Fluid modular type scale (3 display tiers) and a spacing/width scale
+- [x] Fluid modular type scale (3 display tiers) and a spacing/width scale
       (`--section-major/std/tight`, one 12-column grid, header aligned to content)
-- [ ] Remove the inline `overflow-x: hidden` / `overflow: clip` hack (it violates
+- [x] Remove the inline `overflow-x: hidden` / `overflow: clip` hack (it violates
       this repo's own double-scrollbar rule and cannot be themed)
-- [ ] `prefers-reduced-motion` global guard; `.reveal` no-JS fallback
-- [ ] Tokenise the 71 hardcoded colour sites (keep `Install.astro`'s SVG dark —
+- [x] `prefers-reduced-motion` global guard; `.reveal` no-JS fallback
+- [x] Tokenise the 71 hardcoded colour sites (keep `Install.astro`'s SVG dark —
       it is product imagery, and must be framed as such)
 
 **Accept**: both schemes render with no flash at load; zero hardcoded colour
