@@ -24,7 +24,7 @@ Astro-based landing page for the Karpathy LLM Wiki Obsidian plugin. Implements A
 
 **Project name**: "Karpathy LLM Wiki" (formerly "LLM Wiki for Obsidian"). Always refer to it as "Karpathy LLM Wiki" in user-facing copy.
 
-**Version**: v1.29.0-web (current). Tracks the plugin release (v1.29.0) it documents; the website does not auto-update on every plugin patch — only when you manually trigger a sync. See `README.md` "Optimization history" for the per-version change log.
+**Version**: v1.29.0-web (current). Tracks the plugin release (v1.29.0) it documents; the website does not auto-update on every plugin patch — only when you manually trigger a sync. See `CHANGELOG.md` for the per-version record and the `-web` versioning convention.
 
 ## Tech stack
 
@@ -337,7 +337,7 @@ Then in browser:
 
 ## Project conventions
 
-- **Versioning**: this repo doesn't use `npm version`; versions are tracked in `README.md` "Optimization history" section as a manual changelog. Update it whenever you ship a meaningful change.
+- **Versioning**: this repo doesn't use `npm version`. `package.json`'s version is set by hand as part of a sync, and the authoritative record of what each version contains is `CHANGELOG.md` — not `README.md`. To sync: read the plugin `CHANGELOG` between the last synced plugin version and the current one, translate that delta into site changes, bump `package.json` + the `**Version**` line above, then write the new entry at the top of `CHANGELOG.md`. Plan a multi-workstream sync in `ROADMAP.md` first.
 - **Commit messages**: Conventional Commits (`feat:`, `fix:`, `refactor:`, `style:`, `docs:`, `chore:`). Co-authored-by trailer.
 - **Never commit without explicit user approval** — see [[Commit Approval]] in memory.
 - **Don't preserve Tailwind v4 warnings** about canonical classes (`flex-shrink-0` → `shrink-0`, `break-words` → `wrap-break-word`, `h-[700px]` → `h-175`) — they're cosmetic, not errors, but also don't fix them mid-refactor as drive-by changes.

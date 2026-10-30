@@ -2,13 +2,14 @@
 
 This file tracks **active and planned sync work** for the marketing site. It is a
 planning document, not a changelog: shipped work is recorded in `README.md` →
-"Optimization history" and in `git log`. An item is deleted from here once its
-phase is complete and its outcome is written into the Optimization history entry.
+`CHANGELOG.md` and in `git log`. An item is deleted from here once its phase is
+complete and its outcome is written into the changelog entry.
 
 Related documents:
 
 - `AGENTS.md` — copywriting standard (Apple-tier), architecture rules, gate definition.
-- `README.md` → "Optimization history" — the shipped per-version record.
+- `CHANGELOG.md` — the shipped per-version record (single source of truth for history).
+- `README.md` — what the site is, and how to build and deploy it.
 - Plugin repo `/Users/greener/project/obsidian-llm-wiki` — upstream `CHANGELOG.md`
   is the authoritative source of what shipped.
 
@@ -237,10 +238,10 @@ same section order, same claims.
 
 ---
 
-### W7 — Version bump + Optimization history
+### W7 — Version bump + changelog entry
 
 **Files.** `package.json` (`1.27.0-web` → `1.29.0-web`), `README.md`
-(Optimization history: new `### v1.29.0-web (2026-10) — current. Plugin: v1.29.0`
+(CHANGELOG: new `## v1.29.0-web — 2026-10 · plugin v1.29.0`
 entry; demote `v1.27.0-web` by dropping `— current`).
 
 **Acceptance.** Entry records version + release dates, claims introduced, claims
@@ -274,7 +275,7 @@ the existing `v1.27.0-web` entry so the history stays skimmable.
 - [x] **W4** — providers grid: +ChatGPT Plan, −Anthropic-Compatible, un-count subtitle (11 locales)
 - [x] **W5** — privacy FAQ: MinerU retention clause (11 locales)
 - [x] **W6** — v1.28+v1.29 announcement post (EN + ZH)
-- [x] **W7** — version bump + Optimization history
+- [x] **W7** — version bump + changelog entry
 - [x] **W8** — gate + verify + push
 
 ---
