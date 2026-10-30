@@ -268,7 +268,7 @@ the existing `v1.27.0-web` entry so the history stays skimmable.
       docs/PDF-OCR-GUIDE, `src/texts/en.ts` setting names, `src/constants.ts`)
 - [x] Verify every stale claim against plugin source before writing it down
 - [x] **W0** — this document
-- [ ] **W1** — query-pipeline blog corrections (EN + ZH)
+- [x] **W1** — query-pipeline blog corrections (EN + ZH)
 - [ ] **W2** — pdf-ingest-guide: six on-ramps + destination table (EN + ZH)
 - [ ] **W3** — conversational feature card: retrieval story (11 locales)
 - [ ] **W4** — providers grid: +ChatGPT Plan, −Anthropic-Compatible, un-count subtitle (11 locales)

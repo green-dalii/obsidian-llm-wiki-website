@@ -40,20 +40,28 @@ The distinction matters because graph signals and embedding signals make *differ
 
 That single choice is why the answers cite pages, why they feel tied to your notes rather than to the internet, and why the pipeline can tell you honestly when your wiki has nothing to say. With that framing in place, here are the five design choices inside Select Seeds that follow from it.
 
-## Choice 1: Lex-then-PPR, the decision that this isn't a vector system
+## Choice 1: Lexical-then-PPR, the decision that this isn't a vector system
 
-The seed selector's first move is the cheapest one imaginable: tokenize your question and do a plain substring match against page titles and aliases. No model call, no vectors, no I/O beyond the index that's already in memory. If your question was "January 2026 meeting" and you have a page titled exactly that, the match is instant and unambiguous.
+The seed selector's first move is the cheapest one available: score your question against the pages already in the index, with no model call and no I/O beyond memory. The scorer is BM25F over four fields — title, aliases, summary, and body — with per-field term-frequency saturation and an inverse document frequency computed from a real document-frequency table.
+
+The body field is the one that matters most here. It is the largest text on a page, and for most of this project's history it was not scored at all. Adding it changed the lexical channel on precisely the questions that used to fall through to a model call: the ones where your words and the page's words barely overlap.
 
 Those matched pages become the *seeds* for a Personalized PageRank walk over your link graph, which expands outward to the pages your wiki has connected to them. The whole thing is deterministic: the same question produces the same matches, the same seeds, and the same ranked results, every time.
 
-Why start with something so unsophisticated? Because at the scale most personal wikis actually live at — a few hundred to a couple thousand pages — lexical-plus-graph beats embed-then-rerank on nearly every axis that matters:
+Why start with scoring instead of embedding? Because at the scale most personal wikis actually live at — a few hundred to a couple thousand pages — lexical-plus-graph beats embed-then-rerank on nearly every axis that matters:
 
 - It costs **zero tokens and zero vector I/O** for the common case.
 - It has **no cold-start problem** — a page is findable the instant it exists, with no embedding pass to run first.
 - It's **deterministic**, so behavior is reproducible and debuggable.
-- It's **explainable** — the plugin can literally show you which words in your question matched which page titles.
+- It's **explainable** — ranking is arithmetic over the words you wrote on the page, so a result can be justified rather than guessed at.
 
-There is an honest ceiling here, and it's worth naming clearly rather than burying. Past roughly 5,000 pages, the lexical step starts returning too many weak matches — common words collide with too many titles — and a real vector store would genuinely help. Measured on a real 2,142-page vault, recall-at-5 for the lex-PPR cascade came in within sampling noise of a strong embedding model on the same vault. At that scale, embeddings would have bought essentially nothing while adding an ingest-time embedding pass, a vector store to maintain, and per-query embedding cost. So they weren't added. Not "embeddings are bad" — "embeddings don't pay for themselves yet, at this scale." When they do, they'll slot in as an optional pre-lex stage, not a replacement for the cascade.
+There is an honest ceiling here, and it's worth naming clearly rather than burying. Push far enough and the lexical step starts returning too many weak matches — common words collide with too many other pages — and a real vector store would genuinely help. Where that ceiling sits moved upward once the body field joined the scorer, so read the measurement below as the floor it was taken at, not the current limit. Measured on a real 2,142-page vault under the earlier scorer, recall-at-5 for the lexical-PPR cascade came in within sampling noise of a strong embedding model on the same vault. At that scale embeddings would have bought essentially nothing while adding an ingest-time embedding pass, a vector store to maintain, and per-query embedding cost. So they weren't added. Not "embeddings are bad" — "embeddings don't pay for themselves yet, at this scale." When they do, they'll slot in as an optional pre-lex stage, not a replacement for the cascade.
+
+### Widening the question
+
+One more piece sits on top of the scorer. Before seeds are chosen, the query is expanded twice — once with terms the wiki itself supplies, then again with terms a model proposes from that first result set. Each pass is weighted, and expansion only fires when the cascade actually reaches the graph stage; a question that scored cleanly needs nothing added to it.
+
+The interesting part is what the measurement refused to claim. The weighted form and a plain concatenation of the extra terms were compared head to head, and the weighted form was **not** measurably better. What the weighting buys is a floor — the worst case stops dropping below a usable score — not a better average. So the simpler claim is the one that survives, and it does not get rounded up here.
 
 ## Choice 2: Five stages, the decision that the hot path stays fast
 
@@ -95,7 +103,7 @@ Four things make this the right shape:
 
 This is the choice worth being proudest of, precisely because the failure it fixed was invisible until a real person hit it. The seeds this stage finds feed straight into the same PPR walk from Choice 1, and the UI labels the result so you can see the model helped find the entry points.
 
-While we're here: those labels are the arms you may have noticed in the interface. **`Lex+PPR`** means the lexical match was strong enough on its own — no model needed to find your pages. **`LLM+PPR`** means the lexical match was weak, the model extracted keywords, the local scan found seeds, and PPR expanded from them. **`LLM+KB`** means none of that found anything in your wiki — which brings us to the fourth choice.
+While we're here: that label is the line you may have noticed above an answer. It reads `🔍 12 pages · ⚡ BM25F+PPR · 📚 4 sources` — three things worth knowing when an answer looks wrong. The page count is what retrieval loaded. The channel line names what actually ran: `BM25F` is the lexical scorer, `PPR` means the graph expansion fired, `Exp` appears when the question was widened, and `LLM` appears only when a model was called to help find seeds — it used to be printed whether or not the model ran, which made it the answer to "what happened" while the lexical and graph channels did the work and the model sat idle. The source count is coverage, because a single-source answer is a different kind of wrong from a wrong page. Hover the line and the detail hands you the expansion word count, the conversation rounds the retrieval carried, and the fusion rule. When nothing in your wiki matches at all, the line says `🌐 LLM Knowledge Base` — which brings us to the fourth choice.
 
 ## Choice 4: pureLLM as a first-class state, the decision that keeps the plugin honest
 
@@ -154,7 +162,7 @@ For a roughly 2,000-page vault, here's where the time and tokens actually go on 
 | Stage | Latency (typical) | Model tokens |
 |-------|------------------:|-------------:|
 | Read index | 5–15 ms | 0 |
-| Lexical match | 1–3 ms | 0 |
+| Lexical scoring (BM25F) | 5–20 ms | 0 |
 | Keyword extraction (only when lex is weak) | 200–800 ms | 50–150 |
 | PPR expansion | 30–80 ms | 0 |
 | Load pages | 50–200 ms | 0 |
@@ -162,11 +170,13 @@ For a roughly 2,000-page vault, here's where the time and tokens actually go on 
 
 The read across that table is the whole thesis in numbers. A strong-lexical query reaches the chat model in under 300 milliseconds of retrieval work, spending zero tokens on retrieval. A weak-lexical query adds a few hundred milliseconds for keyword extraction — but only when it's needed. And everything above the chat-model row is perceived as instant by a human. The one genuinely slow, genuinely expensive step is the chat model writing the answer, and that cost is identical no matter how you retrieve. The entire point of the cascade is to make sure you're not paying model latency *twice* — once to understand the query and again to answer it — when 90% of the time understanding it was free.
 
+One row in that table is not like the others. The index those first two stages read used to be rebuilt on every question: 4.4 seconds on a 2,864-page vault, against 21 milliseconds to score from a table that already exists. It is now built once per session and rebuilt only for a page whose body changed. What you feel is one slower question after opening the vault, and nothing after that.
+
 ## Why this matters if you use the plugin
 
 Here's the payoff for reading this far. The answers you get from this plugin are *structurally* honest about what they know and don't know — not honest as a matter of the model's good behavior, which can't be relied on, but honest as a matter of how the pipeline is built.
 
-That's what the arm labels are telling you. See **`Lex+PPR`** and you know your question matched your pages cleanly, no model guessing involved. See **`LLM+PPR`** and you know the model helped name what you were after, then your own link graph did the finding. See **`LLM+KB`** with a verify-vault banner and you know, unambiguously, that this answer came from the model's general training and *not* from your notes — believe it accordingly. The presence or absence of `[[wiki-link]]` citations tells you the same story from another angle.
+That's what the label above an answer is telling you. See `⚡ BM25F+PPR` and you know your question scored against your own pages cleanly, no model guessing involved. See `LLM` in that line and you know a model was called to help name what you were after, and then your own link graph did the finding. See `🌐 LLM Knowledge Base` with a verify-vault banner and you know, unambiguously, that this answer came from the model's general training and *not* from your notes — believe it accordingly. The presence or absence of `[[wiki-link]]` citations tells you the same story from another angle.
 
 Choosing a graph-grounded pipeline over a vector-grounded one, keeping the model off the hot path, extracting keywords instead of slicing candidate lists, making pureLLM a loud first-class state instead of a silent fallthrough, sending a compact hint instead of a 70K-token dump, hiding the folder name behind a placeholder — none of these are engineering hygiene for its own sake. They're the concrete decisions that let a pile of Markdown files behave like a wiki you can trust instead of a chatbot in a costume. The wiki's structure is the source of truth. The model is the interpreter. PPR is the navigator. Embeddings are enrichment to be added the day they earn their place — and not before.
 
