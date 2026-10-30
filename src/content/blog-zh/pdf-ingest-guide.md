@@ -1,6 +1,6 @@
 ---
 title: "实践指南（8）：PDF 摄取——从研究论文到可查询的 Wiki 页面"
-description: "从 vault 中任选 PDF。插件通过你的 LLM 提供商读取、逐字转写为 Markdown，再接入标准的 Wiki 抽取流水线。"
+description: "PDF、图片、Office 文件，或者一篇把关键内容放在截图里的笔记——随手挑一个。插件把它逐字转写成 Markdown，再接入标准的 Wiki 抽取流水线。而这一页还会告诉你：每条路径到底把你的文档送到哪里去了。"
 date: 2026-07-20
 tags: ["实践指南"]
 series: "workflow-guides"
@@ -60,19 +60,35 @@ PDF → （LLM 读它、转写成 Markdown） → 走和笔记一模一样的 Wi
 
 顺带一提，当你从别的服务商切回原生服务商（Claude、GPT、Bedrock）时，那个强制开关会自动帮你关掉——因为原生服务商根本不需要它。
 
-## 五种入口，按摄入切换
+## 六种入口，按摄入切换
 
-v1.27.0 把转换选项整理成五条入口，摄入时按需切换：
+v1.27.0 把转换选项整理成五条入口，v1.28.0 又添了第六条。每次摄入挑一条：
 
 1. **内置 MinerU 后端** —— Settings → Wiki Configuration → Markdown Conversion Backend → *MinerU*。支持 PDF、图片（PNG/JPG/JPEG/JP2/WebP/GIF/BMP）和 Office 文档（DOC/DOCX/PPT/PPTX/XLS/XLSX），通过 [MinerU 的 Precise 解析器](https://mineru.net/apiManage/docs) 处理。学术论文、扫描件、对版式保真有要求的 Office 文件走这条最稳。API token 只放在 Obsidian SecretStorage 里。服务端限额：单 PDF 200 MB / 200 页，压缩包 256 MB / 10,000 个文件。
 2. **云服务商原生 PDF** —— Anthropic、OpenAI、Google Gemini、AWS Bedrock（Claude 与 OpenAI 变体）默认就把 PDF 当文件块来读，配好服务商就能用。
 3. **Apple Silicon 本地 OCR** —— [oMLX](https://github.com/jundot/omlx) 内置 Microsoft Markitdown 作为 PDF→Markdown 后端。在 oMLX 里启用 Markitdown，加载 [Baidu Unlimited-OCR](https://huggingface.co/baidu/Unlimited-OCR) 作为视觉模型，把插件指向 oMLX 当作 Custom OpenAI-Compatible 服务商，打开 **Force PDF Support**，选 oMLX 提供的多模态模型即可。PDF 从头到尾不出本机。
 4. **第三方提取器（MinerU 在线 UI）** —— 不想配 token 时，用 [MinerU Extractor 在线服务](https://mineru.net/OpenSourceTools/Extractor) 手动转一份。下载转换好的 `.md`，放进 vault 里 wiki 文件夹之外的位置，作为普通 Markdown 笔记摄取即可。
 5. **Force PDF Support** —— 其他接受文件块的 OpenAI / Anthropic 兼容端点都可以试一下（Settings → LLM Configuration → Advanced）。端点自己决定接不接；失败会显示本地化的提示。
+6. **笔记里本来就有的图片** —— 这条严格说不是"转换器"。很多 Markdown 笔记真正的内放在一张截图里：别人贴过来的表格、下面那段正文正在讲的那张图。打开 Advanced 设置里的 **Analyze embedded images during Markdown ingestion**，每一个符合条件的本地内嵌图片——`![[…]]` 或 `![…](…)`——都会被 Obsidian 解析出来，跟它最近的几段正文一起送去做视觉分析，于是图片落在了指向它的那段文字同一页上。内嵌图片按 20 MiB 一批打包，所以一份源文件不受图片张数限制；单张图上限 10 MiB，GIF 只发静态首帧，远程 URL 永远不下载。如果你想回头看模型到底看到了什么，再打开 **Save embedded image visual evidence to source page**——它会在生成的来源页上写一个可折叠小节。
 
 原生后端（关闭 MinerU）按设计仍然只支持 PDF——多格式路由不在它的范围内。需要图片或 Office 文件时，把后端切到 MinerU。
 
 **Office 格式的注意事项。** Obsidian 原生不渲染 `.docx` / `.xlsx` / `.pptx`（[文件格式说明](https://obsidian.md/help/file-formats)），所以 Office 文件的实际工作流是：MinerU 转成 `.md`，插件把它摄入成 Wiki 页面，原始 Office 文件保留在原位置供查阅。
+
+## 你的文档被送到了哪里
+
+插件自己不起服务端。这点很简单。不简单的是：上面六条路径**并不**都把文件送到同一个地方，而其中一条送去的地方不是你挑的。整张答案就一张表：
+
+| 路径 | 文件发生了什么 |
+|---|---|
+| **内置 MinerU 后端** | 上传到 `mineru.net`，由 OpenDataLab 运营，跑在阿里云基础设施上。 |
+| **云服务商原生 PDF** | 作为文件块发给**你配置的**那家服务商。Anthropic、OpenAI、Google 默认在美国处理；Bedrock 在你配置的区域处理。 |
+| **本地 OCR**（Apple Silicon 上的 oMLX + Markitdown） | 什么都不出去。这是唯一一条文档从未跨过网络边界的路径。 |
+| **别处来的 Markdown** | 插件只看得见你交给它的文本。那份 Markdown 是谁生成的，不在它的范围里。 |
+
+**MinerU 没有任何留存条款。** `mineru.net` 有 API 文档，但我们找不到它公开的隐私政策、留存声明或数据处理协议。在自托管端点落地之前，往那里上传，就当作是把文档交出了你的控制。
+
+**走服务商这条路，选择权在你手上，而这正是重点。** 插件从不自己挑服务商——它把文件发给你配的那一家，用你的账号、按它们的条款。所以真正有后果的选择就是这个：文档是一篇在哪儿都能下载到的公开论文，就用 MinerU；是一份合同、一份病历、或任何地理位置有关的资料，就用本地 OCR。
 
 ## 来源页也带上原文引用了
 

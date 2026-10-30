@@ -1,6 +1,6 @@
 ---
 title: "Workflow Guide (8): PDF Ingest — From Research Papers to Queryable Wiki Pages"
-description: "Pick a PDF from anywhere in your vault. The plugin reads it through your LLM provider, transcribes it to Markdown verbatim, and feeds the result into the standard wiki extraction pipeline."
+description: "Pick a PDF, an image, an Office file, or a note that keeps its screenshots. The plugin transcribes it to Markdown and feeds the result into the standard wiki extraction pipeline — and this page says where each of those paths actually sends your document."
 date: 2026-07-20
 tags: ["guides"]
 series: "workflow-guides"
@@ -66,19 +66,35 @@ This is also why the plugin does not simply attempt every provider and report wh
 
 There is a useful division of labor for local setups. Ollama and LM Studio can still be excellent choices for the later wiki extraction step, where the input is Markdown and the job is entity and concept linking. They are not the providers to rely on for native PDF conversion. Separating those jobs lets you keep a local chat model for your vault while using either a provider with native PDF support or a local OCR stack for the document boundary.
 
-## Five ways in, switchable per ingest
+## Six ways in, switchable per ingest
 
-v1.27.0 reorganizes the conversion options into five on-ramps you can switch per ingest:
+v1.27.0 organized the conversion options into five on-ramps, and v1.28.0 added a sixth. You pick one per ingest:
 
 1. **Built-in MinerU backend** — Settings → Wiki Configuration → Markdown Conversion Backend → *MinerU*. PDF, images (PNG, JPG, JPEG, JP2, WebP, GIF, BMP), and Office documents (DOC, DOCX, PPT, PPTX, XLS, XLSX) through [MinerU's Precise parser](https://mineru.net/apiManage/docs). Best path for scientific papers, scanned documents, and Office files where layout preservation matters. The API token lives only in Obsidian SecretStorage. Server caps: 200 MB / 200 pages per PDF, 256 MB / 10,000 files per archive.
 2. **Cloud providers with native PDF** — Anthropic, OpenAI, Google Gemini, and AWS Bedrock (Claude and OpenAI variants) read PDFs as file parts out of the box. No setup beyond provider selection.
 3. **Local OCR on Apple Silicon** — [oMLX](https://github.com/jundot/omlx) bundles Microsoft Markitdown as a built-in PDF→Markdown backend. Enable Markitdown in oMLX, load [Baidu Unlimited-OCR](https://huggingface.co/baidu/Unlimited-OCR) as the vision model, point the plugin at oMLX as a Custom OpenAI-Compatible provider, turn on **Force PDF Support**, pick the multimodal model oMLX is serving. The PDF never leaves your machine.
 4. **Third-party extractor (MinerU online UI)** — use the [MinerU Extractor online service](https://mineru.net/OpenSourceTools/Extractor) for a quick manual UI when you do not want to wire up an API token. Download the converted `.md`, drop it in your vault outside the wiki folder, and ingest as a regular Markdown note.
 5. **Force PDF Support** — for any other OpenAI / Anthropic-compatible endpoint that accepts file parts, the plugin attempts the call (Settings → LLM Configuration → Advanced). The endpoint decides; failures surface as a localized Notice.
+6. **Images already embedded in your notes** — this one is not a converter at all. A lot of Markdown notes carry their real content in a screenshot: a table someone pasted, a diagram the paragraph beneath it refers to. Turn on **Analyze embedded images during Markdown ingestion** in Advanced settings and every eligible local embed — `![[…]]` or `![…](…)` — is resolved through Obsidian and analyzed together with the paragraphs nearest to it, so the picture lands on the same page as the text that points at it. Embeds travel in 20 MiB packages, so a source is not limited by how many images it has; each single image is capped at 10 MiB, a GIF sends a static first frame, and a remote URL is never downloaded. Turn on **Save embedded image visual evidence to source page** as well if you want to audit what the model actually saw — it writes a collapsible section onto the generated source page.
 
 The native backend (MinerU off) is still PDF-only by design — multi-format routing under the native path is not in scope. Switch backend to MinerU when you need images or Office files.
 
 **A caveat for Office formats.** Obsidian does not natively render `.docx` / `.xlsx` / `.pptx`, so the practical workflow for Office files is: MinerU converts to `.md`, the plugin ingests that `.md` into wiki pages, and the original Office file is kept around for reference.
+
+## Where your document goes
+
+The plugin runs no server of its own. That much is simple. What is less simple is that these six paths do **not** all send your file to the same place, and one of them goes somewhere you did not choose. Here is the whole answer in one table:
+
+| Path | What happens to the file |
+|------|--------------------------|
+| **Built-in MinerU backend** | Uploaded to `mineru.net`, operated by OpenDataLab on Aliyun infrastructure. |
+| **Cloud provider, native PDF** | Sent as a file part to the provider *you* configured. Anthropic, OpenAI and Google process in the United States by default; Bedrock processes in the region you configured. |
+| **Local OCR** (oMLX + Markitdown on Apple Silicon) | Nothing leaves your machine. This is the only path where the document never crosses a network boundary. |
+| **Markdown from elsewhere** | The plugin sees only the text you hand it. Whatever produced that Markdown is outside its scope. |
+
+**MinerU publishes no retention terms.** `mineru.net` documents its API but publishes no privacy policy, retention statement, or data-processing agreement we were able to find. Until a self-hosted endpoint exists, treat an upload there as leaving your control.
+
+**The provider path is yours to choose, and that is the point.** The plugin never picks a provider on its own — it sends the file to whichever one you configured, under your account and their terms. So the choice with real consequences is this one: pick MinerU when the document is a published paper you could have downloaded anywhere, and pick local OCR when it is a contract, a medical record, or anything else whose jurisdiction matters.
 
 ## The source page now keeps the quotes
 
