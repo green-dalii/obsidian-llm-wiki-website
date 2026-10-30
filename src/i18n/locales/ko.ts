@@ -68,8 +68,8 @@ export const ko: Translations = {
     bidirectionalTitle: '살아 있는 링크',
     bidirectionalDesc: '모든 페이지가 Obsidian 그래프에 합류합니다. 그래프 뷰를 열면 — 지식이 성장하는 것을 지켜보세요.',
     bidirectionalTag: '연결됨',
-    conversationalTitle: '그냥 물어볼 일',
-    conversationalDesc: '친구한테 말하듯 질문하세요. 플러그인이 생각하고 자연스럽게 답합니다.',
+    conversationalTitle: '어떻게 물어도 찾습니다',
+    conversationalDesc: '페이지에 적힌 그대로의 단어를 쓸 필요는 없습니다. 제목만이 아니라 본문 전체를 검색하니, 표현이 달라도 알맞은 페이지에 도착합니다.',
     conversationalTag: '자연스럽게',
     autoMaintenanceTitle: '항상 최신',
     autoMaintenanceDesc: '새 파일? 자동 수집. 모순? 자동 발견. 당신의 페이스로.',
@@ -116,7 +116,7 @@ export const ko: Translations = {
   providers: {
     label: '당신만의 AI를 가져오세요',
     title: '당신의 모델. 당신의 규칙.',
-    subtitle: '12가지 길 — 클라우드, 로컬, 또는 당신만의 endpoint. 언제든 바꾸세요.',
+    subtitle: '클라우드, 로컬, 또는 당신만의 endpoint. 언제든 바꾸세요.',
     contextNote: '긴 컨텍스트 모델이 위키 전체를 한 번에 읽습니다 — 단편이 아닌 완전한 그림. 로컬 모델은 기기 안에서 완전히 동작 — 업로드 없음, API 키 없음.',
     bestValue: '최고의 가성비',
     modelGuideLink: '전체 모델 등급표 (PDF-OCR + 하드웨어별 추천)',
@@ -162,7 +162,7 @@ export const ko: Translations = {
       { q: '수동 [[링크]] 와 무엇이 다른가요?', a: '수동 [[링크]] 는 이미 보이는 연결만 잡습니다. 플러그인은 모든 노트를 읽고, 놓친 연결을 찾아, 페이지를 만듭니다 — 월을 넘어, 폴더를 넘어, 묻혀 있던 언급까지.' },
       { q: '플러그인이 노트나 vault 에 손을 대나요?', a: '아닙니다. 플러그인은 자신의 wiki/ 폴더에만 씁니다. 검토 완료 표시를 한 페이지는 AI가 다시 쓰지 않고 추가만 합니다.' },
       { q: '뭐가 필요하고 비용은 얼마인가요?', a: '데스크톱 Obsidian 최신 안정판과 LLM 공급자 API 키. 긴 컨텍스트 모델이 최고. 한 번 수집에 LLM 측 $0.05–$0.50 — 플러그인 자체는 무료 오픈소스. Ollama / LM Studio 로컬 모델은 키 불필요.' },
-      { q: '데이터를 완전히 사적으로 둘 수 있나요?', a: '네. Ollama 또는 LM Studio 를 쓰면 모든 바이트가 당신 컴퓨터 안에 남습니다. 클라우드 모델은 데이터가 당신이 시작한 수집이나 쿼리 동안만 나갑니다.' },
+      { q: '데이터를 완전히 사적으로 둘 수 있나요?', a: '네. Ollama 또는 LM Studio 를 쓰면 모든 바이트가 당신 컴퓨터 안에 남습니다. 클라우드 모델은 데이터가 당신이 시작한 수집이나 쿼리 동안만 나갑니다. 예외가 하나 있습니다. 선택 사항인 문서 변환기는 파일을 mineru.net 으로 업로드하며, 그쪽은 보존 기간을 공개하지 않습니다. 신경 쓰인다면 문서를 로컬에서 처리하세요.' },
       { q: 'PDF 와 작업별 모델을 지원하나요?', a: 'PDF 는 일급 소스입니다 — vault 에서 고르면 노트와 같은 Wiki 그래프에 합류합니다. 수집, lint, 쿼리에 다른 모델을 할당할 수도 있습니다.' },
       { q: '도움은 어디서 받나요?', a: 'GitHub 에서 issue 를 열거나 discussion 을 시작하세요.' },
     ]

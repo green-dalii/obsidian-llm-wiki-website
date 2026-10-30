@@ -15,22 +15,39 @@ const tp = { ...translations.en.providers, ...t.providers };
 // shape — cloud flagship → cloud budget → enterprise / VPC → local →
 // aggregator / custom endpoint. Brand names first; version numbers
 // never. Note: DeepSeek is independent (backed by High-Flyer, NOT
-// Alibaba). Qwen is Alibaba. The "OpenAI-Compatible" slot was retired
-// in v1.27.0-web to make room for AWS Bedrock — Claude / GPT are still
-// reachable via any custom OpenAI- or Anthropic-protocol endpoint.
+// Alibaba). Qwen is Alibaba.
+//
+// Composition history (do not re-litigate without a reason):
+//   v1.27.0-web — retired the generic "OpenAI-Compatible" slot to make room
+//                 for AWS Bedrock (Claude / GPT stay reachable via any custom
+//                 OpenAI- or Anthropic-protocol endpoint).
+//   v1.29.0-web — added "ChatGPT Plan" (Codex OAuth), a distinct *sign-in*
+//                 rather than another endpoint: your ChatGPT subscription
+//                 instead of a separately-billed API key. It has shipped since
+//                 plugin v1.25.2 and had never appeared on this page, while the
+//                 enterprise equivalent (Bedrock SSO) has been here since
+//                 v1.27.0-web. Retired "Anthropic-Compatible" to keep twelve:
+//                 of the previous twelve it was the only card that is a
+//                 configuration path rather than a provider, and the section
+//                 subtitle already promises "or your own endpoint".
+//                 "OpenCode (Zen / Go)" — a new preset in v1.28.0 — is
+//                 deliberately NOT here: it is an aggregator that overlaps
+//                 OpenRouter, and its real user value (a streamed answer that
+//                 survives a blocked origin) belongs in the blog post, not a
+//                 grid cell.
 const PROVIDERS = [
   { name: 'DeepSeek', tagline: 'DeepSeek' },
   { name: 'Anthropic', tagline: 'Claude' },
   { name: 'OpenAI', tagline: 'GPT' },
+  { name: 'ChatGPT Plan', tagline: 'Sign in, no API key' },
   { name: 'Google', tagline: 'Gemini / Gemma' },
   { name: 'xAI', tagline: 'Grok' },
   { name: 'Qwen', tagline: 'Alibaba' },
   { name: 'Kimi', tagline: 'Moonshot' },
   { name: 'GLM', tagline: 'Zhipu' },
   { name: 'AWS Bedrock', tagline: 'Claude / GPT in your VPC' },
-  { name: 'Ollama + LM Studio', tagline: 'Local', local: true },
   { name: 'OpenRouter', tagline: 'Any model' },
-  { name: 'Anthropic-Compatible', tagline: 'Custom Anthropic endpoint' },
+  { name: 'Ollama + LM Studio', tagline: 'Local', local: true },
 ];
 ---
 

@@ -80,8 +80,8 @@ export const zh: Translations = {
     bidirectionalTitle: '活的链接',
     bidirectionalDesc: '每一页都融入 Obsidian 图谱。打开视图——看知识网络自然延展。',
     bidirectionalTag: '已连接',
-    conversationalTitle: '开口即聊',
-    conversationalDesc: '像和朋友说话一样提问。它会思考，再自然地回答你。',
+    conversationalTitle: '怎么问都找得到',
+    conversationalDesc: '不必用页面上的原词。它搜的是整页内容，不只是标题——换个问法，也能落在对的那一页。',
     conversationalTag: '自然',
     autoMaintenanceTitle: '保持更新',
     autoMaintenanceDesc: '新文件？自动收录。有矛盾？自动发现。按你的节奏来。',
@@ -128,7 +128,7 @@ export const zh: Translations = {
   providers: {
     label: '带上你自己的 AI',
     title: '你的模型，你做主。',
-    subtitle: '十二种接法——云端、本地，或你自己的 endpoint。随时切换。',
+    subtitle: '云端、本地，或你自己的 endpoint。随时切换。',
     contextNote: '长上下文模型一次读完整部 Wiki——掌握全貌，而不是拼凑零散片段。本地模型完全在本机运行——无需上传，无需 API 密钥。',
     bestValue: '性价比首选',
     modelGuideLink: '完整模型分级表（PDF-OCR + 各硬件推荐）',
@@ -198,7 +198,7 @@ export const zh: Translations = {
       { q: '这和手动 [[双向链接]] 笔记有什么区别？', a: '手动 [[链接]] 只能记录你已经看到的关联。插件会读所有笔记，找出你没注意到的连接，自动生成 wiki 页面——跨越月份、文件夹、埋在引用里的想法。' },
       { q: '插件会动我的笔记或 vault 吗？', a: '不会。插件只写在它自己的 wiki/ 文件夹里。标为已审阅的页面 AI 永不重写，只追加。每条答案都链回你的笔记。' },
       { q: '需要什么？要花多少钱？', a: '桌面端 Obsidian 最新稳定版，以及一个 LLM 提供商 API 密钥。推荐长上下文模型。单次摄入成本通常 $0.05–$0.50——插件本身免费且开源。本地模型（Ollama / LM Studio）无需密钥。' },
-      { q: '数据能完全私密吗？', a: '可以。用 Ollama 或 LM Studio，每个字节都留在你机器上。用云端模型时，数据只在触发的那次摄入或查询时传出——无遥测、无后端、无存储。' },
+      { q: '数据能完全私密吗？', a: '可以。用 Ollama 或 LM Studio，每个字节都留在你机器上。用云端模型时，数据只在触发的那次摄入或查询时传出——无遥测、无后端、无存储。有一处例外值得点明：可选的文档转换器会把文件上传到 mineru.net，而那边没有公开任何留存条款。在意这一点，就让文档走本地。' },
       { q: '支持 PDF 和按任务选模型吗？', a: 'PDF 是一级来源——从 vault 选一个，接入和笔记同一张 Wiki 图。你也可以为摄入、检查、查询分别指定不同模型。' },
       { q: '如何获取帮助？', a: '在 GitHub 开 issue，或开讨论。也可以在 Obsidian 社区插件页面留评价。' },
     ]

@@ -80,8 +80,8 @@ export const zhHant: Translations = {
     bidirectionalTitle: '活的連結',
     bidirectionalDesc: '每一頁都融入你的 Obsidian 圖譜。開啟 Graph View——看知識網絡自然延展。',
     bidirectionalTag: '已連結',
-    conversationalTitle: '開口即聊',
-    conversationalDesc: '像和朋友說話一樣提問。它會思考，再自然地回答你。',
+    conversationalTitle: '怎麼問都找得到',
+    conversationalDesc: '不必用頁面上的原詞。它搜的是整頁內容，不只是標題——換個問法，也能落在對的那一頁。',
     conversationalTag: '自然',
     autoMaintenanceTitle: '保持更新',
     autoMaintenanceDesc: '新檔案？自動收錄。有矛盾？自動發現。按你的節奏來。',
@@ -128,7 +128,7 @@ export const zhHant: Translations = {
   providers: {
     label: '帶上你自己的 AI',
     title: '你的模型，你作主。',
-    subtitle: '十二種接法——雲端、本機，或你自己的 endpoint。隨時切換。',
+    subtitle: '雲端、本機，或你自己的 endpoint。隨時切換。',
     contextNote: '長脈絡模型一次讀完整部 Wiki——掌握全貌，而不是拼湊零散片段。本機模型完全在本機執行——不用上傳，不需要 API 金鑰。',
     bestValue: '性價比首選',
     modelGuideLink: '完整模型分級表（PDF-OCR + 各硬體推薦）',
@@ -198,7 +198,7 @@ export const zhHant: Translations = {
       { q: '這和手動 [[雙向連結]] 筆記有什麼差別？', a: '手動 [[連結]] 只能記錄你已看到的關聯。外掛會讀所有筆記，找出你沒注意到的連線，自動生成 Wiki 頁面——跨越月份、資料夾、埋在引用裡的想法。' },
       { q: '外掛會動我的筆記或 vault 嗎？', a: '不會。外掛只寫在它自己的 wiki/ 資料夾裡。標為已審閱的頁面 AI 永不重寫，只追加。每條答案都鏈回你的筆記。' },
       { q: '需要什麼？要花多少錢？', a: '桌面端 Obsidian 最新穩定版，以及一個 LLM 供應商 API 金鑰。推薦長上下文模型。單次擷取成本通常 $0.05–$0.50——外掛本身免費且開源。本地模型（Ollama / LM Studio）無需金鑰。' },
-      { q: '資料能完全私密嗎？', a: '可以。用 Ollama 或 LM Studio，每個位元組都留在你機器上。用雲端模型時，資料只在觸發的那次擷取或查詢時傳出——無遙測、無後端、無儲存。' },
+      { q: '資料能完全私密嗎？', a: '可以。用 Ollama 或 LM Studio，每個位元組都留在你機器上。用雲端模型時，資料只在觸發的那次擷取或查詢時傳出——無遙測、無後端、無儲存。有一處例外值得點明：可選的文件轉換器會把檔案上傳到 mineru.net，而那邊沒有公開任何留存條款。在意這一點，就讓文件走本機。' },
       { q: '支援 PDF 和按任務選模型嗎？', a: 'PDF 是一級來源——從 vault 選一個，接入和筆記同一張 Wiki 圖。你也可以為擷取、檢查、查詢分別指定不同模型。' },
       { q: '如何取得協助？', a: '在 GitHub 開 issue，或開討論。也可以在 Obsidian 社群外掛頁面留評價。' },
     ]

@@ -80,8 +80,8 @@ export const en: Translations = {
     bidirectionalTitle: 'Living links',
     bidirectionalDesc: 'Every page joins your Obsidian graph. Open Graph View — and watch your knowledge grow.',
     bidirectionalTag: 'Connected',
-    conversationalTitle: 'Just ask',
-    conversationalDesc: 'Talk to your wiki like a friend. It reasons, then answers — naturally.',
+    conversationalTitle: 'Ask however you like',
+    conversationalDesc: 'It does not need the page\'s exact words. The whole page is searched — not just its title — so another phrasing lands in the right place.',
     conversationalTag: 'Natural',
     autoMaintenanceTitle: 'Stays current',
     autoMaintenanceDesc: 'New files? Auto-ingested. Contradictions? Found. On your terms.',
@@ -133,7 +133,7 @@ export const en: Translations = {
   providers: {
     label: 'Bring Your Own AI',
     title: 'Your model. Your rules.',
-    subtitle: 'Twelve ways in — cloud, local, or your own endpoint. Switch any time.',
+    subtitle: 'Cloud, local, or your own endpoint. Switch any time.',
     contextNote: 'Long-context models read your whole wiki in one pass — the complete picture, not fragmented snippets. Local models run fully on-device — no upload, no API key.',
     bestValue: 'Best value',
     modelGuideLink: 'Full tiered model table (PDF-OCR + per-hardware picks)',
@@ -203,7 +203,7 @@ export const en: Translations = {
       { q: 'How is this different from just [[linking]] my notes?', a: 'You capture what you already see. The plugin reads every note, surfaces links you missed, and builds pages between them — across months, folders, and buried mentions.' },
       { q: 'Does the plugin touch my notes or vault?', a: 'No. The plugin only writes inside its own wiki/ folder. Mark a page reviewed and the AI never rewrites it — only adds. Every answer cites back to your notes.' },
       { q: 'What does it cost and what do I need?', a: 'Obsidian desktop (latest stable) and an LLM provider API key. Long-context models work best. A single ingest runs $0.05 to $0.50 on the LLM side — the plugin itself is free and open source. Local models via Ollama or LM Studio need no key.' },
-      { q: 'Can I keep my data fully private?', a: 'Yes. With Ollama or LM Studio, every byte stays on your machine. With cloud providers, data only leaves during the specific ingest or query you trigger — no telemetry, no backend, no storage.' },
+      { q: 'Can I keep my data fully private?', a: 'Yes. With Ollama or LM Studio, every byte stays on your machine. With cloud providers, data only leaves during the specific ingest or query you trigger — no telemetry, no backend, no storage. One exception worth naming: the optional document converter uploads to mineru.net, which publishes no retention terms. Keep documents local if that matters.' },
       { q: 'Does it work with PDFs and per-task models?', a: 'PDFs are a first-class source — pick one from your vault and it joins the same wiki graph as your notes. You can also assign different models to ingest, lint, and query.' },
       { q: 'How do I get help?', a: 'Open an issue on GitHub, or start a discussion. You can also leave a review on the plugin\'s Obsidian Community page.' },
     ]
