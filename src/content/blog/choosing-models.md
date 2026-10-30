@@ -3,7 +3,7 @@ title: "Inside the System (2): Picking an LLM for Your Wiki"
 description: "Long-context models handle wikis differently. Karpathy LLM Wiki runs against DeepSeek, Gemini, Claude, GPT, Ollama, LM Studio — here is when each makes sense and what you'll pay."
 date: 2026-05-21
 tags: ["internals"]
-related: ["modular-architecture", "faster-ingestion", "first-100-pages"]
+related: ["modular-architecture", "faster-ingestion", "first-100-pages", "v1290-minor-release"]
 series: "inside-the-system"
 ---
 

@@ -4,7 +4,7 @@ description: "Four phases that turn a natural-language question into a wiki-grou
 date: 2026-07-20
 tags: ["internals"]
 series: "inside-the-system"
-related: ["modular-architecture", "monte-carlo-ppr", "schema-layer-deep-dive", "faster-ingestion"]
+related: ["modular-architecture", "monte-carlo-ppr", "schema-layer-deep-dive", "v1290-minor-release"]
 ---
 
 This is the seventh article in the *Inside the System* series. If you only want the user-facing story of what shipped, read [Announcement: v1.24 — Per-Task Models + Query Engine Refactor](/blog/posts/v123-graph-engine-ai-sdk/). This one is for the people who want to know *why the answers behave the way they do* — technical Obsidian users willing to spend fifteen minutes inside the architecture. No source-code tour, no line numbers. Just the design decisions and the reasoning behind them.

@@ -4,7 +4,7 @@ description: "PDF、图片、Office 文件，或者一篇把关键内容放在�
 date: 2026-07-20
 tags: ["实践指南"]
 series: "workflow-guides"
-related: ["zotero-pdf-integration", "research-papers-workflow", "first-100-pages", "choosing-local-models", "v1270-minor-release"]
+related: ["zotero-pdf-integration", "research-papers-workflow", "first-100-pages", "choosing-local-models", "v1270-minor-release", "v1290-minor-release"]
 ---
 
 ## 那 50 篇论文的困境

@@ -4,7 +4,7 @@ description: "把一个自然语言问题变成一条有据可查的 Wiki 答案
 date: 2026-07-20
 tags: ["深入解析"]
 series: "inside-the-system"
-related: ["modular-architecture", "monte-carlo-ppr", "schema-layer-deep-dive", "faster-ingestion"]
+related: ["modular-architecture", "monte-carlo-ppr", "schema-layer-deep-dive", "v1290-minor-release"]
 ---
 
 这是 *Inside the System* 系列的第七篇。前几篇走过模块化架构、模型选择、摄入延迟、矛盾检测、Schema 提取，以及驱动检索的蒙特卡洛 PPR 引擎。本篇打开查询侧的引擎盖，把一个自然语言问题变成一条 Wiki 锚定、带引用的答案的四阶段流水线。

@@ -273,7 +273,7 @@ the existing `v1.27.0-web` entry so the history stays skimmable.
 - [x] **W3** — conversational feature card: retrieval story (11 locales)
 - [x] **W4** — providers grid: +ChatGPT Plan, −Anthropic-Compatible, un-count subtitle (11 locales)
 - [x] **W5** — privacy FAQ: MinerU retention clause (11 locales)
-- [ ] **W6** — v1.28+v1.29 announcement post (EN + ZH)
+- [x] **W6** — v1.28+v1.29 announcement post (EN + ZH)
 - [ ] **W7** — version bump + Optimization history
 - [ ] **W8** — gate + verify + push
 

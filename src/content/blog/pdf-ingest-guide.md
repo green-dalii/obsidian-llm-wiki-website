@@ -4,7 +4,7 @@ description: "Pick a PDF, an image, an Office file, or a note that keeps its scr
 date: 2026-07-20
 tags: ["guides"]
 series: "workflow-guides"
-related: ["zotero-pdf-integration", "research-papers-workflow", "first-100-pages", "choosing-local-models", "v1270-minor-release"]
+related: ["zotero-pdf-integration", "research-papers-workflow", "first-100-pages", "choosing-local-models", "v1270-minor-release", "v1290-minor-release"]
 ---
 
 ## The PDFs sitting beside your vault
