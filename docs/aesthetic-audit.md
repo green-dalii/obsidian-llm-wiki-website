@@ -1,6 +1,6 @@
 # Aesthetic audit & redesign — the connected document
 
-**Status**: in progress (P0–P4)
+**Status**: P0–P3 core shipped; four items deferred with reasons in `ROADMAP.md`
 **Scope**: the marketing site's visual language, motion, and theme system.
 **Not in scope**: copy (owned by `AGENTS.md`), content, i18n strings, and blog
 article bodies.
@@ -316,3 +316,36 @@ user's visual review.
 - i18n strings and the 11 locale files.
 - Blog article bodies and layout beyond token adoption.
 - Provider list composition (settled in the v1.29.0-web sync).
+
+---
+
+## 8. Re-score after implementation
+
+Weights are the same as §2.6. Scored against renders in both schemes, not against
+the intent.
+
+| Criterion | Weight | Before | After | What moved | What caps it |
+|---|---|---|---|---|---|
+| Design | 40 | 2.2 | **3.3** | one container and one rhythm; three-tier type scale; bento with a real entry point; hairlines as structure; accent spent ≤3× per viewport | graphic assets are still thin — no illustration, no product photography, no custom icon set |
+| Usability | 30 | 2.1 | **2.8** | reduced-motion honoured; no-JS fallback; visible focus rings; theme follows the OS with no flash; pointer effects off on touch | nav is still 12px; no skip link; OG image and favicon unchanged |
+| Creativity | 20 | 0.8 | **1.6** | the thesis survives removing the copy: dark is a workspace, light is paper, and the Comparison spine is an argument drawn rather than stated | the idea is legible but not yet unforgettable — the signature motion appears once |
+| Content | 10 | 0.9 | **0.9** | untouched by design | — |
+| **Total** | | **6.0** | **8.6** | | |
+
+The remaining 1.4 sits mostly in the two deferred items (Providers grouping,
+pinned Install) plus the craft tail: a custom icon set, a redrawn OG card, and a
+404 that belongs to the same system rather than being a default.
+
+## 9. Reproducing the comparison
+
+```bash
+npm run dev
+node scripts/visual-audit.mjs /tmp/shots/before dark /     # on the previous commit
+node scripts/visual-audit.mjs /tmp/shots/after  dark /     # on this one
+node scripts/visual-audit.mjs /tmp/shots/after-light light /
+```
+
+Same viewport, same scroll landmarks, both schemes. Comparing renders rather
+than reading CSS is what caught the `prose-invert` defect: the marketing pages
+were correct and the blog was unreadable, and no amount of reading components
+would have shown it.
