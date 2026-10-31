@@ -323,6 +323,33 @@ html:lang(ko) .text-display-m {
   }
 }
 
+/* @tailwindcss/typography ships two fixed palettes and `prose-invert` picks the
+   light-on-dark one. Mapping its variables to the live tokens instead means the
+   article body follows the scheme like every other surface — the invert class
+   left body copy near-white on paper. */
+.prose {
+  --tw-prose-body: var(--ink-2);
+  --tw-prose-headings: var(--ink);
+  --tw-prose-lead: var(--ink-2);
+  --tw-prose-links: var(--accent);
+  --tw-prose-bold: var(--ink);
+  --tw-prose-counters: var(--ink-3);
+  --tw-prose-bullets: var(--ink-3);
+  --tw-prose-hr: var(--line);
+  --tw-prose-quotes: var(--ink);
+  --tw-prose-quote-borders: var(--accent-line);
+  --tw-prose-captions: var(--ink-3);
+  --tw-prose-code: var(--ink);
+  --tw-prose-pre-code: var(--ink-2);
+  --tw-prose-pre-bg: var(--surface-2);
+  --tw-prose-th-borders: var(--line-strong);
+  --tw-prose-td-borders: var(--line);
+}
+
+/* Every prose surface (blog posts, about pages) inherits these, so an article
+   body follows the scheme like any other surface. `prose-invert` selected the
+   plugin's fixed light-on-dark palette and left body copy near-white on paper. */
+
 /* ─────────────────────────────────────────────────────────────
    Surfaces — hairlines are the structural language; glow is not.
    ───────────────────────────────────────────────────────────── */
