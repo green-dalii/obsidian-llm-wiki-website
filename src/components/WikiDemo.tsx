@@ -119,12 +119,12 @@ export default function WikiDemo({ locale = 'en' }: Props) {
   const lineCount = lines.length;
 
   return (
-    <section ref={sectionRef} id="how-it-works" className="relative w-full py-28 sm:py-36">
-      <div className="max-w-5xl mx-auto px-4 sm:px-6">
-        <div className="mb-10 text-center">
-          <span className="text-[11px] font-mono text-obsidian-purple tracking-[0.15em] uppercase">{t.wikiDemo.label}</span>
-          <h2 className="text-[clamp(1.6rem,4vw,2.8rem)] font-semibold mt-3 mb-3 text-obsidian-heading">{t.wikiDemo.title}</h2>
-          <p className="text-obsidian-muted text-sm max-w-md mx-auto">{t.wikiDemo.subtitle}</p>
+    <section ref={sectionRef} id="how-it-works" className="relative w-full py-section-std">
+      <div className="max-w-[1180px] mx-auto px-6 sm:px-8">
+        <div className="mb-10">
+          <span className="text-label font-mono text-accent uppercase">{t.wikiDemo.label}</span>
+          <h2 className="text-display-l font-display mt-3 mb-4 text-ink">{t.wikiDemo.title}</h2>
+          <p className="text-ink-2 max-w-[46ch] text-[0.9375rem]">{t.wikiDemo.subtitle}</p>
         </div>
 
         {/* Scenario Selector */}

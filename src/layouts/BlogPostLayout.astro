@@ -148,7 +148,7 @@ const breadcrumbs = [
   <Fragment slot="head">
     <style is:global>
       .prose h2, .prose h3, .prose h4 { scroll-margin-top: 80px; }
-      .toc-link.active { color: #a78bfa; font-weight: 500; }
+      .toc-link.active { color: var(--accent); font-weight: 500; }
     </style>
     <script is:inline>
     document.addEventListener('DOMContentLoaded',function(){try{var l=document.querySelectorAll('.toc-link');if(!l.length)return;var h=[];l.forEach(function(a){var e=document.getElementById(a.getAttribute('href').slice(1));if(e)h.push(e)});if(!h.length)return;var o=new IntersectionObserver(function(e){e.forEach(function(e){if(e.isIntersecting){var n=e.target.getAttribute('id');l.forEach(function(e){e.classList.toggle('active',e.getAttribute('href')==='#'+n)})}})},{rootMargin:'-80px 0px -70% 0px'});h.forEach(function(e){o.observe(e)})}catch(_){}})</script>
@@ -156,15 +156,15 @@ const breadcrumbs = [
 </BaseLayout>
 
 <style>
-.prose { --tw-prose-links: #a78bfa; }
+.prose { --tw-prose-links: var(--accent); }
 .prose a { text-decoration: underline; text-underline-offset: 3px; }
-.prose a:hover { color: #c4b5fd; }
-.prose code { background: rgba(124,58,237,0.12); padding: 0.15rem 0.4rem; border-radius: 4px; }
-.prose pre { border: 1px solid #333; border-radius: 8px; }
+.prose a:hover { color: var(--focus); }
+.prose code { background: var(--accent-soft); padding: 0.15rem 0.4rem; border-radius: 4px; }
+.prose pre { border: 1px solid var(--line-strong); border-radius: var(--radius-md); }
 .prose pre code { background: none; padding: 0; }
 .prose blockquote { border-left-width: 3px; font-style: normal; }
-.prose img { border-radius: 8px; }
-html { scroll-behavior: smooth; }
+.prose img { border-radius: var(--radius-md); }
+@media (prefers-reduced-motion: no-preference) { html { scroll-behavior: smooth; } }
 </style>
 
 <style is:global>

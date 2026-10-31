@@ -23,12 +23,12 @@ const ICONS = ['code-2', 'lock', 'eye-off', 'shield-check'];
 ---
 
 {items.length > 0 && (
-  <section id="trust" class="relative w-full py-20 sm:py-28 reveal">
-    <div class="max-w-5xl mx-auto px-4 sm:px-6">
-      <div class="mb-10 text-center reveal">
-        <span class="text-[11px] font-mono text-obsidian-purple tracking-[0.15em] uppercase">{label}</span>
-        <h2 class="text-[clamp(1.6rem,4vw,2.8rem)] font-semibold mt-3 mb-3 text-obsidian-heading reveal" data-delay="1">{title}</h2>
-        <p class="text-obsidian-muted text-sm max-w-lg mx-auto">{subtitle}</p>
+  <section id="trust" class="relative w-full py-section-std reveal">
+    <div class="max-w-[1180px] mx-auto px-6 sm:px-8">
+      <div class="mb-10 reveal">
+        <span class="text-label font-mono text-accent uppercase">{label}</span>
+        <h2 class="text-display-m font-display mt-3 mb-4 text-ink reveal" data-delay="1">{title}</h2>
+        <p class="text-ink-2 max-w-[46ch] text-[0.9375rem]">{subtitle}</p>
       </div>
 
       <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-3">

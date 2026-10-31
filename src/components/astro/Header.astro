@@ -45,7 +45,7 @@ const navItems: NavItem[] = isBlog
 ---
 
 <header id="site-header" class="fixed top-0 left-0 right-0 z-40 border-b border-transparent transition-all duration-500">
-  <div class="max-w-6xl mx-auto px-4 sm:px-6 flex items-center justify-between h-14">
+  <div class="max-w-[1180px] mx-auto px-6 sm:px-8 flex items-center justify-between h-14">
     <a href={homePath} class="flex items-center gap-2 group shrink-0" aria-label="Home">
       <img src="/favicon.svg" alt="" class="w-7 h-7 rounded-lg" aria-hidden="true" />
       <span class="text-sm font-semibold text-ink tracking-tight group-hover:text-accent transition-colors whitespace-nowrap">Karpathy LLM Wiki</span>
@@ -54,11 +54,11 @@ const navItems: NavItem[] = isBlog
     <nav class="hidden md:flex items-center gap-0.5">
       {navItems.map((item) => (
         'href' in item ? (
-          <a href={item.href} class="px-2.5 py-1.5 text-xs text-ink-2 hover:text-ink transition-colors duration-200 rounded-md hover:bg-ink/10 whitespace-nowrap">
+          <a href={item.href} class="nav-link px-2.5 py-1.5 text-xs text-ink-2 hover:text-ink transition-colors duration-200 whitespace-nowrap">
             {item.label}
           </a>
         ) : (
-          <button data-scroll-to={item.target} class="px-2.5 py-1.5 text-xs text-ink-2 hover:text-ink transition-colors duration-200 rounded-md hover:bg-ink/10 whitespace-nowrap">
+          <button data-scroll-to={item.target} class="nav-link px-2.5 py-1.5 text-xs text-ink-2 hover:text-ink transition-colors duration-200 whitespace-nowrap">
             {item.label}
           </button>
         )

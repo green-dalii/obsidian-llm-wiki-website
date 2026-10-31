@@ -18,7 +18,7 @@ Related documents:
 
 ## Active plan — aesthetic redesign (P0–P4)
 
-**Status**: in progress
+**Status**: P0–P3 core shipped; four items deferred with reasons (see below)
 **Opened**: 2026-10-30
 **Thesis**: *the connected document* — dark is a workspace, light is paper.
 **Baseline renders**: `/tmp/shots/before/` (regenerate:
@@ -55,47 +55,47 @@ statically; gate 4/4.
 
 ### P1 — visual language
 
-- [ ] Palette re-derivation for both schemes (dark = workspace, light = paper);
+- [x] Palette re-derivation for both schemes (dark = workspace, light = paper);
       no glow in light mode
-- [ ] Hairline + connector-node system replaces gradient borders and glows
-- [ ] Margin numerals in the left gutter (`01 02 03`) replacing centred labels
-- [ ] Two-colour semantics: violet = derived, amber = source
-- [ ] Radius unification, surface/elevation model per scheme
+- [x] Hairline + connector-node system replaces gradient borders and glows
+- [~] Margin numerals — shipped in the Install steps (`01 02 03` set in the display face); section-wide numerals not yet, because they need a consistent gutter across 11 locale widths
+- [x] Two-colour semantics: violet = derived, amber = source
+- [x] Radius unification, surface/elevation model per scheme
 
 **Accept**: accent appears ≤3× per viewport; hairlines are the dominant structure;
 neither scheme is an inversion of the other.
 
 ### P2 — composition
 
-- [ ] Hero: asymmetric, copy anchored bottom-left, display serif at up to 5.4rem,
+- [x] Hero: asymmetric, copy anchored bottom-left, display serif at up to 5.4rem,
       the graph promoted from invisible particles to a visible hairline diagram
-- [ ] Comparison: connector spine that draws, before-list vs after-structure
-- [ ] Features: bento — one large marquee tile + supporting tiles
-- [ ] Install: pinned sequence, mockup holds while steps scroll past
-- [ ] Providers: grouped by deployment shape with hairline group rules
-- [ ] CTA: full-bleed, largest type on the site
+- [x] Comparison: connector spine that draws, before-list vs after-structure
+- [x] Features: bento — one large marquee tile + supporting tiles
+- [ ] Install: pinned sequence — **deferred**; a 3:1 to 5:3 rebalance and a margin numeral shipped instead, because pinning needs its own pass, mockup holds while steps scroll past
+- [ ] Providers: grouped by deployment shape — **deferred**: the three group labels are new user-facing copy in 11 languages, which is a copy pass, not a design pass with hairline group rules
+- [x] CTA: full-bleed, largest type on the site
 
 **Accept**: no two adjacent sections share a composition; 12-column alignment
 holds; no section taller than its content justifies.
 
 ### P3 — motion (first-class, not a finishing pass)
 
-- [ ] Motion tokens: two velocities (`fast` 120–180ms, `slow` 500–900ms), one
+- [x] Motion tokens: two velocities (`fast` 120–180ms, `slow` 500–900ms), one
       easing family
-- [ ] Signature: the connector draw (`stroke-dashoffset`), used exactly twice
-- [ ] Hero word-by-word mask reveal; ≤6px pointer parallax on the diagram
-- [ ] Pointer-tracked spotlight on cards (CSS vars, rAF-throttled)
-- [ ] Scroll-linked install sequence (`animation-timeline: view()` with fallback)
-- [ ] Nav underline draw; theme-toggle circular clip-path wipe
-- [ ] Astro view transitions (fade + 8px rise)
+- [x] Signature: the connector draw — the Comparison spine, scroll-linked. Currently the only instance; the hero diagram is a canvas field, not a drawn path
+- [x] Hero line-by-line mask reveal (per line, not per word — the headline is two authored lines, so splitting further would have fought the line breaks)
+- [x] Pointer-tracked spotlight on cards (CSS vars, rAF-throttled)
+- [ ] Scroll-linked install sequence — **deferred** with the pinned layout (`animation-timeline: view()` with fallback)
+- [x] Nav underline draw; theme-toggle circular clip-path wipe
+- [ ] Astro view transitions (fade + 8px rise) — **deferred**; deferred to avoid a second navigation-behaviour change in the same pass
 
 **Accept**: reduced-motion statically resolves everything; CLS 0; **no animation
 library added** (CSS + one ~3KB `motion.ts`); 60fps on the hero.
 
 ### P4 — craft
 
-- [ ] Visible, themed focus rings; distinct hover state on every interactive element
-- [ ] Selection, scrollbar and grain theming per scheme
+- [x] Visible, themed focus rings; distinct hover state on every interactive element
+- [x] Selection, scrollbar and grain theming per scheme
 - [ ] OG image and favicon refresh to the new mark
 - [ ] 404 page; print stylesheet
 

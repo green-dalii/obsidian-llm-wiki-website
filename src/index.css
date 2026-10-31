@@ -116,6 +116,32 @@ html:lang(ko) {
   --leading-body: 1.78;
 }
 
+/* Display tiers are tuned for a Latin serif, whose ascenders and descenders
+   tolerate 0.95. Han and kana fill their em box on all four sides, so the same
+   leading makes the lines collide — and negative tracking that flatters Latin
+   display type just tightens han glyphs into each other. Both are corrected
+   per script rather than by loosening the scale for everyone. */
+html:lang(zh) .text-display-xl,
+html:lang(ja) .text-display-xl,
+html:lang(ko) .text-display-xl {
+  line-height: 1.14;
+  letter-spacing: 0;
+}
+
+html:lang(zh) .text-display-l,
+html:lang(ja) .text-display-l,
+html:lang(ko) .text-display-l {
+  line-height: 1.2;
+  letter-spacing: 0;
+}
+
+html:lang(zh) .text-display-m,
+html:lang(ja) .text-display-m,
+html:lang(ko) .text-display-m {
+  line-height: 1.26;
+  letter-spacing: 0;
+}
+
 /* ─────────────────────────────────────────────────────────────
    Theme wiring. `inline` makes utilities resolve straight through
    the runtime vars above, so overriding :root flips every surface
@@ -329,6 +355,71 @@ html:lang(ko) {
 
 .card-purple:hover {
   background-color: var(--accent-soft);
+}
+
+/* Pointer spotlight. The light is a surface property, so it lives on the card
+   rather than in a wrapper; motion.ts only updates the two coordinates, and
+   only while a pointer is over a card. Touch and reduced-motion visitors never
+   see it because the coordinates are never set. */
+.card,
+.card-purple {
+  position: relative;
+}
+
+.card::after,
+.card-purple::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  pointer-events: none;
+  opacity: 0;
+  background: radial-gradient(
+    240px circle at var(--spot-x, 50%) var(--spot-y, 0%),
+    var(--accent-soft),
+    transparent 72%
+  );
+  transition: opacity 0.3s var(--ease-state);
+}
+
+.card:hover::after,
+.card-purple:hover::after {
+  opacity: 1;
+}
+
+/* Nav: a hairline that grows from the leading edge. A pill background would
+   make the header heavier than the content it sits above. */
+.nav-link {
+  position: relative;
+}
+
+.nav-link::after {
+  content: '';
+  position: absolute;
+  left: 0.625rem;
+  right: 0.625rem;
+  bottom: 0.3rem;
+  height: 1px;
+  background: currentColor;
+  transform: scaleX(0);
+  transform-origin: left center;
+  transition: transform 0.28s var(--ease-entrance);
+}
+
+.nav-link:hover::after,
+.nav-link[aria-current='true']::after {
+  transform: scaleX(1);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .card::after,
+  .card-purple::after {
+    display: none;
+  }
+
+  .nav-link::after {
+    transition: none;
+  }
 }
 
 .reveal.card-hover,
